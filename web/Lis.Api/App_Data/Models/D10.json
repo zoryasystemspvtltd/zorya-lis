@@ -1,0 +1,290 @@
+﻿[
+  {
+    "Code": "AbHBsII",
+    "Description": "AbHBsII - Hepatitis B Surface Antibody II"
+  },
+  {
+    "Code": "AFP",
+    "Description": "AFP - Alpha-Feto Protein (cancer and ONTD utility)"
+  },
+  {
+    "Code": "AgHBs",
+    "Description": "AgHBs - Hepatitis B Surface Antigen"
+  },
+  {
+    "Code": "AgHBsBlk",
+    "Description": "AgHBsBlk - Hepatitis B Surface Antigen Blocking"
+  },
+  {
+    "Code": "AgHBsCtl",
+    "Description": "AgHBsCtl - Hepatitis B Surface Antigen Control"
+  },
+  {
+    "Code": "CEA",
+    "Description": "CEA - Carcino-embryonic Antigen"
+  },
+  {
+    "Code": "Chl-Ag",
+    "Description": "Chl-Ag - Chlamydia Antigen (available only on Access 2 instruments)"
+  },
+  {
+    "Code": "ChlBlock",
+    "Description": "ChlBlock - Chlamydia Blocking (available only on Access 2 instruments)"
+  },
+  {
+    "Code": "CKMB",
+    "Description": "CKMB - Creatine Kinase - MB (previous formulation P/N 33300)"
+  },
+  {
+    "Code": "CK-MB",
+    "Description": "CK-MB - Creatine Kinase - MB (new formulation P/N 386371)"
+  },
+  {
+    "Code": "CMV-IgG",
+    "Description": "CMV-IgG - Cytomegalovirus Immunoglobulin G"
+  },
+  {
+    "Code": "CMV-IgM",
+    "Description": "CMV-IgM - Cytomegalovirus Immunoglobulin M"
+  },
+  {
+    "Code": "Cortisol",
+    "Description": "Cortisol - Cortisol"
+  },
+  {
+    "Code": "COV2G",
+    "Description": "COV2G"
+  },
+  {
+    "Code": "cTnI",
+    "Description": "cTnI - AccuTnITM"
+  },
+  {
+    "Code": "Dig",
+    "Description": "Dig - Digoxin"
+  },
+  {
+    "Code": "Dil-Fer",
+    "Description": "Dil-Fer"
+  },
+  {
+    "Code": "Dil-hCG2",
+    "Description": "Dil-hCG2 - Diluted Human Chorionic Gonadotropin"
+  },
+  {
+    "Code": "ESTRDL",
+    "Description": "ESTRDL - Estradiol"
+  },
+  {
+    "Code": "Ferritin",
+    "Description": "Ferritin - Ferritin"
+  },
+  {
+    "Code": "FOLW",
+    "Description": "FOLW - FOLW"
+  },
+  {
+    "Code": "freePSA",
+    "Description": "freePSA - Free Prostate Specific Antigen"
+  },
+  {
+    "Code": "FT3",
+    "Description": "FreeT3 - Free Triiodothyronine"
+  },
+  {
+    "Code": "FRT4",
+    "Description": "FT4 - Free Thyroxine"
+  },
+  {
+    "Code": "FTIndex",
+    "Description": "FTIndex - Free Thyroxine Index (calculated using TotT4 and TU results; do not request this test)"
+  },
+  {
+    "Code": "HAVAb",
+    "Description": "HAVAb - Hepatitis A Virus Total Antibody"
+  },
+  {
+    "Code": "HAV-IgM",
+    "Description": "HAV-IgM - Hepatitis A Virus Immunoglobulin M"
+  },
+  {
+    "Code": "HBc-Ab",
+    "Description": "HBc-Ab - Hepatitis B Core Total Antibody"
+  },
+  {
+    "Code": "HBc-IgM",
+    "Description": "HBc-IgM - Hepatitis B Core Immunoglobulin M"
+  },
+  {
+    "Code": "HBsAg",
+    "Description": "HBsAg - Hepatitis B Surface Antigen (previous formulation)"
+  },
+  {
+    "Code": "HBsAgBlk",
+    "Description": "HBsAgBlk - Hepatitis B Surface Antigen Blocking (previous formulation)"
+  },
+  {
+    "Code": "HBsAgCtl",
+    "Description": "HBsAgCtl - Hepatitis B Surface Antigen Control (previous formulation)"
+  },
+  {
+   "Code":"HCG5",
+   "Description":"HCG5"
+  },
+  {
+   "Code":"HCG5d",
+   "Description":"HCG5d"
+  },
+  {
+    "Code": "HCV-Ab",
+    "Description": "HCV-Ab - Hepatitis C Virus Antibody"
+  },
+  {
+    "Code": "HCVPLUS",
+    "Description": "HCVPLUS - Hepatitis C Virus Antibody Plus"
+  },
+  {
+    "Code": "hFSH",
+    "Description": "hFSH - Human Follicle Stimulating Hormone"
+  },
+  {
+    "Code": "hGH",
+    "Description": "hGH - Human Growth Hormone"
+  },
+  {
+    "Code": "HIV-Ab",
+    "Description": "HIV-Ab - HIV Antibody"
+  },
+  {
+    "Code": "HIVAbNew",
+    "Description": "HIVAbNew - HIV 1, 2 New"
+  },
+  {
+    "Code": "hLH",
+    "Description": "hLH - Human Luteinizing Hormone"
+  },
+  {
+    "Code": "hsTnl",
+    "Description": "hsTnl"
+  },
+  {
+    "Code": "IgG-Toxo",
+    "Description": "IgG-Toxo - Toxoplasmosis Immunoglobulin G"
+  },
+  {
+    "Code": "IgM-Toxo",
+    "Description": "IgM-Toxo - Toxoplasmosis Immunoglobulin M"
+  },
+  {
+    "Code": "IL-6",
+    "Description": "IL-6"
+  },
+  {
+    "Code": "Insulin",
+    "Description": "Insulin - Insulin"
+  },
+  {
+    "Code": "MYO",
+    "Description": "MYO - Myoglobin (new formulation, P/N 973243)"
+  },
+  {
+    "Code": "Myoglob",
+    "Description": "Myoglob - Myoglobin (previous formulation, P/N 33310)"
+  },
+  {
+    "Code": "Ostase",
+    "Description": "Ostase - Ostase?"
+  },
+  {
+    "Code": "OV125Ag",
+    "Description": "OV125Ag - OV Monitor (CA 125 Antigen)"
+  },
+  {
+    "Code": "PRL",
+    "Description": "PRL - Prolactin"
+  },
+  {
+    "Code": "Prog",
+    "Description": "Prog - Progesterone"
+  },
+  {
+    "Code": "PSA-Hyb",
+    "Description": "PSA-Hyb - Hybritech? Prostate Specific Antigen"
+  },
+  {
+    "Code": "RBCFol",
+    "Description": "RBCFol - Red Blood Cell Folate"
+  },
+  {
+    "Code": "Rub-IgG",
+    "Description": "Rub-IgG - Rubella Immunoglobulin G"
+  },
+  {
+    "Code": "Rub-IgM",
+    "Description": "Rub-IgM - Rubella Immunoglobulin M"
+  },
+  {
+    "Code": "SpIgE",
+    "Description": "SpIgE - Specific Immunoglobulin E"
+  },
+  {
+    "Code": "TBhCG2",
+    "Description": "TBhCG2 - Total Beta Human Chorionic Gonadotropin"
+  },
+  {
+    "Code": "Testo",
+    "Description": "Testo - Testosterone"
+  },
+  {
+    "Code": "Tg",
+    "Description": "Tg - Thyroglobulin"
+  },
+  {
+    "Code": "TgAb",
+    "Description": "TgAb - Thyroglobulin Antibody"
+  },
+  {
+    "Code": "Theo",
+    "Description": "Theo - Theophylline"
+  },
+  {
+    "Code": "TotIgE",
+    "Description": "TotIgE - Total Immunoglobulin E"
+  },
+  {
+    "Code": "TotT3",
+    "Description": "TotT3 - Total Triiodothyronine (previous formulation)"
+  },
+  {
+    "Code": "TotT4",
+    "Description": "TotT4 - Total Thyroxine"
+  },
+  {
+    "Code": "TSH3",
+    "Description": "TSH3 - Thyroid Stimulating Hormone"
+  },
+  {
+    "Code": "TSH3d",
+    "Description": "TSH3d"
+  },
+  {
+    "Code": "TT3",
+    "Description": "TT3 - Total Triiodothyronine (new formulation)"
+  },
+  {
+    "Code": "TU",
+    "Description": "TU - Thyroid Uptake"
+  },
+  {
+    "Code": "uE3",
+    "Description": "uE3 - Unconjugated Estriol"
+  },
+  {
+    "Code": "VitB12",
+    "Description": "VitB12 - Vitamin B12"
+  },
+  {
+    "Code": "VitdD",
+    "Description": "VitdD"
+  }
+]
