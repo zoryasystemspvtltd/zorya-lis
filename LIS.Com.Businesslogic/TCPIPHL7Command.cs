@@ -1,7 +1,5 @@
 ﻿using LIS.DtoModel;
-using Microsoft.VisualBasic;
 using System;
-using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -11,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LIS.Com.Businesslogic
 {
-    public class TCPIPCommand
+    public class TCPIPHL7Command
     {
         private TCPIPSettings settings;
         protected Thread reportingThread;
@@ -26,7 +24,7 @@ namespace LIS.Com.Businesslogic
         protected System.Timers.Timer timer;
         protected StringBuilder sInputMsg = new StringBuilder();
 
-        public TCPIPCommand(TCPIPSettings settings)
+        public TCPIPHL7Command(TCPIPSettings settings)
         {
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPCommand Constructor method started.");
             IsReady = false;
@@ -178,7 +176,7 @@ namespace LIS.Com.Businesslogic
                 {
                     string sampleNo = field[3];
                     bool flag = IsValidSampleNo(sampleNo);
-                    string response = @"MSH|^~\&|LIS||||||ACK|" + (char)13 + $"MSA|AA|{messageControlId}|{(char)13}";
+                    string response = @"MSH|^~\&|||||||ACK|" + (char)13 + $"MSA|AR|{messageControlId}|{(char)13}";
 
                     if (flag && resultMesgSegments.Length > 2)
                     {

@@ -69,7 +69,7 @@ namespace LIS.Com.Businesslogic
             }
         }
         public SerialCommand Command { get; private set; }
-        public TCPIPCommand TcpIpCommand { get; private set; }
+        public TCPIPHL7Command TcpIpCommand { get; private set; }
         public void InitSerialCommand(PortSettings settings, EquipmentType type)
         {
             switch (type)
@@ -87,7 +87,7 @@ namespace LIS.Com.Businesslogic
 
         public void InitTCPIPCommand(TCPIPSettings settings, EquipmentType type)
         {
-            this.TcpIpCommand = new MindRayTCPIPCommand(settings);
+            this.TcpIpCommand = new BS430TCPIPCommand(settings);
         }
 
         public void InitAPI(string serverUrl, string apiKey)

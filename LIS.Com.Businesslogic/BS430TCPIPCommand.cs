@@ -1,6 +1,5 @@
 ﻿using LIS.DtoModel;
 using LIS.DtoModel.Models;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +7,21 @@ using System.Threading.Tasks;
 
 namespace LIS.Com.Businesslogic
 {
-    public class MindRayTCPIPCommand : TCPIPCommand
+    public class BS430TCPIPCommand : TCPIPHL7Command
     {
-        public MindRayTCPIPCommand(TCPIPSettings _settings) : base(_settings)
+        public BS430TCPIPCommand(TCPIPSettings _settings) : base(_settings)
         { }
 
         public override async Task<string> ProccessMessage(string sampleNo, string rawMessage, string messageControlId)
         {
-            Logger.Logger.LogInstance.LogDebug("Mindray ProccessMessage method started");
-            string[] resultMesgSegments = rawMessage.TrimEnd((char)13).Split((char)13); // vbCr
+            Logger.Logger.LogInstance.LogDebug("BS430 ProccessMessage method started");
+            string[] resultMesgSegments = rawMessage.TrimEnd((char)13).Split((char)13); // <CR>
 
             await SaveResult(sampleNo, resultMesgSegments);
             Logger.Logger.LogInstance.LogDebug("All the mandatory tags are present in the ORU message");
-            string response = @"MSH|^~\&|LIS||||" + DateTime.Now.ToString("yyyyMMddhhmmss") + "||ACK^R01|1|P|2.3.1||||||UNICODE" + (char)13 + $"MSA|AA|{messageControlId}|{(char)13}";
+            string response = @"MSH|^~\&|||||" + DateTime.Now.ToString("yyyyMMddhhmmss") +
+                "||ACK^R01|1|P|2.3.1||||0||ASCII||" + (char)13 +
+                $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
             return response;
         }
 
@@ -30,9 +31,8 @@ namespace LIS.Com.Businesslogic
             List<TestResultDetails> lsResult = new List<TestResultDetails>();
             TestResult testResult = new TestResult
             {
-                ResultDate = DateAndTime.Now,
+                ResultDate = DateTime.Now,
                 SampleNo = sampleNo,
-                LISTestCode = "WBC"
             };
             for (int i = 0; i < resultMesgSegments.Length; i++)
             {
@@ -40,97 +40,32 @@ namespace LIS.Com.Businesslogic
 
                 if (field[0] == "OBX" && field[2] == "NM")
                 {
-                    switch (field[3].Split('^')[1])
-                    {
-                        case "WBC":
-                        case "BAS#":
-                        case "BAS%":
-                        case "NEU#":
-                        case "NEU%":
-                        case "EOS#":
-                        case "EOS%":
-                        case "LYM#":
-                        case "LYM%":
-                        case "MON#":
-                        case "MON%":
-                        case "RBC":
-                        case "HGB":
-                        case "MCV":
-                        case "MCH":
-                        case "MCHC":
-                        case "HCT":
-                        case "PLT":
-                        case "MPV":
-                        case "PDW":
-                        case "PCT":
-                        case "RET#":
-                        case "RET%":
-                        case "RDW-CV":
-                        case "NRBC#":
-                        case "NRBC%":
-                            var resultDetails = GetParameterResult(field);
-                            lsResult.Add(resultDetails);
-                            break;
-                    }
+                    var resultDetails = new TestResultDetails();
+                    var paramCode = field[4].ToString();
+                    var paramValue = field[5].ToString();
+                    resultDetails.LISParamCode = paramCode;
+                    resultDetails.LISParamValue = paramValue;
+                    resultDetails.LISParamUnit = field[6];
+                    lsResult.Add(resultDetails);
                 }
             }
 
             result.TestResult = testResult;
             result.ResultDetails = lsResult;
-            Logger.Logger.LogInstance.LogDebug("Mindray Result posted to API for SampleNo: " + testResult.SampleNo);
+            Logger.Logger.LogInstance.LogDebug("BS430 Result posted to API for SampleNo: " + testResult.SampleNo);
             await LisContext.LisDOM.SaveTestResult(result);
         }
 
-        private TestResultDetails GetParameterResult(string[] field)
-        {
-            var resdt = new TestResultDetails();
-
-            var paramCode = field[3].Split('^')[1];
-            string paramValue;
-            switch (paramCode)
-            {
-                case "WBC":
-                case "RET#":
-                case "NRBC#":
-                case "MON#":
-                case "EOS#":
-                case "BAS#":
-                    try
-                    {
-                        if (!string.IsNullOrWhiteSpace(field[5]))
-                        {
-                            paramValue = (Convert.ToDecimal(field[5]) * 1000).ToString();
-                        }
-                        else
-                        {
-                            paramValue = "";
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        paramValue = "";
-                    }
-                    break;
-
-                default:
-                    paramValue = field[5];
-                    break;
-            }
-
-            resdt.LISParamCode = paramCode;
-            resdt.LISParamValue = paramValue;
-            resdt.LISParamUnit = field[6];
-
-            return resdt;
-        }
         public override async Task<string> SendOrderData(string sampleNo, string messageControlId)
         {
-            Logger.Logger.LogInstance.LogDebug("Mindray generateORMField method started for SampleNo: " + sampleNo);
+            Logger.Logger.LogInstance.LogDebug("BS430 generateORMField method started for SampleNo: " + sampleNo);
             string datetime = DateTime.Now.ToString("yyyyMMddhhmmss");
             string ORMMessage = string.Empty;
             string specialchar = @"^~\&";
-            string message_MSH = $"MSH|{specialchar}|LIS|LabXpert|||{datetime}||ORR^O02|{messageControlId}|P|2.3.1||||||UNICODE{(char)13}";
-            string message_MSA = $"MSA|AA|{messageControlId}{(char)13}";
+            string message_MSH = $"MSH|{specialchar}|||||{datetime}||QRY^Q02|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
+            string message_MSA = $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
+            string message_err = $"ERR|0|{(char)13}";
+            string message_qak = string.Empty;
             bool flag = IsValidSampleNo(sampleNo);
             if (flag)
             {
@@ -192,7 +127,7 @@ namespace LIS.Com.Businesslogic
                         await LisContext.LisDOM.AcknowledgeSample(test.Id);
                         testname = test.LISTestCode;
                     }
-
+                    message_qak = $"QAK|SR|OK|{(char)13}";
                     string message_PID = $"PID|1||{patientId}||{patientLastName}^{patientFirstName}||{DOB}|{gender}{(char)13}";
                     string message_PV1 = $"PV1|1|{patientClass}|{patientLocation}|||||||||||||||||{(char)13}";
                     string message_ORC = $"ORC|AF|{sampleNo}||{(char)13}";
@@ -213,12 +148,13 @@ namespace LIS.Com.Businesslogic
             }
             else
             {
-                ORMMessage = message_MSH + message_MSA;
+                message_qak = $"QAK|SR|NF|{(char)13}";
+                ORMMessage = message_MSH + message_MSA + message_err + message_qak;
             }
 
             ORMMessage = AddHeaderAndFooterToHL7Msg(ORMMessage);
             return ORMMessage;
-        }        
+        }
 
         public string AddHeaderAndFooterToHL7Msg(string RawMessage)
         {
