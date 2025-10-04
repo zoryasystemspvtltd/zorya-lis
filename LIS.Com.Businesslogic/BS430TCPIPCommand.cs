@@ -60,90 +60,86 @@ namespace LIS.Com.Businesslogic
         {
             Logger.Logger.LogInstance.LogDebug("BS430 generateORMField method started for SampleNo: " + sampleNo);
             string datetime = DateTime.Now.ToString("yyyyMMddhhmmss");
-            string ORMMessage = string.Empty;
             string specialchar = @"^~\&";
-            string message_MSH = $"MSH|{specialchar}|||||{datetime}||QRY^Q02|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
+            string message_MSH = $"MSH|{specialchar}|||||{datetime}||DSR^Q03|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
             string message_MSA = $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
             string message_err = $"ERR|0|{(char)13}";
             string message_qak = string.Empty;
+            string message_DSP = string.Empty;
             bool flag = IsValidSampleNo(sampleNo);
+            string ORMMessage;
             if (flag)
             {
                 IEnumerable<TestRequestDetail> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
                 if (testlist != null && testlist.Count() > 0)
                 {
-                    string patientFirstName = "";
-                    string patientLastName = "";
-                    string testname = "";
-                    string patientClass = "MedicalInsurance";
                     var firstTest = testlist.First();
-                    string patientLocation = "Pathology^^" + firstTest.BedNo;
-                    string patientId = firstTest.Patient.HisPatientId + "^^^^MR";
+                    var specimen = firstTest.SpecimenName.ToLower();
                     string gender = "";
                     switch (firstTest.Patient.Gender)
                     {
                         case "MALE":
-                            gender = "Male";
+                            gender = "M";
                             break;
                         case "FEMALE":
-                            gender = "Female";
+                            gender = "F";
+                            break;
+                        default:
+                            gender = "O";
                             break;
                     }
 
                     string DOB = firstTest.Patient.DateOfBirth.ToString("yyyyMMddhhmmss");
-                    var name = firstTest.Patient?.Name.Split(' ');
-                    if (name.Count() > 1)
+                    var name = firstTest.Patient?.Name;
+                    if (name.Length > 32)
                     {
-                        if (name.Count() > 1)
-                        {
-                            patientFirstName = name[0];
-                        }
-                        if (name.Count() == 3)
-                        {
-                            patientLastName = name[2];
-                        }
-                        else if (name.Count() == 2)
-                        {
-                            patientLastName = name[1];
-                        }
-                        var fullname = patientFirstName + patientLastName;
-                        if (fullname.Length > 48)
-                        {
-                            patientFirstName = patientFirstName.Substring(0, 1);
-                        }
+                        name = name.Substring(0, 30);
                     }
-                    else
+                    for (int i = 1; i <= 28; i++)
                     {
-                        patientFirstName = firstTest.Patient?.Name;
-                        if (patientFirstName.Length > 48)
-                        {
-                            patientFirstName = patientFirstName.Substring(0, 47);
-                        }
-                    }
 
-                    for (int i = 0; i < testlist.Count(); i++)
+                        switch (i)
+                        {
+                            case 3:
+                                message_DSP += $"DSP|{i}||{name}|||{(char)13}";
+                                break;
+                            case 4:
+                                message_DSP += $"DSP|{i}||{DOB}|||{(char)13}";
+                                break;
+                            case 5:
+                                message_DSP += $"DSP|{i}||{gender}|||{(char)13}";
+                                break;
+                            case 21:
+                                message_DSP += $"DSP|{i}||{sampleNo}|||{(char)13}";
+                                break;
+                            case 24:
+                                message_DSP += $"DSP|{i}||N|||{(char)13}";
+                                break;
+                            case 26:
+                                message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
+                                break;
+                            default:
+                                message_DSP += $"DSC||{(char)13}";
+                                break;
+                        }
+                    }
+                    for (int i = 29; i <= 29 + testlist.Count(); i++)
                     {
                         var test = testlist.ElementAt(i);
                         await LisContext.LisDOM.AcknowledgeSample(test.Id);
-                        testname = test.LISTestCode;
+                        var testname = test.LISTestCode + "^^^";
+                        message_DSP += $"DSP|{i}||{testname}|||{(char)13}";
                     }
                     message_qak = $"QAK|SR|OK|{(char)13}";
-                    string message_PID = $"PID|1||{patientId}||{patientLastName}^{patientFirstName}||{DOB}|{gender}{(char)13}";
-                    string message_PV1 = $"PV1|1|{patientClass}|{patientLocation}|||||||||||||||||{(char)13}";
-                    string message_ORC = $"ORC|AF|{sampleNo}||{(char)13}";
-                    string message_OBR = $"OBR|1|{sampleNo}|||||{datetime}|{datetime}|||||||{datetime}|||||||||HM|||||||{(char)13}";
-                    string message_OBX1 = $"OBX|1|IS|08001^Take Mode^99MRC||A||||||F{(char)13}";
-                    string message_OBX2 = $"OBX|2|IS|08002^Blood Mode^99MRC||W||||||F{(char)13}";
-                    string message_OBX3 = $"OBX|3|IS|08003^Test Mode^99MRC||{testname}||||||F{(char)13}";
-                    string message_OBX4 = $"OBX|4|IS|01002^Ref Group^99MRC||XXXX||||||F{(char)13}";
-                    string message_OBX5 = $"OBX|5|NM|30525-0^Age^LN||1|hr|||||F{(char)13}";
-                    string message_OBX6 = $"OBX|6|ST|01001^Remark^99MRC||20170809SYS0066||||||F{(char)13}";
-                    ORMMessage = message_MSH + message_MSA + message_PID + message_PV1 + message_ORC + message_OBR +
-                        message_OBX1 + message_OBX2 + message_OBX3 + message_OBX4 + message_OBX5 + message_OBX6;
+                    string message_QRD = $"QRD|{datetime}|R|D|54|||RD|{sampleNo}|OTH|||T|{(char)13}";
+                    string message_QRF = $"QRF||{datetime}|{datetime}|||RCT|COR|ALL||{(char)13}";
+                    string message_DSC = $"DSC||{(char)13}";
+
+                    ORMMessage = message_MSH + message_MSA + message_err + message_qak + message_QRD + message_QRF + message_DSP + message_DSC;
                 }
                 else
                 {
-                    ORMMessage = message_MSH + message_MSA;
+                    ORMMessage = message_MSH + message_MSA + message_err + message_qak;
                 }
             }
             else

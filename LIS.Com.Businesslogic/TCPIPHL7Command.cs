@@ -115,15 +115,15 @@ namespace LIS.Com.Businesslogic
                             {
                                 case "MSH":
                                 case "MSH":
-                                    orderRequest = input[8] == "ORM^O01";
+                                    orderRequest = input[8] == "QRY^Q02";
                                     messageControlId = input[9];
                                     if (!orderRequest)
                                     {
                                         sInputMsg.Append(block + (char)13);
                                     }
                                     break;
-                                case "ORC":
-                                    string sampleNo = input[3];                                    
+                                case "QRD":
+                                    string sampleNo = input[8];                                    
                                     if (orderRequest)
                                     {
                                         // Send the response                                  
