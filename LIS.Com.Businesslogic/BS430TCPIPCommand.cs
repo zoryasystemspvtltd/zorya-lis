@@ -139,11 +139,14 @@ namespace LIS.Com.Businesslogic
                 }
                 else
                 {
+                    message_MSH = $"MSH|{specialchar}|||||{datetime}||QCK^Q02|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
+                    message_qak = $"QAK|SR|NF|{(char)13}";
                     ORMMessage = message_MSH + message_MSA + message_err + message_qak;
                 }
             }
             else
             {
+                message_MSH = $"MSH|{specialchar}|||||{datetime}||QCK^Q02|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
                 message_qak = $"QAK|SR|NF|{(char)13}";
                 ORMMessage = message_MSH + message_MSA + message_err + message_qak;
             }

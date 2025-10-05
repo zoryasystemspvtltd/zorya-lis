@@ -27,7 +27,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIS.BusinessLogic", "LIS.Bu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{231BE0CD-47A2-479A-8EFC-E7D91BE75583}"
 	ProjectSection(SolutionItems) = preProject
-		readme.txt = readme.txt
+		Documents\BS-360E&BS-240Pro&240E_LIS Interface Manual_V1.0_EN.pdf = Documents\BS-360E&BS-240Pro&240E_LIS Interface Manual_V1.0_EN.pdf
+		Documents\BS-430_Host Interface Manual_V4.0.pdf = Documents\BS-430_Host Interface Manual_V4.0.pdf
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{D26E5E74-837F-42F5-A2A9-62C84049B72C}"
