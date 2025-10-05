@@ -123,17 +123,31 @@ namespace LIS.Com.Businesslogic
                                     }
                                     break;
                                 case "QRD":
-                                    string sampleNo = input[8];                                    
+                                    string sampleNo = input[8];
                                     if (orderRequest)
                                     {
-                                        // Send the response                                  
-                                        string finalResponse = await SendOrderData(sampleNo, messageControlId);                                      
-                                       
+                                        // Send the response
+                                        bool flag = IsValidSampleNo(sampleNo);
+                                        string finalResponse = string.Empty;
+                                        if (flag)
+                                        {
+                                            //Send First order Response
+                                            finalResponse = SendResponse("OK", messageControlId);
+                                            sw.Write(finalResponse);
+
+                                            //Send DSR Response
+                                            finalResponse = "";
+                                            finalResponse = await SendOrderData(sampleNo, messageControlId);
+                                        }
+                                        else
+                                        {
+                                            finalResponse = SendResponse("NF", messageControlId);
+                                        }
                                         sw.Write(finalResponse);
                                         Logger.Logger.LogInstance.LogInfo("COM Write: '{0}'", finalResponse);
 
                                         finalResponse = "";
-                                    }                                    
+                                    }
                                     break;
                                 case "OBR":
                                     sInputMsg.Append(block + (char)13);
@@ -215,6 +229,10 @@ namespace LIS.Com.Businesslogic
         }
 
         virtual public Task<string> SendOrderData(string sampleNo, string messageControlId)
+        {
+            throw new NotImplementedException();
+        }
+        virtual public string SendResponse(string sampleNo, string messageControlId)
         {
             throw new NotImplementedException();
         }
