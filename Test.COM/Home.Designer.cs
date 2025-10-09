@@ -177,7 +177,7 @@ namespace Test.COM
             this.txtIPAddress.Name = "txtIPAddress";
             this.txtIPAddress.Size = new System.Drawing.Size(143, 20);
             this.txtIPAddress.TabIndex = 12;
-            this.txtIPAddress.Text = "192.168.43.148";
+            this.txtIPAddress.Text = "10.228.175.184";
             // 
             // lblPortNo
             // 

@@ -97,7 +97,7 @@ namespace LisTCPIPConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MindRay")]
+        [global::System.Configuration.DefaultSettingValueAttribute("BS430")]
         public string EQUIPMENT_TYPE {
             get {
                 return ((string)(this["EQUIPMENT_TYPE"]));

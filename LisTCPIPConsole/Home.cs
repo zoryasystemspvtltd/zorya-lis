@@ -145,7 +145,7 @@ namespace LisTCPIPConsole
 
         }
 
-        private void addUserToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(Settings.Default.SERVER_URL);
         }

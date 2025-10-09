@@ -137,10 +137,9 @@ namespace LIS.BusinessLogic
                             IsActive = true
                         });
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        //logger.LogException(e);
-                        logger.LogDebug("Exception in Adding Patient '{0}'", patient?.PatientId);
+                        logger.LogDebug("Exception in Adding Patient '{0}' and Error Message '{1}'", patient?.PatientId, ex.Message);
                     }
                 }
                 else
@@ -220,17 +219,17 @@ namespace LIS.BusinessLogic
                                                 HISTestCode = order.TestCode
                                             });
                                         }
-                                        catch (Exception e)
+                                        catch (Exception ex)
                                         {
                                             //logger.LogException(e);
-                                            logger.LogDebug("Error in Add Test Parameter '{0}'", testId);
+                                            logger.LogDebug("Error in Add Test Parameter '{0}' and Error Message '{1}'", testId, ex.Message);
                                         }
                                     }
                                 }
-                                catch (Exception e)
+                                catch (Exception ex)
                                 {
                                     //logger.LogException(e);
-                                    logger.LogDebug("Error in Add Test '{0}'", sampleNo);
+                                    logger.LogDebug("Error in Add Test '{0}' and Error Message '{1}'", sampleNo, ex.Message);
                                 }
                             }
 

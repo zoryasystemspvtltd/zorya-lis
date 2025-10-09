@@ -56,7 +56,7 @@ namespace LIS.Com.Businesslogic
             await LisContext.LisDOM.SaveTestResult(result);
         }
 
-        public override async Task<string> SendOrderData(string sampleNo, string messageControlId)
+        public override async Task<OrderResponse> SendOrderData(string sampleNo, string messageControlId)
         {
             Logger.Logger.LogInstance.LogDebug("BS430 generateORMField method started for SampleNo: " + sampleNo);
             string datetime = DateTime.Now.ToString("yyyyMMddhhmmss");
@@ -66,81 +66,100 @@ namespace LIS.Com.Businesslogic
             string message_err = $"ERR|0|{(char)13}";
             string message_qak = string.Empty;
             string message_DSP = string.Empty;
-            string ORMMessage;
-
-            IEnumerable<TestRequestDetail> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
-            if (testlist != null && testlist.Count() > 0)
+            string DSRMessage, QRYMessage;
+            OrderResponse response = new OrderResponse();
+            bool flag = IsValidSampleNo(sampleNo);
+            if (flag)
             {
-                var firstTest = testlist.First();
-                var specimen = firstTest.SpecimenName.ToLower();
-                string gender = "";
-                switch (firstTest.Patient.Gender)
-                {
-                    case "MALE":
-                        gender = "M";
-                        break;
-                    case "FEMALE":
-                        gender = "F";
-                        break;
-                    default:
-                        gender = "O";
-                        break;
-                }
-
-                string DOB = firstTest.Patient.DateOfBirth.ToString("yyyyMMddhhmmss");
-                var name = firstTest.Patient?.Name;
-                if (name.Length > 32)
-                {
-                    name = name.Substring(0, 30);
-                }
-                for (int i = 1; i <= 28; i++)
+                IEnumerable<TestRequestDetail> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
+                if (testlist != null && testlist.Count() > 0)
                 {
 
-                    switch (i)
+                    var firstTest = testlist.First();
+                    var specimen = firstTest.SpecimenName.ToLower();
+                    string gender = "";
+                    switch (firstTest.Patient.Gender)
                     {
-                        case 3:
-                            message_DSP += $"DSP|{i}||{name}|||{(char)13}";
+                        case "MALE":
+                            gender = "M";
                             break;
-                        case 4:
-                            message_DSP += $"DSP|{i}||{DOB}|||{(char)13}";
-                            break;
-                        case 5:
-                            message_DSP += $"DSP|{i}||{gender}|||{(char)13}";
-                            break;
-                        case 21:
-                            message_DSP += $"DSP|{i}||{sampleNo}|||{(char)13}";
-                            break;
-                        case 24:
-                            message_DSP += $"DSP|{i}||N|||{(char)13}";
-                            break;
-                        case 26:
-                            message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
+                        case "FEMALE":
+                            gender = "F";
                             break;
                         default:
-                            message_DSP += $"DSC||{(char)13}";
+                            gender = "O";
                             break;
                     }
-                }
-                for (int i = 29; i <= 29 + testlist.Count(); i++)
-                {
-                    var test = testlist.ElementAt(i);
-                    await LisContext.LisDOM.AcknowledgeSample(test.Id);
-                    var testname = test.LISTestCode + "^^^";
-                    message_DSP += $"DSP|{i}||{testname}|||{(char)13}";
-                }
-                message_qak = $"QAK|SR|OK|{(char)13}";
-                string message_QRD = $"QRD|{datetime}|R|D|54|||RD|{sampleNo}|OTH|||T|{(char)13}";
-                string message_QRF = $"QRF||{datetime}|{datetime}|||RCT|COR|ALL||{(char)13}";
-                string message_DSC = $"DSC||{(char)13}";
 
-                ORMMessage = message_MSH + message_MSA + message_err + message_qak + message_QRD + message_QRF + message_DSP + message_DSC;
-                ORMMessage = AddHeaderAndFooterToHL7Msg(ORMMessage);
-                return ORMMessage;
+                    string DOB = firstTest.Patient.DateOfBirth.ToString("yyyyMMddhhmmss");
+                    var name = firstTest.Patient?.Name;
+                    if (name.Length > 32)
+                    {
+                        name = name.Substring(0, 30);
+                    }
+                    for (int i = 1; i <= 28; i++)
+                    {
+
+                        switch (i)
+                        {
+                            case 3:
+                                message_DSP += $"DSP|{i}||{name}|||{(char)13}";
+                                break;
+                            case 4:
+                                message_DSP += $"DSP|{i}||{DOB}|||{(char)13}";
+                                break;
+                            case 5:
+                                message_DSP += $"DSP|{i}||{gender}|||{(char)13}";
+                                break;
+                            case 21:
+                                message_DSP += $"DSP|{i}||{sampleNo}|||{(char)13}";
+                                break;
+                            case 24:
+                                message_DSP += $"DSP|{i}||N|||{(char)13}";
+                                break;
+                            case 26:
+                                message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
+                                break;
+                            default:
+                                message_DSP += $"DSC||{(char)13}";
+                                break;
+                        }
+                    }
+                    for (int i = 0; i < testlist.Count(); i++)
+                    {
+                        int j = 29 + i;
+                        var test = testlist.ElementAt(i);
+                        await LisContext.LisDOM.AcknowledgeSample(test.Id);
+                        var testname = test.LISTestCode + "^^^";
+                        message_DSP += $"DSP|{j}||{testname}|||{(char)13}";
+                    }
+                    message_qak = $"QAK|SR|OK|{(char)13}";
+                    string message_QRD = $"QRD|{datetime}|R|D|54|||RD|{sampleNo}|OTH|||T|{(char)13}";
+                    string message_QRF = $"QRF||{datetime}|{datetime}|||RCT|COR|ALL||{(char)13}";
+                    string message_DSC = $"DSC||{(char)13}";
+
+                    DSRMessage = message_MSH + message_MSA + message_err + message_qak + message_QRD + message_QRF + message_DSP + message_DSC;
+                    DSRMessage = AddHeaderAndFooterToHL7Msg(DSRMessage);
+
+                    QRYMessage = SendResponse("OK", messageControlId);
+                    response.QRYResponse = QRYMessage;
+                    response.DSRResponse = DSRMessage;
+                    return response;
+                }
+                else
+                {
+                    QRYMessage = SendResponse("NF", messageControlId);
+                    response.QRYResponse = QRYMessage;
+                    response.DSRResponse = null;
+                    return response;
+                }
             }
             else
             {
-                ORMMessage = SendResponse("NF", messageControlId);
-                return ORMMessage;
+                QRYMessage = SendResponse("NF", messageControlId);
+                response.QRYResponse = QRYMessage;
+                response.DSRResponse = null;
+                return response;
             }
         }
 

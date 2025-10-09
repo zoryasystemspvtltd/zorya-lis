@@ -104,7 +104,7 @@ namespace LIS.Com.Businesslogic
                     {
                         var rawmsg = new string(charArray, 0, readByteCount);
 
-                        Logger.Logger.LogInstance.LogInfo("COM Read: '{0}'", rawmsg);
+                        Logger.Logger.LogInstance.LogInfo("TCP/IP Read: '{0}'", rawmsg);
                         var inputmsg = rawmsg.Split((char)28);
                         var blocks = inputmsg[0].Split((char)13);
 
@@ -125,28 +125,18 @@ namespace LIS.Com.Businesslogic
                                 case "QRD":
                                     string sampleNo = input[8];
                                     if (orderRequest)
-                                    {
-                                        // Send the response
-                                        bool flag = IsValidSampleNo(sampleNo);
-                                        string finalResponse = string.Empty;
-                                        if (flag)
-                                        {
-                                            //Send First order Response
-                                            finalResponse = SendResponse("OK", messageControlId);
-                                            sw.Write(finalResponse);
+                                    {                                       
+                                        var response = await SendOrderData(sampleNo, messageControlId);
 
-                                            //Send DSR Response
-                                            finalResponse = "";
-                                            finalResponse = await SendOrderData(sampleNo, messageControlId);
-                                        }
-                                        else
+                                        //Send First order Response
+                                        sw.Write(response.QRYResponse);
+                                        Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.QRYResponse);
+                                        if(response.DSRResponse != null)
                                         {
-                                            finalResponse = SendResponse("NF", messageControlId);
-                                        }
-                                        sw.Write(finalResponse);
-                                        Logger.Logger.LogInstance.LogInfo("COM Write: '{0}'", finalResponse);
-
-                                        finalResponse = "";
+                                            //Send Order Info
+                                            sw.Write(response.DSRResponse);
+                                            Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.DSRResponse);
+                                        }                                       
                                     }
                                     break;
                                 case "OBR":
@@ -207,8 +197,7 @@ namespace LIS.Com.Businesslogic
 
         public bool IsValidSampleNo(string sampleNo)
         {
-            var strlist = sampleNo.Split('.');
-            if (strlist.Length == 1 && sampleNo.Length == 8)
+            if (sampleNo.Length > 4)
             {
                 Logger.Logger.LogInstance.LogDebug("Sample No '{0}' is valid.", sampleNo);
                 return true;
@@ -225,10 +214,10 @@ namespace LIS.Com.Businesslogic
         {
             var finalresponse = (char)11 + response + (char)28 + (char)13;
             sw.Write(finalresponse);
-            Logger.Logger.LogInstance.LogInfo("COM Write: '{0}'", finalresponse);
+            Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", finalresponse);
         }
 
-        virtual public Task<string> SendOrderData(string sampleNo, string messageControlId)
+        virtual public Task<OrderResponse> SendOrderData(string sampleNo, string messageControlId)
         {
             throw new NotImplementedException();
         }
@@ -240,5 +229,11 @@ namespace LIS.Com.Businesslogic
         {
             throw new NotImplementedException();
         }
+    }
+
+    public class OrderResponse
+    {
+        public string QRYResponse { get; set; }
+        public string DSRResponse { get; set; }
     }
 }

@@ -21,7 +21,7 @@
       <Value Profile="(Default)">1234</Value>
     </Setting>
     <Setting Name="EQUIPMENT_TYPE" Type="System.String" Scope="User">
-      <Value Profile="(Default)">MindRay</Value>
+      <Value Profile="(Default)">BS430</Value>
     </Setting>
   </Settings>
 </SettingsFile>
