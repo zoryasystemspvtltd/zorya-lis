@@ -77,8 +77,8 @@ namespace LIS.Com.Businesslogic
                 case EquipmentType.D10:
                     this.Command = new D10SerialCommand(settings);
                     break;
-                case EquipmentType.XN1000:
-                    this.Command = new XN1000SerialCommand(settings);
+                case EquipmentType.XN350:
+                    this.Command = new XN350SerialCommand(settings);
                     break;               
                 default:
                     throw new NotImplementedException();

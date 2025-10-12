@@ -5,7 +5,8 @@ namespace LIS.Com.Businesslogic
     public enum EquipmentType
     {        
         D10 = 0,
-        XN1000 = 1,
+        XN350 = 1,
         BS430 = 2,
+        BS240E = 3,
     }
 }

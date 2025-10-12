@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		Documents\BS-360E&BS-240Pro&240E_LIS Interface Manual_V1.0_EN.pdf = Documents\BS-360E&BS-240Pro&240E_LIS Interface Manual_V1.0_EN.pdf
 		Documents\BS-430_Host Interface Manual_V4.0.pdf = Documents\BS-430_Host Interface Manual_V4.0.pdf
+		C:\Users\Revolution PC\Downloads\R315005_XN-L series_ASTM Host Interface Specifications_EN_Rev6.pdf = C:\Users\Revolution PC\Downloads\R315005_XN-L series_ASTM Host Interface Specifications_EN_Rev6.pdf
 		README.md = README.md
 	EndProjectSection
 EndProject

@@ -54,8 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BS240ETCPIPCommand.cs" />
     <Compile Include="D10SerialCommand.cs" />
-    <Compile Include="XN1000SerialCommand.cs" />
+    <Compile Include="XN350SerialCommand.cs" />
     <Compile Include="BS430TCPIPCommand.cs" />
     <Compile Include="EquipmentType.cs" />
     <Compile Include="LisContext.cs" />

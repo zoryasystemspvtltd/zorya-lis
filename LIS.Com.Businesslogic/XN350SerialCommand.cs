@@ -11,20 +11,20 @@ using System.Threading.Tasks;
 
 namespace LIS.Com.Businesslogic
 {
-    public class XN1000SerialCommand : SerialCommand
+    public class XN350SerialCommand : SerialCommand
     {
         private readonly JArray validCodes;
-        public XN1000SerialCommand(PortSettings settings)
+        public XN350SerialCommand(PortSettings settings)
             : base(settings)
         {
-            var path = $"{Environment.CurrentDirectory}\\Data\\XN1000.json";
+            var path = $"{Environment.CurrentDirectory}\\Data\\XN350.json";
             var jsonData = File.ReadAllText(path);
             validCodes = JArray.Parse(jsonData);
         }
 
         public override async Task CreateMessage(string message)
         {
-            Logger.Logger.LogInstance.LogDebug("XN1000 CreateMessage method started '{0}'", message);
+            Logger.Logger.LogInstance.LogDebug("XN350 CreateMessage method started '{0}'", message);
             sInputMsg = "";
             string formattedmessage = "";
             string[] segments;
@@ -46,7 +46,7 @@ namespace LIS.Com.Businesslogic
             }
 
             await Identify(formattedmessage);
-            Logger.Logger.LogInstance.LogDebug("XN1000 CreateMessage method completed");
+            Logger.Logger.LogInstance.LogDebug("XN350 CreateMessage method completed");
         }
         public override async Task SendOrderData(string sampleStr)
         {
@@ -54,7 +54,7 @@ namespace LIS.Com.Businesslogic
             {
                 string[] sampleField = sampleStr.Split('^');
                 string sampleId = sampleField[2].Trim();
-                Logger.Logger.LogInstance.LogDebug("XN1000 SendOrderData method started for SampleNo: " + sampleId);
+                Logger.Logger.LogInstance.LogDebug("XN350 SendOrderData method started for SampleNo: " + sampleId);
 
                 string datetime = DateTime.Now.AddMinutes(-30).ToString("yyyyMMddhhmmss");
                 var specialchar = @"\^&";
@@ -150,15 +150,15 @@ namespace LIS.Com.Businesslogic
 
                     data[0] = Strings.Chr(5).ToString();
                     data[1] = headerSegment;
-                    Logger.Logger.LogInstance.LogDebug("XN1000 Header Segment {0}", headerSegment);
+                    Logger.Logger.LogInstance.LogDebug("XN350 Header Segment {0}", headerSegment);
                     data[2] = patientSegment;
-                    Logger.Logger.LogInstance.LogDebug("XN1000 Patient Segment {0}", patientSegment);
+                    Logger.Logger.LogInstance.LogDebug("XN350 Patient Segment {0}", patientSegment);
                     data[3] = orderSegment1;
-                    Logger.Logger.LogInstance.LogDebug("XN1000 Order1 Segment {0}", orderSegment1);
+                    Logger.Logger.LogInstance.LogDebug("XN350 Order1 Segment {0}", orderSegment1);
                     data[4] = orderSegment2;
-                    Logger.Logger.LogInstance.LogDebug("XN1000 Order2 Segment {0}", orderSegment2);
+                    Logger.Logger.LogInstance.LogDebug("XN350 Order2 Segment {0}", orderSegment2);
                     data[5] = trailerSegment;
-                    Logger.Logger.LogInstance.LogDebug("XN1000 Trailer Segment {0}", trailerSegment);
+                    Logger.Logger.LogInstance.LogDebug("XN350 Trailer Segment {0}", trailerSegment);
                     index = 0;
                 }
                 else//no test order
@@ -169,13 +169,13 @@ namespace LIS.Com.Businesslogic
                     trailerSegment = $"4L|1|N{Strings.Chr(13)}{Strings.Chr(3)}";
                     data[0] = Strings.Chr(5).ToString();
                     data[1] = headerSegment;
-                    Logger.Logger.LogInstance.LogDebug("XN1000 Header Segment {0}", headerSegment);
+                    Logger.Logger.LogInstance.LogDebug("XN350 Header Segment {0}", headerSegment);
                     data[2] = patientSegment;
-                    Logger.Logger.LogInstance.LogDebug("XN1000 Patient Segment {0}", patientSegment);
+                    Logger.Logger.LogInstance.LogDebug("XN350 Patient Segment {0}", patientSegment);
                     data[3] = orderSegment1;
-                    Logger.Logger.LogInstance.LogDebug("XN1000 Order Segment {0}", orderSegment1);
+                    Logger.Logger.LogInstance.LogDebug("XN350 Order Segment {0}", orderSegment1);
                     data[4] = trailerSegment;
-                    Logger.Logger.LogInstance.LogDebug("XN1000 Trailer Segment {0}", trailerSegment);
+                    Logger.Logger.LogInstance.LogDebug("XN350 Trailer Segment {0}", trailerSegment);
                     index = 0;
                 }
 
@@ -185,18 +185,18 @@ namespace LIS.Com.Businesslogic
                 }
                 WriteToPort("" + (char)5);
 
-                Logger.Logger.LogInstance.LogDebug("XN1000 SendOrderData method completed for SampleNo " + sampleId);
+                Logger.Logger.LogInstance.LogDebug("XN350 SendOrderData method completed for SampleNo " + sampleId);
             }
             catch (Exception ex)
             {
-                Logger.Logger.LogInstance.LogException("XN1000 SendOrderData method exception:", ex);
+                Logger.Logger.LogInstance.LogException("XN350 SendOrderData method exception:", ex);
             }
         }
 
         public override async Task Identify(string message)
         {
-            Logger.Logger.LogInstance.LogDebug("XN1000 Identify method started");
-            Logger.Logger.LogInstance.LogDebug("XN1000 Identify method Data: " + message);
+            Logger.Logger.LogInstance.LogDebug("XN350 Identify method started");
+            Logger.Logger.LogInstance.LogDebug("XN350 Identify method Data: " + message);
             List<string> sampleList = new List<string>();
             ArrayList uniqueSampleList;
             string[] segments = message.Split(Strings.Chr(13)); // Chr(13) <CR>
@@ -229,11 +229,11 @@ namespace LIS.Com.Businesslogic
                         await ParseMessage(message, uniqueSampleList);
                     }
                 }
-                Logger.Logger.LogInstance.LogDebug("XN1000 Identify method completed");
+                Logger.Logger.LogInstance.LogDebug("XN350 Identify method completed");
             }
             catch (Exception ex)
             {
-                Logger.Logger.LogInstance.LogException("XN1000 Identify method exception:", ex);
+                Logger.Logger.LogInstance.LogException("XN350 Identify method exception:", ex);
             }
         }
 
@@ -241,7 +241,7 @@ namespace LIS.Com.Businesslogic
         {
             try
             {
-                Logger.Logger.LogInstance.LogDebug("XN1000 ParseMessage method started");
+                Logger.Logger.LogInstance.LogDebug("XN350 ParseMessage method started");
 
                 string[] record = message.Split(Strings.Chr(13)); // Chr(13)
                 for (int j = 0; j <= sampleIdLst.Count - 1; j++)
@@ -283,7 +283,7 @@ namespace LIS.Com.Businesslogic
                                             resultDetails.LISParamCode = paramCode;
                                             resultDetails.LISParamValue = field[3];
                                             resultDetails.LISParamUnit = field[4];
-                                            Logger.Logger.LogInstance.LogDebug("XN1000 Result processed for SampleNo " + sampleNo + " and Parameter " + paramCode);
+                                            Logger.Logger.LogInstance.LogDebug("XN350 Result processed for SampleNo " + sampleNo + " and Parameter " + paramCode);
                                             lsResult.Add(resultDetails);
                                         }
                                         else
@@ -296,15 +296,15 @@ namespace LIS.Com.Businesslogic
 
                     result.TestResult = testResult;
                     result.ResultDetails = lsResult;
-                    Logger.Logger.LogInstance.LogDebug("XN1000 Result posted to API for SampleNo: " + testResult.SampleNo);
+                    Logger.Logger.LogInstance.LogDebug("XN350 Result posted to API for SampleNo: " + testResult.SampleNo);
                     await LisContext.LisDOM.SaveTestResult(result);
 
                 }
-                Logger.Logger.LogInstance.LogDebug("XN1000 ParseMessage method completed");
+                Logger.Logger.LogInstance.LogDebug("XN350 ParseMessage method completed");
             }
             catch (Exception ex)
             {
-                Logger.Logger.LogInstance.LogException("XN1000 ParseMessage method exception:", ex);
+                Logger.Logger.LogInstance.LogException("XN350 ParseMessage method exception:", ex);
             }
         }
 
