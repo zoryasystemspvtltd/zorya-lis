@@ -1,0 +1,98 @@
+{
+  "RackNo": {
+    "Lenght": 4,
+    "Enabled": true
+  },
+  "CupNo": {
+    "Lenght": 2,
+    "Enabled": true
+  },
+  "Type": {
+    "Lenght": 1,
+    "Enabled": true
+  },
+  "SampleNo": {
+    "Lenght": 4,
+    "Enabled": true
+  },
+  "SampleId": {
+    "Lenght": 26,
+    "Enabled": true
+  },
+  "Dummy": {
+    "Lenght": 4,
+    "Enabled": true
+  },
+  "BlockIdNo": {
+    "Lenght": 1,
+    "Enabled": true
+  },
+  "Sex": {
+    "Lenght": 1,
+    "Enabled": true
+  },
+  "Year": {
+    "Lenght": 3,
+    "Enabled": true
+  },
+  "Month": {
+    "Lenght": 2,
+    "Enabled": true
+  },
+  "OtherType": {
+    "Lenght": 1,
+    "Enabled": true
+  },
+  "PatientInfo": {
+    "Lenght": 20,
+    "Enabled": true
+  },
+  "PatientId": {
+    "Lenght": 20,
+    "Enabled": true
+  },
+  "ControlNo": {
+    "Lenght": 4,
+    "Enabled": true
+  },
+  "RunDateTime": {
+    "Lenght": 14,
+    "Enabled": false
+  },
+  "OnlineTestNumber": {
+    "Lenght": 3,
+    "Enabled": false
+  },
+  "DilutionInfo": {
+    "Lenght": 1,
+    "Enabled": false
+  },
+  "ReagentInfo": {
+    "Lenght": 16,
+    "Enabled": false
+  },
+  "ParamCode": {
+    "Lenght": 3,
+    "Enabled": true
+  },
+  "ParamValue": {
+    "Lenght": 6,
+    "Enabled": true
+  },
+  "Flags": {
+    "Lenght": 2,
+    "Enabled": true
+  },
+  "ISEElectrode": {
+    "Lenght": 20,
+    "Enabled": false
+  },
+  "TestNo": {
+    "Lenght": 3,
+    "Enabled": true
+  },
+  "DilInfo": {
+    "Lenght": 1,
+    "Enabled": false
+  }
+}
