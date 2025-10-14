@@ -68,3 +68,7 @@ nunit-*.xml
 /web/Lis.Api/.vs
 /web/Lis.Api.Client/.vs
 /web/Lis.Api.Client.Test/.vs
+/.vs/zorya-lis/v17/DocumentLayout.json
+/.vs/zorya-lis/v17/.wsuo
+/.vs/VSWorkspaceState.json
+/.vs/Zorya_LIS/config/applicationhost.config
