@@ -47,7 +47,8 @@ namespace QuestionsForU.Authentication.Controllers
                 items = new List<dynamic>()
             };
 
-            foreach (var user in userManager.Users.Where(u => u.Email != "admin@zorya.co.in"))
+            var userList = userManager.Users.Where(u => u.Email != "admin@zorya.co.in").ToList();
+            foreach (var user in userList)
             {
                 users.items.Add(new
                 {
@@ -116,7 +117,8 @@ namespace QuestionsForU.Authentication.Controllers
                 applications = new List<dynamic>()
             };
 
-            foreach (var role in dbContext.Roles.Where(p => !p.Name.Equals("Administrator", StringComparison.OrdinalIgnoreCase)))
+            var roleList = dbContext.Roles.Where(p => !p.Name.Equals("Administrator", StringComparison.OrdinalIgnoreCase)).ToList();
+            foreach (var role in roleList)
             {
                 result.roles.Add(new
                 {
