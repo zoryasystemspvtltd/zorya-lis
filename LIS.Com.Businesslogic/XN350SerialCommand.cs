@@ -52,6 +52,7 @@ namespace LIS.Com.Businesslogic
         {
             try
             {
+                data = new string[7];// This need to be 7 for equipment XN350
                 string[] sampleField = sampleStr.Split('^');
                 string sampleId = sampleField[2].Trim();
                 Logger.Logger.LogInstance.LogDebug("XN350 SendOrderData method started for SampleNo: " + sampleId);

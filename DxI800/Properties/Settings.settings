@@ -30,7 +30,7 @@
       <Value Profile="(Default)">DUMMY</Value>
     </Setting>
     <Setting Name="EQUIPMENT_TYPE" Type="System.String" Scope="User">
-      <Value Profile="(Default)">DxH800</Value>
+      <Value Profile="(Default)">XN350</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -133,7 +133,7 @@ namespace LisConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DxH800")]
+        [global::System.Configuration.DefaultSettingValueAttribute("XN350")]
         public string EQUIPMENT_TYPE {
             get {
                 return ((string)(this["EQUIPMENT_TYPE"]));

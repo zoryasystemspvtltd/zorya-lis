@@ -104,7 +104,7 @@ namespace LIS.Com.Businesslogic
                 string orderSegment = "";
                 string trailerSegment;
                 IEnumerable<TestRequestDetail> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleId);
-                string orderMessage;
+                
                 if (testlist.Count() > 0)
                 {
                     var testname = "";

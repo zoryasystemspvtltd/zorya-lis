@@ -24,7 +24,7 @@ namespace LIS.Com.Businesslogic
 
         protected SerialPort port;
 
-        protected string[] data = new string[6];// This need to be 7 for equipment XN1000
+        protected string[] data;
         protected int index;
         protected string sInputMsg = "";
         public bool IsReady { get; private set; }

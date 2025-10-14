@@ -112,6 +112,18 @@ namespace Test.COM
             }
 
         }
+
+        /// <summary>
+        /// ENQ or (char)5 -enquiry
+        /// ACK or (char)6 -acknowledge
+        /// STX or (char)2- start of text
+        /// ETX or (char)3- end of text
+        /// ETB or (char)17- end of text
+        /// EOT or (char)4 - end of transmission
+        /// NAK or (char)21 - negative acknowledge
+        /// DLE or (char)10 - data link escape 
+        /// CR	carriage return
+        /// </summary>
         private void Port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             var text = port.ReadExisting().ToString();
