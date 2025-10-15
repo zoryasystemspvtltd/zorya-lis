@@ -24,4 +24,10 @@ namespace LIS.DtoModel.Models
         [JsonIgnore]
         public virtual TestRequestDetail TestRequestDetail { get; set; }
     }
+
+    public class TestOrderParameter
+    {        
+        public string ParamCode { get; set; }
+        public string ParamName { get; set; }       
+    }
 }

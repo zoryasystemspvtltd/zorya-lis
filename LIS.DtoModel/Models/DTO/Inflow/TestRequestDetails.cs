@@ -59,4 +59,12 @@ namespace LIS.DtoModel.Models
         [JsonIgnore]
         public virtual IEnumerable<TestParameter> TestParameters { get; set; }
     }
+
+    public class TestOrder
+    {
+        public string SampleNo { get; set; }       
+        public string TestCode { get; set; }      
+        public string TestName { get; set; }
+        public List<TestOrderParameter> TestOrderParameters { get; set; }
+    }
 }

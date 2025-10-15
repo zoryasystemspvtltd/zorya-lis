@@ -277,7 +277,102 @@ namespace LIS.BusinessLogic
             }
             return patientId;
         }
+        public long CreateNewOrderFromAPI(PatientOrder newOrder)
+        {
+            long testRequestId = 0, patientId = 0;
+            var patientCheck = patientRepo.Get(p => p.HisPatientId.Equals(newOrder.PatientInfo.PatientId, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            if (patientCheck == null)
+            {
+                try
+                {
+                    var patientDetails = new PatientDetail()
+                    {
+                        Name = newOrder.PatientInfo.PatientName,
+                        HisPatientId = newOrder.PatientInfo.PatientId,
+                        DateOfBirth = newOrder.PatientInfo.DateOfBirth,
+                        Gender = newOrder.PatientInfo.Gender,
+                        Age = newOrder.PatientInfo.DateOfBirth.Age(),
+                        IsActive = true
+                    };
+                    patientId = patientRepo.Add(patientDetails);
+                }
+                catch (Exception e)
+                {
+                    //logger.LogException(e);
+                    logger.LogDebug("Error in Add Patient '{0}'", newOrder?.PatientInfo?.PatientId);
+                }
+            }
+            else
+            {
+                patientId = patientCheck.Id;
+            }
 
+            foreach (var order in newOrder.PatientInfo.TestOrders)
+            {
+                var test = testRepo.Get(p => p.HISTestCode.Equals(order.TestCode, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+
+                var specimenCode = string.Empty;
+                var specimenName = string.Empty;
+                var department = string.Empty;
+                var departmentId = string.Empty;
+
+                if (test != null)
+                {
+                    specimenCode = test.HISSpecimenCode;
+                    specimenName = test.HISSpecimenName;
+                    department = test.Departments.Name;
+                    departmentId = test.Departments.Code;
+
+                    var testRequestDetail = new TestRequestDetail()
+                    {
+                        PatientId = patientId,
+                        HISTestCode = order.TestCode,
+                        HISTestName = order.TestName,
+                        SampleNo = order.SampleNo,
+                        SampleCollectionDate = DateTime.Now,
+                        SampleReceivedDate = DateTime.Now,
+                        SpecimenCode = specimenCode,
+                        SpecimenName = specimenName,
+                        HISRequestNo = order.SampleNo,
+                        DepartmentId = departmentId,
+                        Department = department
+                    };
+
+                    try
+                    {
+                        testRequestId = testRequestRepo.Add(testRequestDetail);
+                        var parameterlist = parameterMapRepo.Get(p => p.HISTestCode.Equals(order.TestCode, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                        foreach (var param in parameterlist)
+                        {
+                            try
+                            {
+                                var testParameter = new TestParameter()
+                                {
+                                    HISParamCode = param.HISParamCode,
+                                    HISParamName = param.HISParamDescription,
+                                    HISTestCode = param.HISTestCode,
+                                    TestRequestDetailsId = testRequestId
+                                };
+
+                                parameterRepo.Add(testParameter);
+                            }
+                            catch (Exception e)
+                            {
+                                logger.LogException(e);
+                                logger.LogDebug("Error in Add Test Parameter '{0}'", param?.HISTestCode);
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        logger.LogException(e);
+                        logger.LogDebug("Error in Add Test '{0}'", order.SampleNo);
+                    }
+                }
+            }
+            return testRequestId;
+        }
         private List<string> GetTestGroupName(string hISTestCode)
         {
             var mappings = mappingRepo

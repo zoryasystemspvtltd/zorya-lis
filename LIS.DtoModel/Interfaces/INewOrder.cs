@@ -8,4 +8,9 @@ namespace LIS.DtoModel.Interfaces
         PatientDetail PatientDetail { get; set; }
         IEnumerable<TestRequestDetail> TestRequestDetails { get; set; }
     }
+
+    public interface IPatientOrder
+    {
+        PatientInfo PatientInfo { get; set; }        
+    }
 }

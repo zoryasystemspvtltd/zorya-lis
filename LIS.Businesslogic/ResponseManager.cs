@@ -1,11 +1,6 @@
 ﻿using LIS.DtoModel;
 using LIS.DtoModel.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LIS.Businesslogic
 {
@@ -19,6 +14,16 @@ namespace LIS.Businesslogic
                 Message = message,
                 Result = result,
                 ResponseException = apiError
+            };
+        }
+        public ExternalAPIResponse CreateExternalAPIResponse(string status, string message, string patienId, long orderRef)
+        {
+            return new ExternalAPIResponse()
+            {
+                Status = status,
+                Message = message,
+                PatientID = patienId,
+                ZoryaOrderRef = orderRef == 0 ? null : "ZOR-" + orderRef
             };
         }
     }
