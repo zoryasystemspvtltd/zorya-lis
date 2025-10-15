@@ -57,7 +57,7 @@
             this.LinkLabel1.Size = new System.Drawing.Size(220, 17);
             this.LinkLabel1.TabIndex = 8;
             this.LinkLabel1.TabStop = true;
-            this.LinkLabel1.Text = "Copyright © Beckman Coulter";
+            this.LinkLabel1.Text = "Copyright © Zorya System Pvt. Ltd.";
             // 
             // banner1
             // 

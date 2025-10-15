@@ -72,3 +72,5 @@ nunit-*.xml
 /.vs/zorya-lis/v17/.wsuo
 /.vs/VSWorkspaceState.json
 /.vs/Zorya_LIS/config/applicationhost.config
+/web/Lis.Web/node_modules
+/.vs/Zorya_LIS/CopilotIndices/17.14.1231.31060
