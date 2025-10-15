@@ -1,8 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
 
 namespace LIS.DtoModel
 {
@@ -13,5 +9,13 @@ namespace LIS.DtoModel
          string Message { get; set; }
          IApiError ResponseException { get; set; }
          object Result { get; set; }
+    }
+
+    public interface IExternalAPIResponse
+    {
+        string Status { get; set; }
+        string PatientID { get; set; }
+        string ZoryaOrderRef { get; set; }
+        string Message { get; set; }
     }
 }

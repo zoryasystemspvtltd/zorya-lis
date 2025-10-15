@@ -57,6 +57,20 @@ namespace LIS.Com.Businesslogic
                 this.FullMessage = ex.Message;
                 Logger.Logger.LogInstance.LogException(ex);
             }
+            finally
+            {
+                if (reportingThread != null)
+                {
+                    reportingThread.Abort();//properly abort the client
+                    Logger.Logger.LogInstance.LogDebug("Server Stopped.");
+                }
+                if (server != null)
+                {
+                    server.Stop();//properly stop the listner
+                    Logger.Logger.LogInstance.LogDebug("Server Stopped.");
+                }
+
+            }
         }
 
         public void DisconnectToTCPIP()
@@ -125,18 +139,18 @@ namespace LIS.Com.Businesslogic
                                 case "QRD":
                                     string sampleNo = input[8];
                                     if (orderRequest)
-                                    {                                       
+                                    {
                                         var response = await SendOrderData(sampleNo, messageControlId);
 
                                         //Send First order Response
                                         sw.Write(response.QRYResponse);
                                         Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.QRYResponse);
-                                        if(response.DSRResponse != null)
+                                        if (response.DSRResponse != null)
                                         {
                                             //Send Order Info
                                             sw.Write(response.DSRResponse);
                                             Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.DSRResponse);
-                                        }                                       
+                                        }
                                     }
                                     break;
                                 case "OBR":

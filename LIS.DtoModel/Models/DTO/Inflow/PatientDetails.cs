@@ -39,4 +39,13 @@ namespace LIS.DtoModel.Models
         public virtual IEnumerable<TestResult> TestResults { get; set; }
         
     }
+
+    public class PatientInfo
+    {        
+        public string PatientId { get; set; }       
+        public string PatientName { get; set; }        
+        public string Gender { get; set; } 
+        public DateTime DateOfBirth { get; set; }
+        public List<TestOrder> TestOrders { get; set; }
+    }
 }

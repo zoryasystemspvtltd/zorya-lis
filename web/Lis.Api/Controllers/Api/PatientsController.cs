@@ -1,5 +1,4 @@
-﻿using Lis.Api.Providers;
-using LIS.DtoModel;
+﻿using LIS.DtoModel;
 using LIS.DtoModel.Interfaces;
 using LIS.DtoModel.Models;
 using LIS.Logger;
@@ -17,12 +16,15 @@ namespace Lis.Api.Controllers.Api
     {
         private ITestRequestDetailsManager testmanager;
         private IPatientDetailsManager manager;
+        private IResponseManager responseMgr;
         private ILogger logger;
-        public PatientsController(IPatientDetailsManager equipmentManager
+        public PatientsController(IPatientDetailsManager equipmentManager,
+             IResponseManager responseManager
             , ILogger Logger
             , ITestRequestDetailsManager testmanager)
         {
             manager = equipmentManager;
+            responseMgr = responseManager;
             logger = Logger;
             this.testmanager = testmanager;
         }
@@ -81,6 +83,32 @@ namespace Lis.Api.Controllers.Api
         }
 
         [AllowAnonymous]
+        [HttpPost]
+        [ActionName("patient-test-order")]
+        public HttpResponseMessage Post(PatientOrder newOrder)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Request.CreateResponse(HttpStatusCode.PreconditionFailed, ModelState.Keys);
+                }
+
+                long testRequestDetailsId = manager.CreateNewOrderFromAPI(newOrder);
+                ExternalAPIResponse aPIResponse = responseMgr.CreateExternalAPIResponse("success", "Order received successfully",newOrder.PatientInfo.PatientId, testRequestDetailsId);
+
+                return Request.CreateResponse<ExternalAPIResponse>(HttpStatusCode.Created, aPIResponse);
+            }
+            catch (Exception e)
+            {
+                logger.LogException(e);
+                ExternalAPIResponse aPIResponse = responseMgr.CreateExternalAPIResponse("error", e.Message, newOrder.PatientInfo.PatientId, 0);
+
+                return Request.CreateResponse<ExternalAPIResponse>(HttpStatusCode.BadRequest, aPIResponse);
+            }
+        }
+
+        [AllowAnonymous]
         [HttpPut]
         public HttpResponseMessage Put(List<AuthorizeRequest> request)
         {
@@ -90,9 +118,9 @@ namespace Lis.Api.Controllers.Api
                 {
                     return Request.CreateResponse(HttpStatusCode.PreconditionFailed, ModelState.Keys);
                 }
-                foreach(var sample in request)
+                foreach (var sample in request)
                 {
-                    if (sample.Status == ReportStatusType.DoctorApproved 
+                    if (sample.Status == ReportStatusType.DoctorApproved
                         || sample.Status == ReportStatusType.DoctorRejected)
                     {
                         testmanager.DoctorReview(sample.Id, sample.Status, sample.Note, sample.RunIndex);
@@ -103,7 +131,7 @@ namespace Lis.Api.Controllers.Api
                     {
                         testmanager.TechnicianReview(sample.Id, sample.Status, sample.Note, sample.RunIndex);
                     }
-                    
+
                 }
 
                 return Request.CreateResponse(HttpStatusCode.OK);
