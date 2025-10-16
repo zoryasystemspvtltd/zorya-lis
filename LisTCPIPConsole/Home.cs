@@ -14,16 +14,19 @@ namespace LisTCPIPConsole
         EquipmentType selectedEquipment;
         ToolStripMenuItem connectItem;
         HeartBeatProxy heartBeatProxy;
+
         public Home()
         {
             Logger.LogInstance.LogDebug("Lis Console Home method started");
             InitializeComponent();
 
-            var settings = new TCPIPSettings();
-
-            settings.AutoConnect = Settings.Default.AUTO_CONNECT;
-            settings.IPAddress = Settings.Default.IP_ADDRESS;
-            settings.PortNo = Settings.Default.PORT_NO;
+            var settings = new TCPIPSettings
+            {
+                AutoConnect = Settings.Default.AUTO_CONNECT,
+                IPAddress = Settings.Default.IP_ADDRESS,
+                PortNo = Settings.Default.PORT_NO,
+                ProtocolName = Settings.Default.PROTOCOL_NAME
+            };
             selectedEquipment = (EquipmentType)Enum.Parse(typeof(EquipmentType), Settings.Default.EQUIPMENT_TYPE);
             LisContext.LisDOM.InitTCPIPCommand(settings, selectedEquipment);
             LisContext.LisDOM.InitAPI(Settings.Default.SERVER_URL, Settings.Default.API_KEY);
@@ -50,8 +53,8 @@ namespace LisTCPIPConsole
         private void InitLIS()
         {
             Logger.LogInstance.LogDebug("Lis Console InitLIS method started");
-
-            if (LisContext.LisDOM.TcpIpCommand.IsReady)
+            var context = LisContext.LisDOM;
+            if (context.TcpIpHL7Command.IsReady || context.TcpIpASTMCommand.IsReady)
             {
                 ConnectToolStripMenuItem.Text = "Disconnect";
                 connectItem.Text = "Disconnect";
@@ -63,7 +66,6 @@ namespace LisTCPIPConsole
                 connectItem.Text = "Connect";
                 comPortName = " :: Status - Equipment not connected.";
             }
-
 
             heartBeatProxy.WatchHeartBeat();
             this.Text = $"{selectedEquipment} {comPortName}";
@@ -94,34 +96,66 @@ namespace LisTCPIPConsole
 
         private void ConnectTCPIP()
         {
+            var context = LisContext.LisDOM;
             Logger.LogInstance.LogDebug("LisConsole ConnectTCPIP started.");
-            Logger.LogInstance.LogDebug($"ConnectTCPIP IsReady : {LisContext.LisDOM.TcpIpCommand.IsReady}");
-            if (!LisContext.LisDOM.TcpIpCommand.IsReady)
+            if (!context.TcpIpHL7Command.IsReady && Settings.Default.PROTOCOL_NAME == "HL7")
             {
-                LisContext.LisDOM.TcpIpCommand.ConnectToTCPIP();
-                if (!LisContext.LisDOM.TcpIpCommand.IsReady)
+                context.TcpIpHL7Command.ConnectToTCPIP();
+                if (!context.TcpIpHL7Command.IsReady)
                 {
-                    Logger.LogInstance.LogInfo(LisContext.LisDOM.TcpIpCommand.FullMessage);
-                    MessageBox.Show(this, LisContext.LisDOM.TcpIpCommand.FullMessage, "Error !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Logger.LogInstance.LogInfo(context.TcpIpHL7Command.FullMessage);
+                    MessageBox.Show(this, context.TcpIpHL7Command.FullMessage, "Error !", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address connected.");
                 }
             }
+            else if (!context.TcpIpASTMCommand.IsReady && Settings.Default.PROTOCOL_NAME == "ASTM")
+            {
+                context.TcpIpASTMCommand.ConnectToTCPIP();
+                if (!context.TcpIpASTMCommand.IsReady)
+                {
+                    Logger.LogInstance.LogInfo(context.TcpIpASTMCommand.FullMessage);
+                    MessageBox.Show(this, context.TcpIpASTMCommand.FullMessage, "Error !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address connected.");
+                }
+            }
+            else if (context.TcpIpASTMCommand.IsReady && Settings.Default.PROTOCOL_NAME == "ASTM")
+            {
+                context.TcpIpASTMCommand.DisconnectToTCPIP();
+                Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address disconnected.");
+
+            }
             else
             {
-                LisContext.LisDOM.TcpIpCommand.DisconnectToTCPIP();
+                context.TcpIpHL7Command.DisconnectToTCPIP();
                 Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address disconnected.");
-            }
 
+            }
             this.InitLIS();
             Logger.LogInstance.LogDebug("LisConsole ConnectTCPIP completed.");
         }
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
-        {            
+        {
+            DisconnectIP();
             Application.Exit();
+        }
+
+        private void DisconnectIP()
+        {
+            if (Settings.Default.PROTOCOL_NAME == "ASTM")
+            {
+                LisContext.LisDOM.TcpIpASTMCommand.DisconnectToTCPIP();
+            }
+            else
+            {
+                LisContext.LisDOM.TcpIpHL7Command.DisconnectToTCPIP();
+            }
         }
 
         private void AboutUsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -178,7 +212,7 @@ namespace LisTCPIPConsole
 
         void MenuQuit_Click(object sender, EventArgs e)
         {
-            LisContext.LisDOM.TcpIpCommand.DisconnectToTCPIP();
+            DisconnectIP();
             Application.Exit();
         }
 
@@ -189,7 +223,7 @@ namespace LisTCPIPConsole
 
         private void Home_FormClosed(object sender, FormClosedEventArgs e)
         {
-            LisContext.LisDOM.TcpIpCommand.DisconnectToTCPIP();
+            DisconnectIP();
             Application.Exit();
         }
     }

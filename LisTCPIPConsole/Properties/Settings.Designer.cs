@@ -73,18 +73,6 @@ namespace LisTCPIPConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.43.148")]
-        public string IP_ADDRESS {
-            get {
-                return ((string)(this["IP_ADDRESS"]));
-            }
-            set {
-                this["IP_ADDRESS"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1234")]
         public int PORT_NO {
             get {
@@ -104,6 +92,30 @@ namespace LisTCPIPConsole.Properties {
             }
             set {
                 this["EQUIPMENT_TYPE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.228.175.184")]
+        public string IP_ADDRESS {
+            get {
+                return ((string)(this["IP_ADDRESS"]));
+            }
+            set {
+                this["IP_ADDRESS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ASTM")]
+        public string PROTOCOL_NAME {
+            get {
+                return ((string)(this["PROTOCOL_NAME"]));
+            }
+            set {
+                this["PROTOCOL_NAME"] = value;
             }
         }
     }

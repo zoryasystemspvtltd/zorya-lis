@@ -69,17 +69,18 @@ namespace LIS.Com.Businesslogic
             }
         }
         public SerialCommand Command { get; private set; }
-        public TCPIPHL7Command TcpIpCommand { get; private set; }
+        public TCPIPHL7Command TcpIpHL7Command { get; private set; }
+        public TCPIPASTMCommand TcpIpASTMCommand { get; private set; }
         public void InitSerialCommand(PortSettings settings, EquipmentType type)
         {
             switch (type)
-            {               
+            {
                 case EquipmentType.D10:
                     this.Command = new D10SerialCommand(settings);
                     break;
                 case EquipmentType.XN350:
                     this.Command = new XN350SerialCommand(settings);
-                    break;               
+                    break;
                 default:
                     throw new NotImplementedException();
             }
@@ -87,7 +88,31 @@ namespace LIS.Com.Businesslogic
 
         public void InitTCPIPCommand(TCPIPSettings settings, EquipmentType type)
         {
-            this.TcpIpCommand = new BS430TCPIPCommand(settings);
+            if (settings.ProtocolName.ToUpper() == "ASTM")
+            {
+                switch (type)
+                {
+                    case EquipmentType.XN350:
+                        this.TcpIpASTMCommand = new XN350TCPIPASTMCommand(settings);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+            else
+            {
+                switch (type)
+                {
+                    case EquipmentType.BS430:
+                        this.TcpIpHL7Command = new BS430TCPIPHL7Command(settings);
+                        break;
+                    case EquipmentType.BS240E:
+                        this.TcpIpHL7Command = new BS240ETCPIPHL7Command(settings);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
         }
 
         public void InitAPI(string serverUrl, string apiKey)

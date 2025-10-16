@@ -12,13 +12,13 @@ namespace LIS.Com.Businesslogic
     public class TCPIPHL7Command
     {
         private TCPIPSettings settings;
-        protected Thread reportingThread;
+        protected Thread reportingHL7Thread;
         protected Socket soc;
         protected Stream sm;
         protected StreamWriter sw;
         protected StreamReader sr;
 
-        protected TcpListener server;
+        protected TcpListener serverHL7;
         public bool IsReady { get; private set; }
         public string FullMessage { get; private set; }
         protected System.Timers.Timer timer;
@@ -26,7 +26,7 @@ namespace LIS.Com.Businesslogic
 
         public TCPIPHL7Command(TCPIPSettings settings)
         {
-            Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPCommand Constructor method started.");
+            Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method started.");
             IsReady = false;
             this.settings = settings;
             if (this.settings.AutoConnect)
@@ -34,23 +34,24 @@ namespace LIS.Com.Businesslogic
                 ConnectToTCPIP();
             }
 
-            Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPCommand Constructor method completed.");
+            Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method completed.");
         }
 
         public void ConnectToTCPIP()
         {
-            Logger.Logger.LogInstance.LogDebug("TCPIPCommand ConnectToTCPIP method started.");
+            Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command ConnectToTCPIP method started.");
             try
             {
                 var ipAddress = IPAddress.Parse(settings.IPAddress);
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, settings.PortNo);
-                server = new TcpListener(localEndPoint);
-                server.Start();
-                reportingThread = new Thread(new ThreadStart(TCP_ListenData));
-                reportingThread.Start();
+                serverHL7 = new TcpListener(localEndPoint);
+                serverHL7.Start();
+                reportingHL7Thread = new Thread(new ThreadStart(TCPListenHL7Data));
+                reportingHL7Thread.Start();
+
                 IsReady = true;
 
-                Logger.Logger.LogInstance.LogDebug("TCPIPCommand ConnectToTCPIP method completed.");
+                Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command ConnectToTCPIP method completed.");
             }
             catch (Exception ex)
             {
@@ -59,14 +60,14 @@ namespace LIS.Com.Businesslogic
             }
             finally
             {
-                if (reportingThread != null)
+                if (reportingHL7Thread != null)
                 {
-                    reportingThread.Abort();//properly abort the client
+                    reportingHL7Thread.Abort();//properly abort the client
                     Logger.Logger.LogInstance.LogDebug("Server Stopped.");
                 }
-                if (server != null)
+                if (serverHL7 != null)
                 {
-                    server.Stop();//properly stop the listner
+                    serverHL7.Stop();//properly stop the listner
                     Logger.Logger.LogInstance.LogDebug("Server Stopped.");
                 }
 
@@ -75,15 +76,15 @@ namespace LIS.Com.Businesslogic
 
         public void DisconnectToTCPIP()
         {
-            Logger.Logger.LogInstance.LogDebug("TCPIPCommand DisconnectToTCPIP method started.");
+            Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command DisconnectToTCPIP method started.");
             try
             {
-                reportingThread.Abort();
-                if (server != null)
+                reportingHL7Thread.Abort();
+                if (serverHL7 != null)
                 {
                     soc.Dispose();
-                    server.Stop();
-                    server = null;
+                    serverHL7.Stop();
+                    serverHL7 = null;
                 }
                 IsReady = false;
             }
@@ -92,14 +93,14 @@ namespace LIS.Com.Businesslogic
                 this.FullMessage = ex.Message;
                 Logger.Logger.LogInstance.LogException(ex);
             }
-            Logger.Logger.LogInstance.LogDebug("TCPIPCommand DisconnectToTCPIP method completed.");
+            Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command DisconnectToTCPIP method completed.");
         }
 
-        private async void TCP_ListenData()
+        private async void TCPListenHL7Data()
         {
             string messageControlId = "";
-            Logger.Logger.LogInstance.LogDebug("TCPIPCommand TCP_ListenData method started.");
-            soc = server.AcceptSocket();
+            Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command TCPListenHL7Data method started.");
+            soc = serverHL7.AcceptSocket();
             sm = new NetworkStream(soc);
             sr = new StreamReader(sm);
             sw = new StreamWriter(sm)
@@ -231,7 +232,7 @@ namespace LIS.Com.Businesslogic
             Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", finalresponse);
         }
 
-        virtual public Task<OrderResponse> SendOrderData(string sampleNo, string messageControlId)
+        virtual public Task<OrderHL7Response> SendOrderData(string sampleNo, string messageControlId)
         {
             throw new NotImplementedException();
         }
@@ -245,7 +246,7 @@ namespace LIS.Com.Businesslogic
         }
     }
 
-    public class OrderResponse
+    public class OrderHL7Response
     {
         public string QRYResponse { get; set; }
         public string DSRResponse { get; set; }

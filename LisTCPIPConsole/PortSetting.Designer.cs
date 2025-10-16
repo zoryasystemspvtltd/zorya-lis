@@ -46,12 +46,14 @@
             this.txtServerIP = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.btnValidate = new System.Windows.Forms.Button();
             this.txtKey = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtServer = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbProtocol = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -99,6 +101,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.cmbProtocol);
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.ddlEquipmentType);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.cbRunOnStartup);
@@ -243,6 +247,15 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Server Settings";
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(64, 111);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 13);
+            this.lblStatus.TabIndex = 43;
+            // 
             // btnValidate
             // 
             this.btnValidate.Location = new System.Drawing.Point(156, 106);
@@ -289,14 +302,26 @@
             this.label9.TabIndex = 38;
             this.label9.Text = "Server URL:";
             // 
-            // lblStatus
+            // label1
             // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(64, 111);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(0, 13);
-            this.lblStatus.TabIndex = 43;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 90);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 13);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "PROTOCOL NAME:";
+            // 
+            // cmbProtocol
+            // 
+            this.cmbProtocol.FormattingEnabled = true;
+            this.cmbProtocol.Items.AddRange(new object[] {
+            "ASTM",
+            "HL7"});
+            this.cmbProtocol.Location = new System.Drawing.Point(163, 84);
+            this.cmbProtocol.Name = "cmbProtocol";
+            this.cmbProtocol.Size = new System.Drawing.Size(121, 21);
+            this.cmbProtocol.TabIndex = 29;
             // 
             // PortSetting
             // 
@@ -351,5 +376,7 @@
         internal System.Windows.Forms.CheckBox cbAutoConnect;
         internal System.Windows.Forms.Label Label6;
         internal System.Windows.Forms.Label lblStatus;
+        internal System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbProtocol;
     }
 }

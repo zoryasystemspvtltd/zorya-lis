@@ -55,14 +55,14 @@ namespace Test.COM
             }
             catch (Exception ex) { throw ex; }
         }
-        private void TCP_SendData()
+        private void TCP_HL7SendData()
         {
+            if (!client.Connected)
+                client = new TcpClient(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
+
+            Stream sm = client.GetStream();
             try
             {
-                if (!client.Connected)
-                    client = new TcpClient(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
-
-                Stream sm = client.GetStream();
                 StreamReader sr = new StreamReader(sm);
                 StreamWriter sw = new StreamWriter(sm);
                 sw.AutoFlush = true;
@@ -93,9 +93,6 @@ namespace Test.COM
                         Logger.LogInstance.LogInfo("Read :" + ReplaceSpecialCharecter(rawmsg1, false));
                     }
                 }
-
-                clientThread.Abort();
-                sm.Close();
             }
 
             catch (ArgumentNullException ane)
@@ -110,9 +107,63 @@ namespace Test.COM
             {
                 Logger.LogInstance.LogError("Unexpected exception : {0}", e.ToString());
             }
+            finally
+            {
+                clientThread.Abort();
+                sm.Close();
+            }
 
         }
 
+        private void TCP_ASTMSendData()
+        {
+            if (!client.Connected)
+                client = new TcpClient(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
+
+            Stream sm = client.GetStream();
+            try
+            {
+                StreamReader sr = new StreamReader(sm);
+                StreamWriter sw = new StreamWriter(sm);
+                sw.AutoFlush = true;
+                string msg = textBox1.Text;
+                string writemsg = ReplaceSpecialCharecter(msg, false);
+                sw.Write(writemsg);
+                string rawmsg = ReplaceSpecialCharecter(writemsg, true);
+                Logger.LogInstance.LogInfo("Write :" + rawmsg);
+
+                StringBuilder messages = new StringBuilder();
+                char[] charArray = new char[1024];
+                while (true)
+                {
+                    var readByteCount = sr.Read(charArray, 0, charArray.Length);
+                    if (readByteCount > 0)
+                    {
+                        var rawmsg1 = new string(charArray, 0, readByteCount);
+                        Logger.LogInstance.LogInfo("Read :" + ReplaceSpecialCharecter(rawmsg1, false));
+                    }
+                }
+            }
+
+            catch (ArgumentNullException ane)
+            {
+                Logger.LogInstance.LogError("ArgumentNullException : {0}", ane.ToString());
+            }
+            catch (SocketException se)
+            {
+                Logger.LogInstance.LogError("SocketException : {0}", se.ToString());
+            }
+            catch (Exception e)
+            {
+                Logger.LogInstance.LogError("Unexpected exception : {0}", e.ToString());
+            }
+            finally
+            {
+                clientThread.Abort();
+                sm.Close();
+            }
+
+        }
         /// <summary>
         /// ENQ or (char)5 -enquiry
         /// ACK or (char)6 -acknowledge
@@ -179,14 +230,14 @@ namespace Test.COM
             {
                 var response = ReplaceSpecialCharecter(textBox1.Text, false);
                 port.Write(response);
-
                 var text = ReplaceSpecialCharecter(response, false);
-
                 Logger.LogInstance.LogInfo("Write :" + text);
             }
             else
             {
-                clientThread = new Thread(new ThreadStart(TCP_SendData));
+                //test test HL7 uncomment the below method
+                //clientThread = new Thread(new ThreadStart(TCP_HL7SendData));
+                clientThread = new Thread(new ThreadStart(TCP_ASTMSendData));
                 clientThread.Start();
             }
         }
@@ -254,7 +305,6 @@ namespace Test.COM
             txtPortNo.Visible = false;
             label1.Visible = true;
             comboBox1.Visible = true;
-
         }
 
         private void rdbTCPIP_CheckedChanged(object sender, EventArgs e)

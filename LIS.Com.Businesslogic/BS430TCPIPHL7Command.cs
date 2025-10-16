@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace LIS.Com.Businesslogic
 {
-    public class BS430TCPIPCommand : TCPIPHL7Command
+    public class BS430TCPIPHL7Command : TCPIPHL7Command
     {
-        public BS430TCPIPCommand(TCPIPSettings _settings) : base(_settings)
+        public BS430TCPIPHL7Command(TCPIPSettings _settings) : base(_settings)
         { }
 
         public override async Task<string> ProccessMessage(string sampleNo, string rawMessage, string messageControlId)
@@ -56,7 +56,7 @@ namespace LIS.Com.Businesslogic
             await LisContext.LisDOM.SaveTestResult(result);
         }
 
-        public override async Task<OrderResponse> SendOrderData(string sampleNo, string messageControlId)
+        public override async Task<OrderHL7Response> SendOrderData(string sampleNo, string messageControlId)
         {
             Logger.Logger.LogInstance.LogDebug("BS430 generateORMField method started for SampleNo: " + sampleNo);
             string datetime = DateTime.Now.ToString("yyyyMMddhhmmss");
@@ -67,7 +67,7 @@ namespace LIS.Com.Businesslogic
             string message_qak = string.Empty;
             string message_DSP = string.Empty;
             string DSRMessage, QRYMessage;
-            OrderResponse response = new OrderResponse();
+            var response = new OrderHL7Response();
             bool flag = IsValidSampleNo(sampleNo);
             if (flag)
             {
