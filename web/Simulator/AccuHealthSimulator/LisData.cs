@@ -48,9 +48,9 @@ public class TestOrdersData
     public string PROCESSED { get; set; }
     public string PARAMCODE { get; set; }
     public string PARAMNAME { get; set; }
-    public string ROW_ID { get; set; }
+    public Guid ROW_ID { get; set; }
     public bool isSynced { get; set; }
-    public string branch_ID { get; set; }
+    public Guid branch_ID { get; set; }
 }
 
 
