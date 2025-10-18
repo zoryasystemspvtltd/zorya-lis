@@ -74,3 +74,4 @@ nunit-*.xml
 /.vs/Zorya_LIS/config/applicationhost.config
 /web/Lis.Web/node_modules
 /.vs/Zorya_LIS/CopilotIndices/17.14.1231.31060
+/.vs
