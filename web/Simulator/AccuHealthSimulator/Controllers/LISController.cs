@@ -32,9 +32,9 @@ namespace AccuHealthSimulator.Controllers
                 PROCESSED = "N",
                 PARAMCODE = "HB",
                 PARAMNAME = "Hemoglobin",
-                ROW_ID = "b7d93c65-1d23-42f1-8b43-7a812f6b1e0b",
+                ROW_ID = Guid.NewGuid(),
                 isSynced = false,
-                branch_ID = "9e89e6de-62f7-4ad1-a4c0-f43a51979f3b"
+                branch_ID = Guid.NewGuid()
             };
             return response;
         }
