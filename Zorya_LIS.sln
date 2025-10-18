@@ -29,13 +29,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		Documents\BS-360E&BS-240Pro&240E_LIS Interface Manual_V1.0_EN.pdf = Documents\BS-360E&BS-240Pro&240E_LIS Interface Manual_V1.0_EN.pdf
 		Documents\BS-430_Host Interface Manual_V4.0.pdf = Documents\BS-430_Host Interface Manual_V4.0.pdf
-		C:\Users\Revolution PC\Downloads\R315005_XN-L series_ASTM Host Interface Specifications_EN_Rev6.pdf = C:\Users\Revolution PC\Downloads\R315005_XN-L series_ASTM Host Interface Specifications_EN_Rev6.pdf
+		..\..\Users\Revolution PC\Downloads\R315005_XN-L series_ASTM Host Interface Specifications_EN_Rev6.pdf = ..\..\Users\Revolution PC\Downloads\R315005_XN-L series_ASTM Host Interface Specifications_EN_Rev6.pdf
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{D26E5E74-837F-42F5-A2A9-62C84049B72C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LisTCPIPConsole", "LisTCPIPConsole\LisTCPIPConsole.csproj", "{C430D4D6-265D-45C4-B740-1C98D7E4F8CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Simulator", "Simulator", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccuHealthSimulator", "web\Simulator\AccuHealthSimulator\AccuHealthSimulator.csproj", "{F1269DBE-02B9-4755-A667-0C1077C899B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -191,6 +195,18 @@ Global
 		{C430D4D6-265D-45C4-B740-1C98D7E4F8CF}.Release|x64.Build.0 = Release|Any CPU
 		{C430D4D6-265D-45C4-B740-1C98D7E4F8CF}.Release|x86.ActiveCfg = Release|Any CPU
 		{C430D4D6-265D-45C4-B740-1C98D7E4F8CF}.Release|x86.Build.0 = Release|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Debug|x64.Build.0 = Debug|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Release|x64.ActiveCfg = Release|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Release|x64.Build.0 = Release|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1269DBE-02B9-4755-A667-0C1077C899B9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -199,6 +215,8 @@ Global
 		{28709E82-B034-4C9A-9662-936378F3E83C} = {53F02297-2A89-4CC0-AF0E-D26514E0B32B}
 		{1D280630-5CCA-4746-8AAC-A5C1123C9DFE} = {53F02297-2A89-4CC0-AF0E-D26514E0B32B}
 		{C982C471-4505-4F33-91F0-8EB82141DB5B} = {53F02297-2A89-4CC0-AF0E-D26514E0B32B}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {53F02297-2A89-4CC0-AF0E-D26514E0B32B}
+		{F1269DBE-02B9-4755-A667-0C1077C899B9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4BF7C40-094F-4319-B066-1CCD3375A2B3}
