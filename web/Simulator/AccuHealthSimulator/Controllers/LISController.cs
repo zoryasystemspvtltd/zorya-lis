@@ -16,7 +16,13 @@ namespace AccuHealthSimulator.Controllers
         [HttpGet("GetPendingOrderCount")]
         public GetPendingOrderCountResponse GetPendingOrderCount()
         {
-            return new GetPendingOrderCountResponse();
+            // return new GetPendingOrderCountResponse();
+            var response = new GetPendingOrderCountResponse()
+            {
+                PendingCount = 2
+            };
+
+            return response;
         }
 
         [HttpGet("GetTestOrders")]

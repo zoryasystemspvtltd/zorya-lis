@@ -1,5 +1,7 @@
-﻿using LIS.BusinessLogic.Helper;
+﻿using Lis.Api.App_Start;
+using LIS.BusinessLogic.Helper;
 using LIS.DtoModel.Interfaces;
+using LIS.DtoModel.Models;
 using LIS.DtoModel.Models.ExternalApi;
 using LIS.Logger;
 using Newtonsoft.Json;
@@ -23,6 +25,7 @@ namespace Lis.Api
         private static readonly string HospitalApiUrl = ConfigurationManager.AppSettings["HospitalApiUrl"];
         private static readonly string ExternalAPIBaseUri = ConfigurationManager.AppSettings["ExternalAPIBaseUri"];
         private static bool isRunning = false;
+        private static IPatientDetailsManager manager;
         public static void StartScheduler(ILogger logger)
         {
             _logger = logger;
@@ -65,6 +68,41 @@ namespace Lis.Api
                 }
 
                 _logger.LogInfo("Ping His Adapter End.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogException(ex);
+            }
+        }
+
+        private static async Task GetPendingOrderCount()
+        {
+            HttpResponseMessage responseMessage = null;
+
+            GetPendingOrderCountResponse responseCount= new GetPendingOrderCountResponse();
+            try
+            {
+                _logger.LogInfo("Lis Test Order Request.");
+
+                using (var client = new ApiClient().GetHttpClient())
+                {
+                    responseCount = await client.GetAsync($"{ExternalAPIBaseUri}api/Lis/GetPendingOrderCount");
+                }
+                var responseOrder = new GetTestOrdersResponse();
+                if (responseCount.PendingCount>0)
+                {
+                    using (var client = new ApiClient().GetHttpClient())
+                    {
+                        responseOrder = await client.GetAsync($"{ExternalAPIBaseUri}api/Lis/GetTestOrders");
+                    }
+                }
+                if (responseOrder.Data.Count()>0)
+                {
+                    //foreachloop wise data insert into tables                    
+                   var newOrder = new NewOrder();
+                    var id = manager.CreateNewOrder(newOrder);
+                }
+                _logger.LogInfo("Lis Test Order Request.");
             }
             catch (Exception ex)
             {
