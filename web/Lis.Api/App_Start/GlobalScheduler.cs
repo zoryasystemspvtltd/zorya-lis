@@ -1,4 +1,5 @@
-﻿using Lis.Api.App_Start;
+﻿using LIS.BusinessLogic.Helper;
+using Lis.Api.App_Start;
 using LIS.BusinessLogic.Helper;
 using LIS.DtoModel.Interfaces;
 using LIS.DtoModel.Models;
@@ -86,14 +87,14 @@ namespace Lis.Api
 
                 using (var client = new ApiClient().GetHttpClient())
                 {
-                    responseCount = await client.GetAsync($"{ExternalAPIBaseUri}api/Lis/GetPendingOrderCount");
+                    responseMessage = await client.GetAsync($"{ExternalAPIBaseUri}api/Lis/GetPendingOrderCount");
                 }
                 var responseOrder = new GetTestOrdersResponse();
                 if (responseCount.PendingCount>0)
                 {
                     using (var client = new ApiClient().GetHttpClient())
                     {
-                        responseOrder = await client.GetAsync($"{ExternalAPIBaseUri}api/Lis/GetTestOrders");
+                        responseMessage = await client.GetAsync($"{ExternalAPIBaseUri}api/Lis/GetTestOrders");
                     }
                 }
                 if (responseOrder.Data.Count()>0)
