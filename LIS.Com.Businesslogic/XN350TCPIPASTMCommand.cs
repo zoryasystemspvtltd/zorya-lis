@@ -19,6 +19,7 @@ namespace LIS.Com.Businesslogic
             var path = $"{Environment.CurrentDirectory}\\Data\\XN350.json";
             var jsonData = File.ReadAllText(path);
             validCodes = JArray.Parse(jsonData);
+            Logger.Logger.LogInstance.LogError("Please add XN350.JSON file under bin/Data/");
         }
 
         public override async Task CreateMessage(string message)
@@ -74,34 +75,34 @@ namespace LIS.Com.Businesslogic
 
                     var firstTest = testlist.First();
                     var testname = "";
-                    var patientGender = string.Empty;
-                    var patientId = string.Empty;
-                    var dob = string.Empty;
-                    string patientBedNo = "";
+                    //var patientGender = string.Empty;
+                    //var patientId = string.Empty;
+                    //var dob = string.Empty;
+                    //string patientBedNo = "";
 
-                    patientId = firstTest.Patient?.HisPatientId.ToString();
-                    patientGender = firstTest.Patient?.Gender?.Substring(0, 1);
-                    patientBedNo = firstTest.BedNo;
+                    //patientId = firstTest.Patient?.HisPatientId.ToString();
+                    //patientGender = firstTest.Patient?.Gender?.Substring(0, 1);
+                    //patientBedNo = firstTest.BedNo;
 
-                    if (firstTest.Patient?.DateOfBirth != null)
-                    {
-                        dob = firstTest.Patient?.DateOfBirth.ToString("yyyyMMdd");
-                    }
+                    //if (firstTest.Patient?.DateOfBirth != null)
+                    //{
+                    //    dob = firstTest.Patient?.DateOfBirth.ToString("yyyyMMdd");
+                    //}
 
                     var name = firstTest.Patient?.Name.Split(' ');
                     if (name.Count() > 1)
                     {
-                        if (name.Count() == 4)
-                        {
-                            patientFirstName = name[1];
-                            patientLastName = name[3];
-                        }
-                        else if (name.Count() == 3)
-                        {
-                            patientFirstName = name[0];
-                            patientLastName = name[2];
-                        }
-                        else if (name.Count() == 2)
+                        //if (name.Count() == 4)
+                        //{
+                        //    patientFirstName = name[1];
+                        //    patientLastName = name[3];
+                        //}
+                        //else if (name.Count() == 3)
+                        //{
+                        //    patientFirstName = name[0];
+                        //    patientLastName = name[2];
+                        //}
+                        if (name.Count() == 2)
                         {
                             patientFirstName = name[0];
                             patientLastName = name[1];
@@ -138,8 +139,8 @@ namespace LIS.Com.Businesslogic
                         else
                             testname += @"\";
                     }
-
-                    patientSegment = $"2P|1|||{patientId}|^{patientFirstName}^{patientLastName}||{dob}|{patientGender}|||||^||||||||||||^^^{patientBedNo}{Strings.Chr(13)}{Strings.Chr(3)}";
+                    //patientSegment = $"2P|1|||{patientId}|^{patientFirstName}^{patientLastName}||{dob}|{patientGender}|||||^||||||||||||^^^{patientBedNo}{Strings.Chr(13)}{Strings.Chr(3)}";
+                    patientSegment = $"2P|1||||^{patientFirstName}^{patientLastName}||||||||^||||||||||||^^^{Strings.Chr(13)}{Strings.Chr(3)}";
                     temporderSegment += $"{testname}||{datetime}|||||N||||||||||||||Q";
 
                     var order1 = temporderSegment.Substring(0, 230);

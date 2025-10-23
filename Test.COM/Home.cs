@@ -47,7 +47,7 @@ namespace Test.COM
                     });
                 }
                 else
-                {
+                {                   
                     client = new TcpClient();
                     client.ConnectAsync(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
                     Logger.LogInstance.LogInfo("TCP/IP Connected.");
@@ -316,6 +316,8 @@ namespace Test.COM
             txtPortNo.Visible = false;
             label1.Visible = true;
             comboBox1.Visible = true;
+            txtIPAddress.Text = "192.168.31.102";
+            txtPortNo.Text = "1231";
         }
 
         private void rdbTCPIP_CheckedChanged(object sender, EventArgs e)
@@ -330,8 +332,8 @@ namespace Test.COM
 
         private void Home_FormClosed(object sender, FormClosedEventArgs e)
         {
-            clientThread.Abort();
-            client.Close();
+            clientThread?.Abort();
+            client?.Close();
         }
     }
 }

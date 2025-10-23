@@ -58,7 +58,6 @@
     <Compile Include="D10SerialCommand.cs" />
     <Compile Include="TCPIPASTMCommand.cs" />
     <Compile Include="XN350TCPIPASTMCommand.cs" />
-    <Compile Include="XN350SerialCommand.cs" />
     <Compile Include="BS430TCPIPHL7Command.cs" />
     <Compile Include="EquipmentType.cs" />
     <Compile Include="LisContext.cs" />

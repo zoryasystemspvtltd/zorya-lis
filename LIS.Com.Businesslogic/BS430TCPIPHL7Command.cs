@@ -76,22 +76,22 @@ namespace LIS.Com.Businesslogic
                 {
 
                     var firstTest = testlist.First();
-                    var specimen = firstTest.SpecimenName.ToLower();
-                    string gender = "";
-                    switch (firstTest.Patient.Gender)
-                    {
-                        case "MALE":
-                            gender = "M";
-                            break;
-                        case "FEMALE":
-                            gender = "F";
-                            break;
-                        default:
-                            gender = "O";
-                            break;
-                    }
+                    //var specimen = firstTest.SpecimenName.ToLower();
+                    //string gender = "";
+                    //switch (firstTest.Patient.Gender)
+                    //{
+                    //    case "MALE":
+                    //        gender = "M";
+                    //        break;
+                    //    case "FEMALE":
+                    //        gender = "F";
+                    //        break;
+                    //    default:
+                    //        gender = "O";
+                    //        break;
+                    //}
 
-                    string DOB = firstTest.Patient.DateOfBirth.ToString("yyyyMMddhhmmss");
+                    //string DOB = firstTest.Patient.DateOfBirth.ToString("yyyyMMddhhmmss");
                     var name = firstTest.Patient?.Name;
                     if (name.Length > 32)
                     {
@@ -106,10 +106,12 @@ namespace LIS.Com.Businesslogic
                                 message_DSP += $"DSP|{i}||{name}|||{(char)13}";
                                 break;
                             case 4:
-                                message_DSP += $"DSP|{i}||{DOB}|||{(char)13}";
+                                //message_DSP += $"DSP|{i}||{DOB}|||{(char)13}";
+                                message_DSP += $"DSP|{i}|||||{(char)13}";
                                 break;
                             case 5:
-                                message_DSP += $"DSP|{i}||{gender}|||{(char)13}";
+                                //message_DSP += $"DSP|{i}||{gender}|||{(char)13}";
+                                message_DSP += $"DSP|{i}|||||{(char)13}";
                                 break;
                             case 21:
                                 message_DSP += $"DSP|{i}||{sampleNo}|||{(char)13}";
@@ -118,7 +120,8 @@ namespace LIS.Com.Businesslogic
                                 message_DSP += $"DSP|{i}||N|||{(char)13}";
                                 break;
                             case 26:
-                                message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
+                                //message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
+                                message_DSP += $"DSP|{i}|||||{(char)13}";
                                 break;
                             default:
                                 message_DSP += $"DSC||{(char)13}";
