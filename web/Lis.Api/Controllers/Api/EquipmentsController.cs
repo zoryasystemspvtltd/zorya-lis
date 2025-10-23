@@ -46,6 +46,8 @@ namespace Lis.Api.Controllers.Api
                 }
 
                 var id = manager.Add(equipment);
+
+                // Add His Test details
                 APIResponse aPIResponse = responseMgr.CreateResponse(HttpStatusCode.OK, "Equipment added successfully", null, id);
 
                 return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);

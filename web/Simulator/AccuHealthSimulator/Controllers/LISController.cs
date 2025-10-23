@@ -10,9 +10,18 @@ namespace AccuHealthSimulator.Controllers
     {
 
         [HttpGet("GetParams")]
-        public GetParamsResponse GetParams()
+        public GetParamsResponse GetParams([FromQuery] Guid ClientId, [FromQuery] Guid BranchId)
         {
-            return new GetParamsResponse();
+            GetParamsResponse response = null;
+
+            using (StreamReader r = new StreamReader("GetParams.json"))
+            {
+                string json = r.ReadToEnd();
+                response = JsonConvert.DeserializeObject<GetParamsResponse>(json);
+
+            }
+
+            return response;
         }
 
         [HttpGet("GetPendingOrderCount")]

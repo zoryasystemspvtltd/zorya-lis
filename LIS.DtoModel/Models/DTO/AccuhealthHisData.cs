@@ -11,8 +11,8 @@ namespace LIS.DtoModel.Models
 
     public class ParamData
     {
-        public string PARAM_ID { get; set; }
-        public string PARAM_NAME { get; set; }
+        public string PARAMCODE { get; set; }
+        public string PARAMNAME { get; set; }
         public string VALUE { get; set; }
     }
 

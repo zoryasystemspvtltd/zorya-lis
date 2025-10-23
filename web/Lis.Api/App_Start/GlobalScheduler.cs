@@ -84,7 +84,7 @@ namespace Lis.Api
                         Name = $"{orderItem.PATFNAME} {orderItem.PARAMNAME} {orderItem.PATLNAME}",
                         DateOfBirth = !string.IsNullOrEmpty(orderItem.PAT_DOB) ? Convert.ToDateTime(orderItem.PAT_DOB) : DateTime.Now,
                         Gender = orderItem.GENDER,
-                        HisPatientId = orderItem.REF_VISITNO,
+                        HisPatientId = $"{DateTime.UtcNow.Ticks}",
                         ROW_ID = orderItem.ROW_ID,
                     }
 

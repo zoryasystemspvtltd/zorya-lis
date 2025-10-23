@@ -203,6 +203,7 @@
     <Compile Include="App_Start\GlobalScheduler.cs" />
     <Compile Include="App_Start\LisHub.cs" />
     <Compile Include="App_Start\SimpleInjectorConfig.cs" />
+    <Compile Include="Controllers\Api\AccuHealthController.cs" />
     <Compile Include="Controllers\Api\BarCodeController.cs" />
     <Compile Include="Controllers\Api\DailyStatusController.cs" />
     <Compile Include="Controllers\Api\DepartmentController.cs" />
