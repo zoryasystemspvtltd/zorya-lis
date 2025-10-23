@@ -51,7 +51,7 @@ namespace LIS.Com.Businesslogic
         {
             try
             {
-                data = new string[7];// This need to be 7 for equipment XN350
+                output = new string[7];// This need to be 7 for equipment XN350
                 string[] sampleField = sampleStr.Split('^');
                 string sampleId = sampleField[2].Trim();
                 Logger.Logger.LogInstance.LogDebug("XN350 SendOrderData method started for SampleNo: " + sampleId);
@@ -148,16 +148,16 @@ namespace LIS.Com.Businesslogic
                     orderSegment1 = $"3{order1}{Strings.Chr(23)}"; //23 means ETB
                     orderSegment2 = $"4{order2}{Strings.Chr(13)}{Strings.Chr(3)}";
 
-                    data[0] = Strings.Chr(5).ToString();
-                    data[1] = headerSegment;
+                    output[0] = Strings.Chr(5).ToString();
+                    output[1] = headerSegment;
                     Logger.Logger.LogInstance.LogDebug("XN350 Header Segment {0}", headerSegment);
-                    data[2] = patientSegment;
+                    output[2] = patientSegment;
                     Logger.Logger.LogInstance.LogDebug("XN350 Patient Segment {0}", patientSegment);
-                    data[3] = orderSegment1;
+                    output[3] = orderSegment1;
                     Logger.Logger.LogInstance.LogDebug("XN350 Order1 Segment {0}", orderSegment1);
-                    data[4] = orderSegment2;
+                    output[4] = orderSegment2;
                     Logger.Logger.LogInstance.LogDebug("XN350 Order2 Segment {0}", orderSegment2);
-                    data[5] = trailerSegment;
+                    output[5] = trailerSegment;
                     Logger.Logger.LogInstance.LogDebug("XN350 Trailer Segment {0}", trailerSegment);
                     index = 0;
                 }
@@ -167,14 +167,14 @@ namespace LIS.Com.Businesslogic
                     patientSegment = $"2P|1{Strings.Chr(13)}{Strings.Chr(3)}";
                     orderSegment1 = $"3O|{sampleStr}||||{datetime}||||||||||||||||||Y{Strings.Chr(13)}{Strings.Chr(3)}";
                     trailerSegment = $"4L|1|N{Strings.Chr(13)}{Strings.Chr(3)}";
-                    data[0] = Strings.Chr(5).ToString();
-                    data[1] = headerSegment;
+                    output[0] = Strings.Chr(5).ToString();
+                    output[1] = headerSegment;
                     Logger.Logger.LogInstance.LogDebug("XN350 Header Segment {0}", headerSegment);
-                    data[2] = patientSegment;
+                    output[2] = patientSegment;
                     Logger.Logger.LogInstance.LogDebug("XN350 Patient Segment {0}", patientSegment);
-                    data[3] = orderSegment1;
+                    output[3] = orderSegment1;
                     Logger.Logger.LogInstance.LogDebug("XN350 Order Segment {0}", orderSegment1);
-                    data[4] = trailerSegment;
+                    output[4] = trailerSegment;
                     Logger.Logger.LogInstance.LogDebug("XN350 Trailer Segment {0}", trailerSegment);
                     index = 0;
                 }

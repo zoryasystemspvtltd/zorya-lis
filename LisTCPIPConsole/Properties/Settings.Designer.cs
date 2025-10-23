@@ -85,7 +85,7 @@ namespace LisTCPIPConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BS430")]
+        [global::System.Configuration.DefaultSettingValueAttribute("XN350")]
         public string EQUIPMENT_TYPE {
             get {
                 return ((string)(this["EQUIPMENT_TYPE"]));
@@ -97,7 +97,7 @@ namespace LisTCPIPConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10.228.175.184")]
+        [global::System.Configuration.DefaultSettingValueAttribute(" 192.168.31.102")]
         public string IP_ADDRESS {
             get {
                 return ((string)(this["IP_ADDRESS"]));

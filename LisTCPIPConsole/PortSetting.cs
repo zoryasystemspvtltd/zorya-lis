@@ -82,7 +82,7 @@ namespace LisTCPIPConsole
 
             Settings.Default.IP_ADDRESS = txtServerIP.Text;
             Settings.Default.PORT_NO = Convert.ToInt32(txtServerPort.Text);
-            Settings.Default.PROTOCOL_NAME = (string)cmbProtocol.SelectedValue;
+            Settings.Default.PROTOCOL_NAME = (string)cmbProtocol.SelectedItem;
             Settings.Default.AUTO_CONNECT = cbAutoConnect.Checked;
             Settings.Default.SERVER_URL = txtServer.Text;
             Settings.Default.API_KEY = txtKey.Text;

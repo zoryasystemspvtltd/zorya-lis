@@ -2,9 +2,9 @@
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,14 +13,10 @@ namespace LIS.Com.Businesslogic
     public class TCPIPASTMCommand
     {
         private TCPIPSettings settings;
-        protected Thread reportingASTMThread;
-        protected Socket soc;
-        protected Stream sm;
-        protected StreamWriter sw;
-        protected StreamReader sr;
-
-        protected TcpListener serverASTM;
-        protected string[] data;
+        protected Thread TCPServerASTMThread;
+        NetworkStream stream;
+        protected TcpListener TCPServerASTM;
+        protected string[] output;
         protected int index;
         public bool IsReady { get; private set; }
 
@@ -51,33 +47,29 @@ namespace LIS.Com.Businesslogic
             {
                 var ipAddress = IPAddress.Parse(settings.IPAddress);
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, settings.PortNo);
-                serverASTM = new TcpListener(localEndPoint);
-                serverASTM.Start();
-                reportingASTMThread = new Thread(new ThreadStart(TCPIPListenASTMData));
-                reportingASTMThread.Start();
+                TCPServerASTM = new TcpListener(localEndPoint);
+                TCPServerASTM.Start();
+                TCPServerASTMThread = new Thread(new ThreadStart(TCPIPListenASTMData));
+                TCPServerASTMThread.Name = "SERVER";
+                TCPServerASTMThread.Start();
                 IsReady = true;
 
                 Logger.Logger.LogInstance.LogDebug("TCPIPASTMCommand ConnectToTCPIP method completed.");
             }
             catch (Exception ex)
             {
+                if (TCPServerASTMThread != null)
+                {
+                    TCPServerASTMThread.Abort();//properly abort the client
+                }
+                if (TCPServerASTM != null)
+                {
+                    TCPServerASTM.Stop();//properly stop the listner
+                }
+                Logger.Logger.LogInstance.LogDebug("Server Stopped.");
                 this.FullMessage = ex.Message;
                 Logger.Logger.LogInstance.LogException(ex);
-            }
-            finally
-            {
-                if (reportingASTMThread != null)
-                {
-                    reportingASTMThread.Abort();//properly abort the client
-                    Logger.Logger.LogInstance.LogDebug("Server Stopped.");
-                }
-                if (serverASTM != null)
-                {
-                    serverASTM.Stop();//properly stop the listner
-                    Logger.Logger.LogInstance.LogDebug("Server Stopped.");
-                }
-
-            }
+            }            
         }
 
         public void DisconnectToTCPIP()
@@ -85,12 +77,10 @@ namespace LIS.Com.Businesslogic
             Logger.Logger.LogInstance.LogDebug("TCPIPASTMCommand DisconnectToTCPIP method started.");
             try
             {
-                reportingASTMThread.Abort();
-                if (serverASTM != null)
+                if (TCPServerASTMThread != null)
                 {
-                    soc.Dispose();
-                    serverASTM.Stop();
-                    serverASTM = null;
+                    TCPServerASTMThread.Abort();
+                    TCPServerASTM.Stop();
                 }
                 IsReady = false;
             }
@@ -114,124 +104,82 @@ namespace LIS.Com.Businesslogic
         private async void TCPIPListenASTMData()
         {
             Logger.Logger.LogInstance.LogDebug("TCPIPASTMCommand TCPIPListenASTMData method started.");
-            soc = serverASTM.AcceptSocket();
-            sm = new NetworkStream(soc);
-            sr = new StreamReader(sm);
-            sw = new StreamWriter(sm)
-            {
-                AutoFlush = true // enable automatic flushing
-            };
-
-            char[] charArray = new char[10240];
             while (true)
             {
                 try
                 {
-                    var readByteCount = sr.Read(charArray, 0, charArray.Length);
-                    if (readByteCount > 0)
+                    TCPServerASTM.Start();
+                    TcpClient client = TCPServerASTM.AcceptTcpClient();
+                    while (true)
                     {
-                        var rawmsg = new string(charArray, 0, readByteCount);
+                        string message = "";
+                        int read = 0;
 
-                        Logger.Logger.LogInstance.LogInfo("TCP/IP Read: '{0}'", rawmsg);
-                        var InpBuffer = rawmsg.ToCharArray();
-                        int failCount = 0;
-                        switch (InpBuffer[0])
+                        // Get a stream object for reading and writing
+                        stream = client.GetStream();
+
+                        // Loop to receive all the data sent by the client.
+                        while (stream.DataAvailable)
                         {
-                            case (char)5:        // Check for <ENQ>
-                                {
-                                    WriteToPort("" + (char)6);
-                                    break;
-                                }
-
-                            case (char)6:      // Check for <ACK>
-                                {
-                                    failCount = 0;
-                                    switch (index)
+                            read = stream.ReadByte();
+                            message += Convert.ToChar(read);
+                        }
+                        if (message != string.Empty)
+                        {
+                            var InpBuffer = message.ToCharArray();
+                            switch (InpBuffer[0])
+                            {
+                                case (char)5:        // Check for <ENQ>
                                     {
-                                        case 0:
-                                            //(char)2 means start of text
-                                            WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + Constants.vbCrLf);
-                                            index = 1;
-                                            break;
-                                        case 1:
-                                            //(char)2 means start of text
-                                            WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + Constants.vbCrLf);
-                                            index = 2;
-                                            break;
-                                        case 2:
-                                            //(char)2 means start of text
-                                            WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + Constants.vbCrLf);
-                                            index = 3;
-                                            break;
-                                        case 3:
-                                            //(char)2 means start of text
-                                            WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + Constants.vbCrLf);
-                                            index = 4;
-                                            break;
-                                        case 4:
-                                            //(char)2 means start of text
-                                            WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + Constants.vbCrLf);
-                                            index = 5;
-                                            break;
-                                        default:
-                                            //(char)4 means end of transmission
-                                            WriteToPort("" + (char)4);
-                                            index = 0;
-                                            this.IsRunning = false;
-                                            break;
+                                        WriteToPort("" + (char)6);
+                                        break;
                                     }
-                                    break;
-                                }
 
-                            //When the EVOLIS receives a <NAK> for a frame rejected by a host it resends the frame.
-                            //Frames are invalidated when:
-                            //1. Any character errors are detected(ie.parity error, framing error)
-                            //2. The frame checksum does not match the checksum computed on the received frame.
-                            //2. The frame number is not the same as the last accepted frame or one number higher.
-                            case (char)21:       // Check for <NAK>
-                                { 
-                                    if (failCount < 3)
+                                case (char)6:      // Check for <ACK>
                                     {
-                                        if (index > 0)
+                                        if (index < 4)
                                         {
-                                            WriteToPort((char)2 + Add_CheckSum(data[index]) + Constants.vbCrLf);
+                                            WriteToPort((char)2 + Add_CheckSum(output[index + 1]) + (char)13);
+                                            index += 1;
+
                                         }
                                         else
-                                        {
-                                            WriteToPort(data[index]);
+                                        {  //(char)4 means end of transmission
+                                            WriteToPort("" + (char)4);
+                                            index = 0;
+                                            for (int i = 0; i <= 4; i++)
+                                                output[i] = string.Empty;
                                         }
-                                    }
-                                    else
-                                    {
-                                        this.IsRunning = false;
+
+                                        break;
                                     }
 
-                                    failCount++;
-                                    break;
-                                }
-                            case (char)4:   // Check For the <EOT>
-                                {
-                                    Logger.Logger.LogInstance.LogInfo("SerialCommand Read: '{0}'", sInputMsg);
-                                    await CreateMessage(sInputMsg);
-                                    break;
-                                }
-
-                            default:
-                                {
-                                    for (int i = 0; i <= InpBuffer.Length - 1; i++)
+                                case (char)4:   // Check For the <EOT>
                                     {
-                                        sInputMsg += InpBuffer[i];
+                                        Logger.Logger.LogInstance.LogInfo("SerialCommand Read: '{0}'", sInputMsg);
+                                        await CreateMessage(sInputMsg);
+                                        break;
+                                    }
 
-                                        if (InpBuffer[i] == Strings.Chr(10))
+                                default:
+                                    {
+                                        for (int i = 0; i <= InpBuffer.Length - 1; i++)
                                         {
-                                            WriteToPort("" + (char)6);
-                                        }
-                                    }
+                                            sInputMsg += InpBuffer[i];
 
-                                    break;
-                                }
+                                            if (InpBuffer[i] == Strings.Chr(10))
+                                            {
+                                                WriteToPort("" + (char)6);
+                                            }
+                                        }
+
+                                        break;
+                                    }
+                            }
                         }
+
                     }
+                    client.Close();
                 }
                 catch (Exception ex)
                 {
@@ -271,7 +219,9 @@ namespace LIS.Com.Businesslogic
 
         protected void WriteToPort(string text)
         {
-            sw.Write(text);
+            ASCIIEncoding encd = new ASCIIEncoding();
+            var dataBytes = encd.GetBytes(text);
+            stream.Write(dataBytes, 0, dataBytes.Length);
             Logger.Logger.LogInstance.LogInfo("TCPIPASTMCommand Write: '{0}'", text);
         }
 

@@ -19,8 +19,7 @@ namespace Test.COM
         {
             if (_textBox == null)
             {
-                if (String.IsNullOrEmpty(FormName) ||
-                    String.IsNullOrEmpty(TextBoxName))
+                if (string.IsNullOrEmpty(FormName) || string.IsNullOrEmpty(TextBoxName))
                     return;
 
                 Form form = Application.OpenForms[FormName];
@@ -29,14 +28,22 @@ namespace Test.COM
                 var textBoxCollection = GetTextBox(form);
                 _textBox = textBoxCollection.FirstOrDefault(t => t.Name.Equals(TextBoxName)) as TextBox;
 
-                //_textBox = textBox as TextBox;
                 if (_textBox == null)
                     return;
 
                 form.FormClosing += (s, e) => _textBox = null;
             }
 
-            _textBox.AppendText(loggingEvent.RenderedMessage + Environment.NewLine);
+            if (_textBox.InvokeRequired)
+            {
+                _textBox.Invoke(new Action(() =>
+                    _textBox.AppendText(loggingEvent.RenderedMessage + Environment.NewLine)
+                ));
+            }
+            else
+            {
+                _textBox.AppendText(loggingEvent.RenderedMessage + Environment.NewLine);
+            }
         }
 
         public IEnumerable<Control> GetTextBox(Control control)

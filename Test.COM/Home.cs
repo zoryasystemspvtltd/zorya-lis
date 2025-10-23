@@ -48,12 +48,17 @@ namespace Test.COM
                 }
                 else
                 {
-                    client = new TcpClient(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
+                    client = new TcpClient();
+                    client.ConnectAsync(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
                     Logger.LogInstance.LogInfo("TCP/IP Connected.");
                 }
                 btnSend.Enabled = true;
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex)
+            {
+                client.Close();
+                throw ex;
+            }
         }
         private void TCP_HL7SendData()
         {
@@ -115,32 +120,32 @@ namespace Test.COM
 
         }
 
-        private void TCP_ASTMSendData()
+        private async Task TCP_ASTMSendData()
         {
-            if (!client.Connected)
-                client = new TcpClient(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
-
-            Stream sm = client.GetStream();
             try
             {
-                StreamReader sr = new StreamReader(sm);
-                StreamWriter sw = new StreamWriter(sm);
-                sw.AutoFlush = true;
+                if (client == null || !client.Connected)
+                {
+                    client = new TcpClient();
+                    await client.ConnectAsync(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
+                }
+
+                NetworkStream stream = client.GetStream();
                 string msg = textBox1.Text;
                 string writemsg = ReplaceSpecialCharecter(msg, false);
-                sw.Write(writemsg);
-                string rawmsg = ReplaceSpecialCharecter(writemsg, true);
-                Logger.LogInstance.LogInfo("Write :" + rawmsg);
-
-                StringBuilder messages = new StringBuilder();
-                char[] charArray = new char[1024];
+                byte[] writeData = Encoding.ASCII.GetBytes(writemsg);
+                await stream.WriteAsync(writeData, 0, writeData.Length);
+                //string rawmsg = ReplaceSpecialCharecter(writemsg, true);
+                Logger.LogInstance.LogInfo("Write :" + msg);
                 while (true)
                 {
-                    var readByteCount = sr.Read(charArray, 0, charArray.Length);
-                    if (readByteCount > 0)
+                    var data = new byte[1024];
+                    int bytesRead = await stream.ReadAsync(data, 0, data.Length);
+
+                    if (bytesRead > 0)
                     {
-                        var rawmsg1 = new string(charArray, 0, readByteCount);
-                        Logger.LogInstance.LogInfo("Read :" + ReplaceSpecialCharecter(rawmsg1, false));
+                        string response = Encoding.ASCII.GetString(data, 0, bytesRead);
+                        Logger.LogInstance.LogInfo("Read :" + response);
                     }
                 }
             }
@@ -159,8 +164,10 @@ namespace Test.COM
             }
             finally
             {
-                clientThread.Abort();
-                sm.Close();
+                if (client?.Connected == true)
+                {
+                    client.Close();
+                }
             }
 
         }
@@ -224,7 +231,7 @@ namespace Test.COM
 
         }
 
-        private void btnSend_Click(object sender, EventArgs e)
+        private async void btnSend_Click(object sender, EventArgs e)
         {
             if (rdbSerialPort.Checked)
             {
@@ -237,11 +244,15 @@ namespace Test.COM
             {
                 //test test HL7 uncomment the below method
                 //clientThread = new Thread(new ThreadStart(TCP_HL7SendData));
-                clientThread = new Thread(new ThreadStart(TCP_ASTMSendData));
+                clientThread = new Thread(new ThreadStart(RunTCPAsyncMethod));
                 clientThread.Start();
             }
         }
 
+        private void RunTCPAsyncMethod()
+        {
+            TCP_ASTMSendData().GetAwaiter().GetResult();  // Blocking wait, not recommended
+        }
         private string ReplaceSpecialCharecter(string text, bool reverse)
         {
             /*

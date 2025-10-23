@@ -56,19 +56,16 @@ namespace LisConsole
             Logger.LogInstance.LogDebug("Lis Console InitLIS method started");
             if (LisContext.LisDOM.IsCommandReady)
             {
-                if (LisContext.LisDOM.Command.IsReady)
-                {
-                    ConnectToolStripMenuItem.Text = "Disconnect";
-                    connectItem.Text = "Disconnect";
-                    comPortName = " :: Status - Equipment connected.";
-                }
-                else
-                {
-                    ConnectToolStripMenuItem.Text = "Connect";
-                    connectItem.Text = "Connect";
-                    comPortName = " :: Status - Equipment not connected.";
-                }
+                var statusText = LisContext.LisDOM.Command.IsReady ? "Disconnect" : "Connect";
+                var statusMessage = LisContext.LisDOM.Command.IsReady
+                    ? " :: Status - Equipment connected."
+                    : " :: Status - Equipment not connected.";
+
+                ConnectToolStripMenuItem.Text = statusText;
+                connectItem.Text = statusText;
+                comPortName = statusMessage;
             }
+
 
             heartBeatProxy.WatchHeartBeat();
             this.Text = $"{selectedEquipment} {comPortName}";

@@ -12,13 +12,13 @@ namespace LIS.Com.Businesslogic
     public class TCPIPHL7Command
     {
         private TCPIPSettings settings;
-        protected Thread reportingHL7Thread;
+        protected Thread TCPServerHL7Thread;
         protected Socket soc;
         protected Stream sm;
         protected StreamWriter sw;
         protected StreamReader sr;
 
-        protected TcpListener serverHL7;
+        protected TcpListener TCPserverHL7;
         public bool IsReady { get; private set; }
         public string FullMessage { get; private set; }
         protected System.Timers.Timer timer;
@@ -44,10 +44,11 @@ namespace LIS.Com.Businesslogic
             {
                 var ipAddress = IPAddress.Parse(settings.IPAddress);
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, settings.PortNo);
-                serverHL7 = new TcpListener(localEndPoint);
-                serverHL7.Start();
-                reportingHL7Thread = new Thread(new ThreadStart(TCPListenHL7Data));
-                reportingHL7Thread.Start();
+                TCPserverHL7 = new TcpListener(localEndPoint);
+                TCPserverHL7.Start();
+                TCPServerHL7Thread = new Thread(new ThreadStart(TCPListenHL7Data));
+                TCPServerHL7Thread.Name = "SERVER";
+                TCPServerHL7Thread.Start();
 
                 IsReady = true;
 
@@ -60,14 +61,10 @@ namespace LIS.Com.Businesslogic
             }
             finally
             {
-                if (reportingHL7Thread != null)
+                if (TCPServerHL7Thread != null)
                 {
-                    reportingHL7Thread.Abort();//properly abort the client
-                    Logger.Logger.LogInstance.LogDebug("Server Stopped.");
-                }
-                if (serverHL7 != null)
-                {
-                    serverHL7.Stop();//properly stop the listner
+                    TCPServerHL7Thread.Abort();//properly abort the client 
+                    TCPserverHL7.Stop();//properly stop the listner
                     Logger.Logger.LogInstance.LogDebug("Server Stopped.");
                 }
 
@@ -78,13 +75,12 @@ namespace LIS.Com.Businesslogic
         {
             Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command DisconnectToTCPIP method started.");
             try
-            {
-                reportingHL7Thread.Abort();
-                if (serverHL7 != null)
+            {               
+                if (TCPServerHL7Thread != null)
                 {
+                    TCPServerHL7Thread.Abort();
                     soc.Dispose();
-                    serverHL7.Stop();
-                    serverHL7 = null;
+                    TCPserverHL7.Stop();                    
                 }
                 IsReady = false;
             }
@@ -100,7 +96,7 @@ namespace LIS.Com.Businesslogic
         {
             string messageControlId = "";
             Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command TCPListenHL7Data method started.");
-            soc = serverHL7.AcceptSocket();
+            soc = TCPserverHL7.AcceptSocket();
             sm = new NetworkStream(soc);
             sr = new StreamReader(sm);
             sw = new StreamWriter(sm)
