@@ -58,14 +58,8 @@ namespace LIS.Com.Businesslogic
             }
             catch (Exception ex)
             {
-                if (TCPServerASTMThread != null)
-                {
-                    TCPServerASTMThread.Abort();//properly abort the client
-                }
-                if (TCPServerASTM != null)
-                {
-                    TCPServerASTM.Stop();//properly stop the listner
-                }
+                TCPServerASTMThread?.Abort();//properly abort the thread
+                TCPServerASTM?.Stop();//properly stop the listner
                 Logger.Logger.LogInstance.LogDebug("Server Stopped.");
                 this.FullMessage = ex.Message;
                 Logger.Logger.LogInstance.LogException(ex);
