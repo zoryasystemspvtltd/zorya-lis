@@ -1,6 +1,7 @@
 ﻿using Lis.Api.App_Start;
 using LIS.BusinessLogic.Helper;
 using LIS.BusinessLogic.Helper;
+using LIS.DtoModel;
 using LIS.DtoModel.Interfaces;
 using LIS.DtoModel.Models;
 using LIS.DtoModel.Models.ExternalApi;
@@ -13,6 +14,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
@@ -32,7 +34,7 @@ namespace Lis.Api
         private static readonly string AccuHealthClientId = ConfigurationManager.AppSettings["AccuHealthClientId"];
         private static readonly string AccuHealthBranchId = ConfigurationManager.AppSettings["AccuHealthBranchId"];
         private static bool isRunning = false;
-        private static IPatientDetailsManager manager;
+
         public static void StartScheduler(ILogger logger)
         {
             _logger = logger;
@@ -82,7 +84,8 @@ namespace Lis.Api
                         Name = $"{orderItem.PATFNAME} {orderItem.PARAMNAME} {orderItem.PATLNAME}",
                         DateOfBirth = !string.IsNullOrEmpty(orderItem.PAT_DOB) ? Convert.ToDateTime(orderItem.PAT_DOB) : DateTime.Now,
                         Gender = orderItem.GENDER,
-                        HisPatientId = orderItem.REF_VISITNO
+                        HisPatientId = orderItem.REF_VISITNO,
+                        ROW_ID = orderItem.ROW_ID,
                     }
 
                 };
@@ -92,11 +95,11 @@ namespace Lis.Api
                 {
                     HISTestName = orderItem.TESTPROF_CODE,
                     HISTestCode = orderItem.TESTPROF_CODE,
-                    SampleNo = orderItem.ADMISSIONNO,
+                    SampleNo = orderItem.ADMISSIONNO, // Sample number must be unique, normally is is barcode number
                     //SampleCollectionDate = orderItem.REQDATETIME,
                     //SampleReceivedDate = orderItem.REQDATETIME,
-                    SpecimenCode = orderItem.PARAMCODE,
-                    SpecimenName = orderItem.PARAMNAME,
+                    //SpecimenCode = orderItem.PARAMCODE,
+                    //SpecimenName = orderItem.PARAMNAME,
                     HISRequestNo = orderItem.REF_VISITNO,
                     HISRequestId = orderItem.REF_VISITNO,
 
@@ -137,11 +140,50 @@ namespace Lis.Api
                 newOrder.TestRequestDetails = testRequestDetails;
 
 
-                var id = manager.CreateNewOrder(newOrder);
+                var orderId = await SaveLisOrderAsync(newOrder);
 
                 // Acknowledge
+                if (orderId > 0)
+                {
+                    var isSyncd = await UpdateOrderStatus(orderItem);
+                }
+            }
+        }
 
-                var isSyncd = await UpdateOrderStatus(orderItem);
+        private static async Task<long> SaveLisOrderAsync(NewOrder newOrder)
+        {
+            HttpResponseMessage responseMessage = null;
+            try
+            {
+                _logger.LogInfo("SaveLisOrder Started.");
+                var apiUrl = $"{ExternalAPIBaseUri}api/NewSample";
+                using (var client = new ApiClient().GetHttpClient())
+                {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    var payload = newOrder;
+                    var jsonPayload = JsonConvert.SerializeObject(payload);
+                    var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync(apiUrl, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        // Convert JSON string to dynamic object
+                        var result = JsonConvert.DeserializeObject<APIResponse>(responseContent);
+                        return Convert.ToInt64(result.Result);
+                    }
+
+                   
+                }
+
+                _logger.LogInfo("SaveLisOrder End.");
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogException(ex);
+                return 0;
             }
         }
 
@@ -150,6 +192,7 @@ namespace Lis.Api
             string apiUrl = $"{HospitalApiUrl}lis/UpdateOrderStatus";
             using (var client = new ApiClient().GetHttpClient())
             {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 var payload = new
                 {
                     ClientId = AccuHealthClientId,
@@ -217,6 +260,7 @@ namespace Lis.Api
 
                 using (var client = new ApiClient().GetHttpClient())
                 {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     responseMessage = await client.GetAsync(apiUrl);
 
                     var jsonString = await responseMessage.Content.ReadAsStringAsync();
@@ -253,6 +297,7 @@ namespace Lis.Api
 
                 using (var client = new ApiClient().GetHttpClient())
                 {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     responseMessage = await client.GetAsync(apiUrl);
 
                     var jsonString = await responseMessage.Content.ReadAsStringAsync();

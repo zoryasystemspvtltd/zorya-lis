@@ -84,8 +84,8 @@ namespace Lis.Api.Controllers.Api
 
         [AllowAnonymous]
         [HttpPost]
-        [ActionName("patient-test-order")]
-        public HttpResponseMessage Post(PatientOrder newOrder)
+       // [ActionName("patient-test-order")]
+        public HttpResponseMessage Post([FromBody] PatientOrder newOrder)
         {
             try
             {

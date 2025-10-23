@@ -176,6 +176,7 @@ namespace LIS.BusinessLogic
                         DateOfBirth = newOrder.PatientDetail.DateOfBirth,
                         Gender = newOrder.PatientDetail.Gender,
                         Age = newOrder.PatientDetail.DateOfBirth.Age(),
+                        ROW_ID = newOrder.PatientDetail.ROW_ID,
                         IsActive = true
                     };
                     patientId = patientRepo.Add(patientDetails);

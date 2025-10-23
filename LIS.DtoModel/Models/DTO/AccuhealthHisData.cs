@@ -54,7 +54,7 @@ namespace LIS.DtoModel.Models
         public string ADDTIME { get; set; }
         public string TITLE { get; set; }
         public string LABNO { get; set; }
-        public DateTime DATESTAMP { get; set; }
+        public DateTime? DATESTAMP { get; set; }
         public string PARAMCODE { get; set; }
         public string PARAMNAME { get; set; }
         public string MRESULT { get; set; }
@@ -92,7 +92,7 @@ namespace LIS.DtoModel.Models
     public class TestValuesData
     {
         public string SRNO { get; set; }
-        public DateTime SDATE { get; set; }
+        public DateTime? SDATE { get; set; }
         public string SAMPLEID { get; set; }
         public string TESTID { get; set; }
         public string MACHINEID { get; set; }

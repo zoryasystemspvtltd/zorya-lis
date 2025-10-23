@@ -34,9 +34,10 @@ namespace Lis.Api.Controllers.Api
         /// </summary>
         /// <param name="newOrder"></param>
         /// <returns></returns>
-        [QAuthorize(ModuleName = "Samples"
-        , ModulePermissionTypes = ModulePermissionType.CanAdd
-        )]
+        //[QAuthorize(ModuleName = "Samples"
+        //, ModulePermissionTypes = ModulePermissionType.CanAdd
+        //)]
+        [AllowAnonymous]
         public HttpResponseMessage Post(NewOrder newOrder)
         {
             try
@@ -46,7 +47,7 @@ namespace Lis.Api.Controllers.Api
                     return Request.CreateResponse(HttpStatusCode.PreconditionFailed, ModelState.Keys);
                 }
 
-                var id = manager.CreateNewOrder(newOrder);
+                 var id = manager.CreateNewOrder(newOrder);
                 APIResponse aPIResponse = responseMgr.CreateResponse(HttpStatusCode.OK, "New Sample added successfully", null, id);
 
                 return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
