@@ -35,7 +35,11 @@ namespace Lis.Api.Controllers
         {
             var userid = User.Identity.GetUserId();
             var user = dbContext.Users.FirstOrDefault(p => p.Id.Equals(userid, StringComparison.OrdinalIgnoreCase));
-            return user.GetModulePermission(this.dbContext,id);
+            if (user != null)
+            {
+                return user.GetModulePermission(this.dbContext, id);
+            }
+            return null;
         }
 
         /// <summary>

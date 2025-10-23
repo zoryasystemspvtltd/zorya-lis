@@ -18,3 +18,4 @@ Update-Database -configuration Lis.Api.DataContextMigrations.Configuration -Verb
 #### For LIS Data
 Add-Migration -ProjectName LIS.DataAccess -StartUpProjectName Lis.Api
 Update-Database -configuration LIS.DataAccess.Migrations.Configuration -Verbose -ProjectName LIS.DataAccess -StartUpProjectName Lis.Api
+

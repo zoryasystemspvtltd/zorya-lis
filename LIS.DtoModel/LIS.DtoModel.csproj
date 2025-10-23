@@ -74,6 +74,7 @@
     <Compile Include="Models\ApiError.cs" />
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\AuthDetails.cs" />
+    <Compile Include="Models\DTO\AccuhealthHisData.cs" />
     <Compile Include="Models\DTO\Mapping\Department.cs" />
     <Compile Include="Models\DTO\Mapping\EquipmentHeartBeat.cs" />
     <Compile Include="Models\DTO\Mapping\EquipmentMaster.cs" />

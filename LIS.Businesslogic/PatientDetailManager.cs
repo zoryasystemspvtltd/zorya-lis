@@ -176,6 +176,7 @@ namespace LIS.BusinessLogic
                         DateOfBirth = newOrder.PatientDetail.DateOfBirth,
                         Gender = newOrder.PatientDetail.Gender,
                         Age = newOrder.PatientDetail.DateOfBirth.Age(),
+                        ROW_ID = newOrder.PatientDetail.ROW_ID,
                         IsActive = true
                     };
                     patientId = patientRepo.Add(patientDetails);
@@ -223,15 +224,15 @@ namespace LIS.BusinessLogic
                         var testRequestDetail = new TestRequestDetail()
                         {
                             PatientId = patientId,
-                            HISTestCode = order.HISTestCode,
-                            HISTestName = order.HISTestName,
-                            SampleNo = sampleNo,
-                            SampleCollectionDate = order.SampleCollectionDate,
-                            SampleReceivedDate = order.SampleCollectionDate,
-                            SpecimenCode = order.SpecimenCode,
-                            SpecimenName = order.SpecimenName,
-                            HISRequestNo = order.HISRequestNo,
-                            HISRequestId = $"R{order.HISRequestNo}",
+                            HISTestCode = order.HISTestCode, // TODO - TESTPROF_CODE
+                            HISTestName = order.HISTestName, // TODO - TESTPROF_CODE
+                            SampleNo = sampleNo, //ADMISSIONNO
+                            SampleCollectionDate = order.SampleCollectionDate, //REQDATETIME
+                            SampleReceivedDate = order.SampleCollectionDate, // REQDATETIME
+                            SpecimenCode = order.SpecimenCode, // PARAMCODE
+                            SpecimenName = order.SpecimenName, // PARAMNAME
+                            HISRequestNo = order.HISRequestNo, // REF_VISITNO
+                            HISRequestId = $"R{order.HISRequestNo}", //REF_VISITNO
                             BedNo = order.BedNo,
                             IPNo = order.IPNo,
                             MRNo = order.MRNo,

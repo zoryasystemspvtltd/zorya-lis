@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LIS.DtoModel.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace AccuHealthSimulator.Controllers
 {
@@ -8,34 +10,38 @@ namespace AccuHealthSimulator.Controllers
     {
 
         [HttpGet("GetParams")]
-        public GetParamsResponse GetParams()
+        public GetParamsResponse GetParams([FromQuery] Guid ClientId, [FromQuery] Guid BranchId)
         {
-            return new GetParamsResponse();
+            GetParamsResponse response = null;
+
+            using (StreamReader r = new StreamReader("GetParams.json"))
+            {
+                string json = r.ReadToEnd();
+                response = JsonConvert.DeserializeObject<GetParamsResponse>(json);
+
+            }
+
+            return response;
         }
 
         [HttpGet("GetPendingOrderCount")]
-        public GetPendingOrderCountResponse GetPendingOrderCount()
+        public GetPendingOrderCountResponse GetPendingOrderCount([FromQuery] Guid ClientId, [FromQuery] Guid BranchId)
         {
             return new GetPendingOrderCountResponse();
         }
 
         [HttpGet("GetTestOrders")]
-        public GetTestOrdersResponse GetTestOrders()
+        public GetTestOrdersResponse GetTestOrders([FromQuery] Guid ClientId, [FromQuery] Guid BranchId)
         {
-            var response = new  GetTestOrdersResponse();
-            response.Data[0] = new TestOrdersData()
+            GetTestOrdersResponse response = null;
+           
+            using (StreamReader r = new StreamReader("GetTestOrders.json"))
             {
-                REF_VISITNO = "RV10023",
-                ADMISSIONNO = "ADM987654",
-                REQDATETIME = "2025-10-15T09:42:00",
-                TESTPROF_CODE = "CBC001",
-                PROCESSED = "N",
-                PARAMCODE = "HB",
-                PARAMNAME = "Hemoglobin",
-                ROW_ID = Guid.NewGuid(),
-                isSynced = false,
-                branch_ID = Guid.NewGuid()
-            };
+                string json = r.ReadToEnd();
+                response = JsonConvert.DeserializeObject<GetTestOrdersResponse>(json);
+                
+            }
+
             return response;
         }
 
