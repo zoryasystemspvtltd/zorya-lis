@@ -56,12 +56,14 @@ namespace Lis.Api
             _logger.LogInfo("Synchronization Scheduler Elapsed Started.");
             if (!isRunning)
             {
+                isRunning = true;
                 if (await GetPendingOrderCount() > 0)
                 {
                     var order = await GetTestOrders();
 
                     await ProcessTestOrder(order);
                 }
+                isRunning = false;
             }
             _logger.LogInfo("Synchronization Scheduler Elapsed End.");
 
@@ -88,9 +90,17 @@ namespace Lis.Api
 
                 testRequestDetails.Add(new TestRequestDetail()
                 {
-                    HISTestName = orderItem.PARAMNAME,
-                    HISTestCode = orderItem.PARAMCODE,
-                    
+                    HISTestName = orderItem.TESTPROF_CODE,
+                    HISTestCode = orderItem.TESTPROF_CODE,
+                    SampleNo = orderItem.ADMISSIONNO,
+                    //SampleCollectionDate = orderItem.REQDATETIME,
+                    //SampleReceivedDate = orderItem.REQDATETIME,
+                    SpecimenCode = orderItem.PARAMCODE,
+                    SpecimenName = orderItem.PARAMNAME,
+                    HISRequestNo = orderItem.REF_VISITNO,
+                    HISRequestId = orderItem.REF_VISITNO,
+
+
 
                     IPOPFLAG = orderItem.IPOPFLAG,
                     PINNO = orderItem.PINNO,
