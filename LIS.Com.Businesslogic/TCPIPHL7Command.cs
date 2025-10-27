@@ -110,7 +110,10 @@ namespace LIS.Com.Businesslogic
                             if (message != string.Empty)
                             {
                                 Logger.Logger.LogInstance.LogInfo("TCP/IP Read: '{0}'", message);
-                                var inputmsg = message.Split((char)28);
+                                //Remove <SB> character from raw message
+                                message = message.Replace("<SB>", "");
+
+                                var inputmsg = message.Split((char)28); 
                                 var blocks = inputmsg[0].Split((char)13);
 
                                 foreach (var block in blocks)
@@ -128,6 +131,7 @@ namespace LIS.Com.Businesslogic
                                             }
                                             break;
                                         case "QRD":
+                                        case "\nQRD":
                                             string sampleNo = input[8];
                                             if (orderRequest)
                                             {
