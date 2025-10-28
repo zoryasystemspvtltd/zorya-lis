@@ -77,8 +77,14 @@ namespace LIS.DtoModel.Models
         public DateTime RUNDATE { get; set; }
 
     }
+    public class LisTestValue
+    {
+        public string REF_VISITNO { get; set; }
+        public string PARAMCODE { get; set; }
+        public string Value { get; set; }
+    }
 
-    [Table("AccuHealthTestOrders")]
+        [Table("AccuHealthTestOrders")]
     public class AccuHealthTestOrder
     {
         [Key]

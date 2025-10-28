@@ -122,28 +122,37 @@ namespace Lis.Api.Controllers.Api
         /// <param name="newOrder"></param>
         /// <returns></returns>`
         [AllowAnonymous]
-        public HttpResponseMessage Post(AccuHealthTestOrder newOrder)
+        public HttpResponseMessage Post(LisTestValue testValue)
         {
             try
             {
-                if (!ModelState.IsValid)
+                var order = dBContext.AccuHealthTestOrders
+                            .Join(dBContext.AccuHealthParamMappings,
+                                t => t.PARAMCODE,
+                                pm => pm.HIS_PARAMCODE,
+                                (t, pm) => new { t, pm })
+                            .Join(dBContext.EquipmentMaster,
+                                temp => temp.pm.EquipmentId,
+                                e => e.Id,
+                                (temp, e) => new { temp.t, temp.pm, e })
+                            .Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase)
+                                     && x.t.REF_VISITNO == testValue.REF_VISITNO
+                                     && x.pm.LIS_PARAMCODE == testValue.PARAMCODE)
+                            .Select(x=>x.t)
+                            .FirstOrDefault();
+               
+                if (order != null)
                 {
-                    return Request.CreateResponse(HttpStatusCode.PreconditionFailed, ModelState.Keys);
-                }
-                var isExists = dBContext.AccuHealthTestOrders.Any(o => o.ROW_ID == newOrder.ROW_ID);
-                if (!isExists)
-                {
-                    dBContext.AccuHealthTestOrders.Add(newOrder);
+                    order.Value = testValue.Value;
                     dBContext.SaveChanges();
 
-                    APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "New Sample added successfully", null, newOrder.ROW_ID);
+                    APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "New Sample added successfully", null, order.ROW_ID);
 
                     return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
 
                 }
                 else
                 {
-                    logger.LogError($"Duplicate Test Order {newOrder.ROW_ID}");
                     return null;
                 }
             }
