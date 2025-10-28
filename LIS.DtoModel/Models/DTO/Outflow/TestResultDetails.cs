@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace LIS.DtoModel.Models
 {
     [Table("TestResultDetails")]
-    public class TestResultDetails : TestValuesData
+    public class TestResultDetails
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

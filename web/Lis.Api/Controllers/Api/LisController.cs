@@ -107,24 +107,24 @@ namespace Lis.Api.Controllers.Api
                 // TODO Question ?
                 //apiRequest.ClientId = result.TestResult.ClientId;
 
-                var values = new List<TestValuesData>();
+                var values = new List<AccuHealthTestValue>();
                 foreach (var r in result.ResultDetails)
                 {
-                    var value = new TestValuesData();
+                    var value = new AccuHealthTestValue();
 
                     // Convert Zorya format to Accuhealth Format before saving to the DB
-                    value.SRNO = $"{result.TestResult.TestRequestDetail.SEQNO}";
-                    value.SDATE = result.TestResult.TestRequestDetail.DATESTAMP;
-                    value.SAMPLEID = $"{result.TestResult.TestRequestDetail.Id}";
-                    value.TESTID = $"{result.TestResult.TestRequestId}";
-                    value.MACHINEID = $"{result.TestResult.EquipmentId}";
-                    value.SUFFIX = string.Empty;
-                    value.TRANSFERFLAG = string.Empty;
-                    value.TMPVALUE = r.LISParamValue;
-                    value.DESCRIPTION = r.LISParamCode;
-                    value.RUNDATE = result.TestResult.ResultDate;
-                    value.ROW_ID = result.TestResult.TestRequestDetail.ROW_ID;
-                    value.isSynced = true; // set to true for sending; DB update will handle marking as synced
+                    //value.SRNO = $"{result.TestResult.TestRequestDetail.SEQNO}";
+                    //value.SDATE = result.TestResult.TestRequestDetail.DATESTAMP;
+                    //value.SAMPLEID = $"{result.TestResult.TestRequestDetail.Id}";
+                    //value.TESTID = $"{result.TestResult.TestRequestId}";
+                    //value.MACHINEID = $"{result.TestResult.EquipmentId}";
+                    //value.SUFFIX = string.Empty;
+                    //value.TRANSFERFLAG = string.Empty;
+                    //value.TMPVALUE = r.LISParamValue;
+                    //value.DESCRIPTION = r.LISParamCode;
+                    //value.RUNDATE = result.TestResult.ResultDate;
+                    //value.ROW_ID = result.TestResult.TestRequestDetail.ROW_ID;
+                    //value.isSynced = true; // set to true for sending; DB update will handle marking as synced
 
 
                     values.Add(value);

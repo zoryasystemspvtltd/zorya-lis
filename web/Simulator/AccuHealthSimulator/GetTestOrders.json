@@ -36,7 +36,7 @@
     {
       "IPOPFLAG": null,
       "PINNO": null,
-      "REF_VISITNO": "40000165181025",
+      "REF_VISITNO": "40000165181025",// barcode number, Sample id in result
       "ADMISSIONNO": "TB/KSB/251018/0001",
       "REQDATETIME": "2025-10-18T20:32:59.407",
       "TESTPROF_CODE": "COMPLETE HAEMOGRAM",

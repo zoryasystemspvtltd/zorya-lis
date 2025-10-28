@@ -71,178 +71,6 @@ namespace Lis.Api
 
         }
 
-        private static async Task ProcessTestOrder(GetTestOrdersResponse order)
-        {
-            foreach (var orderItem in order.Data)
-            {
-                // Map Accuhealth data to LIs Data
-
-                var newOrder = new NewOrder()
-                {
-                    PatientDetail = new PatientDetail()
-                    {
-                        Name = $"{orderItem.PATFNAME} {orderItem.PARAMNAME} {orderItem.PATLNAME}",
-                        DateOfBirth = !string.IsNullOrEmpty(orderItem.PAT_DOB) ? Convert.ToDateTime(orderItem.PAT_DOB) : DateTime.Now,
-                        Gender = orderItem.GENDER,
-                        HisPatientId = $"{DateTime.UtcNow.Ticks}",
-                        ROW_ID = orderItem.ROW_ID,
-                    }
-
-                };
-                var testRequestDetails = new List<TestRequestDetail>();
-
-                testRequestDetails.Add(new TestRequestDetail()
-                {
-                    HISTestName = orderItem.TESTPROF_CODE,
-                    HISTestCode = orderItem.TESTPROF_CODE,
-                    SampleNo = orderItem.ADMISSIONNO, // Sample number must be unique, normally is is barcode number
-                    //SampleCollectionDate = orderItem.REQDATETIME,
-                    //SampleReceivedDate = orderItem.REQDATETIME,
-                    //SpecimenCode = orderItem.PARAMCODE,
-                    //SpecimenName = orderItem.PARAMNAME,
-                    HISRequestNo = orderItem.REF_VISITNO,
-                    HISRequestId = orderItem.REF_VISITNO,
-
-
-
-                    IPOPFLAG = orderItem.IPOPFLAG,
-                    PINNO = orderItem.PINNO,
-                    REF_VISITNO = orderItem.REF_VISITNO,
-                    ADMISSIONNO = orderItem.ADMISSIONNO,
-                    REQDATETIME = orderItem.REQDATETIME,
-                    TESTPROF_CODE = orderItem.TESTPROF_CODE,
-                    PROCESSED = orderItem.PROCESSED,
-                    PATFNAME = orderItem.PATFNAME,
-                    PATMNAME = orderItem.PATMNAME,
-                    PATLNAME = orderItem.PATLNAME,
-                    PAT_DOB = orderItem.PAT_DOB,
-                    GENDER = orderItem.GENDER,
-                    PATAGE = orderItem.PATAGE,
-                    AGEUNIT = orderItem.AGEUNIT,
-                    DOC_NAME = orderItem.DOC_NAME,
-                    PATIENTTYPECLASS = orderItem.PATIENTTYPECLASS,
-                    SEQNO = orderItem.SEQNO,
-                    ADDDATE = orderItem.ADDDATE,
-                    ADDTIME = orderItem.ADDTIME,
-                    TITLE = orderItem.TITLE,
-                    LABNO = orderItem.LABNO,
-                    DATESTAMP = orderItem.DATESTAMP,
-                    PARAMCODE = orderItem.PARAMCODE,
-                    PARAMNAME = orderItem.PARAMNAME,
-                    MRESULT = orderItem.MRESULT,
-                    BC_PRINTED = orderItem.BC_PRINTED,
-                    ROW_ID = orderItem.ROW_ID,
-                    isSynced = orderItem.isSynced,
-                    branch_ID = orderItem.branch_ID
-
-                });
-
-                newOrder.TestRequestDetails = testRequestDetails;
-
-
-                var orderId = await SaveLisOrderAsync(newOrder);
-
-                // Acknowledge
-                if (orderId > 0)
-                {
-                    var isSyncd = await UpdateOrderStatus(orderItem);
-                }
-            }
-        }
-
-        private static async Task<long> SaveLisOrderAsync(NewOrder newOrder)
-        {
-            HttpResponseMessage responseMessage = null;
-            try
-            {
-                _logger.LogInfo("SaveLisOrder Started.");
-                var apiUrl = $"{ExternalAPIBaseUri}api/NewSample";
-                using (var client = new ApiClient().GetHttpClient())
-                {
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                    var payload = newOrder;
-                    var jsonPayload = JsonConvert.SerializeObject(payload);
-                    var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-                    var response = await client.PostAsync(apiUrl, content);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var responseContent = await response.Content.ReadAsStringAsync();
-                        // Convert JSON string to dynamic object
-                        var result = JsonConvert.DeserializeObject<APIResponse>(responseContent);
-                        return Convert.ToInt64(result.Result);
-                    }
-
-                   
-                }
-
-                _logger.LogInfo("SaveLisOrder End.");
-
-                return 0;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogException(ex);
-                return 0;
-            }
-        }
-
-        private static async Task<bool> UpdateOrderStatus(TestOrdersData orderItem)
-        {
-            string apiUrl = $"{HospitalApiUrl}lis/UpdateOrderStatus";
-            using (var client = new ApiClient().GetHttpClient())
-            {
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                var payload = new
-                {
-                    ClientId = AccuHealthClientId,
-                    ROW_ID = orderItem.ROW_ID,
-                    isSynced = true
-                };
-                var jsonPayload = JsonConvert.SerializeObject(payload);
-                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(apiUrl, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    // Convert JSON string to dynamic object
-                    var result = JsonConvert.DeserializeObject<UpdateOrderStatusResponse>(responseContent);
-                    if (result.ResponseType == "Success")
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
-        private static async Task PingHisAdapterAsync()
-        {
-            HttpResponseMessage responseMessage = null;
-            try
-            {
-                _logger.LogInfo("Ping His Adapter Started.");
-
-                using (var client = new ApiClient().GetHttpClient())
-                {
-                    responseMessage = await client.GetAsync($"{ExternalAPIBaseUri}api/ping");
-                }
-
-                _logger.LogInfo("Ping His Adapter End.");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogException(ex);
-            }
-        }
-
         private static async Task<int> GetPendingOrderCount()
         {
             HttpResponseMessage responseMessage = null;
@@ -314,28 +142,96 @@ namespace Lis.Api
                 return null;
             }
         }
-        private static async Task SyncTestRequisitionAsync()
+
+        private static async Task ProcessTestOrder(GetTestOrdersResponse order)
+        {
+            foreach (var orderItem in order.Data)
+            {
+                // Map Accuhealth data to LIs Data
+
+                var orderId = await SaveLisOrderAsync(orderItem);
+
+                // Acknowledge
+                if (orderId != null)
+                {
+                    // TODO Uncomment
+                    //var isSyncd = await UpdateOrderStatus(orderItem);
+                }
+            }
+        }
+
+        private static async Task<Guid?> SaveLisOrderAsync(AccuHealthTestOrder newOrder)
         {
             HttpResponseMessage responseMessage = null;
             try
             {
-                _logger.LogInfo("Synchronization Test Requisition Started.");
-                var testDetails = new List<TestDetail>();
-
+                _logger.LogInfo("SaveLisOrder Started.");
+                var apiUrl = $"{ExternalAPIBaseUri}api/AccuHealth";
                 using (var client = new ApiClient().GetHttpClient())
                 {
-                    isRunning = true;
-                    responseMessage = await client.GetAsync(HospitalApiUrl);
-                    isRunning = false;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    var payload = newOrder;
+                    var jsonPayload = JsonConvert.SerializeObject(payload);
+                    var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync(apiUrl, content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        // Convert JSON string to dynamic object
+                        var result = JsonConvert.DeserializeObject<APIResponse>(responseContent);
+                        return Guid.Parse(result.Result?.ToString());
+                    }
+
+                   
                 }
 
-                _logger.LogInfo("Synchronization Test Requisition End.");
+                _logger.LogInfo("SaveLisOrder End.");
+
+                return null;
             }
             catch (Exception ex)
             {
-                isRunning = false;
                 _logger.LogException(ex);
+                return null;
             }
         }
+
+        private static async Task<bool> UpdateOrderStatus(AccuHealthTestOrder orderItem)
+        {
+            string apiUrl = $"{HospitalApiUrl}lis/UpdateOrderStatus";
+            using (var client = new ApiClient().GetHttpClient())
+            {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                var payload = new
+                {
+                    ClientId = AccuHealthClientId,
+                    ROW_ID = orderItem.ROW_ID,
+                    isSynced = true
+                };
+                var jsonPayload = JsonConvert.SerializeObject(payload);
+                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(apiUrl, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    // Convert JSON string to dynamic object
+                    var result = JsonConvert.DeserializeObject<UpdateOrderStatusResponse>(responseContent);
+                    if (result.ResponseType == "Success")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 }

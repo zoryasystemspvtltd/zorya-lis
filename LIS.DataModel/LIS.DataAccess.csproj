@@ -154,6 +154,14 @@
     <Compile Include="Migrations\202510230554469_ah2.Designer.cs">
       <DependentUpon>202510230554469_ah2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202510240911377_Accu.cs" />
+    <Compile Include="Migrations\202510240911377_Accu.Designer.cs">
+      <DependentUpon>202510240911377_Accu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202510250412251_Accu1.cs" />
+    <Compile Include="Migrations\202510250412251_Accu1.Designer.cs">
+      <DependentUpon>202510250412251_Accu1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repo\IGenericRepository.cs" />
@@ -241,6 +249,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202510230554469_ah2.resx">
       <DependentUpon>202510230554469_ah2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510240911377_Accu.resx">
+      <DependentUpon>202510240911377_Accu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510250412251_Accu1.resx">
+      <DependentUpon>202510250412251_Accu1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

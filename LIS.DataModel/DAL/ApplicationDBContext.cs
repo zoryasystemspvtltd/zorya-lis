@@ -48,6 +48,12 @@ namespace LIS.DataAccess
         public virtual DbSet<ControlResult> ControlResults { get; set; }
         public virtual DbSet<ControlResultDetails> ControlResultDetails { get; set; }
 
+
+        // AccuHealth Data
+        public virtual DbSet<AccuHealthTestValue> AccuHealthTestValues { get; set; }
+        public virtual DbSet<AccuHealthTestOrder> AccuHealthTestOrders { get; set; }
+        public virtual DbSet<AccuHealthParamMapping> AccuHealthParamMappings { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             if (modelBuilder != null)

@@ -11,12 +11,13 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Lis.Api.Controllers.Api
 {
-    public class AccuHealthController : ApiController
+    public class AccuHealthLisController : ApiController
     {
         private static readonly string HospitalApiUrl = ConfigurationManager.AppSettings["HospitalApiUrl"];
         private static readonly string ExternalAPIBaseUri = ConfigurationManager.AppSettings["ExternalAPIBaseUri"];
@@ -26,11 +27,13 @@ namespace Lis.Api.Controllers.Api
         private IResponseManager responseManager;
         private ApplicationDBContext dBContext;
         private ILogger logger;
-        public AccuHealthController(ILogger logger, IResponseManager responseManager, ApplicationDBContext dBContext)
+        private IModuleIdentity identity;
+        public AccuHealthLisController(ILogger logger, IResponseManager responseManager, ApplicationDBContext dBContext, IModuleIdentity identity )
         {
             this.dBContext = dBContext;
             this.logger = logger;
             this.responseManager = responseManager;
+            this.identity = identity;
         }
 
         [AllowAnonymous]
@@ -63,10 +66,53 @@ namespace Lis.Api.Controllers.Api
             return new List<string>();
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [AllowAnonymous]
+        [HttpGet]
+        public IEnumerable<AccuHealthSample> Get(string Id)
         {
-            return "value";
+            try
+            {
+                logger.LogInfo($"Get Sample Request: {Id}");
+
+
+                var testOrderList = dBContext.AccuHealthTestOrders
+                            .Where(p => p.TESTPROF_CODE.Equals(Id, StringComparison.OrdinalIgnoreCase) && 
+                                            p.Status == ReportStatusType.New)
+                            .Join(dBContext.AccuHealthParamMappings,
+                                t => t.PARAMCODE,
+                                pm => pm.HIS_PARAMCODE,
+                                (t, pm) => new { t, pm })
+                            .Join(dBContext.EquipmentMaster,
+                                tmp => tmp.pm.EquipmentId,
+                                e => e.Id,
+                                (tmp, e) => new { tmp.t, tmp.pm, e })
+                            .Where(x => x.e.IsActive &&
+                                    x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase))
+                            .Select(x => new AccuHealthSample()
+                            {
+                                PATFNAME = x.t.PATFNAME,
+                                PATMNAME = x.t.PATMNAME,
+                                PATLNAME = x.t.PATLNAME,
+                                PAT_DOB = x.t.PAT_DOB,
+                                GENDER = x.t.GENDER,
+                                PATAGE = x.t.PATAGE,
+                                AGEUNIT = x.t.AGEUNIT,
+                                SampleNo = x.t.REF_VISITNO,
+                                LisParamCode = x.pm.LIS_PARAMCODE,
+                                HIS_PARAMCODE = x.pm.HIS_PARAMCODE,
+                                SPECIMEN = x.pm.SPECIMEN
+                            })
+                            .ToList();
+
+                var responseStrign = JsonConvert.SerializeObject(testOrderList);
+                logger.LogInfo($"Get Sample Response: {responseStrign}");
+                return testOrderList;
+            }
+            catch (Exception e)
+            {
+                logger.LogException(e);
+                return null;
+            }
         }
 
 
@@ -93,7 +139,7 @@ namespace Lis.Api.Controllers.Api
                     APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "New Sample added successfully", null, newOrder.ROW_ID);
 
                     return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
-                
+
                 }
                 else
                 {
@@ -153,4 +199,6 @@ namespace Lis.Api.Controllers.Api
             }
         }
     }
+
+    
 }

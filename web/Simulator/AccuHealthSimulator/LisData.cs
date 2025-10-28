@@ -31,6 +31,7 @@ namespace LIS.DtoModel.Models
         public TestOrdersData[] Data { get; set; }
     }
 
+
     public class TestOrdersData
     {
         public string IPOPFLAG { get; set; }

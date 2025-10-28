@@ -49,6 +49,5 @@ namespace LIS.DtoModel.Models
         [JsonIgnore]
         public virtual IEnumerable<TestResultDetails> TestResultDetails { get; set; }
 
-        public Guid ROW_ID { get; set; }
     }
 }
