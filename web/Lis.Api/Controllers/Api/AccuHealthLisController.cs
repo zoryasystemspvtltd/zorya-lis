@@ -11,7 +11,6 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -28,7 +27,7 @@ namespace Lis.Api.Controllers.Api
         private ApplicationDBContext dBContext;
         private ILogger logger;
         private IModuleIdentity identity;
-        public AccuHealthLisController(ILogger logger, IResponseManager responseManager, ApplicationDBContext dBContext, IModuleIdentity identity )
+        public AccuHealthLisController(ILogger logger, IResponseManager responseManager, ApplicationDBContext dBContext, IModuleIdentity identity)
         {
             this.dBContext = dBContext;
             this.logger = logger;
@@ -37,11 +36,25 @@ namespace Lis.Api.Controllers.Api
         }
 
         [AllowAnonymous]
+        [HttpGet]
         // GET api/<controller>
         // Sync Test Param - api/LIS/GetParams?ClientId=67DB18E8-2988-4F53-A252-B6CB0CB8873F&Branch_Id=EE09D44E-757D-4FD2-B171-1F59224390EA
-        public async Task<IEnumerable<string>> Get()
+        public bool Get()
         {
-            throw new NotImplementedException();
+            try
+            {
+                logger.LogInfo($"Ping API Request");
+                bool isValid = false;
+                var equipment = dBContext.EquipmentMaster.Where(p => p.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+                isValid = (equipment != null);
+                logger.LogInfo($"Ping API Response");
+                return isValid;
+            }
+            catch (Exception e)
+            {
+                logger.LogException(e);
+                return false;
+            }
         }
 
         [AllowAnonymous]
@@ -54,7 +67,7 @@ namespace Lis.Api.Controllers.Api
 
 
                 var testOrderList = dBContext.AccuHealthTestOrders
-                            .Where(p => p.TESTPROF_CODE.Equals(Id, StringComparison.OrdinalIgnoreCase) && 
+                            .Where(p => p.TESTPROF_CODE.Equals(Id, StringComparison.OrdinalIgnoreCase) &&
                                             p.Status == ReportStatusType.New)
                             .Join(dBContext.AccuHealthParamMappings,
                                 t => t.PARAMCODE,
@@ -97,42 +110,47 @@ namespace Lis.Api.Controllers.Api
         /// <summary>
         /// Saving new order from Accuhealth
         /// </summary>
-        /// <param name="newOrder"></param>
+        /// <param name="listresult"></param>
         /// <returns></returns>`
         [AllowAnonymous]
-        public HttpResponseMessage Post(LisTestValue testValue)
+        public HttpResponseMessage Post(IEnumerable<LisTestValue> listresult)
         {
             try
             {
-                var order = dBContext.AccuHealthTestOrders
-                            .Join(dBContext.AccuHealthParamMappings,
-                                t => t.PARAMCODE,
-                                pm => pm.HIS_PARAMCODE,
-                                (t, pm) => new { t, pm })
-                            .Join(dBContext.EquipmentMaster,
-                                temp => temp.pm.EquipmentId,
-                                e => e.Id,
-                                (temp, e) => new { temp.t, temp.pm, e })
-                            .Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase)
-                                     && x.t.REF_VISITNO == testValue.REF_VISITNO
-                                     && x.pm.LIS_PARAMCODE == testValue.PARAMCODE)
-                            .Select(x=>x.t)
-                            .FirstOrDefault();
-               
-                if (order != null)
+                HttpResponseMessage response = null;
+                foreach (var testValue in listresult)
                 {
-                    order.Value = testValue.Value;
-                    dBContext.SaveChanges();
+                    var order = dBContext.AccuHealthTestOrders
+                                .Join(dBContext.AccuHealthParamMappings,
+                                    t => t.PARAMCODE,
+                                    pm => pm.HIS_PARAMCODE,
+                                    (t, pm) => new { t, pm })
+                                .Join(dBContext.EquipmentMaster,
+                                    temp => temp.pm.EquipmentId,
+                                    e => e.Id,
+                                    (temp, e) => new { temp.t, temp.pm, e })
+                                .Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase)
+                                         && x.t.REF_VISITNO == testValue.REF_VISITNO
+                                         && x.pm.LIS_PARAMCODE == testValue.PARAMCODE)
+                                .Select(x => x.t)
+                                .FirstOrDefault();
 
-                    APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "New Sample added successfully", null, order.ROW_ID);
+                    if (order != null)
+                    {
+                        order.Value = testValue.Value;
+                        dBContext.SaveChanges();
 
-                    return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
+                        APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "New Sample added successfully", null, order.ROW_ID);
 
+                        response = Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
+
+                    }
+                    else
+                    {
+                        response = null;
+                    }
                 }
-                else
-                {
-                    return null;
-                }
+                return response;
             }
             catch (Exception e)
             {
@@ -187,5 +205,5 @@ namespace Lis.Api.Controllers.Api
         }
     }
 
-    
+
 }

@@ -85,7 +85,7 @@ namespace LisTCPIPConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BS430")]
+        [global::System.Configuration.DefaultSettingValueAttribute("XN350")]
         public string EQUIPMENT_TYPE {
             get {
                 return ((string)(this["EQUIPMENT_TYPE"]));
@@ -109,7 +109,7 @@ namespace LisTCPIPConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("HL7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("ASTM")]
         public string PROTOCOL_NAME {
             get {
                 return ((string)(this["PROTOCOL_NAME"]));

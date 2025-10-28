@@ -122,7 +122,7 @@ namespace LIS.Com.Businesslogic
         {
             bool isPanel = false;
 
-            var response = await api.Get($"api/Lis/?SampleNo={sampleNo}&LisHostCode={lisHostCode}", null, null);
+            var response = await api.Get($"api/AccuHealthLis/?SampleNo={sampleNo}&LisHostCode={lisHostCode}", null, null);
 
             if (response.StatusCode == 200 && response.Result != null)
             {
@@ -131,29 +131,29 @@ namespace LIS.Com.Businesslogic
             return isPanel;
         }
 
-        public async Task<IEnumerable<TestRequestDetail>> GetTestRequestDetails(string sampleNo)
+        public async Task<IEnumerable<AccuHealthSample>> GetTestRequestDetails(string sampleNo)
         {
             Logger.Logger.LogInstance.LogDebug("LISContext GetTestRequestDetails method started.");
             Logger.Logger.LogInstance.LogDebug("LISContext GetTestRequestDetails method started for SampleNo: '{0}'", sampleNo);
-            string apiName = $"Lis/{sampleNo}";
+            string apiName = $"AccuHealthLis/{sampleNo}";
             var response = await api.Get($"api/{apiName}", null, null);
             var jsonModel = JsonConvert.SerializeObject(response.Result);
             Logger.Logger.LogInstance.LogDebug("LISContext GetTestRequestDetails get data: '{0}'", jsonModel);
-            IEnumerable<TestRequestDetail> items = null;
+            IEnumerable<AccuHealthSample> items = null;
             if (jsonModel.Length > 0)
             {
-                items = JsonConvert.DeserializeObject<IEnumerable<TestRequestDetail>>(jsonModel);
+                items = JsonConvert.DeserializeObject<IEnumerable<AccuHealthSample>>(jsonModel);
             }
             Logger.Logger.LogInstance.LogDebug("LISContext GetTestRequestDetails method completed.");
             return items;
         }
 
-        public async Task SaveTestResult(Result result)
+        public async Task SaveTestResult(IEnumerable<LisTestValue> result)
         {
             Logger.Logger.LogInstance.LogDebug("LISContext SaveTestResult method started.");
             var jsonModel = JsonConvert.SerializeObject(result);
             Logger.Logger.LogInstance.LogDebug("LISContext SaveTestResult method posted data:" + jsonModel);
-            string apiName = "Lis";
+            string apiName = "AccuHealthLis";
             await api.Post($"api/{apiName}", result, null);
             Logger.Logger.LogInstance.LogDebug("LISContext SaveTestResult method completed.");
         }
@@ -161,7 +161,7 @@ namespace LIS.Com.Businesslogic
         public async Task<bool> PingAPI()
         {
             Logger.Logger.LogInstance.LogDebug("LISContext PingAPI method started.");
-            string apiName = $"Lis";
+            string apiName = $"AccuHealthLis";
             var response = await api.Get($"api/{apiName}", null, null);
             var jsonModel = JsonConvert.SerializeObject(response.Result);
             bool isValid = false;
@@ -188,7 +188,7 @@ namespace LIS.Com.Businesslogic
         public async Task<bool> AcknowledgeSample(long SampleId)
         {
             Logger.Logger.LogInstance.LogDebug("LISContext AcknowledgeSample method started for SampleNo:" + SampleId);
-            string apiName = $"Lis/{SampleId}";
+            string apiName = $"AccuHealthLis/{SampleId}";
             var response = await api.Put($"api/{apiName}", null, null);
 
             bool isValid = (bool)response.Result;

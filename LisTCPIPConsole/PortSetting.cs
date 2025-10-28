@@ -112,13 +112,13 @@ namespace LisTCPIPConsole
         private async void btnValidate_Click(object sender, EventArgs e)
         {
             LisContext.LisDOM.InitAPI(txtServer.Text, txtKey.Text);
-            isValidAPI = await LisContext.LisDOM.PingAPI();
+            //isValidAPI = await LisContext.LisDOM.PingAPI();
 
-            if (!isValidAPI)
-            {
-                MessageBox.Show(this, "Invalid API Details", "Error !", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //if (!isValidAPI)
+            //{
+            //    MessageBox.Show(this, "Invalid API Details", "Error !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
             lblStatus.Text = "Success...";
         }

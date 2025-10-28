@@ -26,34 +26,26 @@ namespace LIS.Com.Businesslogic
         }
 
         private async Task SaveResult(string sampleNo, string[] resultMesgSegments)
-        {
-            Result result = new Result();
-            List<TestResultDetails> lsResult = new List<TestResultDetails>();
-            TestResult testResult = new TestResult
-            {
-                ResultDate = DateTime.Now,
-                SampleNo = sampleNo,
-            };
+        {           
+            List<LisTestValue> lsResult = new List<LisTestValue>();            
             for (int i = 0; i < resultMesgSegments.Length; i++)
             {
                 string[] field = resultMesgSegments[i].Split('|');
 
                 if (field[0] == "OBX" && field[2] == "NM")
                 {
-                    var resultDetails = new TestResultDetails();
+                    var resultDetails = new LisTestValue();
                     var paramCode = field[4].ToString();
                     var paramValue = field[5].ToString();
-                    resultDetails.LISParamCode = paramCode;
-                    resultDetails.LISParamValue = paramValue;
-                    resultDetails.LISParamUnit = field[6];
+                    resultDetails.PARAMCODE = paramCode;
+                    resultDetails.Value = paramValue;
+                    resultDetails.REF_VISITNO = sampleNo;
                     lsResult.Add(resultDetails);
                 }
             }
-
-            result.TestResult = testResult;
-            result.ResultDetails = lsResult;
-            Logger.Logger.LogInstance.LogDebug("BS430 Result posted to API for SampleNo: " + testResult.SampleNo);
-            await LisContext.LisDOM.SaveTestResult(result);
+           
+            Logger.Logger.LogInstance.LogDebug("BS430 Result posted to API for SampleNo: " + lsResult[0].REF_VISITNO);
+            await LisContext.LisDOM.SaveTestResult(lsResult);
         }
 
         public override async Task<OrderHL7Response> SendOrderData(string sampleNo, string messageControlId)
@@ -71,7 +63,7 @@ namespace LIS.Com.Businesslogic
             bool flag = IsValidSampleNo(sampleNo);
             if (flag)
             {
-                IEnumerable<TestRequestDetail> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
+                IEnumerable<AccuHealthSample> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
                 if (testlist != null && testlist.Count() > 0)
                 {
 
@@ -92,7 +84,7 @@ namespace LIS.Com.Businesslogic
                     //}
 
                     //string DOB = firstTest.Patient.DateOfBirth.ToString("yyyyMMddhhmmss");
-                    var name = firstTest.Patient?.Name;
+                    var name = firstTest.PATFNAME;
                     if (name.Length > 32)
                     {
                         name = name.Substring(0, 30);
@@ -132,8 +124,8 @@ namespace LIS.Com.Businesslogic
                     {
                         int j = 29 + i;
                         var test = testlist.ElementAt(i);
-                        await LisContext.LisDOM.AcknowledgeSample(test.Id);
-                        var testname = test.LISTestCode + "^^^";
+                        //await LisContext.LisDOM.AcknowledgeSample(test.Id);
+                        var testname = test.LisParamCode + "^^^";
                         message_DSP += $"DSP|{j}||{testname}|||{(char)13}";
                     }
                     message_qak = $"QAK|SR|OK|{(char)13}";

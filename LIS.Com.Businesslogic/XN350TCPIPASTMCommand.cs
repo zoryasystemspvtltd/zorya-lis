@@ -65,7 +65,7 @@ namespace LIS.Com.Businesslogic
                 var orderSegment1 = "";
                 var orderSegment2 = "";
                 var temporderSegment = $"O|1|{sampleStr}||";
-                IEnumerable<TestRequestDetail> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleId);
+                IEnumerable<AccuHealthSample> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleId);
 
                 if (testlist != null && testlist.Count() > 0)
                 {
@@ -89,49 +89,15 @@ namespace LIS.Com.Businesslogic
                     //    dob = firstTest.Patient?.DateOfBirth.ToString("yyyyMMdd");
                     //}
 
-                    var name = firstTest.Patient?.Name.Split(' ');
-                    if (name.Count() > 1)
-                    {
-                        //if (name.Count() == 4)
-                        //{
-                        //    patientFirstName = name[1];
-                        //    patientLastName = name[3];
-                        //}
-                        //else if (name.Count() == 3)
-                        //{
-                        //    patientFirstName = name[0];
-                        //    patientLastName = name[2];
-                        //}
-                        if (name.Count() == 2)
-                        {
-                            patientFirstName = name[0];
-                            patientLastName = name[1];
-                        }
-                        else
-                        {
-                            patientFirstName = name[0];
-                            patientLastName = name[1];
-                        }
-                    }
-                    else
-                    {
-                        patientFirstName = firstTest.Patient?.Name;
-                    }
+                    patientFirstName = firstTest.PATFNAME;
+                    patientLastName = firstTest.PATMNAME;
 
-                    if (patientFirstName.Length > 20)
-                    {
-                        patientFirstName = patientFirstName.Substring(0, 19);
-                    }
-                    if (patientLastName.Length > 20)
-                    {
-                        patientLastName = patientLastName.Substring(0, 19);
-                    }
 
                     for (int i = 0; i < testlist.Count();)
                     {
                         var test = testlist.ElementAt(i);
-                        var ackSent = await LisContext.LisDOM.AcknowledgeSample(test.Id);
-                        testname += "^^^^" + test.LISTestCode;
+                        //var ackSent = await LisContext.LisDOM.AcknowledgeSample(test.Id);
+                        testname += "^^^^" + test.LisParamCode;
 
                         i++;
                         if (testlist.Count() == i)
@@ -179,7 +145,7 @@ namespace LIS.Com.Businesslogic
                     Logger.Logger.LogInstance.LogDebug("XN350 Trailer Segment {0}", trailerSegment);
                     index = 0;
                 }
-                
+
                 WriteToPort("" + (char)5);
 
                 Logger.Logger.LogInstance.LogDebug("XN350 SendOrderData method completed for SampleNo " + sampleId);
@@ -242,12 +208,8 @@ namespace LIS.Com.Businesslogic
 
                 string[] record = message.Split(Strings.Chr(13)); // Chr(13)
                 for (int j = 0; j <= sampleIdLst.Count - 1; j++)
-                {
-                    var result = new Result();
-                    var lsResult = new List<TestResultDetails>();
-                    var testResult = new TestResult();
-                    string lisTestCode = "";
-                    testResult.ResultDate = DateAndTime.Now;
+                {                   
+                    var lsResult = new List<LisTestValue>();                  
                     string sampleNo = "";
                     for (int index = 0; index <= record.Length - 1; index++)
                     {
@@ -257,13 +219,7 @@ namespace LIS.Com.Businesslogic
                             case "O":
                                 {
                                     string[] sampleField = field[3].Split('^');
-                                    sampleNo = sampleField[2].Trim();
-                                    testResult.SampleNo = sampleNo;
-                                    if (field[4].Length > 0)
-                                    {
-                                        lisTestCode = field[4].Split('^')[4];
-                                        testResult.LISTestCode = lisTestCode.Trim('\\');
-                                    }
+                                    sampleNo = sampleField[2].Trim();                                    
                                     break;
                                 }
 
@@ -276,10 +232,10 @@ namespace LIS.Com.Businesslogic
                                         bool isValid = validCodes.Any(item => (string)item["Code"] == paramCode);
                                         if (paramCode != "" && isValid)
                                         {
-                                            TestResultDetails resultDetails = new TestResultDetails();
-                                            resultDetails.LISParamCode = paramCode;
-                                            resultDetails.LISParamValue = field[3];
-                                            resultDetails.LISParamUnit = field[4];
+                                            LisTestValue resultDetails = new LisTestValue();
+                                            resultDetails.REF_VISITNO = sampleNo;
+                                            resultDetails.PARAMCODE = paramCode;
+                                            resultDetails.Value = field[3];                                           
                                             Logger.Logger.LogInstance.LogDebug("XN350 Result processed for SampleNo " + sampleNo + " and Parameter " + paramCode);
                                             lsResult.Add(resultDetails);
                                         }
@@ -290,11 +246,9 @@ namespace LIS.Com.Businesslogic
                                 }
                         }
                     }
-
-                    result.TestResult = testResult;
-                    result.ResultDetails = lsResult;
-                    Logger.Logger.LogInstance.LogDebug("XN350 Result posted to API for SampleNo: " + testResult.SampleNo);
-                    await LisContext.LisDOM.SaveTestResult(result);
+                   
+                    Logger.Logger.LogInstance.LogDebug("XN350 Result posted to API for SampleNo: " + lsResult[0].REF_VISITNO);
+                    await LisContext.LisDOM.SaveTestResult(lsResult);
 
                 }
                 Logger.Logger.LogInstance.LogDebug("XN350 ParseMessage method completed");
