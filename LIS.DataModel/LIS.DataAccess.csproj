@@ -162,6 +162,10 @@
     <Compile Include="Migrations\202510250412251_Accu1.Designer.cs">
       <DependentUpon>202510250412251_Accu1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202510280505077_AccuHealth1.cs" />
+    <Compile Include="Migrations\202510280505077_AccuHealth1.Designer.cs">
+      <DependentUpon>202510280505077_AccuHealth1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repo\IGenericRepository.cs" />
@@ -255,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202510250412251_Accu1.resx">
       <DependentUpon>202510250412251_Accu1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202510280505077_AccuHealth1.resx">
+      <DependentUpon>202510280505077_AccuHealth1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

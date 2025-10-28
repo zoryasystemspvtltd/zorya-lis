@@ -60,6 +60,9 @@ namespace LIS.DtoModel.Models
     public class AccuHealthTestValue
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
+
         public Guid ROW_ID { get; set; }
         public bool isSynced { get; set; }
         public string SRNO { get; set; }
@@ -108,6 +111,7 @@ namespace LIS.DtoModel.Models
         public string PARAMNAME { get; set; }
         public string MRESULT { get; set; }
         public string BC_PRINTED { get; set; }
+        public string Value { get; set; }
         public ReportStatusType Status { get; set; }
 
     }

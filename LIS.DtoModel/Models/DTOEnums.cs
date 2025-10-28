@@ -11,10 +11,10 @@ namespace LIS.DtoModel.Models
         New = 0,
         SentToEquipment = 1,
         ReportGenerated = 2,
-        TechnicianApproved = 3,
-        TechnicianRejected = 4,
-        DoctorApproved = 5,
-        DoctorRejected = 6,
-        FinallyRejected = 7
+        //TechnicianApproved = 3,
+        //TechnicianRejected = 4,
+        //DoctorApproved = 5,
+        //DoctorRejected = 6,
+        //FinallyRejected = 7
     }
 }
