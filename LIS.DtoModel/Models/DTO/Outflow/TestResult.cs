@@ -48,5 +48,6 @@ namespace LIS.DtoModel.Models
 
         [JsonIgnore]
         public virtual IEnumerable<TestResultDetails> TestResultDetails { get; set; }
+
     }
 }

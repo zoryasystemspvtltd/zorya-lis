@@ -37,7 +37,8 @@ namespace LIS.DtoModel.Models
 
         [JsonIgnore]
         public virtual IEnumerable<TestResult> TestResults { get; set; }
-        
+
+
     }
 
     public class PatientInfo

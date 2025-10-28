@@ -95,20 +95,10 @@ namespace Lis.Api
             container.Register<IModuleIdentity, ModuleIdentity>(Lifestyle.Transient);
             container.Register<ILogger, Logger>(Lifestyle.Singleton);
             container.Register<IFileHandler, FileHandler>(Lifestyle.Scoped);
-            container.Register<IEquipmentManager, EquipmentManager>(Lifestyle.Scoped);
-            container.Register<IDepartmentManager, DepartmentManager>(Lifestyle.Scoped);
-            container.Register<IEquipmentTestMappingManager, EquipmentTestMappingManager>(Lifestyle.Scoped);
-            container.Register<ISpecimenManager, SpecimenManager>(Lifestyle.Scoped);
-            container.Register<IHisMasterManager, HISParameterRangeMasterManager>(Lifestyle.Scoped);
-            container.Register<IPatientDetailsManager, PatientDetailManager>(Lifestyle.Scoped);
-            container.Register<ITestParameterManager, TestParameterManager>(Lifestyle.Scoped);
-            container.Register<ITestRequestDetailsManager, TestRequestDetailsManager>(Lifestyle.Scoped);
-            container.Register<IEquipmentParamMappingManager, EquipmentParamMappingManager>(Lifestyle.Scoped);
+            //.Register<IEquipmentManager, EquipmentManager>(Lifestyle.Scoped);
+            
             container.Register<IResponseManager, ResponseManager>(Lifestyle.Scoped);
-            container.Register<IResultManager, ResultManager>(Lifestyle.Scoped);
-            container.Register<IExternalApiManager, ExternalApiManager>(Lifestyle.Scoped);
-            container.Register<IQualityControlManager, QualityControlManager>(Lifestyle.Scoped);
-            container.Register<IEquipmentHeartBeatManager, EquipmentHeartBeatManager>(Lifestyle.Scoped);
+            //container.Register<IEquipmentHeartBeatManager, EquipmentHeartBeatManager>(Lifestyle.Scoped);
             container.Register<IHubContext<ILisClient>>(() =>
             {
                 return GlobalHost.ConnectionManager.GetHubContext<LisHub, ILisClient>();

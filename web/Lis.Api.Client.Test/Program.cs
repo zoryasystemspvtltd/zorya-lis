@@ -24,18 +24,18 @@ namespace Lis.Api.Client.Test
 
         private static async Task GetSampleByBI(string SampleNo)
         {
-            LisContext.LisDOM.InitAPI(rootUrl, accessToken);
-            var samples = await LisContext.LisDOM.GetTestRequestDetails(SampleNo);
-            if (samples.Count() > 0)
-            {
-                Console.WriteLine(JsonConvert.SerializeObject(samples));
-                foreach (var sample in samples)
-                {
-                    var isAck = await LisContext.LisDOM.AcknowledgeSample(sample.Id);
-                    Console.WriteLine(JsonConvert.SerializeObject(isAck));
-                }
+            //LisContext.LisDOM.InitAPI(rootUrl, accessToken);
+            //var samples = await LisContext.LisDOM.GetTestRequestDetails(SampleNo);
+            //if (samples.Count() > 0)
+            //{
+            //    Console.WriteLine(JsonConvert.SerializeObject(samples));
+            //    foreach (var sample in samples)
+            //    {
+            //        var isAck = await LisContext.LisDOM.AcknowledgeSample(sample.Id);
+            //        Console.WriteLine(JsonConvert.SerializeObject(isAck));
+            //    }
 
-            }
+            //}
 
         }
 
