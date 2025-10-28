@@ -41,29 +41,7 @@ namespace Lis.Api.Controllers.Api
         // Sync Test Param - api/LIS/GetParams?ClientId=67DB18E8-2988-4F53-A252-B6CB0CB8873F&Branch_Id=EE09D44E-757D-4FD2-B171-1F59224390EA
         public async Task<IEnumerable<string>> Get()
         {
-            var response = await GetTestParams();
-
-            foreach (var data in response.Data)
-            {
-                var existing = dBContext.HisTestMaster.FirstOrDefault(p => p.HISTestCode.Equals(data.HIS_PARAMCODE));
-
-                if (existing == null)
-                {
-                    dBContext.HisTestMaster.Add(new HisTestMaster()
-                    {
-                        HISTestCode = data.HIS_PARAMCODE,
-                        HISTestCodeDescription = data.HIS_PARAMNAME,
-                        HISSpecimenCode = data.HIS_PARAMCODE,
-                        HISSpecimenName = data.HIS_PARAMNAME,
-                        CreatedOn = DateTime.UtcNow,
-                        DepartmentCode = "NA",
-                        IsActive = true
-                    });
-                }
-            }
-
-            await dBContext.SaveChangesAsync();
-            return new List<string>();
+            throw new NotImplementedException();
         }
 
         [AllowAnonymous]

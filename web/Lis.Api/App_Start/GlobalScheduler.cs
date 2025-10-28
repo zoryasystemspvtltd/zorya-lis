@@ -1,26 +1,14 @@
-﻿using Lis.Api.App_Start;
-using LIS.BusinessLogic.Helper;
-using LIS.BusinessLogic.Helper;
+﻿using LIS.BusinessLogic.Helper;
 using LIS.DtoModel;
-using LIS.DtoModel.Interfaces;
 using LIS.DtoModel.Models;
-using LIS.DtoModel.Models.ExternalApi;
 using LIS.Logger;
-using log4net.Util;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace Lis.Api
 {
