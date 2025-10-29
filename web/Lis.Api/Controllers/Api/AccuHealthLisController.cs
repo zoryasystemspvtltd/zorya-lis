@@ -54,9 +54,8 @@ namespace Lis.Api.Controllers.Api
             {
                 logger.LogInfo($"Get Sample Request: {Id}");
 
-
-                var testOrderList = dBContext.AccuHealthTestOrders
-                            .Where(p => p.TESTPROF_CODE.Equals(Id, StringComparison.OrdinalIgnoreCase) && 
+                var testOrders = dBContext.AccuHealthTestOrders
+                            .Where(p => p.TESTPROF_CODE.Equals(Id, StringComparison.OrdinalIgnoreCase) &&
                                             p.Status == ReportStatusType.New)
                             .Join(dBContext.AccuHealthParamMappings,
                                 t => t.PARAMCODE,
@@ -67,26 +66,37 @@ namespace Lis.Api.Controllers.Api
                                 e => e.Id,
                                 (tmp, e) => new { tmp.t, tmp.pm, e })
                             .Where(x => x.e.IsActive &&
-                                    x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase))
-                            .Select(x => new AccuHealthSample()
-                            {
-                                PATFNAME = x.t.PATFNAME,
-                                PATMNAME = x.t.PATMNAME,
-                                PATLNAME = x.t.PATLNAME,
-                                PAT_DOB = x.t.PAT_DOB,
-                                GENDER = x.t.GENDER,
-                                PATAGE = x.t.PATAGE,
-                                AGEUNIT = x.t.AGEUNIT,
-                                SampleNo = x.t.REF_VISITNO,
-                                LisParamCode = x.pm.LIS_PARAMCODE,
-                                HIS_PARAMCODE = x.pm.HIS_PARAMCODE,
-                                SPECIMEN = x.pm.SPECIMEN
-                            })
-                            .ToList();
+                                    x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase));
+                            
 
-                var responseStrign = JsonConvert.SerializeObject(testOrderList);
-                logger.LogInfo($"Get Sample Response: {responseStrign}");
-                return testOrderList;
+                foreach (var item in testOrders)
+                {
+                    item.t.Status = ReportStatusType.SentToEquipment;
+                }
+
+                var orders = testOrders
+                    .Select(x => new AccuHealthSample()
+                    {
+                        PATFNAME = x.t.PATFNAME,
+                        PATMNAME = x.t.PATMNAME,
+                        PATLNAME = x.t.PATLNAME,
+                        PAT_DOB = x.t.PAT_DOB,
+                        GENDER = x.t.GENDER,
+                        PATAGE = x.t.PATAGE,
+                        AGEUNIT = x.t.AGEUNIT,
+                        SampleNo = x.t.REF_VISITNO,
+                        LisParamCode = x.pm.LIS_PARAMCODE,
+                        HIS_PARAMCODE = x.pm.HIS_PARAMCODE,
+                        SPECIMEN = x.pm.SPECIMEN
+                    })
+                    .ToList();
+
+                var responseStrign = JsonConvert.SerializeObject(orders);
+                logger.LogInfo($"Get Sample Response: {orders}");
+
+                dBContext.SaveChanges();
+
+                return orders;
             }
             catch (Exception e)
             {
@@ -131,6 +141,7 @@ namespace Lis.Api.Controllers.Api
                 foreach (var item in recordsToUpdate)
                 {
                     item.o.Value = item.Value;
+                    item.o.Status = ReportStatusType.ReportGenerated;
                 }
 
                 dBContext.SaveChanges();
