@@ -3,11 +3,13 @@ using LIS.DataAccess;
 using LIS.DtoModel;
 using LIS.DtoModel.Interfaces;
 using LIS.DtoModel.Models;
+using LIS.DtoModel.Models.ExternalApi;
 using LIS.Logger;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -17,6 +19,10 @@ using System.Web.Http;
 
 namespace Lis.Api.Controllers.Api
 {
+    /// <summary>
+    /// This API is used to comminicate between Zorya LIS server and indivedual LIS terminal
+    /// Used for Accu Health
+    /// </summary>
     public class AccuHealthLisController : ApiController
     {
         private static readonly string HospitalApiUrl = ConfigurationManager.AppSettings["HospitalApiUrl"];
@@ -36,14 +42,12 @@ namespace Lis.Api.Controllers.Api
             this.identity = identity;
         }
 
-        [AllowAnonymous]
-        // GET api/<controller>
-        // Sync Test Param - api/LIS/GetParams?ClientId=67DB18E8-2988-4F53-A252-B6CB0CB8873F&Branch_Id=EE09D44E-757D-4FD2-B171-1F59224390EA
-        public async Task<IEnumerable<string>> Get()
-        {
-            throw new NotImplementedException();
-        }
-
+        
+        /// <summary>
+        /// Get list of Sample for a specific sampleno coming through barcode
+        /// </summary>
+        /// <param name="Id">Barcode</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
         public IEnumerable<AccuHealthSample> Get(string Id)
@@ -95,44 +99,47 @@ namespace Lis.Api.Controllers.Api
 
 
         /// <summary>
-        /// Saving new order from Accuhealth
+        /// Save the list of result received from LIS Console
         /// </summary>
-        /// <param name="newOrder"></param>
+        /// <param name="testValue"></param>
         /// <returns></returns>`
         [AllowAnonymous]
-        public HttpResponseMessage Post(LisTestValue testValue)
+        public HttpResponseMessage Post(LisTestValue[] values)
         {
             try
             {
-                var order = dBContext.AccuHealthTestOrders
-                            .Join(dBContext.AccuHealthParamMappings,
-                                t => t.PARAMCODE,
-                                pm => pm.HIS_PARAMCODE,
-                                (t, pm) => new { t, pm })
-                            .Join(dBContext.EquipmentMaster,
-                                temp => temp.pm.EquipmentId,
-                                e => e.Id,
-                                (temp, e) => new { temp.t, temp.pm, e })
-                            .Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase)
-                                     && x.t.REF_VISITNO == testValue.REF_VISITNO
-                                     && x.pm.LIS_PARAMCODE == testValue.PARAMCODE)
-                            .Select(x=>x.t)
-                            .FirstOrDefault();
-               
-                if (order != null)
+                foreach(var item in values)
                 {
-                    order.Value = testValue.Value;
-                    dBContext.SaveChanges();
-
-                    APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "New Sample added successfully", null, order.ROW_ID);
-
-                    return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
-
+                    item.Equipment = identity.AccessKey;
                 }
-                else
+
+                dBContext.LisTestValues.AddRange(values);
+
+                var recordsToUpdate = dBContext.AccuHealthTestOrders
+                .Join(dBContext.AccuHealthParamMappings,
+                    o => o.PARAMCODE,
+                    pm => pm.HIS_PARAMCODE,
+                    (o, pm) => new { o, pm })
+                .Join(dBContext.EquipmentMaster,
+                    x => x.pm.EquipmentId,
+                    e => e.Id,
+                    (x, e) => new { x.o, x.pm, e })
+                .Join(values,
+                    x => new { x.o.REF_VISITNO, LIS_PARAMCODE = x.pm.LIS_PARAMCODE },
+                    vItem => new { REF_VISITNO = vItem.REF_VISITNO, LIS_PARAMCODE = vItem.PARAMCODE },
+                    (x, vItem) => new { x.o, x.pm, x.e, vItem.Value })
+                .Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase));
+
+                foreach (var item in recordsToUpdate)
                 {
-                    return null;
+                    item.o.Value = item.Value;
                 }
+
+                dBContext.SaveChanges();
+
+                APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "Value saved successfully.", null,null);
+
+                return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
             }
             catch (Exception e)
             {
@@ -141,15 +148,7 @@ namespace Lis.Api.Controllers.Api
             }
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+        
 
         private async Task<GetParamsResponse> GetTestParams()
         {

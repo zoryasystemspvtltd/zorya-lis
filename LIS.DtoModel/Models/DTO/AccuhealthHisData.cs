@@ -77,14 +77,21 @@ namespace LIS.DtoModel.Models
         public DateTime RUNDATE { get; set; }
 
     }
+
+    [Table("LisTestValues")]
     public class LisTestValue
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
         public string REF_VISITNO { get; set; }
         public string PARAMCODE { get; set; }
         public string Value { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public string Equipment { get; set; }
     }
 
-        [Table("AccuHealthTestOrders")]
+    [Table("AccuHealthTestOrders")]
     public class AccuHealthTestOrder
     {
         [Key]
@@ -128,12 +135,9 @@ namespace LIS.DtoModel.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        public string HIS_TESTNAME { get; set; }
         public string HIS_PARAMCODE { get; set; }
         public string HIS_PARAMNAME { get; set; }
         public string LIS_PARAMCODE { get; set; }
-        public string LIS_PARAMNAME { get; set; }
-        public string LIS_TESTNAME { get; set; }
         public string SPECIMEN { get; set; }
         public string UNIT { get; set; }
 
