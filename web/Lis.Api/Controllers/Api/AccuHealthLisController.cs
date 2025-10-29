@@ -25,16 +25,14 @@ namespace Lis.Api.Controllers.Api
     /// </summary>
     public class AccuHealthLisController : ApiController
     {
-        private static readonly string HospitalApiUrl = ConfigurationManager.AppSettings["HospitalApiUrl"];
-        private static readonly string ExternalAPIBaseUri = ConfigurationManager.AppSettings["ExternalAPIBaseUri"];
-        private static readonly string AccuHealthClientId = ConfigurationManager.AppSettings["AccuHealthClientId"];
-        private static readonly string AccuHealthBranchId = ConfigurationManager.AppSettings["AccuHealthBranchId"];
-
         private IResponseManager responseManager;
         private ApplicationDBContext dBContext;
         private ILogger logger;
         private IModuleIdentity identity;
-        public AccuHealthLisController(ILogger logger, IResponseManager responseManager, ApplicationDBContext dBContext, IModuleIdentity identity )
+        public AccuHealthLisController(ILogger logger, 
+            IResponseManager responseManager, 
+            ApplicationDBContext dBContext, 
+            IModuleIdentity identity )
         {
             this.dBContext = dBContext;
             this.logger = logger;
@@ -147,44 +145,5 @@ namespace Lis.Api.Controllers.Api
                 return null;
             }
         }
-
-        
-
-        private async Task<GetParamsResponse> GetTestParams()
-        {
-            HttpResponseMessage responseMessage = null;
-
-            GetPendingOrderCountResponse responseCount = new GetPendingOrderCountResponse();
-            try
-            {
-                logger.LogInfo("GetTestParams Started.");
-
-                string apiUrl = $"{HospitalApiUrl}lis/GetParams?ClientId={AccuHealthClientId}";
-                if (!AccuHealthBranchId.Equals(string.Empty))
-                {
-                    apiUrl += $"&BranchId={AccuHealthBranchId}";
-                }
-
-                using (var client = new ApiClient().GetHttpClient())
-                {
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                    responseMessage = await client.GetAsync(apiUrl);
-
-                    var jsonString = await responseMessage.Content.ReadAsStringAsync();
-                    var response = JsonConvert.DeserializeObject<GetParamsResponse>(jsonString);
-                    logger.LogInfo("GetTestParams Completed.");
-                    return response;
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                logger.LogException(ex);
-                return null;
-            }
-        }
     }
-
-    
 }

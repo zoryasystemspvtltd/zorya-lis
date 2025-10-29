@@ -33,20 +33,6 @@ namespace Lis.Api.Controllers.Api
             this.responseManager = responseManager;
         }
 
-        [AllowAnonymous]
-        // GET api/<controller>
-        // Sync Test Param - api/LIS/GetParams?ClientId=67DB18E8-2988-4F53-A252-B6CB0CB8873F&Branch_Id=EE09D44E-757D-4FD2-B171-1F59224390EA
-        public async Task<IEnumerable<string>> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
 
         /// <summary>
         /// Saving new order from Accuhealth
@@ -86,15 +72,7 @@ namespace Lis.Api.Controllers.Api
             }
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+        
 
         private async Task<GetParamsResponse> GetTestParams()
         {
