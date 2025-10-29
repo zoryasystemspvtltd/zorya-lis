@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Remoting.Contexts;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -112,7 +113,7 @@ namespace Lis.Api.Controllers.Api
         /// <param name="testValue"></param>
         /// <returns></returns>`
         [AllowAnonymous]
-        public HttpResponseMessage Post(LisTestValue[] values)
+        public async Task<HttpResponseMessage> Post(LisTestValue[] values)
         {
             try
             {
@@ -146,6 +147,30 @@ namespace Lis.Api.Controllers.Api
 
                 dBContext.SaveChanges();
 
+                var accuHealthResults = recordsToUpdate
+                                            .Select(p=> new AccuHealthTestValue()
+                                            {
+                                                ROW_ID = p.o.ROW_ID,
+                                                isSynced = true,
+                                                SRNO = p.o.REF_VISITNO,
+                                                SDATE = p.o.DATESTAMP,
+                                                SAMPLEID = p.o.REF_VISITNO,
+                                                TESTID = p.o.PARAMCODE,
+                                                MACHINEID = p.e.Name,
+                                                SUFFIX = "",
+                                                TRANSFERFLAG = "",
+                                                TMPVALUE = p.o.Value,
+                                                DESCRIPTION = p.o.PARAMCODE,
+                                                RUNDATE = DateTime.Now,
+                                            })
+                                            .ToArray();
+
+                // TODO Uncomment to send the result to Accuhealth
+                //await PostTestResults(accuHealthResults);
+
+                dBContext.AccuHealthTestValues.AddRange(accuHealthResults);
+                dBContext.SaveChanges();
+
                 APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "Value saved successfully.", null,null);
 
                 return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
@@ -154,6 +179,45 @@ namespace Lis.Api.Controllers.Api
             {
                 logger.LogException(e);
                 return null;
+            }
+        }
+
+
+        private static readonly string HospitalApiUrl = ConfigurationManager.AppSettings["HospitalApiUrl"];
+        private static readonly string AccuHealthClientId = ConfigurationManager.AppSettings["AccuHealthClientId"];
+        private static readonly string AccuHealthBranchId = ConfigurationManager.AppSettings["AccuHealthBranchId"];
+        private static async Task<bool> PostTestResults(AccuHealthTestValue[] results)
+        {
+            string apiUrl = $"{HospitalApiUrl}lis/PostTestResults";
+            using (var client = new ApiClient().GetHttpClient())
+            {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                var payload = new
+                {
+                    ClientId = AccuHealthClientId,
+                    TestValues = results
+                };
+                var jsonPayload = JsonConvert.SerializeObject(payload);
+                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(apiUrl, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    // Convert JSON string to dynamic object
+                    var result = JsonConvert.DeserializeObject<UpdateOrderStatusResponse>(responseContent);
+                    if (result.ResponseType == "Success")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }
