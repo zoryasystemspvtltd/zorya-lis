@@ -1,4 +1,6 @@
 delete from [dbo].[AccuHealthParamMappings]
+go
+truncate table [dbo].[AccuHealthParamMappings]
 GO
 delete from [dbo].[EquipmentMaster]
 GO
