@@ -41,7 +41,27 @@ namespace Lis.Api.Controllers.Api
             this.identity = identity;
         }
 
-        
+        /// <summary>
+        /// This methods is used to ping the API from LIS Console
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public bool Get()
+        {
+            try
+            {
+                logger.LogInfo($"Ping API Request");
+                var testRequestDetails = true; // Todo 
+                logger.LogInfo($"Ping API Response");
+                return testRequestDetails;
+            }
+            catch (Exception e)
+            {
+                logger.LogException(e);
+                return false;
+            }
+        }
         /// <summary>
         /// Get list of Sample for a specific sampleno coming through barcode
         /// </summary>
