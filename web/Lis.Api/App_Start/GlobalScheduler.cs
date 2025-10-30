@@ -143,7 +143,7 @@ namespace Lis.Api
                 if (orderId != null)
                 {
                     // TODO Uncomment
-                    //var isSyncd = await UpdateOrderStatus(orderItem);
+                    var isSyncd = await UpdateOrderStatus(orderItem);
                 }
             }
         }
