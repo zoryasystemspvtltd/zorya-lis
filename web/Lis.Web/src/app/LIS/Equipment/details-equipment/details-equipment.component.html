@@ -46,36 +46,29 @@
             <hr />
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 form-grid-stye">
-                    <table class="table table-striped">
+                    <table class="table ">
                         <thead>
                             <tr>
-                                <th style="width:10%"><label class="black-text">HIS Code</label></th>
-                                <th style="width:40%"><label class="black-text">HIS Description</label></th>
-                                <th style="width:50%"><label class="black-text">LIS Code & Description</label></th>
+                                <th style="width:30%"><label class="black-text">HIS Code</label></th>
+                                <th style="width:30%"><label class="black-text">LIS Code</label></th>
+                                <th style="width:20%"><label class="black-text">Specimen</label></th>
+                                <th style="width:20%"><label class="black-text">Unit</label></th>
                             </tr>
                         </thead>
                         <tbody *ngFor="let mapping of item.mappings">
-                            <tr *ngIf="mapping.isActive">
+                            <tr >
                                 <td>
-                                    <span class="glyphicon" style="cursor: pointer;" [ngClass]="{ 'glyphicon-plus': !mapping.showDetails,'glyphicon-minus': mapping.showDetails }" (click)=" showDetails(mapping) " *ngIf="hasMapping(mapping) "></span>
-                                    <label> {{mapping.hisTestCode}}</label>
-                                </td>
-                                <td><label for="{{$index}} ">{{mapping.hisTestCodeDescription}}</label>
+                                     <label for="{{$index}} "> {{mapping.hiS_PARAMCODE}}</label>
                                 </td>
                                 <td>
-                                    <ul>
-                                        <li *ngFor="let lisTest of mapping.lisTests ">
-                                            <label for="{{$index}} ">{{lisTest.code}} - {{lisTest.description}}</label>
-                                        </li>
-                                    </ul>
+                                    <label for="{{$index}} ">{{mapping.liS_PARAMCODE}}</label>
+                                </td>
+                                 <td><label for="{{$index}} ">{{mapping.specimen}}</label>
+                                </td>
+                                 <td><label for="{{$index}} ">{{mapping.unit}}</label>
                                 </td>
                             </tr>
-                            <tr *ngIf="mapping.isActive ">
-                                <td colspan="3 " *ngIf="mapping.showDetails " style="border:1px solid #ccc; ">
-                                    <app-his-test-details [hisTestCode]="mapping.hisTestCode ">
-                                    </app-his-test-details>
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>

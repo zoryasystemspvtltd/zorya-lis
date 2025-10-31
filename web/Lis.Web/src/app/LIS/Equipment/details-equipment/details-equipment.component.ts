@@ -35,6 +35,7 @@ export class DetailsEquipmentComponent implements OnInit {
     this.equipmentService.getById(id)
       .subscribe(response => {
         this.item = response;
+        console.log(this.item)
         this.isLoaded = true;
       });
   }

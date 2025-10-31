@@ -176,9 +176,9 @@ namespace Lis.Api.Providers
             {
                 { "userName", user.UserName},
                 { "emailConfirmed", user.EmailConfirmed ? "true" : "false"},
-                { "as:client_id", client.AccessKey},
-                { "as:clientAllowedOrigin", client.AllowedOrigin},
-                { "as:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString()}
+                { "as:client_id", client?.AccessKey},
+                { "as:clientAllowedOrigin", client?.AllowedOrigin},
+                { "as:clientRefreshTokenLifeTime", client?.RefreshTokenLifeTime.ToString()}
             };
 
             return new AuthenticationProperties(data);
