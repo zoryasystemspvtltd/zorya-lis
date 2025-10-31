@@ -126,6 +126,7 @@ namespace LIS.DtoModel.Models
         public string BC_PRINTED { get; set; }
         public string Value { get; set; }
         public ReportStatusType Status { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     }
 

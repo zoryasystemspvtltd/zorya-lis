@@ -26,7 +26,9 @@ namespace LIS.DataAccess
         
         //Equipment Master and mapping with HIS
         public virtual DbSet<EquipmentMaster> EquipmentMaster { get; set; }
-        
+        public virtual DbSet<EquipmentHeartBeat> EquipmentHeartBeats { get; set; }
+
+
         public virtual DbSet<LisTestValue> LisTestValues { get; set; }
         // AccuHealth Data
         public virtual DbSet<AccuHealthTestValue> AccuHealthTestValues { get; set; }

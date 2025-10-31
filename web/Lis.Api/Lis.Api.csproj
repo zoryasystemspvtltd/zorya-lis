@@ -205,6 +205,10 @@
     <Compile Include="App_Start\SimpleInjectorConfig.cs" />
     <Compile Include="Controllers\Api\AccuHealthLisController.cs" />
     <Compile Include="Controllers\Api\AccuHealthController.cs" />
+    <Compile Include="Controllers\Api\EquipmentsController.cs" />
+    <Compile Include="Controllers\Api\EquipmentTestMappingsController.cs" />
+    <Compile Include="Controllers\Api\HeartbeatController.cs" />
+    <Compile Include="Controllers\Api\PatientsController.cs" />
     <Compile Include="Controllers\Api\User\UsersController.cs" />
     <Compile Include="DataContextMigrations\202102040722092_cnci1.cs" />
     <Compile Include="DataContextMigrations\202102040722092_cnci1.designer.cs">
