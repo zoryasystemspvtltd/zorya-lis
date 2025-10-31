@@ -97,6 +97,7 @@ namespace Lis.Api
                 Lifestyle.Scoped);
             container.Register<IModuleIdentity, ModuleIdentity>(Lifestyle.Transient);
             container.Register<ILogger, Logger>(Lifestyle.Singleton);
+            container.Register<AccuHealthDataSynchronizer>(Lifestyle.Singleton);
             container.Register<IFileHandler, FileHandler>(Lifestyle.Scoped);
             //.Register<IEquipmentManager, EquipmentManager>(Lifestyle.Scoped);
             

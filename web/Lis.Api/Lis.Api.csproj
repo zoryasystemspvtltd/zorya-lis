@@ -199,6 +199,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AccuHealthDataSynchronizer.cs" />
     <Compile Include="App_Start\FileHandler.cs" />
     <Compile Include="App_Start\GlobalScheduler.cs" />
     <Compile Include="App_Start\LisHub.cs" />

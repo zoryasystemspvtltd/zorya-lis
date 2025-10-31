@@ -185,7 +185,7 @@ namespace Lis.Api.Controllers.Api
                                             })
                                             .ToArray();
 
-                // TODO Uncomment to send the result to Accuhealth
+                // TODO Send to AccuHealth
                 await PostTestResults(accuHealthResults);
 
                 dBContext.AccuHealthTestValues.AddRange(accuHealthResults);
