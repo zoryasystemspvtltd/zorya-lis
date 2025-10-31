@@ -41,10 +41,8 @@ namespace Lis.Api
             {
                 isRunning = true;
 
-                Task inPutTask = Task.Run(() => _accuHealth.SynchronizeOrder());
-                Task outPutTask = Task.Run(() => _accuHealth.SynchronizeResult());
-
-                await Task.WhenAll(inPutTask, outPutTask);
+                await _accuHealth.SynchronizeOrder();
+                
 
                 isRunning = false;
             }
