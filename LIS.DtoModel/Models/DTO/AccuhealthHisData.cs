@@ -102,7 +102,7 @@ namespace LIS.DtoModel.Models
         public string PINNO { get; set; }
         public string REF_VISITNO { get; set; }
         public string ADMISSIONNO { get; set; }
-        public string REQDATETIME { get; set; }
+        public DateTime? REQDATETIME { get; set; }
         public string TESTPROF_CODE { get; set; }
         public string PROCESSED { get; set; }
         public string PATFNAME { get; set; }
