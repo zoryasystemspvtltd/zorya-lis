@@ -304,8 +304,18 @@
     <Content Include="ui\assets\images\unicell_banner.png" />
     <Content Include="ui\assets\images\xls.png" />
     <Content Include="ui\assets\images\xlsx.png" />
+    <Content Include="ui\assets\ssl\q4u.crt" />
+    <Content Include="ui\assets\ssl\q4u.key" />
+    <Content Include="ui\fontawesome-webfont.1e59d2330b4c6deb84b3.ttf" />
+    <Content Include="ui\fontawesome-webfont.20fd1704ea223900efa9.woff2" />
+    <Content Include="ui\fontawesome-webfont.8b43027f47b20503057d.eot" />
     <Content Include="ui\fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg" />
+    <Content Include="ui\fontawesome-webfont.f691f37e57f04c152e23.woff" />
     <Content Include="ui\glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg" />
+    <Content Include="ui\glyphicons-halflings-regular.4692b9ec53fd5972caa2.ttf" />
+    <Content Include="ui\glyphicons-halflings-regular.5be1347c682810f199c7.eot" />
+    <Content Include="ui\glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff" />
+    <Content Include="ui\glyphicons-halflings-regular.be810be3a3e14c682a25.woff2" />
     <Content Include="ui\icon_facebook.a4a821dd7a42e1c10eda.png" />
     <Content Include="ui\icon_google.e74abd862dfd83547f92.png" />
     <Content Include="ui\index.html" />
@@ -467,6 +477,7 @@
     <Content Include="ui\tinymce\skins\ui\oxide-dark\content.min.css" />
     <Content Include="ui\tinymce\skins\ui\oxide-dark\content.mobile.css" />
     <Content Include="ui\tinymce\skins\ui\oxide-dark\content.mobile.min.css" />
+    <Content Include="ui\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
     <Content Include="ui\tinymce\skins\ui\oxide-dark\skin.css" />
     <Content Include="ui\tinymce\skins\ui\oxide-dark\skin.min.css" />
     <Content Include="ui\tinymce\skins\ui\oxide-dark\skin.mobile.css" />
@@ -479,6 +490,7 @@
     <Content Include="ui\tinymce\skins\ui\oxide\content.min.css" />
     <Content Include="ui\tinymce\skins\ui\oxide\content.mobile.css" />
     <Content Include="ui\tinymce\skins\ui\oxide\content.mobile.min.css" />
+    <Content Include="ui\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="ui\tinymce\skins\ui\oxide\skin.css" />
     <Content Include="ui\tinymce\skins\ui\oxide\skin.min.css" />
     <Content Include="ui\tinymce\skins\ui\oxide\skin.mobile.css" />
@@ -505,18 +517,6 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
-    <Content Include="ui\assets\ssl\q4u.crt" />
-    <Content Include="ui\assets\ssl\q4u.key" />
-    <Content Include="ui\fontawesome-webfont.1e59d2330b4c6deb84b3.ttf" />
-    <Content Include="ui\fontawesome-webfont.20fd1704ea223900efa9.woff2" />
-    <Content Include="ui\fontawesome-webfont.8b43027f47b20503057d.eot" />
-    <Content Include="ui\fontawesome-webfont.f691f37e57f04c152e23.woff" />
-    <Content Include="ui\glyphicons-halflings-regular.4692b9ec53fd5972caa2.ttf" />
-    <Content Include="ui\glyphicons-halflings-regular.5be1347c682810f199c7.eot" />
-    <Content Include="ui\glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff" />
-    <Content Include="ui\glyphicons-halflings-regular.be810be3a3e14c682a25.woff2" />
-    <Content Include="ui\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
-    <Content Include="ui\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DataContextMigrations\202102040722092_cnci1.resx">
