@@ -1,6 +1,6 @@
 USE [ZoryaLIS]
 GO
-/****** Object:  Table [dbo].[AccuHealthParamMappings]    Script Date: 30-10-2025 01:15:01 PM ******/
+/****** Object:  Table [dbo].[AccuHealthParamMappings]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -19,7 +19,7 @@ CREATE TABLE [dbo].[AccuHealthParamMappings](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AccuHealthTestOrders]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[AccuHealthTestOrders]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -32,7 +32,7 @@ CREATE TABLE [dbo].[AccuHealthTestOrders](
 	[PINNO] [nvarchar](max) NULL,
 	[REF_VISITNO] [nvarchar](max) NULL,
 	[ADMISSIONNO] [nvarchar](max) NULL,
-	[REQDATETIME] [nvarchar](max) NULL,
+	[REQDATETIME] [datetime] NULL,
 	[TESTPROF_CODE] [nvarchar](max) NULL,
 	[PROCESSED] [nvarchar](max) NULL,
 	[PATFNAME] [nvarchar](max) NULL,
@@ -56,13 +56,14 @@ CREATE TABLE [dbo].[AccuHealthTestOrders](
 	[BC_PRINTED] [nvarchar](max) NULL,
 	[Value] [nvarchar](max) NULL,
 	[Status] [int] NOT NULL,
+	[CreatedAt] [datetime] NOT NULL,
  CONSTRAINT [PK_dbo.AccuHealthTestOrders] PRIMARY KEY CLUSTERED 
 (
 	[ROW_ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AccuHealthTestValues]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[AccuHealthTestValues]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -87,7 +88,7 @@ CREATE TABLE [dbo].[AccuHealthTestValues](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -101,7 +102,7 @@ CREATE TABLE [dbo].[AspNetRoles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +118,7 @@ CREATE TABLE [dbo].[AspNetUserClaims](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -134,7 +135,7 @@ CREATE TABLE [dbo].[AspNetUserLogins](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -149,7 +150,7 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -184,7 +185,7 @@ CREATE TABLE [dbo].[AspNetUsers](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ClientApplication]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[ClientApplication]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -205,7 +206,24 @@ CREATE TABLE [dbo].[ClientApplication](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EquipmentMaster]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[EquipmentHeartBeat]    Script Date: 01-11-2025 10:17:19 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EquipmentHeartBeat](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[AccessKey] [nvarchar](50) NOT NULL,
+	[IsAlive] [bit] NOT NULL,
+	[CreatedBy] [nvarchar](max) NULL,
+	[CreatedOn] [datetime] NOT NULL,
+ CONSTRAINT [PK_dbo.EquipmentHeartBeat] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EquipmentMaster]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -224,7 +242,7 @@ CREATE TABLE [dbo].[EquipmentMaster](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LisTestValues]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[LisTestValues]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -242,7 +260,7 @@ CREATE TABLE [dbo].[LisTestValues](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MigrationHistory]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[MigrationHistory]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -259,7 +277,7 @@ CREATE TABLE [dbo].[MigrationHistory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[RefreshTokens]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[RefreshTokens]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -277,7 +295,7 @@ CREATE TABLE [dbo].[RefreshTokens](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[RoleModuleMappings]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[RoleModuleMappings]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -299,7 +317,7 @@ CREATE TABLE [dbo].[RoleModuleMappings](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserApplicationMappings]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[UserApplicationMappings]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -314,7 +332,7 @@ CREATE TABLE [dbo].[UserApplicationMappings](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserModules]    Script Date: 30-10-2025 01:15:02 PM ******/
+/****** Object:  Table [dbo].[UserModules]    Script Date: 01-11-2025 10:17:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -333,6 +351,8 @@ CREATE TABLE [dbo].[UserModules](
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[AccuHealthTestOrders] ADD  DEFAULT ((0)) FOR [Status]
+GO
+ALTER TABLE [dbo].[AccuHealthTestOrders] ADD  DEFAULT ('1900-01-01T00:00:00.000') FOR [CreatedAt]
 GO
 ALTER TABLE [dbo].[AccuHealthParamMappings]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AccuHealthParamMappings_dbo.EquipmentMaster_EquipmentId] FOREIGN KEY([EquipmentId])
 REFERENCES [dbo].[EquipmentMaster] ([Id])

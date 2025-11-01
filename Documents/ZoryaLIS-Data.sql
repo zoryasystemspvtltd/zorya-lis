@@ -40,549 +40,549 @@ INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'0c43c93b-2c5f-4544
 GO
 SET IDENTITY_INSERT [dbo].[EquipmentMaster] ON 
 GO
-INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (1, N'BC30A', N'BC30A', N'ACCU-HEALTH-BC30A-1', 1, N'admin@zorya.co.in', CAST(N'2025-10-29T13:01:11.487' AS DateTime))
+INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (1, N'BC30A', N'BC30A', N'ACCU-HEALTH-BC30A-1', 1, N'admin@zorya.co.in', CAST(N'2025-11-01T10:25:11.380' AS DateTime))
 GO
-INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (2, N'BS400', N'BS400', N'ACCU-HEALTH-BS400-1', 1, N'admin@zorya.co.in', CAST(N'2025-10-29T13:01:11.487' AS DateTime))
+INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (2, N'BS400', N'BS400', N'ACCU-HEALTH-BS400-1', 1, N'admin@zorya.co.in', CAST(N'2025-11-01T10:25:11.380' AS DateTime))
 GO
-INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (3, N'CL1200', N'CL1200', N'ACCU-HEALTH-CL1200-1', 1, N'admin@zorya.co.in', CAST(N'2025-10-29T13:01:11.487' AS DateTime))
+INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (3, N'CL1200', N'CL1200', N'ACCU-HEALTH-CL1200-1', 1, N'admin@zorya.co.in', CAST(N'2025-11-01T10:25:11.380' AS DateTime))
 GO
-INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (4, N'EC90', N'EC90', N'ACCU-HEALTH-EC90-1', 1, N'admin@zorya.co.in', CAST(N'2025-10-29T13:01:11.487' AS DateTime))
+INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (4, N'EC90', N'EC90', N'ACCU-HEALTH-EC90-1', 1, N'admin@zorya.co.in', CAST(N'2025-11-01T10:25:11.380' AS DateTime))
 GO
-INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (5, N'EM200', N'EM200', N'ACCU-HEALTH-EM200-1', 1, N'admin@zorya.co.in', CAST(N'2025-10-29T13:01:11.487' AS DateTime))
+INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (5, N'EM200', N'EM200', N'ACCU-HEALTH-EM200-1', 1, N'admin@zorya.co.in', CAST(N'2025-11-01T10:25:11.380' AS DateTime))
 GO
-INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (6, N'ERBAH560', N'ERBAH560', N'ACCU-HEALTH-ERBAH560-1', 1, N'admin@zorya.co.in', CAST(N'2025-10-29T13:01:11.487' AS DateTime))
+INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (6, N'ERBAH560', N'ERBAH560', N'ACCU-HEALTH-ERBAH560-1', 1, N'admin@zorya.co.in', CAST(N'2025-11-01T10:25:11.380' AS DateTime))
 GO
-INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (7, N'MINIVIDAS', N'MINIVIDAS', N'ACCU-HEALTH-MINIVIDAS-1', 1, N'admin@zorya.co.in', CAST(N'2025-10-29T13:01:11.487' AS DateTime))
+INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (7, N'MINIVIDAS', N'MINIVIDAS', N'ACCU-HEALTH-MINIVIDAS-1', 1, N'admin@zorya.co.in', CAST(N'2025-11-01T10:25:11.380' AS DateTime))
 GO
-INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (8, N'SYSMEXXN330', N'SYSMEXXN330', N'ACCU-HEALTH-SYSMEXXN330-1', 1, N'admin@zorya.co.in', CAST(N'2025-10-29T13:01:11.487' AS DateTime))
+INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (8, N'SYSMEXXN330', N'SYSMEXXN330', N'ACCU-HEALTH-SYSMEXXN330-1', 1, N'admin@zorya.co.in', CAST(N'2025-11-01T10:25:11.380' AS DateTime))
 GO
-INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (9, N'ZYBIO', N'ZYBIO', N'ACCU-HEALTH-ZYBIO-1', 1, N'admin@zorya.co.in', CAST(N'2025-10-29T13:01:11.487' AS DateTime))
+INSERT [dbo].[EquipmentMaster] ([Id], [Name], [Model], [AccessKey], [IsActive], [CreatedBy], [CreatedOn]) VALUES (9, N'ZYBIO', N'ZYBIO', N'ACCU-HEALTH-ZYBIO-1', 1, N'admin@zorya.co.in', CAST(N'2025-11-01T10:25:11.380' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[EquipmentMaster] OFF
 GO
 SET IDENTITY_INSERT [dbo].[AccuHealthParamMappings] ON 
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (1, N'Hematocrit (PCV) ', N'Hematocrit (PCV) ', N'HCT', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (1, N'Hematocrit (PCV) ', N'Hematocrit (PCV) ', N'HCT', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (2, N'MCH', N'MCH', N'MCH', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (2, N'MCH', N'MCH', N'MCH', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (3, N'MCHC', N'MCHC', N'MCHC', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (3, N'MCHC', N'MCHC', N'MCHC', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (4, N'MCV', N'MCV', N'MCV', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (4, N'MCV', N'MCV', N'MCV', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (5, N'PLATELET COUNT', N'PLATELET COUNT', N'PLT', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (5, N'PLATELET COUNT', N'PLATELET COUNT', N'PLT', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (6, N'RBC', N'RBC', N'RBC', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (6, N'RBC', N'RBC', N'RBC', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (7, N'RBC COUNT', N'RBC COUNT', N'RBC', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (7, N'RBC COUNT', N'RBC COUNT', N'RBC', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (8, N'Total Leucocyte Count(correct value)', N'Total Leucocyte Count(correct value)', N'WBC', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (8, N'Total Leucocyte Count(correct value)', N'Total Leucocyte Count(correct value)', N'WBC', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (9, N'Total Leucocyte Count', N'Total Leucocyte Count', N'WBC', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (9, N'Total Leucocyte Count', N'Total Leucocyte Count', N'WBC', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (10, N'RDW', N'RDW', N'RDW-CV', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (10, N'RDW', N'RDW', N'RDW-CV', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (11, N'PCV', N'PCV', N'HCT', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (11, N'PCV', N'PCV', N'HCT', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (12, N'Haemoglobin', N'Haemoglobin', N'HGB', NULL, NULL, 1)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (12, N'Haemoglobin', N'Haemoglobin', N'HGB', N'Blood', NULL, 1)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (13, N'Bilirubin Conjugated', N'Bilirubin Conjugated', N'1', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (13, N'Bilirubin Conjugated', N'Bilirubin Conjugated', N'1', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (14, N'Bilirubin Total', N'Bilirubin Total', N'2', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (14, N'Bilirubin Total', N'Bilirubin Total', N'2', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (15, N'AMYLASE', N'AMYLASE', N'3', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (15, N'AMYLASE', N'AMYLASE', N'3', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (16, N'AMYLASE', N'AMYLASE', N'a-AMY', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (16, N'AMYLASE', N'AMYLASE', N'a-AMY', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (17, N'SERUM AMYLASE', N'SERUM AMYLASE', N'a-AMY', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (17, N'SERUM AMYLASE', N'SERUM AMYLASE', N'a-AMY', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (18, N'ANTI CCP', N'ANTI CCP', N'A-CCP', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (18, N'ANTI CCP', N'ANTI CCP', N'A-CCP', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (19, N'A-CCP', N'A-CCP', N'A-CCP', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (19, N'A-CCP', N'A-CCP', N'A-CCP', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (20, N'ANTI CCP', N'ANTI CCP', N'ACCP-O', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (20, N'ANTI CCP', N'ANTI CCP', N'ACCP-O', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (21, N'ADA (BODY FLUID)', N'ADA (BODY FLUID)', N'ADA-O', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (21, N'ADA (BODY FLUID)', N'ADA (BODY FLUID)', N'ADA-O', N'FLUID', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (22, N'ADA(Body Fluid)', N'ADA(Body Fluid)', N'ADA-O', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (22, N'ADA(Body Fluid)', N'ADA(Body Fluid)', N'ADA-O', N'FLUID', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (23, N'ADA (FLUID)', N'ADA (FLUID)', N'ADA-O', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (23, N'ADA (FLUID)', N'ADA (FLUID)', N'ADA-O', N'FLUID', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (24, N'Albumin', N'Albumin', N'ALB II', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (24, N'Albumin', N'Albumin', N'ALB II', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (25, N'ALBUMIN (BLOOD)', N'ALBUMIN (BLOOD)', N'ALB II', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (25, N'ALBUMIN (BLOOD)', N'ALBUMIN (BLOOD)', N'ALB II', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (26, N'Alkaline Phosphatase', N'Alkaline Phosphatase', N'ALP', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (26, N'Alkaline Phosphatase', N'Alkaline Phosphatase', N'ALP', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (27, N'SGPT (ALT)', N'SGPT (ALT)', N'ALT', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (27, N'SGPT (ALT)', N'SGPT (ALT)', N'ALT', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (28, N'SGPT', N'SGPT', N'ALT', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (28, N'SGPT', N'SGPT', N'ALT', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (29, N'ALT (SGPT)', N'ALT (SGPT)', N'ALT', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (29, N'ALT (SGPT)', N'ALT (SGPT)', N'ALT', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (30, N'ASO TITRE', N'ASO TITRE', N'ASO-O', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (30, N'ASO TITRE', N'ASO TITRE', N'ASO-O', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (31, N'SGOT', N'SGOT', N'AST', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (31, N'SGOT', N'SGOT', N'AST', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (32, N'SGOT (AST)', N'SGOT (AST)', N'AST', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (32, N'SGOT (AST)', N'SGOT (AST)', N'AST', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (33, N'AST (SGOT)', N'AST (SGOT)', N'AST', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (33, N'AST (SGOT)', N'AST (SGOT)', N'AST', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (34, N'CALCIUM', N'CALCIUM', N'Ca', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (34, N'CALCIUM', N'CALCIUM', N'Ca', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (35, N'CREATININE', N'CREATININE', N'CRE-Z', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (35, N'CREATININE', N'CREATININE', N'CRE-Z', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (36, N'Serum Creatinine', N'Serum Creatinine', N'CRE-Z', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (36, N'Serum Creatinine', N'Serum Creatinine', N'CRE-Z', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (37, N'CRP - C REACTIVE PROTEIN', N'CRP - C REACTIVE PROTEIN', N'CRP II', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (37, N'CRP - C REACTIVE PROTEIN', N'CRP - C REACTIVE PROTEIN', N'CRP II', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (38, N'CRP', N'CRP', N'CRP II', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (38, N'CRP', N'CRP', N'CRP II', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (39, N'Bilirubin Conjugated', N'Bilirubin Conjugated', N'D-bil-D II', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (39, N'Bilirubin Conjugated', N'Bilirubin Conjugated', N'D-bil-D II', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (40, N'GLOBULIN', N'GLOBULIN', N'Glo', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (40, N'GLOBULIN', N'GLOBULIN', N'Glo', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (41, N'GLUCOSE FASTING', N'GLUCOSE FASTING', N'GLU', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (41, N'GLUCOSE FASTING', N'GLUCOSE FASTING', N'GLU', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (42, N'GLUCOSE RANDOM', N'GLUCOSE RANDOM', N'GLU', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (42, N'GLUCOSE RANDOM', N'GLUCOSE RANDOM', N'GLU', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (43, N'GLUCOSE PP', N'GLUCOSE PP', N'GLU', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (43, N'GLUCOSE PP', N'GLUCOSE PP', N'GLU', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (44, N'HDL Cholesterol', N'HDL Cholesterol', N'HDL-C', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (44, N'HDL Cholesterol', N'HDL Cholesterol', N'HDL-C', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (45, N'Total IgE', N'Total IgE', N'IGE', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (45, N'Total IgE', N'Total IgE', N'IGE', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (46, N'IMMUNOGLOBULIN IGE', N'IMMUNOGLOBULIN IGE', N'IGE', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (46, N'IMMUNOGLOBULIN IGE', N'IMMUNOGLOBULIN IGE', N'IGE', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (47, N'LDH TOTAL', N'LDH TOTAL', N'LDH', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (47, N'LDH TOTAL', N'LDH TOTAL', N'LDH', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (48, N'LDL Cholesterol', N'LDL Cholesterol', N'LDL-C', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (48, N'LDL Cholesterol', N'LDL Cholesterol', N'LDL-C', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (49, N'LIPASE', N'LIPASE', N'LIP', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (49, N'LIPASE', N'LIPASE', N'LIP', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (50, N'MICROALBUMIN / CREATININE RATIO', N'MICROALBUMIN / CREATININE RATIO', N'MALB-O', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (50, N'MICROALBUMIN / CREATININE RATIO', N'MICROALBUMIN / CREATININE RATIO', N'MALB-O', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (51, N'Microalbumin & Creatinine Ratio', N'Microalbumin & Creatinine Ratio', N'MALB-O', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (51, N'Microalbumin & Creatinine Ratio', N'Microalbumin & Creatinine Ratio', N'MALB-O', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (52, N'Microalbumin and Creatinine Ratio', N'Microalbumin and Creatinine Ratio', N'MALB-O', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (52, N'Microalbumin and Creatinine Ratio', N'Microalbumin and Creatinine Ratio', N'MALB-O', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (53, N'SERUM INORGANIC PHOSPHORUS (PO4)', N'SERUM INORGANIC PHOSPHORUS (PO4)', N'P', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (53, N'SERUM INORGANIC PHOSPHORUS (PO4)', N'SERUM INORGANIC PHOSPHORUS (PO4)', N'P', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (54, N'RHEUMATOID FACTOR', N'RHEUMATOID FACTOR', N'RF', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (54, N'RHEUMATOID FACTOR', N'RHEUMATOID FACTOR', N'RF', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (55, N'Bilirubin Total', N'Bilirubin Total', N'T-bil-D II', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (55, N'Bilirubin Total', N'Bilirubin Total', N'T-bil-D II', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (56, N'Cholesterol', N'Cholesterol', N'TC', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (56, N'Cholesterol', N'Cholesterol', N'TC', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (57, N'TRIGLYCERIDE', N'TRIGLYCERIDE', N'TG', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (57, N'TRIGLYCERIDE', N'TRIGLYCERIDE', N'TG', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (58, N'Triglycerides', N'Triglycerides', N'TG', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (58, N'Triglycerides', N'Triglycerides', N'TG', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (59, N'Total Protein', N'Total Protein', N'TP', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (59, N'Total Protein', N'Total Protein', N'TP', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (60, N'Uric Acid', N'Uric Acid', N'UA', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (60, N'Uric Acid', N'Uric Acid', N'UA', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (61, N'UREA', N'UREA', N'UREA', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (61, N'UREA', N'UREA', N'UREA', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (62, N'GGT', N'GGT', N'y-GT', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (62, N'GGT', N'GGT', N'y-GT', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (63, N'GGT - GAMMA GLUTAMYL TRANSFERASE', N'GGT - GAMMA GLUTAMYL TRANSFERASE', N'y-GT', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (63, N'GGT - GAMMA GLUTAMYL TRANSFERASE', N'GGT - GAMMA GLUTAMYL TRANSFERASE', N'y-GT', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (64, N'A-CCP', N'A-CCP', N'ACCP-O', NULL, NULL, 2)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (64, N'A-CCP', N'A-CCP', N'ACCP-O', N'Blood', NULL, 2)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (65, N'ALPHA FETOPROTEIN (AFP)', N'ALPHA FETOPROTEIN (AFP)', N'AFP', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (65, N'ALPHA FETOPROTEIN (AFP)', N'ALPHA FETOPROTEIN (AFP)', N'AFP', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (66, N'AMH - ANTI MULLERIAN HORMONE', N'AMH - ANTI MULLERIAN HORMONE', N'AMH', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (66, N'AMH - ANTI MULLERIAN HORMONE', N'AMH - ANTI MULLERIAN HORMONE', N'AMH', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (67, N'AMH (ANTI-MULLERIAN HORMONE)', N'AMH (ANTI-MULLERIAN HORMONE)', N'AMH', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (67, N'AMH (ANTI-MULLERIAN HORMONE)', N'AMH (ANTI-MULLERIAN HORMONE)', N'AMH', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (68, N'ANTI TPO ANTIBODY', N'ANTI TPO ANTIBODY', N'Anti-TPO', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (68, N'ANTI TPO ANTIBODY', N'ANTI TPO ANTIBODY', N'Anti-TPO', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (69, N'PRO BNP', N'PRO BNP', N'BNP', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (69, N'PRO BNP', N'PRO BNP', N'BNP', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (70, N'C-PEPTIDE', N'C-PEPTIDE', N'C-Peptide', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (70, N'C-PEPTIDE', N'C-PEPTIDE', N'C-Peptide', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (71, N'CA 125', N'CA 125', N'CA125', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (71, N'CA 125', N'CA 125', N'CA125', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (72, N'CA 15.3', N'CA 15.3', N'CA15', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (72, N'CA 15.3', N'CA 15.3', N'CA15', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (73, N'CA 19.9', N'CA 19.9', N'CA19', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (73, N'CA 19.9', N'CA 19.9', N'CA19', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (74, N'CEA', N'CEA', N'CEA', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (74, N'CEA', N'CEA', N'CEA', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (75, N'CORTISOL (PM)', N'CORTISOL (PM)', N'Cortisol', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (75, N'CORTISOL (PM)', N'CORTISOL (PM)', N'Cortisol', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (76, N'CORTISOL (AM)', N'CORTISOL (AM)', N'Cortisol', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (76, N'CORTISOL (AM)', N'CORTISOL (AM)', N'Cortisol', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (77, N'DHEA', N'DHEA', N'DHEA-S', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (77, N'DHEA', N'DHEA', N'DHEA-S', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (78, N'E2 - ESTRADIOL', N'E2 - ESTRADIOL', N'E2', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (78, N'E2 - ESTRADIOL', N'E2 - ESTRADIOL', N'E2', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (79, N'FERRITIN', N'FERRITIN', N'FERR', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (79, N'FERRITIN', N'FERRITIN', N'FERR', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (80, N'FOLIC ACID', N'FOLIC ACID', N'Folate', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (80, N'FOLIC ACID', N'FOLIC ACID', N'Folate', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (81, N'FREE PSA - PROSTATE SPECIFIC ANTIGEN FREE', N'FREE PSA - PROSTATE SPECIFIC ANTIGEN FREE', N'FPSA', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (81, N'FREE PSA - PROSTATE SPECIFIC ANTIGEN FREE', N'FREE PSA - PROSTATE SPECIFIC ANTIGEN FREE', N'FPSA', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (82, N'FSH ', N'FSH ', N'FSH', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (82, N'FSH ', N'FSH ', N'FSH', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (83, N'FT3 - FREE TRIIODOTHYRONINE', N'FT3 - FREE TRIIODOTHYRONINE', N'FT3', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (83, N'FT3 - FREE TRIIODOTHYRONINE', N'FT3 - FREE TRIIODOTHYRONINE', N'FT3', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (84, N'FREE T3', N'FREE T3', N'FT3', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (84, N'FREE T3', N'FREE T3', N'FT3', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (85, N'FREE T4', N'FREE T4', N'FT4', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (85, N'FREE T4', N'FREE T4', N'FT4', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (86, N'FT4 - FREE THYROXINE', N'FT4 - FREE THYROXINE', N'FT4', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (86, N'FT4 - FREE THYROXINE', N'FT4 - FREE THYROXINE', N'FT4', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (87, N'BETA HCG', N'BETA HCG', N'HCG', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (87, N'BETA HCG', N'BETA HCG', N'HCG', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (88, N'BETA HCG(SERUM)', N'BETA HCG(SERUM)', N'HCG', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (88, N'BETA HCG(SERUM)', N'BETA HCG(SERUM)', N'HCG', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (89, N'INSULIN (FASTING)', N'INSULIN (FASTING)', N'Insulin', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (89, N'INSULIN (FASTING)', N'INSULIN (FASTING)', N'Insulin', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (90, N'INSULIN ASSAY ( FASTING ) ', N'INSULIN ASSAY ( FASTING ) ', N'Insulin', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (90, N'INSULIN ASSAY ( FASTING ) ', N'INSULIN ASSAY ( FASTING ) ', N'Insulin', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (91, N'INSULIN(PP)', N'INSULIN(PP)', N'Insulin', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (91, N'INSULIN(PP)', N'INSULIN(PP)', N'Insulin', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (92, N'LH', N'LH', N'LH', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (92, N'LH', N'LH', N'LH', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (93, N'PROCALCITONIN', N'PROCALCITONIN', N'PCT', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (93, N'PROCALCITONIN', N'PROCALCITONIN', N'PCT', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (94, N'PROLACTIN', N'PROLACTIN', N'PRL', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (94, N'PROLACTIN', N'PROLACTIN', N'PRL', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (95, N'PSA', N'PSA', N'PSA', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (95, N'PSA', N'PSA', N'PSA', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (96, N'PTH - PARATHYROID HORMONE INTACT', N'PTH - PARATHYROID HORMONE INTACT', N'PTH', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (96, N'PTH - PARATHYROID HORMONE INTACT', N'PTH - PARATHYROID HORMONE INTACT', N'PTH', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (97, N'T3', N'T3', N'T3', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (97, N'T3', N'T3', N'T3', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (98, N'T4', N'T4', N'T4', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (98, N'T4', N'T4', N'T4', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (99, N'TESTOSTERONE (TOTAL)', N'TESTOSTERONE (TOTAL)', N'TESTO', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (99, N'TESTOSTERONE (TOTAL)', N'TESTOSTERONE (TOTAL)', N'TESTO', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (100, N'BETA HCG', N'BETA HCG', N'Total ßHCG', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (100, N'BETA HCG', N'BETA HCG', N'Total ßHCG', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (101, N'TSH', N'TSH', N'TSH', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (101, N'TSH', N'TSH', N'TSH', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (102, N'Vitamin B-12', N'Vitamin B-12', N'VB12', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (102, N'Vitamin B-12', N'Vitamin B-12', N'VB12', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (103, N'VITAMIN B12', N'VITAMIN B12', N'VB12', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (103, N'VITAMIN B12', N'VITAMIN B12', N'VB12', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (104, N'VITAMIN D (25OH)', N'VITAMIN D (25OH)', N'VD', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (104, N'VITAMIN D (25OH)', N'VITAMIN D (25OH)', N'VD', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (105, N'VITAMIN D TOTAL(25 O H)', N'VITAMIN D TOTAL(25 O H)', N'VD', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (105, N'VITAMIN D TOTAL(25 O H)', N'VITAMIN D TOTAL(25 O H)', N'VD', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (106, N'Vitamin D Total (25 O H)', N'Vitamin D Total (25 O H)', N'VD', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (106, N'Vitamin D Total (25 O H)', N'Vitamin D Total (25 O H)', N'VD', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (107, N'BETA HCG(SERUM)', N'BETA HCG(SERUM)', N'Total ßHCG', NULL, NULL, 3)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (107, N'BETA HCG(SERUM)', N'BETA HCG(SERUM)', N'Total ßHCG', N'Blood', NULL, 3)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (108, N'Sodium', N'Sodium', N'Na', NULL, NULL, 4)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (108, N'Sodium', N'Sodium', N'Na', N'Blood', NULL, 4)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (109, N'Potassium2', N'Potassium2', N'K', NULL, NULL, 4)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (109, N'Potassium2', N'Potassium2', N'K', N'Blood', NULL, 4)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (110, N'Potassium', N'Potassium', N'K', NULL, NULL, 4)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (110, N'Potassium', N'Potassium', N'K', N'Blood', NULL, 4)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (111, N'Chloride', N'Chloride', N'Cl', NULL, NULL, 4)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (111, N'Chloride', N'Chloride', N'Cl', N'Blood', NULL, 4)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (112, N'Albumin', N'Albumin', N'ALBD', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (112, N'Albumin', N'Albumin', N'ALBD', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (113, N'Alkaline Phosphatase', N'Alkaline Phosphatase', N'ALPU', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (113, N'Alkaline Phosphatase', N'Alkaline Phosphatase', N'ALPU', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (114, N'AMYLASE', N'AMYLASE', N'AMY', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (114, N'AMYLASE', N'AMYLASE', N'AMY', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (115, N'BILIRUBIN CONJUGATED', N'BILIRUBIN CONJUGATED', N'BIDD', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (115, N'BILIRUBIN CONJUGATED', N'BILIRUBIN CONJUGATED', N'BIDD', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (116, N'Bilirubin Total', N'Bilirubin Total', N'BIT', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (116, N'Bilirubin Total', N'Bilirubin Total', N'BIT', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (117, N'CALCIUM', N'CALCIUM', N'CA', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (117, N'CALCIUM', N'CALCIUM', N'CA', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (118, N'CHOLESTEROL', N'CHOLESTEROL', N'CHOL', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (118, N'CHOLESTEROL', N'CHOLESTEROL', N'CHOL', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (119, N'CREATININE', N'CREATININE', N'CRENZ', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (119, N'CREATININE', N'CREATININE', N'CRENZ', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (120, N'CRP', N'CRP', N'CRPD', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (120, N'CRP', N'CRP', N'CRPD', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (121, N'GGT', N'GGT', N'GGT', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (121, N'GGT', N'GGT', N'GGT', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (122, N'GGT - GAMMA GLUTAMYL TRANSFERASE', N'GGT - GAMMA GLUTAMYL TRANSFERASE', N'GGT', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (122, N'GGT - GAMMA GLUTAMYL TRANSFERASE', N'GGT - GAMMA GLUTAMYL TRANSFERASE', N'GGT', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (123, N'Glucose Fasting', N'Glucose Fasting', N'GLU', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (123, N'Glucose Fasting', N'Glucose Fasting', N'GLU', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (124, N'GLUCOSE FASTING', N'GLUCOSE FASTING', N'GLU', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (124, N'GLUCOSE FASTING', N'GLUCOSE FASTING', N'GLU', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (125, N'Glucose pp', N'Glucose pp', N'GLU', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (125, N'Glucose pp', N'Glucose pp', N'GLU', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (126, N'GLUCOSE PP', N'GLUCOSE PP', N'GLU', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (126, N'GLUCOSE PP', N'GLUCOSE PP', N'GLU', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (127, N'GLUCOSE RANDOM', N'GLUCOSE RANDOM', N'GLU', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (127, N'GLUCOSE RANDOM', N'GLUCOSE RANDOM', N'GLU', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (128, N'HDL CHOLESTEROL', N'HDL CHOLESTEROL', N'HDLC', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (128, N'HDL CHOLESTEROL', N'HDL CHOLESTEROL', N'HDLC', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (129, N'LDH (CSF)', N'LDH (CSF)', N'LDH', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (129, N'LDH (CSF)', N'LDH (CSF)', N'LDH', N'FLUID', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (130, N'LDH (FLUID)', N'LDH (FLUID)', N'LDH', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (130, N'LDH (FLUID)', N'LDH (FLUID)', N'LDH', N'FLUID', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (131, N'LDH TOTAL', N'LDH TOTAL', N'LDH', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (131, N'LDH TOTAL', N'LDH TOTAL', N'LDH', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (132, N'LDL Cholesterol', N'LDL Cholesterol', N'LDL', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (132, N'LDL Cholesterol', N'LDL Cholesterol', N'LDL', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (133, N'LIPASE', N'LIPASE', N'LIP', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (133, N'LIPASE', N'LIPASE', N'LIP', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (134, N'PHOPHATE', N'PHOPHATE', N'PHOS', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (134, N'PHOPHATE', N'PHOPHATE', N'PHOS', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (135, N'Phosphate', N'Phosphate', N'PHOS', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (135, N'Phosphate', N'Phosphate', N'PHOS', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (136, N'Total Protein', N'Total Protein', N'PRO', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (136, N'Total Protein', N'Total Protein', N'PRO', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (137, N'RH FACTOR', N'RH FACTOR', N'RFD', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (137, N'RH FACTOR', N'RH FACTOR', N'RFD', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (138, N'RHEUMATOID FACTOR', N'RHEUMATOID FACTOR', N'RFD', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (138, N'RHEUMATOID FACTOR', N'RHEUMATOID FACTOR', N'RFD', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (139, N'SGOT', N'SGOT', N'SGOTD', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (139, N'SGOT', N'SGOT', N'SGOTD', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (140, N'SGOT (AST)', N'SGOT (AST)', N'SGOTD', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (140, N'SGOT (AST)', N'SGOT (AST)', N'SGOTD', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (141, N'SGPT', N'SGPT', N'SGPTD', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (141, N'SGPT', N'SGPT', N'SGPTD', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (142, N'SGPT (ALT)', N'SGPT (ALT)', N'SGPTD', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (142, N'SGPT (ALT)', N'SGPT (ALT)', N'SGPTD', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (143, N'SGPT(ALT)', N'SGPT(ALT)', N'SGPTD', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (143, N'SGPT(ALT)', N'SGPT(ALT)', N'SGPTD', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (144, N'TRIGLYCERIDE', N'TRIGLYCERIDE', N'TRIG', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (144, N'TRIGLYCERIDE', N'TRIGLYCERIDE', N'TRIG', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (145, N'Triglycerides', N'Triglycerides', N'TRIG', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (145, N'Triglycerides', N'Triglycerides', N'TRIG', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (146, N'Uric Acid', N'Uric Acid', N'UA', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (146, N'Uric Acid', N'Uric Acid', N'UA', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (147, N'UREA', N'UREA', N'UREA', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (147, N'UREA', N'UREA', N'UREA', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (148, N'Glucose PP ( 75gm Glucose)', N'Glucose PP ( 75gm Glucose)', N'GLU', NULL, NULL, 5)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (148, N'Glucose PP ( 75gm Glucose)', N'Glucose PP ( 75gm Glucose)', N'GLU', N'Blood', NULL, 5)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (149, N'PCV', N'PCV', N'HCT', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (149, N'PCV', N'PCV', N'HCT', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (150, N'LYMPHOCYTES', N'LYMPHOCYTES', N'LYM%', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (150, N'LYMPHOCYTES', N'LYMPHOCYTES', N'LYM%', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (151, N'MCH', N'MCH', N'MCH', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (151, N'MCH', N'MCH', N'MCH', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (152, N'MCHC', N'MCHC', N'MCHC', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (152, N'MCHC', N'MCHC', N'MCHC', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (153, N'MCV', N'MCV', N'MCV', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (153, N'MCV', N'MCV', N'MCV', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (154, N'PLATELET COUNT', N'PLATELET COUNT', N'PLT', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (154, N'PLATELET COUNT', N'PLATELET COUNT', N'PLT', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (155, N'Total Leucocyte Count', N'Total Leucocyte Count', N'WBC', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (155, N'Total Leucocyte Count', N'Total Leucocyte Count', N'WBC', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (156, N'RBC', N'RBC', N'RBC', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (156, N'RBC', N'RBC', N'RBC', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (157, N'RBC COUNT', N'RBC COUNT', N'RBC', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (157, N'RBC COUNT', N'RBC COUNT', N'RBC', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (158, N'NEUTROPHILS', N'NEUTROPHILS', N'GRAN%', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (158, N'NEUTROPHILS', N'NEUTROPHILS', N'GRAN%', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (159, N'MCH', N'MCH', N'MCH', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (159, N'MCH', N'MCH', N'MCH', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (160, N'MCHC', N'MCHC', N'MCHC', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (160, N'MCHC', N'MCHC', N'MCHC', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (161, N'PLATELET COUNT', N'PLATELET COUNT', N'PLT', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (161, N'PLATELET COUNT', N'PLATELET COUNT', N'PLT', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (162, N'MCV', N'MCV', N'MCV', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (162, N'MCV', N'MCV', N'MCV', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (163, N'RDW', N'RDW', N'RDW-CV', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (163, N'RDW', N'RDW', N'RDW-CV', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (164, N'HEMATOCRIT (PCV)', N'HEMATOCRIT (PCV)', N'HCT', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (164, N'HEMATOCRIT (PCV)', N'HEMATOCRIT (PCV)', N'HCT', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (165, N'NEUTROPHILS', N'NEUTROPHILS', N'GRAN%', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (165, N'NEUTROPHILS', N'NEUTROPHILS', N'GRAN%', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (166, N'RDW', N'RDW', N'RDW-CV', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (166, N'RDW', N'RDW', N'RDW-CV', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (167, N'Haemoglobin', N'Haemoglobin', N'HGB', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (167, N'Haemoglobin', N'Haemoglobin', N'HGB', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (168, N'Haemoglobin', N'Haemoglobin', N'HGB', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (168, N'Haemoglobin', N'Haemoglobin', N'HGB', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (169, N'PCV', N'PCV', N'HCT', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (169, N'PCV', N'PCV', N'HCT', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (170, N'LYMPHOCYTES', N'LYMPHOCYTES', N'LYM%', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (170, N'LYMPHOCYTES', N'LYMPHOCYTES', N'LYM%', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (171, N'Total Leucocyte Count', N'Total Leucocyte Count', N'WBC', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (171, N'Total Leucocyte Count', N'Total Leucocyte Count', N'WBC', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (172, N'RBC', N'RBC', N'RBC', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (172, N'RBC', N'RBC', N'RBC', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (173, N'RBC COUNT', N'RBC COUNT', N'RBC', NULL, NULL, 6)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (173, N'RBC COUNT', N'RBC COUNT', N'RBC', N'Blood', NULL, 6)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (174, N'CA 125', N'CA 125', N'125', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (174, N'CA 125', N'CA 125', N'125', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (175, N'CA 19.9', N'CA 19.9', N'199', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (175, N'CA 19.9', N'CA 19.9', N'199', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (176, N'FERRITIN', N'FERRITIN', N'FER', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (176, N'FERRITIN', N'FERRITIN', N'FER', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (177, N'FSH ', N'FSH ', N'FSH', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (177, N'FSH ', N'FSH ', N'FSH', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (178, N'FSH - FOLLICLE STIMULATING HORMONE', N'FSH - FOLLICLE STIMULATING HORMONE', N'FSH', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (178, N'FSH - FOLLICLE STIMULATING HORMONE', N'FSH - FOLLICLE STIMULATING HORMONE', N'FSH', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (179, N'Total IgE', N'Total IgE', N'IGE', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (179, N'Total IgE', N'Total IgE', N'IGE', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (180, N'LH', N'LH', N'LH', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (180, N'LH', N'LH', N'LH', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (181, N'LH - LUTEINIZING HORMONE', N'LH - LUTEINIZING HORMONE', N'LH', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (181, N'LH - LUTEINIZING HORMONE', N'LH - LUTEINIZING HORMONE', N'LH', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (182, N'TOTAL T3', N'TOTAL T3', N'T3', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (182, N'TOTAL T3', N'TOTAL T3', N'T3', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (183, N'Triiodothyronine - T3', N'Triiodothyronine - T3', N'T3', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (183, N'Triiodothyronine - T3', N'Triiodothyronine - T3', N'T3', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (184, N'T3', N'T3', N'T3', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (184, N'T3', N'T3', N'T3', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (185, N'T3 - TOTAL TRIIODOTHYRONINE', N'T3 - TOTAL TRIIODOTHYRONINE', N'T3', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (185, N'T3 - TOTAL TRIIODOTHYRONINE', N'T3 - TOTAL TRIIODOTHYRONINE', N'T3', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (186, N'T4', N'T4', N'T4', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (186, N'T4', N'T4', N'T4', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (187, N'T4 - TOTAL THYROXINE', N'T4 - TOTAL THYROXINE', N'T4', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (187, N'T4 - TOTAL THYROXINE', N'T4 - TOTAL THYROXINE', N'T4', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (188, N'TOTAL T4', N'TOTAL T4', N'T4', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (188, N'TOTAL T4', N'TOTAL T4', N'T4', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (189, N'PSA TOTAL', N'PSA TOTAL', N'TPSA', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (189, N'PSA TOTAL', N'PSA TOTAL', N'TPSA', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (190, N'PSA', N'PSA', N'TPSA', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (190, N'PSA', N'PSA', N'TPSA', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (191, N'PSA - PROSTATE SPECIFIC ANTIGEN', N'PSA - PROSTATE SPECIFIC ANTIGEN', N'TPSA', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (191, N'PSA - PROSTATE SPECIFIC ANTIGEN', N'PSA - PROSTATE SPECIFIC ANTIGEN', N'TPSA', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (192, N'PSA- Prostate Specific Antigen', N'PSA- Prostate Specific Antigen', N'TPSA', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (192, N'PSA- Prostate Specific Antigen', N'PSA- Prostate Specific Antigen', N'TPSA', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (193, N'TSH', N'TSH', N'TSH', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (193, N'TSH', N'TSH', N'TSH', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (194, N'TSH - THYROID-STIMULATING HORMONE', N'TSH - THYROID-STIMULATING HORMONE', N'TSH', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (194, N'TSH - THYROID-STIMULATING HORMONE', N'TSH - THYROID-STIMULATING HORMONE', N'TSH', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (195, N'FREE T4', N'FREE T4', N'FT4N', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (195, N'FREE T4', N'FREE T4', N'FT4N', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (196, N'FT4 - FREE THYROXINE', N'FT4 - FREE THYROXINE', N'FT4N', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (196, N'FT4 - FREE THYROXINE', N'FT4 - FREE THYROXINE', N'FT4N', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (197, N'VITAMIN D (25OH)', N'VITAMIN D (25OH)', N'VITD', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (197, N'VITAMIN D (25OH)', N'VITAMIN D (25OH)', N'VITD', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (198, N'Vitamin D Total (25 O H)', N'Vitamin D Total (25 O H)', N'VITD', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (198, N'Vitamin D Total (25 O H)', N'Vitamin D Total (25 O H)', N'VITD', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (199, N'vitamin d total (25 oh)', N'vitamin d total (25 oh)', N'VITD', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (199, N'vitamin d total (25 oh)', N'vitamin d total (25 oh)', N'VITD', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (200, N'VITAMIN D TOTAL(25 O H)', N'VITAMIN D TOTAL(25 O H)', N'VITD', NULL, NULL, 7)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (200, N'VITAMIN D TOTAL(25 O H)', N'VITAMIN D TOTAL(25 O H)', N'VITD', N'Blood', NULL, 7)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (201, N'BASOPHIL', N'BASOPHIL', N'BASO%', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (201, N'BASOPHIL', N'BASOPHIL', N'BASO%', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (202, N'Basophils', N'Basophils', N'BASO%', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (202, N'Basophils', N'Basophils', N'BASO%', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (203, N'Eosinophil', N'Eosinophil', N'EO%', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (203, N'Eosinophil', N'Eosinophil', N'EO%', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (204, N'Eosinophils', N'Eosinophils', N'EO%', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (204, N'Eosinophils', N'Eosinophils', N'EO%', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (205, N'PCV', N'PCV', N'HCT', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (205, N'PCV', N'PCV', N'HCT', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (206, N'Haemoglobin', N'Haemoglobin', N'HGB', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (206, N'Haemoglobin', N'Haemoglobin', N'HGB', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (207, N'Hb', N'Hb', N'HGB', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (207, N'Hb', N'Hb', N'HGB', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (208, N'Hb - HAEMOGLOBIN', N'Hb - HAEMOGLOBIN', N'HGB', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (208, N'Hb - HAEMOGLOBIN', N'Hb - HAEMOGLOBIN', N'HGB', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (209, N'Lymphocyte', N'Lymphocyte', N'LYMPH%', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (209, N'Lymphocyte', N'Lymphocyte', N'LYMPH%', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (210, N'Lymphocytes', N'Lymphocytes', N'LYMPH%', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (210, N'Lymphocytes', N'Lymphocytes', N'LYMPH%', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (211, N'MCH', N'MCH', N'MCH', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (211, N'MCH', N'MCH', N'MCH', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (212, N'MCHC', N'MCHC', N'MCHC', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (212, N'MCHC', N'MCHC', N'MCHC', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (213, N'MCV', N'MCV', N'MCV', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (213, N'MCV', N'MCV', N'MCV', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (214, N'Monocyte', N'Monocyte', N'MONO%', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (214, N'Monocyte', N'Monocyte', N'MONO%', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (215, N'Monocytes', N'Monocytes', N'MONO%', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (215, N'Monocytes', N'Monocytes', N'MONO%', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (216, N'Neutrophil ', N'Neutrophil ', N'NEUT%', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (216, N'Neutrophil ', N'Neutrophil ', N'NEUT%', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (217, N'Neutrophils', N'Neutrophils', N'NEUT%', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (217, N'Neutrophils', N'Neutrophils', N'NEUT%', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (218, N'PLATELET COUNT', N'PLATELET COUNT', N'PLT', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (218, N'PLATELET COUNT', N'PLATELET COUNT', N'PLT', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (219, N'RBC', N'RBC', N'RBC', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (219, N'RBC', N'RBC', N'RBC', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (220, N'RBC COUNT', N'RBC COUNT', N'RBC', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (220, N'RBC COUNT', N'RBC COUNT', N'RBC', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (221, N'RDW', N'RDW', N'RDW-CV', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (221, N'RDW', N'RDW', N'RDW-CV', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (222, N'Total Leucocyte Count', N'Total Leucocyte Count', N'WBC', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (222, N'Total Leucocyte Count', N'Total Leucocyte Count', N'WBC', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (223, N'Hematocrit (PCV) ', N'Hematocrit (PCV) ', N'HCT', NULL, NULL, 8)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (223, N'Hematocrit (PCV) ', N'Hematocrit (PCV) ', N'HCT', N'Blood', NULL, 8)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (224, N'Hb', N'Hb', N'HGB', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (224, N'Hb', N'Hb', N'HGB', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (225, N'PLATELET COUNT', N'PLATELET COUNT', N'PLT', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (225, N'PLATELET COUNT', N'PLATELET COUNT', N'PLT', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (226, N'Hematocrit (PCV) ', N'Hematocrit (PCV) ', N'HCT', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (226, N'Hematocrit (PCV) ', N'Hematocrit (PCV) ', N'HCT', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (227, N'Haemoglobin', N'Haemoglobin', N'HGB', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (227, N'Haemoglobin', N'Haemoglobin', N'HGB', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (228, N'Total Leucocyte Count', N'Total Leucocyte Count', N'WBC', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (228, N'Total Leucocyte Count', N'Total Leucocyte Count', N'WBC', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (229, N'Lymphocytes', N'Lymphocytes', N'LYM%', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (229, N'Lymphocytes', N'Lymphocytes', N'LYM%', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (230, N'RBC', N'RBC', N'RBC', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (230, N'RBC', N'RBC', N'RBC', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (231, N'Neutrophil ', N'Neutrophil ', N'NEU%', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (231, N'Neutrophil ', N'Neutrophil ', N'NEU%', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (232, N'MCH', N'MCH', N'MCH', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (232, N'MCH', N'MCH', N'MCH', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (233, N'Monocytes', N'Monocytes', N'MON%', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (233, N'Monocytes', N'Monocytes', N'MON%', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (234, N'Monocyte', N'Monocyte', N'MON%', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (234, N'Monocyte', N'Monocyte', N'MON%', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (235, N'PCV', N'PCV', N'HCT', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (235, N'PCV', N'PCV', N'HCT', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (236, N'RDW', N'RDW', N'RDW-CV', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (236, N'RDW', N'RDW', N'RDW-CV', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (237, N'Neutrophils', N'Neutrophils', N'NEU%', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (237, N'Neutrophils', N'Neutrophils', N'NEU%', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (238, N'Eosinophil', N'Eosinophil', N'EOS%', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (238, N'Eosinophil', N'Eosinophil', N'EOS%', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (239, N'MCHC', N'MCHC', N'MCHC', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (239, N'MCHC', N'MCHC', N'MCHC', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (240, N'Lymphocyte', N'Lymphocyte', N'LYM%', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (240, N'Lymphocyte', N'Lymphocyte', N'LYM%', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (241, N'Basophils', N'Basophils', N'BAS%', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (241, N'Basophils', N'Basophils', N'BAS%', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (242, N'RBC COUNT', N'RBC COUNT', N'RBC', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (242, N'RBC COUNT', N'RBC COUNT', N'RBC', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (243, N'Eosinophils', N'Eosinophils', N'EOS%', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (243, N'Eosinophils', N'Eosinophils', N'EOS%', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (244, N'BASOPHIL', N'BASOPHIL', N'BAS%', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (244, N'BASOPHIL', N'BASOPHIL', N'BAS%', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (245, N'MCV', N'MCV', N'MCV', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (245, N'MCV', N'MCV', N'MCV', N'Blood', NULL, 9)
 GO
-INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (246, N'Hb - HAEMOGLOBIN', N'Hb - HAEMOGLOBIN', N'HGB', NULL, NULL, 9)
+INSERT [dbo].[AccuHealthParamMappings] ([Id], [HIS_PARAMCODE], [HIS_PARAMNAME], [LIS_PARAMCODE], [SPECIMEN], [UNIT], [EquipmentId]) VALUES (246, N'Hb - HAEMOGLOBIN', N'Hb - HAEMOGLOBIN', N'HGB', N'Blood', NULL, 9)
 GO
 SET IDENTITY_INSERT [dbo].[AccuHealthParamMappings] OFF
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'1da5685b-b788-4a81-902f-11fb74631918', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Neutrophils', N'Neutrophils', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'1da5685b-b788-4a81-902f-11fb74631918', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Neutrophils', N'Neutrophils', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'ae9ba772-5b4a-49bc-937a-15b397bf09c1', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Haemoglobin', N'Haemoglobin', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'ae9ba772-5b4a-49bc-937a-15b397bf09c1', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Haemoglobin', N'Haemoglobin', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'0ed82716-4ff6-44db-9f10-1ee59ed520be', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Total Leucocyte Count', N'Total Leucocyte Count', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'0ed82716-4ff6-44db-9f10-1ee59ed520be', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Total Leucocyte Count', N'Total Leucocyte Count', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'4609c083-3967-45b0-9051-26126d506330', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'MCHC', N'MCHC', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'4609c083-3967-45b0-9051-26126d506330', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'MCHC', N'MCHC', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'a43ef136-4a6d-4d55-99d5-2b8344ea1575', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'MCV', N'MCV', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'a43ef136-4a6d-4d55-99d5-2b8344ea1575', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'MCV', N'MCV', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'668e0b2f-7c99-4915-9483-4737b213c141', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Lymphocytes', N'Lymphocytes', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'668e0b2f-7c99-4915-9483-4737b213c141', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Lymphocytes', N'Lymphocytes', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'223f5bab-3b01-4900-ab31-4d4fc3af2a7a', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Monocytes', N'Monocytes', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'223f5bab-3b01-4900-ab31-4d4fc3af2a7a', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Monocytes', N'Monocytes', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'13040b08-cc9c-4c98-9c61-522a19689bd6', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'RDW', N'RDW', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'13040b08-cc9c-4c98-9c61-522a19689bd6', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'RDW', N'RDW', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'74a2c4c0-2f4d-44f2-bee0-5d685101906a', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Basophil', N'Basophil', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'74a2c4c0-2f4d-44f2-bee0-5d685101906a', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Basophil', N'Basophil', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'15720145-33d9-46b9-a9f4-748b03899225', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'MCH', N'MCH', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'15720145-33d9-46b9-a9f4-748b03899225', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'MCH', N'MCH', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'34a35fe0-8f60-4064-9120-87a98a2470bd', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Platelet Count', N'Platelet Count', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'34a35fe0-8f60-4064-9120-87a98a2470bd', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Platelet Count', N'Platelet Count', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'198c450c-96d7-458f-8228-b216607a8f54', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Eosinophils', N'Eosinophils', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'198c450c-96d7-458f-8228-b216607a8f54', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Eosinophils', N'Eosinophils', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'67bd9a1d-9d97-458e-88a7-dbb769227360', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Hematocrit (PCV) ', N'Hematocrit (PCV) ', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'67bd9a1d-9d97-458e-88a7-dbb769227360', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'Hematocrit (PCV) ', N'Hematocrit (PCV) ', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
-INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status]) VALUES (N'7149ba02-4d48-4a66-bef9-ef1cf1ba23da', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', N'2025-10-18T20:32:59.407', N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'RBC', N'RBC', NULL, NULL, NULL, 0)
+INSERT [dbo].[AccuHealthTestOrders] ([ROW_ID], [isSynced], [branch_ID], [IPOPFLAG], [PINNO], [REF_VISITNO], [ADMISSIONNO], [REQDATETIME], [TESTPROF_CODE], [PROCESSED], [PATFNAME], [PATMNAME], [PATLNAME], [PAT_DOB], [GENDER], [PATAGE], [AGEUNIT], [DOC_NAME], [PATIENTTYPECLASS], [SEQNO], [ADDDATE], [ADDTIME], [TITLE], [LABNO], [DATESTAMP], [PARAMCODE], [PARAMNAME], [MRESULT], [BC_PRINTED], [Value], [Status], [CreatedAt]) VALUES (N'7149ba02-4d48-4a66-bef9-ef1cf1ba23da', 0, N'ee09d44e-757d-4fd2-b171-1f59224390ea', NULL, NULL, N'40000165181025', N'TB/KSB/251018/0001', CAST(N'2025-10-18T20:32:59.407' AS DateTime), N'COMPLETE HAEMOGRAM', NULL, N'DEMO', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'RBC', N'RBC', NULL, NULL, NULL, 0, CAST(N'1900-01-01T00:00:00.000' AS DateTime))
 GO
 INSERT [dbo].[MigrationHistory] ([Migration_PK], [ContextKey], [Model], [ProductVersion]) VALUES (N'202102040722092_cnci1', N'Lis.Api.DataContextMigrations.Configuration', 0x1F8B0800000000000400ED5D596FE4B8117E0F90FF20F4531278BB7DCC4C3683F62E7A7C6C8C786C67DAB308F2329025B6ADAC5AEAD5E1B113EC2FCB437E52FE42489DBC454AD4D18B6080819BC747B2582C92C552D57FFFFD9FE5F72F5BDF7A0651EC85C1E9EC687E38B340E084AE173C9ECED264F3CDB7B3EFBFFBED6F9617EEF6C5FAB12C7782CAC19A417C3A7B4A92DDFBC522769EC0D68EE75BCF89C238DC247327DC2E6C375C1C1F1EFE697174B400106206B12C6BF9290D126F0BB21FF0E75918386097A4B6FF3174811F17E930679DA15A37F616C43BDB01A7B36B2F9EAF76DE3C2F39B356BE67C35EAC81BF9959761084899DC03EBEFF1C83751285C1E37A07136CFFFE750760B98DEDC7A0E8FBFBBAB8EA300E8FD1301675C512CA49E324DC6A021E9D147459D0D55B517756D10D52EE0252387945A3CEA8773A3BF33D1024ABDDCEF79CA20DBAD5F7677E846AD0549E33750FACA2C441C5149077D0BF03EB2CF5933402A7014893C8F60FACBBF401D6FB0B78BD0F7F02C16990FA3EDE55D859984724C0A4BB28DC812879FD0436C500AEDC99B520EB2DE88A5535AC4E3EA2AB2039399E5937B071FBC107152760A35F2761047E000188EC04B87776928028401820A325D33AD516FABF6C0DB21E5C4133EBA3FD720D82C7E4E97476FCF6DDCCBAF45E805BA6143DF81C7870C1C14A4994024E0FE5AD9E83D889BC5D3EA1C2C68F0E8FDFF4D1FACA71401CC35990B4FDF6B09F9613EF19CECA399CABB271F4F7BDB755AEFB116C1F406460CEE4CD41168E40FC9471FFB5B729BA2867CB8601F87EF815B8B791F7E8C9A75D8DF6F2D6A010487D10AFEEAE244DC13FDB3475633F7B8FD9F2E3373AB33E013FCB8F9FBC5D2EE7E750B64779FE17429E5D46E1F65388A8C82FF1E5DE8E1E410247114A8BADC33472A8BE2E17B54495CAD91A5343C0D695F652B2BE7B33A6643D3AFEB60F09F339F2876FF436726B89D45238D49CDCBCFDC9A1AEE2F52B9CB16D89F22184CBC60E9A7184CB9A58AF269776B9661B9676290154FB8BC0F84208E5E40D7CB4773BC81EF19772D9D79D1516624491B8642769C4C26A4825B6F2FFA513DBD6991DAC5C577B89B02817AE97188059A5C9531879FF0406B0CE810F1213403F7AE0AB01984FE01FC0E94CA49CA7191E6938C5857895E176049938579562F9FD6DEDA1A9541365780DA938AB0B3222585E5A571297C2D5BC2856E83725B475760FD51EE765A5FD45492ABDCDCAF1FAAABC6D94B22FEF9478C3F858E92356F1EE0624F3B2E23C87BC8C20DCD730FA698E231E58CAF5EA7DE658759F39397AD89C7CFBF69DED9EBC7B034EDE0EBFE70C271C06D23908191C9DB2F8C7237CBEBF14C56AE6667319BEE61431C2D208CA3C5B97A8D3676DD45396BDB945CB2D4F7725944D0CBD1A86D9A2D5CFDE98DE47E7D48D55DBBFF3F670B3BD4E1FF0C3E0609AC7FC0C231D713F0D5FC5710ADCCF89C3EA3B35912E5E761EE4311350F067026701B8F79EF31390CD86AA86D0CCE24332083B3A1767234D951C0BB07F0BB2FF870FE675A8E99ED2D776D1420985DA162AA2D8E9FFC254251553CD35B88A2A856ABA570FCE739FFA2839951BC7C9D4511D295BB1D3398F9921E5154FD5DCBFA53EDCDE7BE94571D270F968F92244B5746D0FD4D0CA47520FCEFE33B8D8DA9E4CF76FE659F0FCF683EEC3E559980649247B6C35D3B57582BDAAF6D6CACA75E12124EEBD9DBF7B3BE91BA989A144C0BEDDC0DD0EC011C90E416646F4D7D4F6BD4D259B7B6EED2AFEE087F070D759C73DCCBACA5A390B838D176DBBF7F9CE8E63785B77FF6CC74FBDCBA03570D2086E6770FD6D653C6BA6B5BBA730003769830D84F1B68C4DCDFDD7F0D276E0D9F52240B53AE35D43260FD3E42270913CE65E8E14018C7427B7ADB984CC0CDC4CF0777BCB45479AB1D58567BEED6DF9FA42FABC5B16ADCF9DFC12CC2953504CF7FC7C1D3E7A815A57CBA2E2AEE6251ABB5A1433F7464D3750941477342BD0D8CFBC94316D6C3643E6D5B119ECF4F5B153BFDD8FA5CCCDA60F35DAFBDE94B5F4A3EDA7A69B6AB51A3221607E3564B0D35F0D593761F2B397D941293C52948533235485F2FCF78FE63547F56CE8E5400C737053B841648068B9ACE23874BC6C153036968495183906788EB3D44CC6F25191E667707890DD3D541A76E974F60786468DF89589578DCF51AC91CD1CCD680EBE2D8C702C64B58C3E2C38B363C776D93983D473C914C8F4F03E1AA0CF1FE0A13B868BD60B1276857881E3ED6C5F6930546DC51D0DF5AE6A87CE39073B102029A4345B2A1DA054D16C5FAA26290A36116CB9C07851CEA2729B1A1127291AD8D40CC5B3EF53675C350B1D1DFE3D9CCF8F98065BF1A152DF066047A529D963AE2CC49D068BD066533D72236D2CAB22A97B6541B243E3B01F497F953ED4068FA3701DC71648C40332C3A07AF249F3B41E775069C7385CC91A1935B17F2BC6145369008E145342A571BE4DD178E22F9B250D8944DA60F628FA0823CE3178DF94C8C407328EC0C4E76CF23C2A50848A38A7492B5A330EF3303E88DC6C50C70A6467A112EC4578CA29360087CA49A2D201A10DE7180C5AA8BF551980D6854F8D412925BC80410B2DDD200C4A526C04062549B2770C9ABF7AA8CE3FF5043235F624DF5E863F7A4AC935026F12F4983C6B2A5A15CA148D3A2686E47599670EABA7E4D4B053545F38E6EEEB7A5D1C4895A93E5FFBCABDAC5250938724A6A30370B0D8FE741CC5A76E37C7E363E1BCA974896B353E005BE76F4CB04E026B808852519D3FA01CF092705E6021158A47D8B878CFA2390D21AC41221A613CB3EA172E3163310C4CC2569E51182C5C27DA00C253573078BC420AB83C28526BD100421F656480F571A7A967D86755DCC1125F6B3580F11784684E78624BA1011E1CB3976A90B234A992D2B2B8796BC096E64F52D8E2BE44C1624B941C3ACF05085658EE2C849621CA0FC1D528B145C64824E5675F0C8D2709E83B00490B053AC95F1839E4D278926C524E721E25B1E136CB0D0DFC11C959CA522552F2DED1345FD28C92907A3A6BE6ED1634E37DE4CD12ABE9F947F50188228F9C2292F71A0C87B3D3F4C148F906A5C446EC7B84D68B845116229E209AA8DF8252229B5F96502A4A711DB5383698826D25946950610BD8A91C8C712A95FB6D3395789A591DDD6C272A517A540195CAC118A752C1A3CD44E2680735F4839D4844EAF27A164BAA1FB4F28F59BA4AAB2E6A2B8AA6DC7376C3B14C4351D53483E648CDB9EA2913BB41C7D24DCBD20FC1C57A155347B9D260B4BACC5779CB45EE39BA48582E042EA697E500EB9A458AB5CEFD4D9F7DB3D677C6BCCD31160E215868D543D5521246F623A072D1D79E2EC83EB43DB713FBC146E6B267EE9629C6AA2E0477B7B23DA176829DE2F2465756457F17E6D00D1EA2393AA002E4120E768B744BD98709325E60312CE412DCF6ED88F341C459E8A7DB40ACEF12D7CE3F8BC2EBE729EA088417661C88C850C7C3FC2AE36858B20E16EE299984C373F4114BFFC93CCC324F1D95EF2619C7E697D0E837E93699E83699A58E893B47C601F174166DB9A01603A3F764D61EF36448AE6AA5355FDEFC3A2C744CC7A8BFC26595A7BAB43337C0384096A05EBFF0E88B2314491A8C4B6AC909C6952BD02574AD7CFB12D4AD5227C3B49C7B6C07FE6D4653E06315907EF8B974368B2394695A28B9B3590A264FD4EB4DED6D96EE539DA38558FA9CA5E0CA642DACDCED2C8594276AE1947E6729A4325977BBA079406C9F2D462A8D14890D5260B82846E922594694079D4400F116A5BFF8E5D5C7DEC6469A145663616082AAB7BDF693248610EEF7858505B1E50BAC2EC4287AAB73AC95443C8976D954F1B7D316DBA9B47A3F2BAAF21E894354891A9B43E50D92D81BAA549D0359E5DE913C9155C9EA58B883471C0C4F5747637C3CE2904CE664D85BA4CBEA78FBE1BCE6B7BB09A900F5748AE4D9DEB0FCDBFA6EA1274347648F4ECCD0A00057E08246847EA61FF3DE878360C9EA58B57F3E1CAA4ED5D1CED00EF848050D9DABA19D439EF608AD1C4AD0582EA5DB3D628994891A7B4EC2A8E08A240D2A954EF308E29489EA3899533C1C234BD0E807E5F18EE80E95A78E4A39B6C341A92C9D7DB5725F47EEAB55B2C6BECA32A63637D2FEE918302C4F638F26FCD4111B3491A3C1ADA4333A826BC92C8D5EE22EE7884EE219ADF00414E597506F81753287A3B3B91A9293753747885036BB0536A7CF749EEEAB04E1918E7D9D20B2F58E0CEC3E52A74EE6D8C0B1F13074D5CD4D2FBBDD750518FD9C23CC5C9531475FE411B44AD6C42A5C79316045FA24394968AAD38A93726BDB6E9C24C0104B1CC23D162970A43EBDC49884CF2BEACE29F6F925C69BD0B584315DA08B54AD1729D5EFCA74A1301B680E99CDD811E44566564946B8A1BFC609D8CE5181F9FA673FBFFED5053EDA81B78147B9DCCFDBECF8F0E8988ABC3D9D28D88B38767D8ED905E66EAFE983A501FC367A88BC8D9E193B44830A9EEDC879B223D6C16BF700D35CEC3CC474D7F8D15C68144EC540786817FE8DC2CE1F23C6068E97C7B2FF238EADE4EB9B1B3D5A85DE5D8345674C632254B460020F753BCB46862E917FB7B55F7E2F876B135179F075FA80C836C652CD3C2AB68F586C0C930848DC8A0149252206C47C607715B8E0E574F6AFACE67BEBEA6F5F88CA0756D699F7D6A1F54BE750C60F5ED350BAC4D8FDD5F02919DCB699685C043CB06D4B0826A86D4B1C32A06D4B103C986D4B0832906D1B103A886DC9010AABAAAC2A5A504AFB5488375E8B1B85E6F3AA64E31DA554FF42C68077678EABB1012483B19D80BF6535D1170D1AFD95251F5857F1E7C0FB398519F790A0D4CC371F4F4D46FBAC3AFACB5E84D1D45A627955A34B6CCC05DF2EE4E6FE2E352AB4A5A94B111DB9D2142E1398B2BC6919084CD91A8AB14B68B8A0F4106CF2D7A15590847754DD6139105DCE1E8309C60E9BBEF4697FAF841113EB4FE38ECFA2D1F1FC3A818962F69952C66021FA78724829B80819B2CF54CF88087DA640A9807CA660B1F87B02C5937647B9E1F64CF5971B5DCF1438134CAFCDDDAF1766E7C7CD6BD33D5ECCBC4EEB9C1B17AF132227F69D293C232414C5B66B83258C6BD756A6F1E3DCB5E99A30C65D1B4D636D2CA07B30286B8E7849E53CDCEFED89715A1757269058A785CE060BEBE3C94325205837FDC59E05DA32769ABD63E368997B7F1991EF7B0B9EC5F15A81F9781B36A015CFF75AEBF85DAD9C73AAF8395091D156BB8858FB1C684821FC55475EE3FA609579B8EA1CC1637F7848E9BBE7BDE1A586A055DAD2614F384753108CC332FB196C6A2AF1A5EA072B4E7FEACCDEC34A0D19494AF29DAFEA6BDA78A288F3AA3B4D0E9B8A101B9ACB5A8AB151F98C7A3DD00C023581B0251C97D202793660A8A7A1659AE8830E0D6B82E907749A18B315DA1201B30D18B6696866137DF3317166E3380BD91B5E1BEB9C3632A7296FDCA3325A1BAFB56638AFE1322930163111EB665FB849D98DC67EF0947A00A47E155C53E3ACD194A52D796B5A218958F7BFF4BC175F178A7AAF166D28FF18F074E63E849053F2F705FDA044B86A8D6915CFE43557E7AB05186A15B888D77073880461E49B7C7B675A26B3796DAEE2DD0D48F85EDD458DD5E7096183751171A36277F20C958960482C7D896C2E65C9684B0ADCC3934A5C4EE215147115CFFD53536798DD9DE90553424E72BD792EEEC3D2892ECAC89B1504A090B55D5C8FA46D1765E46D0BC23A0C1DEF49281205FEC65961CF7F53C040F064FA1A31DD904E26092396C88A6168A618AC497BB6472749CFB198B8F149F20C0921441B18DF47672F7C91239B88BDD49D1C63F0854095DC439025622C4C9E229710DB9FC0BD8D79A2F41753C90851887D59E0A9C53C518AA3A2F1104A4648328434515421F51132C914C9E4276B992BD2DEC837541824D387BFBEC9A811CD8875FDB35C7C4A0364CB9DFF3A07B1F758432C2166001C42EF5095B90A3661A90BA17A5416A13F3D0789EDDA89BD8A126F633B09CC4666DCD97033D358F431C10370AF82DB34D9A5091C32D83EF884D92852A3C8DACF4236917D5EDE665E6862134380DDF490F9FB6DF021F57CB7EAF725C7B2520081F43385D1349ACB04194F3FBE56483761A0085490AF522BDD83EDCE8760F16DB0B69F419BBE4166BC068FB6F35ADBD18A409A278224FBF2DCB31F237B1B1718757DF813F2B0BB7DF9EE7F6EA6E9E05AC60000, N'6.4.4')
 GO
@@ -632,7 +632,13 @@ INSERT [dbo].[MigrationHistory] ([Migration_PK], [ContextKey], [Model], [Product
 GO
 INSERT [dbo].[MigrationHistory] ([Migration_PK], [ContextKey], [Model], [ProductVersion]) VALUES (N'202510290631234_Ac', N'LIS.DataAccess.Migrations.Configuration', 0x1F8B0800000000000400ED5D596FE4B8117E0F90FF20E8290966DDB667779318EE5DB4FBF008DBD7B6E4C9E6C9A0D5745B898E1E8972DC08F2CBF2909F94BF10EAE6A18B4D49F104C100C6B8A4FA8A4755B14856C9FFFEE7BF6E7F7C736CE515FA81E5B963F5EAE25255A06B7A7BCB3D8CD5103D7FF307F5C71F7EFDABDBF9DE79533E67EF7D8CDEC39C6E30565F103ADE8C4681F9021D105C3896E97B81F78C2E4CCF1981BD37BABEBCFCE3E8EA6A0431848AB114E57617BAC87260FC0BFE75EAB9263CA210D82B6F0FED20A5E3277A8CAAAC8103832330E1585D6AFAC50C2030314D1804AA32B12D805BA143FB595580EB7A0820DCC69B8700EAC8F7DC837EC404601BA723C4EF3D033B8069DB6F8AD7DB76E3F23AEAC6A860CCA0CC30409E230878F5311D9711CB7ED6E8AAF9B8E1919BE31146A7A8D7F1E88D553C60E127086CF4B2053E7056E078C493AC2AACE89BA9ED476CE950232F9E938B64662ECA513E28E4BB1F7245C1FA14FDFBA04C431B853E1CBB30443EC06F6CC327DB327F8227C3FB2B74C76E68DB64F37107F0338A80495BDF3B421F9D76F039ED94B6579511CD37621973368227E9A0E6A2EFBF559535160E9E6C986B0731183AF27C780F5DE80304F75B8010F4DD0803C6E3CB4967647DD2F4C7ED6437594D37B3792616EB653CF22BF0B684EE01BD8C55FC5F5559586F709F51D2A63CB816B646CC84FC10B696B69EACFA97B61CB46FFA763ED556F375EF821ED69AD1BB90F997D03A3A58872865FC785DA28C0CD01ABC5A875837AB20556507EDF88DE0C53A26AEB1C26E1F09A685EF393BCFAEF414C5BB8FBA17FA266E9AE1B56430807F8088EECBEDA87051B58E2B875981005B9FA8C762D8BF5E5755AA1DDDB9AAE867EF7A1F0F7AEF5292D8000F6E8DA4EF2E5B096A324776C2828989ACD77C20EF3C6C20C015C699FA309AC4BBBA1E743356A9A48D9B49C2C115342CA7A9EFADCDB7700E060CD0C6DF8B9B7009C47FCD8C779B3F3D6A337153CEF8925EDE87D65E5829AC403FE140792FAB5C4F3E70CD17D9D668DBCD76B19CDCF7AEA15B6DBDDEF42E65375F3C7ED674CD1840D664B6D2745DDB0CD3AF9F6713636E68034484C65C37B6BBCDE2719088104B9ACE757D3EEB5FD2C4580C12526341C3C4EE58D07228418FB3CD5DEF72EEE7EBD97C37447726F7FD8F1A9631C83664B6993E0EA506DA7C6D187FC6BBB8E544D7FBDF2ECE7F1EC491CF22E73A849C611CB8662C07383898DC0D3037D1C4E8C664B5E503DB265D1DEA4C63B8B39AD56EAE3F2CFB772877D3C7ED4E5B1B032CCA9F811DF6BF61D5F1FE240C7231D151CA0E1E3D1F250F22723F1BA5B47B321BA518E2EB3DEFE8F968F61D6DC8F4DD00FE502757AAB6BE50C7FE7339D7FAB7E6C8570F206635997ED2D64374487F582CB45FFA1FB7DD64AD2FE6BB4176E2C66AFB79B27CE87FB99ACDF5E94EDB1A788BDCFF06F9615D6E19DD78F5A5159CEDCE49DEFFFBF1AAF91BF0E066B8D07098E8263DFC9D2041EDAFB9D0EAB8CDD576163A8495F13199162C6C70286EFCC52C8FC5EBC6FA7047F7D0B74F7860C85B1D7A6057D079827E762903FFA62AB12E8CD54B6E0EA857753CF88647CC43CA7655CF96F43437BF9CEDBA9ECD80E60B9E350BB893E3D1F75E09CE8F6D3977F02FD024657E5BCF39F34CEC2A3879DFB5E1E2647D5FCFB5B05C60DB278EEDF7BC7A268A48122741E0E10E466A569B7C415CBFD24D99BB7B45F42EB6D8A054657AACB08E5A47AC95D89EC6EAEFB80110909A5DE81252B96B5A5A1CAF867889817EE4E3813DF5DC009B8DE5227E3DB25CD33A025BB0650C4ECB952D9AD05C22FB64068FD08D1625C1A969D3142A1F806F532E9A59879B86F07644A8221FA6601E843972A5C7A685A72B7E7976173D846FA8C4733E0430759E41EAB2593D8AC075886A951F6FAA0BD7DEA0B99CA2D20238D5E380B9371A104B6E1CEBDB4BDC6D0A41C76EA5193A0D071AA0C978B10C938E45193042539AA68E4C1B21D8DAA69AB0EA7D86B7CB7B5EA35D9C199DE1DF08394D2A34A207B02486C9CDADC86F1C25098E5922E4A82213F236EB55C19952143D498B9C7EA38BE70C3A09C6C80C4A5207F3D6E692F0320A0E90798A45E3962E2C3F40515AE6138882ADE9DEE15E2B752E15FA9C89ACF71FFCFC66FA9EF147FFCF93D588B4D12A47C3BBEAF4C902F73C9AFB781060A3F6F1404A94CB0A6CE097EC94A69E1D3A6EF59A54CDCDA4179240CCA333309383E952CCE4517BCC65753B97E7B6B3480824E10A6A7BA4E4AA8D444928ED11A8E59B04AA5DD7238367F48B5BF9399D669C0E6B32AD0C8A75651286D400D5C2821A11FA319D24DD8DE44F28ED11D25C36122225B5C72032D5481C82DC1EABC83DA34625A7B64722B2CF4828822C8C15E597956045E4776316A5415F278B4C111DCAAC30352855A39F5D7290435F9EC1568752DC73903805B53D12917A46421164017DCF13D0287DCFA9ED91D20C33122625B5C7A08E21A9E1261F08780632478CF20DE40391F611796074FB8807EDF1985C2F12917924300F45461735170559002BCFD9A2A072AA1052492C5450859096A548CB339092B42A062821B6C7C9D2A648988C26D49A382B8A694C4C13D0F82CE989D2F68CD81EA7486A22810AAA50BF98AC25A687CC5381E035494FA222D78424E221D2E423DA3BA444211CDE2BE444018F90240F519E2021096C1492D4206A83909004E6BF48FCA114A0208B6840E9A6E5AC0D4BC5A6EAAC0D559ECF43459F19B13D0E99AF434291F4F668E9C11209547AD654879125DC50A691D2DE69A4989EB77516292663261B2956A0F4B39B7A6F7166925143E9D04ECC8BE8BC6FD5453D6B913D43C1E454B1688BC5C968025EA3C87EA1FC464116E85B9ADF42F52CA509F48B4A5FA17A473D1140CC735428B49C2AB08E904928D44A423E10B0912CD18432928CF86E7C1B7D8920E1D4A8DB06716F56CFDE931BEB7813D765F8D0C5E24AE47B941CC64C9008167107547AE239B84A73D72CEC2BB9F4FCBA85B956B94DAF389ABF42C1DD7924AFA80A1EA4576B1FDD77E8A700412736880BFD8B3DB5AD7850B21756C0B59EB17E27E921EAF5E5D535F3318BF7F361895110ECEDB3BE2E41CFDE00F9664FD6C18A86B931A94C30BFA9F4430EEE2BF0CD17E0FFC6016FBF2521CFFE58831462E90719A410D98F2E488191154D5240251F4F88E79C4B54D0DC3D7C1BAB7F8FF96E14ED974782F583129FA5DE2897CA3FBA4AF6ACBDCB1842FD7BD1FDE86727134755FF4B217115FE191A57E32F59C0FF6421F9E27DA9AE7205FA7BFC2BEAB940FF0CC5EDA6303E74AD2F21B462557DB6A2340BC99A8C7326902B90976E155B2C2FA5115441BC145249EEB49C59F285ED92EDE38AD7A5F04A0BD4E5E6822D429743630ACD65C1BA8B2DD882715930B2285C0A8B2EFC966D1651DC2D67087401B714165BA42DDBC7D2426CB930912CB69674205441B52C56778E832C8C960BD2C9E26739BD600B9CCB0283B3AA5A2435ACCB3D0D53B82C85C517274BC151253A72F6431519C7317C7F25C5FF335BF27718389285BC721A417AC173ED9A2DDE950E9D3A82E28A70E5868A2AB495EB634931AD1C2053302BE7EFF9A258B9E09A2E7CED7A5B597D7EFF553B9D8E774CDDAEBDDD2D495C65684BF5A839AD3BA35D55CAD661811D57D62153D2D65461D24999DE597573CD79DA6D2C5091AF8FFB8ACAE1F8C2968A0BD4FA3B90F6656EC92512B6B5270F6B4A62142DCB9BBAA8892B13DF41E15CDBBAB9FADE937578426D487D62BB02BBE63664C5750D6DA04BED1A2AF1CAA432B57C8CB8F750AC57A1616D8AE55AB9CAE62A2B2E3EE8A2048FBF03C68E85F87B05D8CF05D6A18088FE7A810B4DCAA5E4EF68EEB397B937A645D92B6C700C11D84749143EDEC70013E1C7D15547DCDDB4067DEE3CC1BDE66E42740C11EE32749E6CAA2623F29075F2E33A43BACDB79B63FCC5F02EBA809B6945E1C2C6BD0B2DBBA89D5F944493151091EB4DA3B6682E5114BD1D4E39D2DA735B02A5C397AF1806748E36060B36AE0EA26B1EF1B63D0470090FC03C6557F9D520CD13410FFBEDCC0207ACE0418A51F0E35FB10EEF9DB71FFE03A0E4063BB6630000, N'6.4.4')
 GO
+INSERT [dbo].[MigrationHistory] ([Migration_PK], [ContextKey], [Model], [ProductVersion]) VALUES (N'202510310635487_eq', N'LIS.DataAccess.Migrations.Configuration', 0x1F8B0800000000000400ED5D5B6FEBB8117E2FD0FF20E8A92DCEC649CEEEB60DEC5D38B67C56A86F6B29A7DBA780911947AD2E3E12952628FACBFAD09FD4BF50EACE8B2C89A6A44DDAC5018293A1F80D2F33C321399CFCE75FFF1E7FFFE23ACA330C42DBF726EAD5C5A5AA40CFF2F7B67798A8117AFCEA0FEAF7DFFDFA57636DEFBE289FF3EF3EC6DFE19A5E38519F103ADE8C46A1F5045D105EB8B615F8A1FF882E2CDF1D81BD3FBABEBCFCE3E8EA6A0431848AB11465BC8B3C64BB30F905FF3AF33D0B1E51049C95BF874E98D1718991A02A6BE0C2F0082C385197BA713107084C2D0B86A1AA4C1D1BE05618D0795415E0793E0208B7F1E62E84060A7CEF601C310138E6EB11E2EF1E8113C2ACED37E5E76DBB71791D77635456CCA1AC2844BE2B0878F5311B97115BFDACD1558B71C323A7E11146AF71AF93D19BA878C0A21F2070D0D31604C05D81E3114FB2AAB0AC6F664E1057CB861AF9C99C5CA43373518DF24121BFFD50080A96A7F8DF07651639280AE0C483110A00FE621B3D38B6F527F86AFA7F83DEC48B1C876C3EEE002EA30898B40DFC230CD0EB0E3E669DD2F7AA32A2EB8DD88A4535A24EDA41DD43DF7EAD2A6BCC1C3C38B0900E62300CE407F013F4600010DC6F014230F0620C988C2FC79DE1F5836EDC6FA7BBE96AB6996B395B2C97C9C8AFC0CB127A07F43451F17F556561BFC07D4EC99A72E7D9581B71251444B035B7F574D53FB7E5A07D33B6DA4C5F69EBDE19DDAD75B37726DA97C83EBA58862861FC785D218C0CD01A3CDB8744364F41AACA0E3AC917E1937D4C4DE309BDBD272A2D02DFDDF9CE494B517E7B6FF85160E1A6997ECB0A26080E10D17D198F4A13556BB80A981508B1F6895A2CA6FAFB355595D2D19DA98A7FF62EF7C9A0F7CE25F50DF0E0D670FAE6B215A3267564272C9C5AC87E2E06F2D6C70A023C619C5900E349BCADEB4137639571DA783927EC5C41D3769BFADE5A7D4BE360C2106D82BDB80A5740FC6C6ABCDBFCF95E9F8BAB725E2FEDE5A7C8DE0B0B851D1AAFD851DECB0AD743003CEB49B635FA76B35D2CA79F7A97D0ADBE5E6F7AE7B2D316F79F75433707E0359DAF74C3D037C3F4EBC7F9D4D44C7D008FD0D40C73BBDB2CEE07F10831A7996618DABC7F4E537331884B8D190DE3BB6346CBA118DDCF37B7BDF3F9A4ADE7DA6E88EE4C3FF53F6A98C720DB90F966763F9418E8DADA34FF827771CBA961F4BF5DD47E1CC490CF63E33A049F610CB86E2E07383898DE0E3037F1C418E674B5E51DDB26591DEA4C63B8B39AD54E33EE96FD1B94DBD9FD76A7AFCD0116E5CFC089FADFB01A787F1285059BF82865078F7E80D28298DCCF4629EB9ECC46298178BFE71D3D1FCDBEA10D99B11BC01E1AE44AD5D6161AD87E2E35BD7F6D8E6DF5006C56D3D90FFA7A880E19778B85FE53FFE3B69BAE8D85B61B64276EAEB69FA7CBBBFE97ABB966CC76FAD6C45BE4FE37C877EB6ACDE8C6AA17C7CFD82E07E8160274F6017681F07E6D7ACF67D83FEBC1AFF3CBB92F29F84B3B3CDB8F21EBBE5F61EFDB8119F0C472B83DD1306E7D26FD532428FD3537B91DB7F9B49E452EA165FC66440F170E3894A12E629AC7E275A37DB8A37B1838AF7860C8A5801ED815741F6090DF46C2BFAB4A220B13F5929B03EA53030FBEE913F39055BBAAAF96F6B450BFA2DA757D35135A4F78D66CE04D8FC7C07F266A7E6C5B7307FF0A2D92E7D7F535E7BE854D05C7EF9B36B5385EDFD6D75AD81E709C57AEDAEF79F14C0591244EC3D0C71D8CC5AC36EA88883BA09BA2797B453408A1DC999F0A715A6119B58F582AB13E4DD4DF710320C0358F6420B872F109343B5E0CF1120383D8C60367E67B21561BDB43FC7A647B967D048E60CB189C962B5B3CA10547B6640E8FD08B1725C1A969D3142A10866F53C19A59879B86703C2244917753701D846B14428F550B4F57F2F1FC362E842F556EFA5D0833E31966269B95A318DC80A856F84355294D7B83E472824A33E0448F03E6BE6840ACB86AAF6F2F71A92F049D989566E8CC1D683B0EC516A90AB96A2BD6004C3AA25590B493CB801122D8241364201651AD6DF016AB376798D1A2E73562CBE9E7198693E0D3249B237A002B9CA3428F8BB2F1280D19CE08E3D189D8E271DEABB26646518C34D078F695211E85EBA618232BAC08C62D5A5B70C2EB333840A614B3C62D5DD84188E240E707107B71B3BDCB7D5669B54EC873CEB2DE30F1F39BCB7B5E3FFE7F11FE4904629FB260FC1A90952C70CFE3B94F0601364A1F0FA4C4D1E1C00141C5166CE63B91EB9D5EEC4ED76602764920A6E80CCCF4AAA712332D6A8FB93CDDCEE5B9ED2C436C49B892DA1E29BDBC2651524A7B04CA2F20816A1D8658E119F9E25C0A4EA619A3C3AA4C2B85624D9984223540B5D0A046847E54270D2025EBA794F608597428099191DA63104780240E416E8F55467352A35250DB2311E77A24144116C68A4FEE2AB062F29B518B4A6FB29345A6743B6556981A9453A39F5F1B92435F1D135A8752DE1C923825B53D1211CC4942116401792F423A29792FA8ED91B2984D122623B5C7A0CE37A9E1260B042C03197549D906B240A47D446425DD3EA2A03D1E133D4922324502F350C6485273519205B08A28480AAAA00A2155F842255508695989B43C03290D54648052627B9C3C109184C96942AD49E20C99C624340189CFC3082969CF89ED71CA304112A8A40AF58B8903647AC8940A38AF69C01FE5B9A624110B9185F3D1D621230AE1F056A1200A5884341C8FB204294960A39006DB511B84942430FF65281D2500255944022A372D676D584E6CAACEDA5015117294F79913DBE39011702414496F8F961D2C914095674D751879081BA51A19ED8D7A8AD9795B679E623A66B29EE209947E76536FCDCF4C63D42819DA89591183B7AD86A8652DE3D12898822AE66DB138394DC06A94F16494DD28C9027DCB22C6A89E6534817E51016154EFA81201C422EA8B422BA802EB0819D645AD246481808EE4A15B9492E4C43763DBAA6E27BA38202AAF3124CE886A40FA316C1D1FD03855E733CE2FC7336D0493BEDD921049EA1A4C5C18EBABF7B4BE767CBAD0A55FDB85D74744385588E194BBFAACC3222E272B8FE2071769EEFE8FFDA4E05EDC0332F77DE3ECEEAD39E1107719977EA22A78909EED7D7C1167BC8608BA89425C185F9C99632783927FB0029EFD88E53B0D8852AF2FAFAE99BC456F2787D0280CF74EC5DD657322217AF60688B07CB00F763CCC8D619482117D95397BBC6710584F20F88D0B5E7E4B429E9D97470AB132F78E14229B5F470A8C7CBC2A055491272799732E3447F7F6F065A2FE23A977A3E83FDD13553F28C921FF8D72A9FCB3F3B8FEAA4BB621C4BF17D98F7F76327154A21729242EA63F47E3A2FA2573B53CD8483E5E5FAAAB5C4CFE1EFF8A7ACEC57286E076930325F2EC2F11B413517DB4E3F81FC9E777E74C20970B45BA556C5E142989A0729F482155BC1690534B3E878964FBB83C25527895B948E4E682CD372287C6E4149105EBCEB7607383C88291F93FA4B0E81C1FB2CD22F278C829029DAB430A8BCDC721DBC7CA9C1B726E22995743D28050B93364B1BA331C640E0C39279DCC732127176C2E8B2AC7E0AC775C9212D6E59E86C9512185C5E7A19082A31EA5C9E90F954F22F1E1FBCB1EF13FB3257F838E2399B3414E22482B78AE5EB3791AA45DA78EA0B87C0B724345E55490EB6345DE0439402637829CBDE7F31FC839D7748E83AEB7954D9749EFF638A4CFB307E7FFEBE8E1F41DCFBB5E983ADE5577EB9F75E7B670EFE55B8A47CD89EE19ED3A256C1D3E3BE6DEA4C93CF46D7A1ED7C9E3E5B35E13373F3269A3818AFCABE177F448987F95C7CE769BD7BF028F7FD38B46AC6B0F3E969454295ABECDECE2A57015FB0E9E13B77D4D5CDF7BF275B2501B329BD8EED971731BF297C16D879F787ADCEA7D72ED249CF78EB9F11973154FE62134C3EE2DBC743E21E16D5E1AB732D5CD4F5439FFA48BF7CB7C9C02366CC49F4FC27636B40F2544FCC7943C685126ADF846F71EFDDCBC322DCA3F61377010817D1CE813E0BD36B0102E8E5DE2A4BB596610CD7D807BDDDB44E81821DC65E83E3854C4546CA1EBF8278FB4E9368F37C7E40F9874D105DC4C3B765736DE6D643B6546934585377B022236FD99D718CF258ABDC7C36B81B4F6BD9640D9F0152B9609DDA383C1C28D6780783F20DEB6BB102EE10158AF79B8C96990E689A0877D3CB7C1010B78986194F5F1AF5886F7EECB77FF05D7857D62456C0000, N'6.4.4')
+GO
+INSERT [dbo].[MigrationHistory] ([Migration_PK], [ContextKey], [Model], [ProductVersion]) VALUES (N'202510310744396_da', N'LIS.DataAccess.Migrations.Configuration', 0x1F8B0800000000000400ED5D596FE4B8117E0F90FF20E8290966DDB667779318DDBB90BBD5B3C2F6B52D79B279326835DD56A2A347876323C82FCB437E52FE42A89B875A1245496B238B018C7151FC8A4755B14816CBFFFDF77FA6DFBF38B6F40CFDC0F2DC997C7571294BD035BD83E51E6772143E7EF527F9FBEF7EFB9BA97A705EA4CFF9771FE3EF504D3798C94F6178BA994C02F3093A20B8702CD3F702EF31BC303D67020EDEE4FAF2F2CF93ABAB09441032C292A4E93E7243CB81C92FE8D7B9E79AF01446C05E7B076807191D95E809AAB4010E0C4EC0843379A5E9170B1002C5346110C892625B00B54287F6A32C01D7F54210A236DEDC05500F7DCF3DEA274400B6F17A82E8BB476007306BFB4DF979DB6E5C5EC7DD9894157328330A42CFE104BCFA988DCB84AEDE6974E562DCD0C8A96884C3D7B8D7C9E8CD643460D10F10D8E1D30EF8C05983D3094DB22CD1AC6FE6B61F57CB863AF49239B94867E6A21AE583847FFBA11014244FF1BF0FD23CB2C3C887331746A10FD017BBE8C1B6CC1FE1ABE1FD1DBA3337B26DBCF9A803A88C2020D2CEF74ED00F5FF7F031EB947690A509596F42572CAA6175D20E6A6EF8EDD7B2B441CCC1830D0BE9C006430F3D1F7E822EF441080F3B1086D077630C988C2FC39DE2F583A6DFEF94BDB29E6F176ACE16C96532F26BF0B282EE317C9AC9E8BFB2B4B45EE021A7644DB9732DA48DA852E847B035B78DB21E9EDB6AD4BEE93B75AEADD5CDE08CEE369A313813F54B649D1C244384307EBCAE10460A68039EAD63229BE72065690FEDE48BE0C93AA5A6F18CDEDE639596BEE7EC3DFBACA528BFBDD7BDC83751D30CAF650503F84718927D994E4A13556BB80A98350890F6F15A2CAAFAFB355595D2D19FA98A7F0E2EF7C9A00FCE25F50DD0E0D670FAE6B215A32675A4272C50CCD07A2E06F2D6430A025C6E9CB90FE349BCADEB413F639571DABA3927E45C41C3729AFADE5A7D4BE360C020DCFA077E15AE80F8C5D478BFFDCBBDB6E057E5BC5EDACB4F9175E0160A2BD05F91A37C1015AE071FB8E693686BB4DD76B75C299F0697D09DB6D96C07E7B25797F79F355D3346E0A52CD69AAE6BDB71FAF5D3423154431BC1233454DDD8EDB7CBFB513C42C469AEEABABA189E93622C4771A911A3717C77C4683516A3FBC5F676703E9FD4CD42DD8FD11DE5D3F0A386788CB20D596CE7F7638981A66E0CE3AF6817B752747DF8EDA2FAD328867C111BD731F88C63C0356335C2C181723BC2DCC413A31BCA7AC73AB64DB23AD699C6786735EBBDAADFAD863728B7F3FBDD5EDB18232CCA9F811D0DBF61D5D1FE240A0A36F151CA1E9E3C3F4C0B6272D7CD9D128EB3E5CA064A64CB9540BCDF9393810F79DFD0D64EDF8F6059757CCD6B6B5575648957AA36BC5D88ADFE086CD6CAFC076D334687F4BBE552FB79F871DB2B1B7DA9EE47D9D31BEBDD67657537FCC2B750F5F95EDB1968B33DFC56FB6E53AD19FD58F5E2201BD9653FBC456B48E7A3F002E1FDDAF4814FC37FD12364FBD713645CF05756D0D98FC1EBBE5F611FDA8119F1EC73BCDDD5381B84AECE7CCD9D70CF6D3EAF6791836919BBADD182A50D8E65D00C9FE6D178FD681FEAE801FAF62B1A187C292007760D9D07E8E7F79AF01FB294C8C24CBE64E680F85447836F78D83C64D5AEEAABA53D2DD4AFA8765D5FCD80E6139A350BB8CAE9E47BCF58CD8F6D6BEEE1DFA089F3FCBABEE6C23391A960F87DD3A616C3EBDBFA5A4BCB05B6FDCA54FB232B9EA920E24425083CD4C158CC6AE397B00806B229AA7B9078C319CA3DFEB960A9359251EB84A412E9D34CFE0333001C5CF398088C2B13E940B263C5102D31D08F6D3CB0E79E1B20B5B1DC905D8F2CD7B44EC0E66C1985D372658B27B4E048972CE009BAF1A2C439356D9A4284D4B06D2A5853EB70D3104E279828B26E0AAA13A21A85D023D542D3957CBCB88D0BE14B959B7E17C0CC780699C9A6E52806D761582BFC812C95A6BD41721941251930A2C700335F3420565CDAD7B7170B0FE0824ECC4A3374E60EB41D87628B54855CB5156B00C61DD12A48D2C9A5C030116C92093CA40BABD6360C8CD69B0E66B4E8798DD832FAD9C170627C9A6473420E60857354E87151369DA4C1C719613A3913A53CCD7B55D6CC28929E862CCFBFD2F9E3799D146362061561BD456B0B4E687D0647489522D6A8A54BCB0FC23864FA01C45EDCFCE0309F555AAD33F29CB3AC374CECFCE6F29ED78FFF5F04926221DDE72C18BB0664254BD4F378EE9341808DD2C70249719C39B0815FB1059B7B76E4B8E717BBF3B5A9D05F1C882AEA80995E1A5562A645ED3157E7DBB9EADACE325817872BA9ED91D26B701C25A5B44720FC021CA8D66188159E922FC6A560649A323AB4CAB45228DA9409285203540B0D6A44184675D25054BC7E4A698F90C599E21019A93D06760488E360E4F658655C28312A05B53D1276AE874361646EACF8E4AE022B26BF19B5A8F4267B59644AB7536485A9413937FAF9B5213EF4D5D1A57528E5CD218E5352DB236161A1381446E690F722389490F782DA1E298BFEC46132527B0CE27C93186EBC80C332E0F19B846DC00B78DA87C56892EDC30ADAE3517198382255C4310F65B4253117259903AB88A724A00A2A1752852F5452B990569548AB0E4869C823059412DBE3E4218D384C4EE36A4D12B1483526A171487C1E9048487B4E6C8F53061CE2402595AB5F544421D543AA94C3794D430709CF3525F158882C3090B40E19910B87B50A0591C322A4817D842548491C1B85346C8FD820A4248EF92F83F2080128C93C1250B969E9B46139B3A9EAB4A12A62ED08EF3327B6C7C163E970289CDE1E2D3B58C2812ACF9AEA30F260384235321AB7D719DF9855789D0A73949620BD05AF333BBBEBCDEB4CC75FD4EB3C8332CCCEECADF9AC69BC1B218F7B3E8BA4B3765AE7B5D2656C1B015350F93C371A27A77158A032368DB0412599A36F59F419D1B38CC6D12F22B88CE81D51C28158449011680595634DC243C48855092FE0D0913C0C8C50929CF8666C5BD54D471F874DE59588C079530DC83086ADE7C31EBBEAACC7FEF5A8A78D609237650222495CA9F10B637DF581D6D79E4F2AFAF491FBF020BBF87E8D07FB678EF5471769E62E91FEA4E05EDC29527787D3EC1EAF390D1273B1977E224B68909EAD437CA9A7BF0621741285B8D0BFD873DB4A0625FF600D5CEB11C9771A5C255F5F5E5D53D994DE4E66A349101CEC8A7BD0E6F446E4EC8D10ADF9601DAD78981B433239A3032B3309B9CFC0379F80FF3B07BCFC1E87EC9C2D4808B132239010229DF547080C7F522B045491BD27997326CC47730FF06526FF33A97723693FDF63553F48C985C18D7429FDABF737025517766388FF20B21FFFEC65E288F4334248CCFB801C8D7921209841E6C10AC563FF85BACAC4F71FD0AFE1C019623A086E3F995922D7FA12412B11D5472B8E25127CCAD76502990C2DC2ADA2B3B508490491914508A9E2E581985AB2995504DBC7644F11C2ABCC9022361774161431342AD38928587FBE059DB144140CCF4A228445661E116D16965D444C11C80C224258749610D13E566602117313F16C1F820684C8E8218AD59FE1C033738839E978F60D31B9A0336C5439069DDE84094A589F7B1A2A738610169B1D43088E78E026A63F44968BC48717CD6931AC93587128F79E37F76FD005C5334988C9166E4FBB5A083A7B84B013D613149305426CA8884C0F627DACC8E6200648656C105B39D8AC0C626E3A9979A16FDBD3742DF56E0F56863CC5B0FFBF0E31CEDF16BDEB85A9E7FD79BF9E5E7F0E5057F7A5E66CB843BBCE095B8F8FA199977222CF8F9B1EEDF5F2A4BAD31BE7E6A72F6D3450127FCBFC8E9E2EB36F05E9D96EF32699E349727A658974EDC14392922A45CB17A37DBC5FAE62DFC323E7B66F9CEB7B8FBF99E66A436613DB3D866E6E43FE5EB9EDF0630FA25BBD9AAE9D846EAFAB1B1F5757F1A49E6753ECDEC2FBEB3312DEE6FD732B53DDFC7096F14FFA7855CD463C20C386FD7928646703EB5842C47F2CCA852661D28A6F34F7D1CBCD2BD5A2FC137A030743708843867CB4D70666888A639738E96E96AF44751EE04173B751788A42D465E83CD844EC556CA1EBF8274FC7C9364FB7A7E40FB4F4D105D44C2B7657B6EE6D64D9659E956585377B062236FD99D718CF65187B8FC7D70269E3B92D81B2E12B562C033A271B81055B5707F17E80BF6D77015CC123305FF3C095F320CD13410EFB7461812312F020C328EBA35F910C1F9C97EFFE07BFECC7DD256D0000, N'6.4.4')
+GO
+INSERT [dbo].[MigrationHistory] ([Migration_PK], [ContextKey], [Model], [ProductVersion]) VALUES (N'202511010445238_Acc', N'LIS.DataAccess.Migrations.Configuration', 0x1F8B0800000000000400ED5D596FE4B8117E0F90FF20E8290966DDB667779318DDBB90BBD5B3C2F6B52D79B279326835DD56A2A347876323C82FCB437E52FE42A89B875A1245496B238B018C7151FC8A4755B14816CBFFFDF77FA6DFBF38B6F40CFDC0F2DC997C7571294BD035BD83E51E6772143E7EF527F9FBEF7EFB9BA97A705EA4CFF9771FE3EF504D3798C94F6178BA994C02F3093A20B8702CD3F702EF31BC303D67020EDEE4FAF2F2CF93ABAB09441032C292A4E93E7243CB81C92FE8D7B9E79AF01446C05E7B076807191D95E809AAB4010E0C4EC0843379A5E9170B1002C5346110C892625B00B54287F6A32C01D7F54210A236DEDC05500F7DCF3DEA274400B6F17A82E8BB476007306BFB4DF979DB6E5C5EC7DD9894157328330A42CFE104BCFA988DCB84AEDE6974E562DCD0C8A96884C3D7B8D7C9E8CD643460D10F10D8E1D30EF8C05983D3094DB22CD1AC6FE6B61F57CB863AF49239B94867E6A21AE583847FFBA11014244FF1BF0FD23CB2C3C887331746A10FD017BBE8C1B6CC1FE1ABE1FD1DBA3337B26DBCF9A803A88C2020D2CEF74ED00F5FF7F031EB947690A509596F42572CAA6175D20E6A6EF8EDD7B2B441CCC1830D0BE9C006430F3D1F7E822EF441080F3B1086D077630C988C2FC39DE2F583A6DFEF94BDB29E6F176ACE16C96532F26BF0B282EE317C9AC9E8BFB2B4B45EE021A7644DB9732DA48DA852E847B035B78DB21E9EDB6AD4BEE93B75AEADD5CDE08CEE369A313813F54B649D1C244384307EBCAE10460A68039EAD63229BE72065690FEDE48BE0C93AA5A6F18CDEDE639596BEE7EC3DFBACA528BFBDD7BDC83751D30CAF650503F84718927D994E4A13556BB80A98350890F6F15A2CAAFAFB355595D2D19FA98A7F0E2EF7C9A00FCE25F50DD0E0D670FAE6B215A32675A4272C50CCD07A2E06F2D6430A025C6E9CB90FE349BCADEB413F639571DABA3927E45C41C3729AFADE5A7D4BE360C020DCFA077E15AE80F8C5D478BFFDCBBDB6E057E5BC5EDACB4F9175E0160A2BD05F91A37C1015AE071FB8E693686BB4DD76B75C299F0697D09DB6D96C07E7B25797F79F355D3346E0A52CD69AAE6BDB71FAF5D3423154432B3DC252C3EBAB1AAA6EECF6DBE5FD280E1EE23457755D5D0CCF493196A378C888D138AE3862B41A8BD1FD627B3B389F4FEA66A1EEC7E88EF269F851433C46D9552CB6F3FBB1C440533786F157B4295B29BA3EFCEE4FFD6914BBBC886DE5187C707B3C181F433356239C0328B723CC4D3C31BAA1AC77BCABD8784714E31DBDACF7AA7EB71ADEA0DCCEEF777B6D638CB0287F067634FCFE5347DB8D2828D8C427237B78F2FC302D88C95DF76A4A38CE0E2A1B28911D5402F17E0F42063EB37D433B357D3F8265D5F135AFAD55D591255EA9DAF07621B6FA23B0592BF31FB4CD181DD2EF964BEDE7E1C76DAF6CF4A5BA1F658B6EAC779F95D5DDF00BDF42D5E77B6D67A0BDF3F03BE7BB4DB566F463D58B73696497FDF016AD219D4FB60B84F76BD3073EDCFE454F84ED5F0F8471C15F5941673F06AFFB7E857D680766C4A3CCF17657E36C10BA3AF33557BC3DB7F9BC9E450EA665ECB6460B9636389631307C9A47E3F5A37DA8A307E8DBAF6860F0A5801CD835741EA09F5F53C27FC852220B33F9929903E2531D0DBEE161F39055BBAAAF96F6B450BFA2DA757D35039A4F68D62CE02AA793EF3D63353FB6ADB9877F8326CEF3EBFA9A0BCF44A682E1F74D9B5A0CAF6FEB6B2D2D17D8F62B53ED8FAC78A68288139520F050076331AB0D47C20212C8A6A8EE41E28D4E28F7F8E7629FD64846AD13924AA44F33F90FCC007070CD431C30AE4CE002C98E1543B4C4403FB6F1C09E7B6E80D4C67243763DB25CD33A019BB365144ECB952D9ED082235DB28027E8C68B12E7D4B4690A1121C3B6A9604DADC34D43389D60A2C8BA29A84E886A14428F540B4D57F2F1E2362E842F556EFA5D0033E31964269B96A3185C8761ADF007B2549AF606C965049564C0881E03CC7CD1805871075FDF5EECB69F0B3A312BCDD0993BD0761C8A2D521572D556AC01187744AB2049279702C344B04926F0082DAC5ADBA82E5A6F3A98D1A2E73562CBE86707C389F16992CD09398015CE51A1C745D97492C6126784E9E44CD0F134EF555933A3487A1A813CFF4AE70FCF75528C89195444E916AD2D38A1F5191C21558A58A3962E2D3F08E308E807107B71F383C37C5669B5CEC873CEB2DE30B1F39BCB7B5E3FFE7F11178A45689FB360EC1A90952C51CFE3B94F0601364A1F0B24C561E3C0067EC5166CEED991E39E5FECCED7A622797120AAA803667A6954899916B5C75C9D6FE7AA6B3BCBD85B1CAEA4B6474AAFC1719494D21E81F00B70A05A872156784ABE1897829169CAE8D02AD34AA1685326A0480D502D34A8116118D549234BF1FA29A53D4216368A4364A4F618D811208E8391DB6395619EC4A814D4F648D8B91E0E8591B9B1E293BB0AAC98FC66D4A2D29BEC659129DD4E9115A606E5DCE8E7D786F8D057078BD6A1943787384E496D8F844579E250189943DE8B584F42DE0B6A7BA42C981387C948ED3188F34D62B8F1020ECB80876312B6012FE0691F167249B60F2B688F47C561E2885411C73C94D196C45C94640EAC229E92802AA85C4815BE5049E5425A5522AD3A20A5218F14504A6C8F938734E230398DAB3549C422D59884C621F179402221ED39B13D4E197088039554AE7E511185540FA9520EE7350D1D243CD794C46321B2C040D23A64442E1CD62A14440E8B9006F611962025716C14D2B03D6283909238E6BF0CCA2304A024F34840E5A6A5D386E5CCA6AAD386AA88B523BCCF9CD81E078FA5C3A1707A7BB4EC600907AA3C6BAAC3C883E108D5C868DC5E677C6356E1752ACC515A82F416BCCEECECAE37AF331D7F51AFF30CCA303BB3B7E6B3A6F16E843CEEF92C92CEDA699DD74A97B16D044C41E5F3DC689C9CC66181CAD834C20695648EBE65D16744CF321A47BF88E032A27744090762114146A015548E35090F11235625BC804347F23030424972E29BB16D55371D7D1C3695572202E74D3520C318B69E0F7BECAAB31EFBD7A39E368249DE9409882471A5C62F8CF5D5075A5F7B3EA9E8D347EEC383ECE2FB351EEC9F39D61F5DA499BB44FA93827B71A748DD1D4EB37BBCE6AC46CCC55EFA892CA1417AB60EF1A59EFE1A84D04914E242FF62CF6D2B1994FC833570AD4724DF6970957C7D79754D25477A3B898A264170B02BEE419BB31591B33742B4E68375B4E2616E0CC9E48C0EAC4C0CE43E03DF7C02FEEF1CF0F27B1CB273F21F21C4CA043F428874121F2130FC49AD105045329E64CE99301FCD3DC09799FCCFA4DE8DA4FD7C8F55FD2025170637D2A5F4AFDEDF08545DD88D21FE83C87EFCB3978923B2C9082131EF037234E68580604298072B148FFD17EA2A13DF7F40BF8603277CE920B8FD245A895CEB4B04AD44541FAD389648F0295F97096412AE08B78A4EBE22241144821521A48A9707626AC9264A116C1F930CA54AFADBBE4B6492A3884D039D00450C8D4A72220AD69F5B41272B1105C313920861914947449B85251611D30132798810169D2044B48F954940C43C443CD187A0ED2092798862E13643088B48CA21E69FE38937C4E4824EAED1D52AF6BB5DE8773B4325CD10C262136308C1116FDBC4F487487091B8EFA2E92C86F50F2BCEE3DEF3BEFE0D7A9F78120931D9C2ED69570B41278E10B3A544720831EB402780101B2A22C983581F2B1239880152C91AC4560E36218398874E265DE8DBF634DD48BDDB3395210F30ECFFAFF38BF31745EF7A61EA796BDEAFA7D79F03D4D57DA93916EED0AE73C2D6E33B68E6919CC8CBE3A6F77ABDBCA6EEF4BCB9F9D54B1B0D94C49F31BFA357CBEC33417AB6DB3C47E6788D9CDE56225D7BF090A4A44AD1F2B1681F4F97ABD8F7F0BEB9EDF3E6FADEE3CFA5B9DA90D9C476EFA09BDB903F556E3BFCD85BE8560FA66B27A1DBC3EAC677D5553CA997D914BBB7F0F4FA8C84B779FADCCA5437BF9965FC933E1E54B3C10EC8B0617FE809D9D9C03A9610F19F7D72A14998B4E21BCD7DF472F34AB528FF84DEC0C1101CE268211FEDB58119A2E2D8254EBA9BA52A519D0778D0DC6D149EA21075193A0F361176155BE83AFEC9AB71B2CDD3ED29F9532B7D740135D38ADD95AD7B1B597699626559E1CD9E81884D7FE635C67319C6DEE3F1B540DA786E4BA06CF88A15CB80CEC94660C1D6D541BC1FE06FDB5D0057F008CCD73C66E53C48F34490C33E5D58E088043CC830CAFAE85724C307E7E5BBFF018D8DC83FEF6C0000, N'6.4.4')
+GO
 INSERT [dbo].[RefreshTokens] ([Id], [Subject], [ClientId], [IssuedUtc], [ExpiresUtc], [ProtectedTicket]) VALUES (N'cArPl4tD0UcTdzMgvhkAD2bZbH4NnCVnHn2DuRzZ/B8=', N'admin@zorya.co.in', N'DUMMY', CAST(N'2025-10-23T08:29:17.733' AS DateTime), CAST(N'2025-10-23T08:29:17.733' AS DateTime), N'iO_wMouptSBLkhB9MSFIuR4lfmPDmhALI_afiMh6NoAOSWHXNYgQaw8bujrqZERMPqbsTPhwIH06FjrKibxjdLB-N_K55_iWaAaG4V4Da9yXs7cy0UXlLqpowlbZbjWJbMNliaogRjwkTA_qvkDCW8hNK7Yl_1mQXmVH1JmMcihT0emRAS_JXhvUmK_srKLXbfWM5_zydKda5rHycfurDuQqW0G5vZ7ZyfGwf9uCLSZr9_yeDs2JwKx5G0qSW6uPwwtAsH74w8r-Iy1v5Xl0sgmhXvq5RBIQWZyYI2FMo8ZNieap2SiViKYcs4f7GcMQKWyOr62N9UdtuJB4ha3M59lNw3Yay5UTHq-GjoY8jMMPXHbC1LUqi5rrIddhG5k5XE9gVHtqA_5wngA4bt6b5gEBmm2vjJea48jTlf1N_bHRIWKukX5nyNXQoHOvYPBUqN1W-QYX1nxUSGmUh9gJ7tspVuTsLxxvG-b9jDCQHXDci-J9eu4X-rpwrTPL6kAbeQrrBCbNq010BXEj0Tkdabq23liyARFBafzCIotxS99pU8j3kYKAvf2Ng4aPuPxsUyYBiqx4eSTgmtHYR7uIiQVTWYZzunyacddUfPGgF7_EJavegDcP_HzwAvqDNw_64wt4n-s4Br7HZY4LMyiZFXKwcvqImm77pMO7Af0GKYgXYiVb6DuFa4Qz5AwFaIdSSgZ0dP58n33Jb_qriCto1bIRxo5pTKCAnvdtQguIciO9W8e6qHbDj9DOML4AE9s9eEcQKT56eLMqp9ujEITkw6Ue03iMWqJa8xJsIDPhqQD9yeqiGwMA8HpgokxmAYxATNUbWZm8jFdZVsiocJ8kVUt1bmdaq66bdGJwkJTEVa8')
 GO
-INSERT [dbo].[RefreshTokens] ([Id], [Subject], [ClientId], [IssuedUtc], [ExpiresUtc], [ProtectedTicket]) VALUES (N'oU1slb/dYI9Vik33HLLdH3c8/sarOVhpQeynUGHLxgc=', N'admin@zorya.co.in', N'DXI800', CAST(N'2025-10-29T04:24:43.853' AS DateTime), CAST(N'2025-10-29T04:24:43.853' AS DateTime), N'b15enPJS4qhyBaMt1cF7mUJ-3K-oznARJB6pgoScEQkZKWeF2uIIsykvnPgb1AAY4wOUx-FBXJJCZ9TqYA4segV1pEchYp0YA4_i5MKckjWMbkhtpQQQ_dK63R2saRKfh3fX7k1aoFHiMIOE3csJDYxL86YMReoxAdCtT29g_6xUOJVqiOGZT4wxE5_ol5T2CF13bpH1czGhcwz3CHRAsGEnCaqnQj8xyKYUtsfNdCxCZeU5ZVv-2Jjj1RbkNiS9AQD4A4u_b5Wix6_Y7BCIFrVC3btd4S0Bv0TxRJOmMUJRjuHHDEnXnJV4bsYBZ-X5gZea6HGkT47tJlVwUTDKXp6nv8SOEDh9nQ2FRx0-XtTbYCW3GJ5Ot53jV_dfcq7Xc12OZIOGW_4Dfr0HcQLC1jAqUSFDbjveg0zFRG3kDwYAy3NTbYxmCJ0SyCFNZzajoYfYS3NY70ZVol6WALzVbYUSsnb0Uz-e6RF7TjtDbSG0f9guN3_yLoHC3hxhKj1UqHWsT7nmApkSTIOXoeD7i1rGhMR2M9oqWE2PVs5FvzRV4AUBHwVpgmtx4gtfBoGo6XqjJIJ_RM53tNiaPekVRV5p_T-zR8wQpXjmPatfn7Erfl4yTwJmcg0f8RdFp8NC9lf7OAgRJiF2JaCacAvCGXAZH5zQje4_MwIvjwlBALlyBjfZUZ7fyJVRVLMYLF7InEbzmt-mcJuW6MMhHVEw4WVCg9crT_L6fPzCREDkU-gmEIzvOr-2m6ffyort1VZrd6S3KqW8QWaihrFi2R7uddTU6Bv0DUCl7htg-wx_DU4E0M7XsAqEjFJKCEavA1XeFH4pozEMUNguwjB-aEth2Jw4jOT7LpLjiBT1fBqp8es')
+INSERT [dbo].[RefreshTokens] ([Id], [Subject], [ClientId], [IssuedUtc], [ExpiresUtc], [ProtectedTicket]) VALUES (N'FZbw4k7lW/eX8wUHEruCtnQn21a0NVdHJJdsbg6ZdCY=', N'admin@zorya.co.in', N'DXI800', CAST(N'2025-10-31T04:53:36.790' AS DateTime), CAST(N'2025-10-31T04:53:36.790' AS DateTime), N'NPtsNWd0ZDobA248i6e9vbaCVgHS8qE9i7_0tvDKNnPoE2lwxbxiSnvOcukvAgQP9MyRujHSt_eYm9k2X3Y3lFvODDNv6gcR2UsUrnzsw6mpy9e74ep5OgiQ4GqNAXXZXXawTlQrlkAD9ixkjFT551U8HGeAHk_vXTz6izTLZAr7HLxplJd5l_EAc2Y4n-Y-9n9_CQ2tIu5h_Ro0dIADNjBUSbaxmgQ3MOZ1wTc5laH_VekiXAw1eRhUjCnnYg-bYshAROYQQ1Hhxg7VojoJt5ylCZA-_pEcg4UatuH1sHpFEWexZd1RNAdok3c-J5iZ3KORoNwYDr1EZ1tn_qG6TVUIXLNHHeZyWfG2r-i_nZdrFzwkID-1KOL23o5pEEcNXDaFf5MlbCfCJ48YMXwTYAKqZIGUrYHYumMGl3nmrcHce75QeVie1OUPgsgOIYwwf32jEMtKU7s0Rh1wyEduqhoFgdk-e891LNlm5JKmcA8JY9J4jA5PeRAm0leC21hIkGkfrIOo6aw72g_393ythrTHOd5CTzXotbhMh-rV9umUcZx5zTcWMfkuUD2KjrJ_KexbsRlZlVOjta6d6zsZVIGZEKZ61Zg0fl5m99-E19lxMG5Vm18uYoTTtujBp7fVHahjEiLPJPF5ov6tJrOMe-SX1vLfTdpk0JoILEss8ILzzaErK4NoplDWBhLrCqB3FvDWOUrxY8BCvx_-KPBbjKbbFRvvl8cHa_Op8f7brKMHj8OaxWrN8O1ww5LyB9sKgqlej73XBl4ZTpYqMkbNhEfCqNc1SnYzTDHATnvksosVCnyUR6Nh7jV4ASLStEXbh2gzBjBmRrvxAW767VlbA0R-Z6yAv3KU5nOjA4B_BPc')
 GO
