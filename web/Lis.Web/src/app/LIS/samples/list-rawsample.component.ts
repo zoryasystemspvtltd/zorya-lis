@@ -42,7 +42,7 @@ export class ListRawSampleComponent implements OnInit {
         heading: 'Param Name', fieldName: 'paramcode', sortable: false, width: '10%', type: 'label'
       },
       {
-        heading: 'Collection Date', fieldName: 'createdAt', sortable: true, width: '16%', type: 'date', format: 'dd/MM/yyyy'
+        heading: 'Collection Date', fieldName: 'reqdatetime', sortable: true, width: '16%', type: 'date', format: 'dd/MM/yyyy'
       },
       {
         heading: 'Value', fieldName: 'value', sortable: false, width: '15%', type: 'label'

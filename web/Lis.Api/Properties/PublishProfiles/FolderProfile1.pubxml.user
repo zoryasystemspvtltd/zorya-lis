@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Code\zorya-lis\publish</_PublishTargetUrl>
-    <History>True|2025-10-30T08:09:01.2489159Z||;</History>
+    <History>False|2025-11-01T06:25:44.6150233Z||;True|2025-11-01T11:16:23.1667510+05:30||;True|2025-10-30T13:39:01.2489159+05:30||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -20,43 +20,43 @@
       <publishTime>04/17/2020 02:08:56</publishTime>
     </File>
     <File Include="bin/Lis.Api.Client.dll">
-      <publishTime>10/30/2025 13:38:58</publishTime>
+      <publishTime>11/01/2025 11:16:16</publishTime>
     </File>
     <File Include="bin/Lis.Api.Client.pdb">
-      <publishTime>10/30/2025 13:38:58</publishTime>
+      <publishTime>11/01/2025 11:16:16</publishTime>
     </File>
     <File Include="bin/Lis.Api.dll">
-      <publishTime>10/30/2025 13:38:59</publishTime>
+      <publishTime>11/01/2025 11:16:19</publishTime>
     </File>
     <File Include="bin/Lis.Api.pdb">
-      <publishTime>10/30/2025 13:38:59</publishTime>
+      <publishTime>11/01/2025 11:16:19</publishTime>
     </File>
     <File Include="bin/LIS.BusinessLogic.dll">
-      <publishTime>10/30/2025 13:38:58</publishTime>
+      <publishTime>11/01/2025 11:16:17</publishTime>
     </File>
     <File Include="bin/LIS.BusinessLogic.pdb">
-      <publishTime>10/30/2025 13:38:58</publishTime>
+      <publishTime>11/01/2025 11:16:17</publishTime>
     </File>
     <File Include="bin/LIS.Com.Businesslogic.dll">
-      <publishTime>10/30/2025 13:38:58</publishTime>
+      <publishTime>11/01/2025 11:16:17</publishTime>
     </File>
     <File Include="bin/LIS.Com.Businesslogic.pdb">
-      <publishTime>10/30/2025 13:38:58</publishTime>
+      <publishTime>11/01/2025 11:16:17</publishTime>
     </File>
     <File Include="bin/LIS.DataAccess.dll">
-      <publishTime>10/30/2025 13:38:57</publishTime>
+      <publishTime>11/01/2025 11:16:16</publishTime>
     </File>
     <File Include="bin/LIS.DataAccess.dll.config">
       <publishTime>10/23/2025 13:10:42</publishTime>
     </File>
     <File Include="bin/LIS.DataAccess.pdb">
-      <publishTime>10/30/2025 13:38:57</publishTime>
+      <publishTime>11/01/2025 11:16:16</publishTime>
     </File>
     <File Include="bin/LIS.DtoModel.dll">
-      <publishTime>10/30/2025 13:38:56</publishTime>
+      <publishTime>11/01/2025 11:16:15</publishTime>
     </File>
     <File Include="bin/LIS.DtoModel.pdb">
-      <publishTime>10/30/2025 13:38:56</publishTime>
+      <publishTime>11/01/2025 11:16:15</publishTime>
     </File>
     <File Include="bin/LIS.Logger.dll">
       <publishTime>10/30/2025 13:38:56</publishTime>
@@ -202,14 +202,722 @@
     <File Include="Scripts/jquery.signalR-2.4.2.min.js">
       <publishTime>10/14/2025 10:29:08</publishTime>
     </File>
+    <File Include="ui/3rdpartylicenses.txt">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/5-es2015.fc06634abe25ea2eeb03.js">
+      <publishTime>10/23/2025 10:24:00</publishTime>
+    </File>
+    <File Include="ui/5-es5.fc06634abe25ea2eeb03.js">
+      <publishTime>10/23/2025 10:23:56</publishTime>
+    </File>
+    <File Include="ui/assets/html/media.html">
+      <publishTime>10/14/2025 12:29:45</publishTime>
+    </File>
+    <File Include="ui/assets/images/a_area.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/banner.png">
+      <publishTime>07/29/2025 12:23:08</publishTime>
+    </File>
+    <File Include="ui/assets/images/beckman-logo-svg.svg">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/crop.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/doc.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/docx.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/Dummy.jpg">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/favicon.ico">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/grayscale.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/http.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/icon_facebook.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/icon_google.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/img01.gif">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/img03.gif">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/logo.png">
+      <publishTime>07/29/2025 12:23:08</publishTime>
+    </File>
+    <File Include="ui/assets/images/logo.svg">
+      <publishTime>07/29/2025 12:23:08</publishTime>
+    </File>
+    <File Include="ui/assets/images/next.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/o_area.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/pdf.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/ppt.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/pptx.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/prev.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/q_area.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/rotate_l.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/rotate_r.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/save.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/save_as.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/spinner.gif">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/split_h.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/split_v.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/unicell_banner.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/xls.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/images/xlsx.png">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/ssl/q4u.crt">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/assets/ssl/q4u.key">
+      <publishTime>03/02/2021 19:39:03</publishTime>
+    </File>
+    <File Include="ui/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/fontawesome-webfont.20fd1704ea223900efa9.woff2">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/fontawesome-webfont.8b43027f47b20503057d.eot">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/fontawesome-webfont.f691f37e57f04c152e23.woff">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/glyphicons-halflings-regular.4692b9ec53fd5972caa2.ttf">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/glyphicons-halflings-regular.5be1347c682810f199c7.eot">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/icon_facebook.a4a821dd7a42e1c10eda.png">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/icon_google.e74abd862dfd83547f92.png">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/index.html">
+      <publishTime>11/01/2025 11:11:42</publishTime>
+    </File>
+    <File Include="ui/main-es2015.cb1abbf7d64353d8be65.js">
+      <publishTime>11/01/2025 11:11:41</publishTime>
+    </File>
+    <File Include="ui/main-es5.cb1abbf7d64353d8be65.js">
+      <publishTime>11/01/2025 11:11:37</publishTime>
+    </File>
+    <File Include="ui/polyfills-es2015.1fa79c8fa3f9ad800f15.js">
+      <publishTime>10/23/2025 10:23:18</publishTime>
+    </File>
+    <File Include="ui/polyfills-es5.3541e0fe0342e58a8062.js">
+      <publishTime>10/23/2025 10:23:43</publishTime>
+    </File>
+    <File Include="ui/runtime-es2015.5b2aa354bcdddab16363.js">
+      <publishTime>10/23/2025 10:23:17</publishTime>
+    </File>
+    <File Include="ui/runtime-es5.5b2aa354bcdddab16363.js">
+      <publishTime>10/23/2025 10:23:18</publishTime>
+    </File>
+    <File Include="ui/scripts.65274e0f6d1a497be977.js">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/styles.6d0b8073eff40581600d.css">
+      <publishTime>11/01/2025 11:10:57</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/advlist/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/advlist/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/advlist/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/anchor/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/anchor/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/anchor/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/autolink/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/autolink/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/autolink/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/autoresize/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/autoresize/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/autoresize/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/autosave/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/autosave/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/autosave/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/bbcode/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/bbcode/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/bbcode/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/charmap/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/charmap/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/charmap/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/code/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/code/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/code/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/codesample/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/codesample/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/codesample/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/colorpicker/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/colorpicker/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/colorpicker/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/contextmenu/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/contextmenu/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/contextmenu/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/directionality/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/directionality/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/directionality/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/emoticons/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/emoticons/js/emojiimages.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/emoticons/js/emojiimages.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/emoticons/js/emojis.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/emoticons/js/emojis.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/emoticons/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/emoticons/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/fullpage/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/fullpage/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/fullpage/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/fullscreen/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/fullscreen/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/fullscreen/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/help/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/help/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/help/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/hr/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/hr/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/hr/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/image/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/image/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/image/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/imagetools/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/imagetools/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/imagetools/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/importcss/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/importcss/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/importcss/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/insertdatetime/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/insertdatetime/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/insertdatetime/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/legacyoutput/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/legacyoutput/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/legacyoutput/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/link/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/link/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/link/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/lists/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/lists/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/lists/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/media/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/media/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/media/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/nonbreaking/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/nonbreaking/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/nonbreaking/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/noneditable/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/noneditable/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/noneditable/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/pagebreak/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/pagebreak/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/pagebreak/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/paste/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/paste/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/paste/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/preview/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/preview/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/preview/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/print/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/print/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/print/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/quickbars/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/quickbars/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/quickbars/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/save/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/save/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/save/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/searchreplace/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/searchreplace/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/searchreplace/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/spellchecker/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/spellchecker/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/spellchecker/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/tabfocus/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/tabfocus/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/tabfocus/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/table/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/table/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/table/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/template/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/template/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/template/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/textcolor/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/textcolor/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/textcolor/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/textpattern/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/textpattern/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/textpattern/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/toc/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/toc/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/toc/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/visualblocks/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/visualblocks/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/visualblocks/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/visualchars/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/visualchars/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/visualchars/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/wordcount/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/wordcount/plugin.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/plugins/wordcount/plugin.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/content/dark/content.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/content/dark/content.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/content/default/content.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/content/default/content.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/content/document/content.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/content/document/content.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/content/writer/content.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/content/writer/content.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/content.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/content.inline.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/content.inline.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/content.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/content.mobile.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/content.mobile.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/fonts/tinymce-mobile.woff">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/skin.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/skin.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/skin.mobile.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/skin.mobile.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/skin.shadowdom.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide-dark/skin.shadowdom.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/content.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/content.inline.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/content.inline.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/content.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/content.mobile.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/content.mobile.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/fonts/tinymce-mobile.woff">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/skin.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/skin.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/skin.mobile.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/skin.mobile.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/skin.shadowdom.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/skins/ui/oxide/skin.shadowdom.min.css">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/themes/mobile/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/themes/mobile/theme.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/themes/mobile/theme.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/themes/silver/index.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/themes/silver/theme.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
+    <File Include="ui/tinymce/themes/silver/theme.min.js">
+      <publishTime>10/26/1985 13:45:00</publishTime>
+    </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>10/29/2025 09:58:30</publishTime>
+      <publishTime>11/01/2025 11:13:03</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>10/14/2025 10:29:08</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/30/2025 13:38:59</publishTime>
+      <publishTime>11/01/2025 11:16:20</publishTime>
     </File>
   </ItemGroup>
 </Project>
