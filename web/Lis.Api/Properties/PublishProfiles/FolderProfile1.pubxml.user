@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Code\zorya-lis\publish</_PublishTargetUrl>
-    <History>False|2025-11-01T06:25:44.6150233Z||;True|2025-11-01T11:16:23.1667510+05:30||;True|2025-10-30T13:39:01.2489159+05:30||;</History>
+    <History>False|2025-11-01T06:31:48.8228606Z||;False|2025-11-01T12:00:11.7513776+05:30||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -20,37 +20,37 @@
       <publishTime>04/17/2020 02:08:56</publishTime>
     </File>
     <File Include="bin/Lis.Api.Client.dll">
-      <publishTime>11/01/2025 11:16:16</publishTime>
+      <publishTime>11/01/2025 11:58:40</publishTime>
     </File>
     <File Include="bin/Lis.Api.Client.pdb">
-      <publishTime>11/01/2025 11:16:16</publishTime>
+      <publishTime>11/01/2025 11:58:40</publishTime>
     </File>
     <File Include="bin/Lis.Api.dll">
-      <publishTime>11/01/2025 11:16:19</publishTime>
+      <publishTime>11/01/2025 12:05:48</publishTime>
     </File>
     <File Include="bin/Lis.Api.pdb">
-      <publishTime>11/01/2025 11:16:19</publishTime>
+      <publishTime>11/01/2025 12:05:48</publishTime>
     </File>
     <File Include="bin/LIS.BusinessLogic.dll">
-      <publishTime>11/01/2025 11:16:17</publishTime>
+      <publishTime>11/01/2025 11:58:41</publishTime>
     </File>
     <File Include="bin/LIS.BusinessLogic.pdb">
-      <publishTime>11/01/2025 11:16:17</publishTime>
+      <publishTime>11/01/2025 11:58:41</publishTime>
     </File>
     <File Include="bin/LIS.Com.Businesslogic.dll">
-      <publishTime>11/01/2025 11:16:17</publishTime>
+      <publishTime>11/01/2025 11:58:41</publishTime>
     </File>
     <File Include="bin/LIS.Com.Businesslogic.pdb">
-      <publishTime>11/01/2025 11:16:17</publishTime>
+      <publishTime>11/01/2025 11:58:41</publishTime>
     </File>
     <File Include="bin/LIS.DataAccess.dll">
-      <publishTime>11/01/2025 11:16:16</publishTime>
+      <publishTime>11/01/2025 11:58:40</publishTime>
     </File>
     <File Include="bin/LIS.DataAccess.dll.config">
       <publishTime>10/23/2025 13:10:42</publishTime>
     </File>
     <File Include="bin/LIS.DataAccess.pdb">
-      <publishTime>11/01/2025 11:16:16</publishTime>
+      <publishTime>11/01/2025 11:58:40</publishTime>
     </File>
     <File Include="bin/LIS.DtoModel.dll">
       <publishTime>11/01/2025 11:16:15</publishTime>
@@ -203,7 +203,7 @@
       <publishTime>10/14/2025 10:29:08</publishTime>
     </File>
     <File Include="ui/3rdpartylicenses.txt">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/5-es2015.fc06634abe25ea2eeb03.js">
       <publishTime>10/23/2025 10:24:00</publishTime>
@@ -320,49 +320,49 @@
       <publishTime>03/02/2021 19:39:03</publishTime>
     </File>
     <File Include="ui/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/fontawesome-webfont.20fd1704ea223900efa9.woff2">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/fontawesome-webfont.8b43027f47b20503057d.eot">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/fontawesome-webfont.f691f37e57f04c152e23.woff">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/glyphicons-halflings-regular.4692b9ec53fd5972caa2.ttf">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/glyphicons-halflings-regular.5be1347c682810f199c7.eot">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/icon_facebook.a4a821dd7a42e1c10eda.png">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/icon_google.e74abd862dfd83547f92.png">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/index.html">
-      <publishTime>11/01/2025 11:11:42</publishTime>
+      <publishTime>11/01/2025 11:52:17</publishTime>
     </File>
-    <File Include="ui/main-es2015.cb1abbf7d64353d8be65.js">
-      <publishTime>11/01/2025 11:11:41</publishTime>
+    <File Include="ui/main-es2015.9144e0921a53200b8754.js">
+      <publishTime>11/01/2025 11:52:17</publishTime>
     </File>
-    <File Include="ui/main-es5.cb1abbf7d64353d8be65.js">
-      <publishTime>11/01/2025 11:11:37</publishTime>
+    <File Include="ui/main-es5.9144e0921a53200b8754.js">
+      <publishTime>11/01/2025 11:52:12</publishTime>
     </File>
     <File Include="ui/polyfills-es2015.1fa79c8fa3f9ad800f15.js">
       <publishTime>10/23/2025 10:23:18</publishTime>
@@ -377,10 +377,10 @@
       <publishTime>10/23/2025 10:23:18</publishTime>
     </File>
     <File Include="ui/scripts.65274e0f6d1a497be977.js">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/styles.6d0b8073eff40581600d.css">
-      <publishTime>11/01/2025 11:10:57</publishTime>
+      <publishTime>11/01/2025 11:51:40</publishTime>
     </File>
     <File Include="ui/tinymce/plugins/advlist/index.js">
       <publishTime>10/26/1985 13:45:00</publishTime>
@@ -911,13 +911,13 @@
       <publishTime>10/26/1985 13:45:00</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>11/01/2025 11:13:03</publishTime>
+      <publishTime>11/01/2025 11:53:24</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>10/14/2025 10:29:08</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/01/2025 11:16:20</publishTime>
+      <publishTime>11/01/2025 12:00:11</publishTime>
     </File>
   </ItemGroup>
 </Project>
