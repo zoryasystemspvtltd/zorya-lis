@@ -27,22 +27,25 @@ export class ListRawSampleComponent implements OnInit {
     isNew:true,
     elements: [
       {
-        heading: 'Sample No', fieldName: 'reF_VISITNO', sortable: true, width: '12%', type: 'link'
+        heading: 'Sample No', fieldName: 'reF_VISITNO', sortable: true, width: '15%', type: 'link'
       },
       {
-        heading: 'Admission No', fieldName: 'admissionno', sortable: false, width: '10%', type: 'label'
+        heading: 'Admission No', fieldName: 'admissionno', sortable: false, width: '15%', type: 'label'
+      },
+      {
+        heading: 'Patient Name', fieldName: 'patfname', sortable: false, width: '15%', type: 'label'
       },
       {
         heading: 'Test Name', fieldName: 'testproF_CODE', sortable: false, width: '10%', type: 'label'
       },
       {
-        heading: 'Param Name', fieldName: 'paramcode', sortable: false, width: '16%', type: 'label'
+        heading: 'Param Name', fieldName: 'paramcode', sortable: false, width: '10%', type: 'label'
       },
       {
         heading: 'Collection Date', fieldName: 'createdAt', sortable: true, width: '16%', type: 'date', format: 'dd/MM/yyyy'
       },
       {
-        heading: 'Patient Name', fieldName: 'patfname', sortable: false, width: '20%', type: 'label'
+        heading: 'Value', fieldName: 'value', sortable: false, width: '15%', type: 'label'
       }
     ]
   }

@@ -80,12 +80,16 @@ namespace Lis.Api
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     responseMessage = await client.GetAsync(apiUrl);
 
-                    var jsonString = await responseMessage.Content.ReadAsStringAsync();
-                    var response = JsonConvert.DeserializeObject<GetPendingOrderCountResponse>(jsonString);
+                    if (responseMessage.StatusCode == HttpStatusCode.OK)
+                    {
+                        var jsonString = await responseMessage.Content.ReadAsStringAsync();
+                        var response = JsonConvert.DeserializeObject<GetPendingOrderCountResponse>(jsonString);
 
-                    var pendingCount = response.PendingCount;
-                    _logger.LogInfo($"GetPendingOrderCount - {pendingCount}.");
-                    return pendingCount;
+                        var pendingCount = response.PendingCount;
+                        _logger.LogInfo($"GetPendingOrderCount - {pendingCount}.");
+                        return pendingCount;
+                    }
+                    return 0;
                 }
 
 
