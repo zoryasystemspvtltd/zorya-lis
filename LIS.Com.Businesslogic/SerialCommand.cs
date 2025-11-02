@@ -103,7 +103,7 @@ namespace LIS.Com.Businesslogic
         /// EOT or (char)4 - end of transmission
         /// NAK or (char)21 - negative acknowledge
         /// DLE or (char)10 - data link escape 
-        /// CR	carriage return
+        /// CR	or (char)13 carriage return
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

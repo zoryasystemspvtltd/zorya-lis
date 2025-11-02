@@ -103,7 +103,7 @@ namespace LIS.Com.Businesslogic
                 string patientSegment = $"2P|1|{Strings.Chr(13)}<CHK1><CHK2>{Strings.Chr(3)}";
                 string orderSegment = "";
                 string trailerSegment;
-                IEnumerable<TestRequestDetail> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleId);
+                IEnumerable<AccuHealthSample> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleId);
                 
                 if (testlist.Count() > 0)
                 {
@@ -112,8 +112,8 @@ namespace LIS.Com.Businesslogic
                     for (int i = 0; i < testlist.Count();)
                     {
                         var test = testlist.ElementAt(i);
-                        var ackSent = await LisContext.LisDOM.AcknowledgeSample(test.Id);
-                        testname += "^^^" + test.LISTestCode;
+                        //var ackSent = await LisContext.LisDOM.AcknowledgeSample(test.Id);
+                        testname += "^^^" + test.LisParamCode;
                         i++;
                         if (testlist.Count() == i)
                             break;
@@ -167,12 +167,8 @@ namespace LIS.Com.Businesslogic
                 Logger.Logger.LogInstance.LogDebug("D10 ParseMessage method Data: " + message);
                 string[] record = message.Split(Strings.Chr(13)); // Chr(13)
                 for (int j = 0; j <= sampleIdLst.Count - 1; j++)
-                {
-                    Result result = new Result();
-                    List<TestResultDetails> lsResult = new List<TestResultDetails>();
-                    TestResult testResult = new TestResult();
-                    string LisTestCode = "";
-                    testResult.ResultDate = DateAndTime.Now;
+                {                    
+                    List<LisTestValue> lsResult = new List<LisTestValue>();                   
                     string sampleNo = "";
                     for (int index = 0; index <= record.Length - 1; index++)
                     {
@@ -182,9 +178,6 @@ namespace LIS.Com.Businesslogic
                             case "O":
                                 {
                                     sampleNo = field[2];
-                                    testResult.SampleNo = sampleNo;
-                                    LisTestCode = field[4].Split('^')[3];
-                                    testResult.LISTestCode = LisTestCode;
                                     break;
                                 }
 
@@ -192,15 +185,15 @@ namespace LIS.Com.Businesslogic
                                 {
                                     if (sampleNo == sampleIdLst[j].ToString())
                                     {
-                                        TestResultDetails resultDetails = new TestResultDetails();
+                                        LisTestValue resultDetails = new LisTestValue();
                                         string[] parameter = field[2].Split('^');
                                         string paramCode = parameter[3];
-                                        string paramUnit = parameter[4];
+                                        //string paramUnit = parameter[4];
                                         if (paramCode != "")
                                         {
-                                            resultDetails.LISParamCode = paramCode;
-                                            resultDetails.LISParamValue = field[3];
-                                            resultDetails.LISParamUnit = paramUnit;
+                                            resultDetails.REF_VISITNO = sampleNo;
+                                            resultDetails.PARAMCODE = paramCode;
+                                            resultDetails.Value = field[3];
                                         }
                                         lsResult.Add(resultDetails);
                                     }
@@ -209,11 +202,9 @@ namespace LIS.Com.Businesslogic
                                 }
                         }
                     }
-
-                    result.TestResult = testResult;
-                    result.ResultDetails = lsResult;
-                    Logger.Logger.LogInstance.LogDebug("D10 Result posted to API for SampleNo: " + testResult.SampleNo);
-                    await LisContext.LisDOM.SaveTestResult(result);
+                    
+                    Logger.Logger.LogInstance.LogDebug("D10 Result posted to API for SampleNo: " + lsResult[0].REF_VISITNO);
+                    await LisContext.LisDOM.SaveTestResult(lsResult);
 
                 }
                 Logger.Logger.LogInstance.LogDebug("D10 ParseMessage method completed");

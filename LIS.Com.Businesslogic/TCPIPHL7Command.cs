@@ -12,13 +12,9 @@ namespace LIS.Com.Businesslogic
     public class TCPIPHL7Command
     {
         private TCPIPSettings settings;
-        protected Thread reportingThread;
-        protected Socket soc;
-        protected Stream sm;
-        protected StreamWriter sw;
-        protected StreamReader sr;
-
-        protected TcpListener server;
+        protected Thread TCPServerHL7Thread;
+        protected TcpListener TCPserverHL7;
+        NetworkStream stream;
         public bool IsReady { get; private set; }
         public string FullMessage { get; private set; }
         protected System.Timers.Timer timer;
@@ -26,7 +22,7 @@ namespace LIS.Com.Businesslogic
 
         public TCPIPHL7Command(TCPIPSettings settings)
         {
-            Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPCommand Constructor method started.");
+            Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method started.");
             IsReady = false;
             this.settings = settings;
             if (this.settings.AutoConnect)
@@ -34,56 +30,44 @@ namespace LIS.Com.Businesslogic
                 ConnectToTCPIP();
             }
 
-            Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPCommand Constructor method completed.");
+            Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method completed.");
         }
 
         public void ConnectToTCPIP()
         {
-            Logger.Logger.LogInstance.LogDebug("TCPIPCommand ConnectToTCPIP method started.");
+            Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command ConnectToTCPIP method started.");
             try
             {
                 var ipAddress = IPAddress.Parse(settings.IPAddress);
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, settings.PortNo);
-                server = new TcpListener(localEndPoint);
-                server.Start();
-                reportingThread = new Thread(new ThreadStart(TCP_ListenData));
-                reportingThread.Start();
-                IsReady = true;
+                TCPserverHL7 = new TcpListener(localEndPoint);
+                TCPserverHL7.Start();
+                TCPServerHL7Thread = new Thread(new ThreadStart(TCPListenHL7Data));
+                TCPServerHL7Thread.Name = "SERVER";
+                TCPServerHL7Thread.Start();
 
-                Logger.Logger.LogInstance.LogDebug("TCPIPCommand ConnectToTCPIP method completed.");
+                IsReady = true;
+                Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command ConnectToTCPIP method completed.");
             }
             catch (Exception ex)
             {
+                TCPServerHL7Thread?.Abort();//properly abort the client 
+                TCPserverHL7?.Stop();//properly stop the listner
+                Logger.Logger.LogInstance.LogDebug("Server Stopped.");
                 this.FullMessage = ex.Message;
                 Logger.Logger.LogInstance.LogException(ex);
-            }
-            finally
-            {
-                if (reportingThread != null)
-                {
-                    reportingThread.Abort();//properly abort the client
-                    Logger.Logger.LogInstance.LogDebug("Server Stopped.");
-                }
-                if (server != null)
-                {
-                    server.Stop();//properly stop the listner
-                    Logger.Logger.LogInstance.LogDebug("Server Stopped.");
-                }
-
             }
         }
 
         public void DisconnectToTCPIP()
         {
-            Logger.Logger.LogInstance.LogDebug("TCPIPCommand DisconnectToTCPIP method started.");
+            Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command DisconnectToTCPIP method started.");
             try
             {
-                reportingThread.Abort();
-                if (server != null)
+                if (TCPServerHL7Thread != null)
                 {
-                    soc.Dispose();
-                    server.Stop();
-                    server = null;
+                    TCPServerHL7Thread.Abort();
+                    TCPserverHL7.Stop();
                 }
                 IsReady = false;
             }
@@ -92,81 +76,102 @@ namespace LIS.Com.Businesslogic
                 this.FullMessage = ex.Message;
                 Logger.Logger.LogInstance.LogException(ex);
             }
-            Logger.Logger.LogInstance.LogDebug("TCPIPCommand DisconnectToTCPIP method completed.");
+            Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command DisconnectToTCPIP method completed.");
         }
 
-        private async void TCP_ListenData()
+        private async void TCPListenHL7Data()
         {
-            string messageControlId = "";
-            Logger.Logger.LogInstance.LogDebug("TCPIPCommand TCP_ListenData method started.");
-            soc = server.AcceptSocket();
-            sm = new NetworkStream(soc);
-            sr = new StreamReader(sm);
-            sw = new StreamWriter(sm)
-            {
-                AutoFlush = true // enable automatic flushing
-            };
-
-            bool orderRequest = false;
-            char[] charArray = new char[10240];
             while (true)
             {
                 try
                 {
-                    var readByteCount = sr.Read(charArray, 0, charArray.Length);
-                    if (readByteCount > 0)
+
+                    TCPserverHL7.Start();
+                    TcpClient client = TCPserverHL7.AcceptTcpClient();
+
+                    while (true)
                     {
-                        var rawmsg = new string(charArray, 0, readByteCount);
-
-                        Logger.Logger.LogInstance.LogInfo("TCP/IP Read: '{0}'", rawmsg);
-                        var inputmsg = rawmsg.Split((char)28);
-                        var blocks = inputmsg[0].Split((char)13);
-
-                        foreach (var block in blocks)
+                        try
                         {
-                            var input = block.Split('|');
-                            switch (input[0])
+                            string messageControlId = "";
+                            bool orderRequest = false;
+                            string message = "";
+                            int read = 0;
+
+                            // Get a stream object for reading and writing
+                            stream = client.GetStream();
+
+                            // Loop to receive all the data sent by the client.
+                            while (stream.DataAvailable)
                             {
-                                case "MSH":
-                                case "MSH":
-                                    orderRequest = input[8] == "QRY^Q02";
-                                    messageControlId = input[9];
-                                    if (!orderRequest)
-                                    {
-                                        sInputMsg.Append(block + (char)13);
-                                    }
-                                    break;
-                                case "QRD":
-                                    string sampleNo = input[8];
-                                    if (orderRequest)
-                                    {
-                                        var response = await SendOrderData(sampleNo, messageControlId);
-
-                                        //Send First order Response
-                                        sw.Write(response.QRYResponse);
-                                        Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.QRYResponse);
-                                        if (response.DSRResponse != null)
-                                        {
-                                            //Send Order Info
-                                            sw.Write(response.DSRResponse);
-                                            Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.DSRResponse);
-                                        }
-                                    }
-                                    break;
-                                case "OBR":
-                                    sInputMsg.Append(block + (char)13);
-                                    break;
-                                case "OBX":
-                                    sInputMsg.Append(block + (char)13);
-                                    break;
+                                read = stream.ReadByte();
+                                message += Convert.ToChar(read);
                             }
+                            if (message != string.Empty)
+                            {
+                                Logger.Logger.LogInstance.LogInfo("TCP/IP Read: '{0}'", message);
+                                //Remove <SB> character from raw message
+                                message = message.Replace("<SB>", "");
 
+                                var inputmsg = message.Split((char)28); 
+                                var blocks = inputmsg[0].Split((char)13);
+
+                                foreach (var block in blocks)
+                                {
+                                    var input = block.Split('|');
+                                    switch (input[0])
+                                    {
+                                        case "MSH":
+                                        case "MSH":
+                                            orderRequest = input[8] == "QRY^Q02";
+                                            messageControlId = input[9];
+                                            if (!orderRequest)
+                                            {
+                                                sInputMsg.Append(block + (char)13);
+                                            }
+                                            break;
+                                        case "QRD":
+                                        case "\nQRD":
+                                            string sampleNo = input[8];
+                                            if (orderRequest)
+                                            {
+                                                ASCIIEncoding encd = new ASCIIEncoding();
+                                                var response = await SendOrderData(sampleNo, messageControlId);
+
+                                                //Send First order Response
+                                                var dataBytes = encd.GetBytes(response.QRYResponse);
+                                                stream.Write(dataBytes, 0, dataBytes.Length);
+                                                Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.QRYResponse);
+                                                if (response.DSRResponse != null)
+                                                {
+                                                    //Send Order Info
+                                                    var dsrBytes = encd.GetBytes(response.DSRResponse);
+                                                    stream.Write(dsrBytes, 0, dsrBytes.Length);
+                                                    Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.DSRResponse);
+                                                }
+                                            }
+                                            break;
+                                        case "OBR":
+                                            sInputMsg.Append(block + (char)13);
+                                            break;
+                                        case "OBX":
+                                            sInputMsg.Append(block + (char)13);
+                                            break;
+                                    }
+
+                                }
+                                if (sInputMsg.Length > 1000)
+                                {
+                                    await ResultProcess();
+                                }
+                            }
                         }
-                        if (sInputMsg.Length > 1000)
+                        catch (Exception ex)
                         {
-                            await ResultProcess();
+                            Logger.Logger.LogInstance.LogException(ex);
                         }
                     }
+
                 }
                 catch (Exception ex)
                 {
@@ -199,11 +204,11 @@ namespace LIS.Com.Businesslogic
                     if (flag && resultMesgSegments.Length > 2)
                     {
                         response = await ProccessMessage(sampleNo, message, messageControlId);
-                        WriteMessage(response.ToString(), sw);
+                        WriteMessage(response.ToString());
                     }
                     else
                     {
-                        WriteMessage(response.ToString(), sw);
+                        WriteMessage(response.ToString());
                     }
                 }
             }
@@ -224,14 +229,16 @@ namespace LIS.Com.Businesslogic
         }
 
 
-        private void WriteMessage(string response, StreamWriter sw)
+        private void WriteMessage(string response)
         {
+            ASCIIEncoding encd = new ASCIIEncoding();
             var finalresponse = (char)11 + response + (char)28 + (char)13;
-            sw.Write(finalresponse);
+            var dsrBytes = encd.GetBytes(finalresponse);
+            stream.Write(dsrBytes, 0, dsrBytes.Length);           
             Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", finalresponse);
         }
 
-        virtual public Task<OrderResponse> SendOrderData(string sampleNo, string messageControlId)
+        virtual public Task<OrderHL7Response> SendOrderData(string sampleNo, string messageControlId)
         {
             throw new NotImplementedException();
         }
@@ -245,7 +252,7 @@ namespace LIS.Com.Businesslogic
         }
     }
 
-    public class OrderResponse
+    public class OrderHL7Response
     {
         public string QRYResponse { get; set; }
         public string DSRResponse { get; set; }

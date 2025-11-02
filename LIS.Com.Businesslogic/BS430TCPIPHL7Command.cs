@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace LIS.Com.Businesslogic
 {
-    public class BS240ETCPIPCommand : TCPIPHL7Command
+    public class BS430TCPIPHL7Command : TCPIPHL7Command
     {
-        public BS240ETCPIPCommand(TCPIPSettings _settings) : base(_settings)
+        public BS430TCPIPHL7Command(TCPIPSettings _settings) : base(_settings)
         { }
 
         public override async Task<string> ProccessMessage(string sampleNo, string rawMessage, string messageControlId)
@@ -26,37 +26,29 @@ namespace LIS.Com.Businesslogic
         }
 
         private async Task SaveResult(string sampleNo, string[] resultMesgSegments)
-        {
-            Result result = new Result();
-            List<TestResultDetails> lsResult = new List<TestResultDetails>();
-            TestResult testResult = new TestResult
-            {
-                ResultDate = DateTime.Now,
-                SampleNo = sampleNo,
-            };
+        {            
+            List<LisTestValue> lsResult = new List<LisTestValue>();            
             for (int i = 0; i < resultMesgSegments.Length; i++)
             {
                 string[] field = resultMesgSegments[i].Split('|');
 
                 if (field[0] == "OBX" && field[2] == "NM")
                 {
-                    var resultDetails = new TestResultDetails();
+                    var resultDetails = new LisTestValue();
                     var paramCode = field[4].ToString();
                     var paramValue = field[5].ToString();
-                    resultDetails.LISParamCode = paramCode;
-                    resultDetails.LISParamValue = paramValue;
-                    resultDetails.LISParamUnit = field[6];
+                    resultDetails.PARAMCODE = paramCode;
+                    resultDetails.Value = paramValue;
+                    resultDetails.REF_VISITNO = sampleNo;
                     lsResult.Add(resultDetails);
                 }
             }
-
-            result.TestResult = testResult;
-            result.ResultDetails = lsResult;
-            Logger.Logger.LogInstance.LogDebug("BS430 Result posted to API for SampleNo: " + testResult.SampleNo);
-            await LisContext.LisDOM.SaveTestResult(result);
+            
+            Logger.Logger.LogInstance.LogDebug("BS430 Result posted to API for SampleNo: " + lsResult[0].REF_VISITNO);
+            await LisContext.LisDOM.SaveTestResult(lsResult);
         }
 
-        public override async Task<OrderResponse> SendOrderData(string sampleNo, string messageControlId)
+        public override async Task<OrderHL7Response> SendOrderData(string sampleNo, string messageControlId)
         {
             Logger.Logger.LogInstance.LogDebug("BS430 generateORMField method started for SampleNo: " + sampleNo);
             string datetime = DateTime.Now.ToString("yyyyMMddhhmmss");
@@ -67,32 +59,32 @@ namespace LIS.Com.Businesslogic
             string message_qak = string.Empty;
             string message_DSP = string.Empty;
             string DSRMessage, QRYMessage;
-            OrderResponse response = new OrderResponse();
+            var response = new OrderHL7Response();
             bool flag = IsValidSampleNo(sampleNo);
             if (flag)
             {
-                IEnumerable<TestRequestDetail> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
+                IEnumerable<AccuHealthSample> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
                 if (testlist != null && testlist.Count() > 0)
                 {
 
                     var firstTest = testlist.First();
-                    var specimen = firstTest.SpecimenName.ToLower();
-                    string gender = "";
-                    switch (firstTest.Patient.Gender)
-                    {
-                        case "MALE":
-                            gender = "M";
-                            break;
-                        case "FEMALE":
-                            gender = "F";
-                            break;
-                        default:
-                            gender = "O";
-                            break;
-                    }
+                    //var specimen = firstTest.SpecimenName.ToLower();
+                    //string gender = "";
+                    //switch (firstTest.Patient.Gender)
+                    //{
+                    //    case "MALE":
+                    //        gender = "M";
+                    //        break;
+                    //    case "FEMALE":
+                    //        gender = "F";
+                    //        break;
+                    //    default:
+                    //        gender = "O";
+                    //        break;
+                    //}
 
-                    string DOB = firstTest.Patient.DateOfBirth.ToString("yyyyMMddhhmmss");
-                    var name = firstTest.Patient?.Name;
+                    //string DOB = firstTest.Patient.DateOfBirth.ToString("yyyyMMddhhmmss");
+                    var name = firstTest.PATFNAME;
                     if (name.Length > 32)
                     {
                         name = name.Substring(0, 30);
@@ -106,10 +98,12 @@ namespace LIS.Com.Businesslogic
                                 message_DSP += $"DSP|{i}||{name}|||{(char)13}";
                                 break;
                             case 4:
-                                message_DSP += $"DSP|{i}||{DOB}|||{(char)13}";
+                                //message_DSP += $"DSP|{i}||{DOB}|||{(char)13}";
+                                message_DSP += $"DSP|{i}|||||{(char)13}";
                                 break;
                             case 5:
-                                message_DSP += $"DSP|{i}||{gender}|||{(char)13}";
+                                //message_DSP += $"DSP|{i}||{gender}|||{(char)13}";
+                                message_DSP += $"DSP|{i}|||||{(char)13}";
                                 break;
                             case 21:
                                 message_DSP += $"DSP|{i}||{sampleNo}|||{(char)13}";
@@ -118,7 +112,8 @@ namespace LIS.Com.Businesslogic
                                 message_DSP += $"DSP|{i}||N|||{(char)13}";
                                 break;
                             case 26:
-                                message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
+                                //message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
+                                message_DSP += $"DSP|{i}|||||{(char)13}";
                                 break;
                             default:
                                 message_DSP += $"DSC||{(char)13}";
@@ -129,8 +124,8 @@ namespace LIS.Com.Businesslogic
                     {
                         int j = 29 + i;
                         var test = testlist.ElementAt(i);
-                        await LisContext.LisDOM.AcknowledgeSample(test.Id);
-                        var testname = test.LISTestCode + "^^^";
+                        //await LisContext.LisDOM.AcknowledgeSample(test.Id);
+                        var testname = test.LisParamCode + "^^^";
                         message_DSP += $"DSP|{j}||{testname}|||{(char)13}";
                     }
                     message_qak = $"QAK|SR|OK|{(char)13}";

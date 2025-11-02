@@ -47,22 +47,27 @@ namespace Test.COM
                     });
                 }
                 else
-                {
-                    client = new TcpClient(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
+                {                   
+                    client = new TcpClient();
+                    client.ConnectAsync(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
                     Logger.LogInstance.LogInfo("TCP/IP Connected.");
                 }
                 btnSend.Enabled = true;
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex)
+            {
+                client.Close();
+                throw ex;
+            }
         }
-        private void TCP_SendData()
+        private void TCP_HL7SendData()
         {
+            if (!client.Connected)
+                client = new TcpClient(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
+
+            Stream sm = client.GetStream();
             try
             {
-                if (!client.Connected)
-                    client = new TcpClient(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
-
-                Stream sm = client.GetStream();
                 StreamReader sr = new StreamReader(sm);
                 StreamWriter sw = new StreamWriter(sm);
                 sw.AutoFlush = true;
@@ -93,9 +98,6 @@ namespace Test.COM
                         Logger.LogInstance.LogInfo("Read :" + ReplaceSpecialCharecter(rawmsg1, false));
                     }
                 }
-
-                clientThread.Abort();
-                sm.Close();
             }
 
             catch (ArgumentNullException ane)
@@ -110,9 +112,65 @@ namespace Test.COM
             {
                 Logger.LogInstance.LogError("Unexpected exception : {0}", e.ToString());
             }
+            finally
+            {
+                clientThread.Abort();
+                sm.Close();
+            }
 
         }
 
+        private async Task TCP_ASTMSendData()
+        {
+            try
+            {
+                if (client == null || !client.Connected)
+                {
+                    client = new TcpClient();
+                    await client.ConnectAsync(txtIPAddress.Text, Convert.ToInt32(txtPortNo.Text));
+                }
+
+                NetworkStream stream = client.GetStream();
+                string msg = textBox1.Text;
+                string writemsg = ReplaceSpecialCharecter(msg, false);
+                byte[] writeData = Encoding.ASCII.GetBytes(writemsg);
+                await stream.WriteAsync(writeData, 0, writeData.Length);
+                //string rawmsg = ReplaceSpecialCharecter(writemsg, true);
+                Logger.LogInstance.LogInfo("Write :" + msg);
+                while (true)
+                {
+                    var data = new byte[1024];
+                    int bytesRead = await stream.ReadAsync(data, 0, data.Length);
+
+                    if (bytesRead > 0)
+                    {
+                        string response = Encoding.ASCII.GetString(data, 0, bytesRead);
+                        Logger.LogInstance.LogInfo("Read :" + response);
+                    }
+                }
+            }
+
+            catch (ArgumentNullException ane)
+            {
+                Logger.LogInstance.LogError("ArgumentNullException : {0}", ane.ToString());
+            }
+            catch (SocketException se)
+            {
+                Logger.LogInstance.LogError("SocketException : {0}", se.ToString());
+            }
+            catch (Exception e)
+            {
+                Logger.LogInstance.LogError("Unexpected exception : {0}", e.ToString());
+            }
+            finally
+            {
+                if (client?.Connected == true)
+                {
+                    client.Close();
+                }
+            }
+
+        }
         /// <summary>
         /// ENQ or (char)5 -enquiry
         /// ACK or (char)6 -acknowledge
@@ -173,24 +231,28 @@ namespace Test.COM
 
         }
 
-        private void btnSend_Click(object sender, EventArgs e)
+        private async void btnSend_Click(object sender, EventArgs e)
         {
             if (rdbSerialPort.Checked)
             {
                 var response = ReplaceSpecialCharecter(textBox1.Text, false);
                 port.Write(response);
-
                 var text = ReplaceSpecialCharecter(response, false);
-
                 Logger.LogInstance.LogInfo("Write :" + text);
             }
             else
             {
-                clientThread = new Thread(new ThreadStart(TCP_SendData));
+                //test test HL7 uncomment the below method
+                //clientThread = new Thread(new ThreadStart(TCP_HL7SendData));
+                clientThread = new Thread(new ThreadStart(RunTCPAsyncMethod));
                 clientThread.Start();
             }
         }
 
+        private void RunTCPAsyncMethod()
+        {
+            TCP_ASTMSendData().GetAwaiter().GetResult();  // Blocking wait, not recommended
+        }
         private string ReplaceSpecialCharecter(string text, bool reverse)
         {
             /*
@@ -254,7 +316,8 @@ namespace Test.COM
             txtPortNo.Visible = false;
             label1.Visible = true;
             comboBox1.Visible = true;
-
+            txtIPAddress.Text = "192.168.31.102";
+            txtPortNo.Text = "1231";
         }
 
         private void rdbTCPIP_CheckedChanged(object sender, EventArgs e)
@@ -269,8 +332,8 @@ namespace Test.COM
 
         private void Home_FormClosed(object sender, FormClosedEventArgs e)
         {
-            clientThread.Abort();
-            client.Close();
+            clientThread?.Abort();
+            client?.Close();
         }
     }
 }
