@@ -1,5 +1,6 @@
 ﻿using LIS.DtoModel;
 using LIS.DtoModel.Models;
+using LIS.DtoModel.Models.ExternalApi;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using System;
@@ -109,24 +110,40 @@ namespace LIS.Com.Businesslogic
                     patientSegment = $"2P|1||||^{patientFirstName}^{patientLastName}||||||||^||||||||||||^^^{Strings.Chr(13)}{Strings.Chr(3)}";
                     temporderSegment += $"{testname}||{datetime}|||||N||||||||||||||Q";
 
-                    var order1 = temporderSegment.Substring(0, 230);
-                    int orderCharCount = temporderSegment.Length - 230;
-                    var order2 = temporderSegment.Substring(230, orderCharCount);
-                    orderSegment1 = $"3{order1}{Strings.Chr(23)}"; //23 means ETB
-                    orderSegment2 = $"4{order2}{Strings.Chr(13)}{Strings.Chr(3)}";
-
-                    output[0] = Strings.Chr(5).ToString();
-                    output[1] = headerSegment;
-                    Logger.Logger.LogInstance.LogDebug("XN350 Header Segment {0}", headerSegment);
-                    output[2] = patientSegment;
-                    Logger.Logger.LogInstance.LogDebug("XN350 Patient Segment {0}", patientSegment);
-                    output[3] = orderSegment1;
-                    Logger.Logger.LogInstance.LogDebug("XN350 Order1 Segment {0}", orderSegment1);
-                    output[4] = orderSegment2;
-                    Logger.Logger.LogInstance.LogDebug("XN350 Order2 Segment {0}", orderSegment2);
-                    output[5] = trailerSegment;
-                    Logger.Logger.LogInstance.LogDebug("XN350 Trailer Segment {0}", trailerSegment);
-                    index = 0;
+                    if (temporderSegment.Length > 230)
+                    {
+                        var order1 = temporderSegment.Substring(0, 230);
+                        int orderCharCount = temporderSegment.Length - 230;
+                        var order2 = temporderSegment.Substring(230, orderCharCount);
+                        orderSegment1 = $"3{order1}{Strings.Chr(23)}"; //23 means ETB
+                        orderSegment2 = $"4{order2}{Strings.Chr(13)}{Strings.Chr(3)}";
+                        output[0] = Strings.Chr(5).ToString();
+                        output[1] = headerSegment;
+                        Logger.Logger.LogInstance.LogDebug("XN350 Header Segment {0}", headerSegment);
+                        output[2] = patientSegment;
+                        Logger.Logger.LogInstance.LogDebug("XN350 Patient Segment {0}", patientSegment);
+                        output[3] = orderSegment1;
+                        Logger.Logger.LogInstance.LogDebug("XN350 Order1 Segment {0}", orderSegment1);
+                        output[4] = orderSegment2;
+                        Logger.Logger.LogInstance.LogDebug("XN350 Order2 Segment {0}", orderSegment2);
+                        output[5] = trailerSegment;
+                        Logger.Logger.LogInstance.LogDebug("XN350 Trailer Segment {0}", trailerSegment);
+                        index = 0;
+                    }
+                    else
+                    {
+                        orderSegment2 = $"3{temporderSegment}{Strings.Chr(13)}{Strings.Chr(3)}";
+                        output[1] = Strings.Chr(5).ToString();
+                        output[2] = headerSegment;
+                        Logger.Logger.LogInstance.LogDebug("XN350 Header Segment {0}", headerSegment);
+                        output[3] = patientSegment;
+                        Logger.Logger.LogInstance.LogDebug("XN350 Patient Segment {0}", patientSegment);
+                        output[4] = orderSegment2;                       
+                        Logger.Logger.LogInstance.LogDebug("XN350 Order2 Segment {0}", orderSegment2);
+                        output[5] = trailerSegment;
+                        Logger.Logger.LogInstance.LogDebug("XN350 Trailer Segment {0}", trailerSegment);
+                        index = 1;
+                    }                    
                 }
                 else//no test order
                 {
@@ -134,16 +151,16 @@ namespace LIS.Com.Businesslogic
                     patientSegment = $"2P|1{Strings.Chr(13)}{Strings.Chr(3)}";
                     orderSegment1 = $"3O|{sampleStr}||||{datetime}||||||||||||||||||Y{Strings.Chr(13)}{Strings.Chr(3)}";
                     trailerSegment = $"4L|1|N{Strings.Chr(13)}{Strings.Chr(3)}";
-                    output[0] = Strings.Chr(5).ToString();
-                    output[1] = headerSegment;
+                    output[1] = Strings.Chr(5).ToString();
+                    output[2] = headerSegment;
                     Logger.Logger.LogInstance.LogDebug("XN350 Header Segment {0}", headerSegment);
-                    output[2] = patientSegment;
+                    output[3] = patientSegment;
                     Logger.Logger.LogInstance.LogDebug("XN350 Patient Segment {0}", patientSegment);
-                    output[3] = orderSegment1;
+                    output[4] = orderSegment1;
                     Logger.Logger.LogInstance.LogDebug("XN350 Order Segment {0}", orderSegment1);
-                    output[4] = trailerSegment;
+                    output[5] = trailerSegment;
                     Logger.Logger.LogInstance.LogDebug("XN350 Trailer Segment {0}", trailerSegment);
-                    index = 0;
+                    index = 1;
                 }
 
                 WriteToPort("" + (char)5);
@@ -208,8 +225,8 @@ namespace LIS.Com.Businesslogic
 
                 string[] record = message.Split(Strings.Chr(13)); // Chr(13)
                 for (int j = 0; j <= sampleIdLst.Count - 1; j++)
-                {                   
-                    var lsResult = new List<LisTestValue>();                  
+                {
+                    var lsResult = new List<LisTestValue>();
                     string sampleNo = "";
                     for (int index = 0; index <= record.Length - 1; index++)
                     {
@@ -219,7 +236,7 @@ namespace LIS.Com.Businesslogic
                             case "O":
                                 {
                                     string[] sampleField = field[3].Split('^');
-                                    sampleNo = sampleField[2].Trim();                                    
+                                    sampleNo = sampleField[2].Trim();
                                     break;
                                 }
 
@@ -235,7 +252,7 @@ namespace LIS.Com.Businesslogic
                                             LisTestValue resultDetails = new LisTestValue();
                                             resultDetails.REF_VISITNO = sampleNo;
                                             resultDetails.PARAMCODE = paramCode;
-                                            resultDetails.Value = field[3];                                           
+                                            resultDetails.Value = field[3];
                                             Logger.Logger.LogInstance.LogDebug("XN350 Result processed for SampleNo " + sampleNo + " and Parameter " + paramCode);
                                             lsResult.Add(resultDetails);
                                         }
@@ -246,7 +263,7 @@ namespace LIS.Com.Businesslogic
                                 }
                         }
                     }
-                   
+
                     Logger.Logger.LogInstance.LogDebug("XN350 Result posted to API for SampleNo: " + lsResult[0].REF_VISITNO);
                     await LisContext.LisDOM.SaveTestResult(lsResult);
 
