@@ -77,14 +77,21 @@ namespace LIS.DtoModel.Models
         public DateTime RUNDATE { get; set; }
 
     }
+
+    [Table("LisTestValues")]
     public class LisTestValue
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
         public string REF_VISITNO { get; set; }
         public string PARAMCODE { get; set; }
         public string Value { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public string Equipment { get; set; }
     }
 
-        [Table("AccuHealthTestOrders")]
+    [Table("AccuHealthTestOrders")]
     public class AccuHealthTestOrder
     {
         [Key]
@@ -95,7 +102,7 @@ namespace LIS.DtoModel.Models
         public string PINNO { get; set; }
         public string REF_VISITNO { get; set; }
         public string ADMISSIONNO { get; set; }
-        public string REQDATETIME { get; set; }
+        public DateTime? REQDATETIME { get; set; }
         public string TESTPROF_CODE { get; set; }
         public string PROCESSED { get; set; }
         public string PATFNAME { get; set; }
@@ -119,6 +126,7 @@ namespace LIS.DtoModel.Models
         public string BC_PRINTED { get; set; }
         public string Value { get; set; }
         public ReportStatusType Status { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     }
 
@@ -128,12 +136,9 @@ namespace LIS.DtoModel.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        public string HIS_TESTNAME { get; set; }
         public string HIS_PARAMCODE { get; set; }
         public string HIS_PARAMNAME { get; set; }
         public string LIS_PARAMCODE { get; set; }
-        public string LIS_PARAMNAME { get; set; }
-        public string LIS_TESTNAME { get; set; }
         public string SPECIMEN { get; set; }
         public string UNIT { get; set; }
 

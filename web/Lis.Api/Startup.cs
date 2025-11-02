@@ -13,6 +13,7 @@ using System.Configuration;
 using SimpleInjector;
 using LIS.Logger;
 using LIS.DtoModel.Interfaces;
+using LIS.DataAccess;
 
 [assembly: OwinStartup(typeof(Lis.Api.Startup))]
 
@@ -33,7 +34,9 @@ namespace Lis.Api
             ConfigureAuth(app, container);
 
             var logger = container.GetInstance<ILogger>();
-            GlobalScheduler.StartScheduler(logger);
+            var accuHealth = new AccuHealthDataSynchronizer(logger);
+
+            GlobalScheduler.StartScheduler(logger, accuHealth);
 
 #if DEBUG
             CreateRolesandUsers(container);

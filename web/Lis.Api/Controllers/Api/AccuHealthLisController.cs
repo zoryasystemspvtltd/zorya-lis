@@ -3,32 +3,37 @@ using LIS.DataAccess;
 using LIS.DtoModel;
 using LIS.DtoModel.Interfaces;
 using LIS.DtoModel.Models;
+using LIS.DtoModel.Models.ExternalApi;
 using LIS.Logger;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Remoting.Contexts;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Lis.Api.Controllers.Api
 {
+    /// <summary>
+    /// This API is used to comminicate between Zorya LIS server and indivedual LIS terminal
+    /// Used for Accu Health
+    /// </summary>
     public class AccuHealthLisController : ApiController
     {
-        private static readonly string HospitalApiUrl = ConfigurationManager.AppSettings["HospitalApiUrl"];
-        private static readonly string ExternalAPIBaseUri = ConfigurationManager.AppSettings["ExternalAPIBaseUri"];
-        private static readonly string AccuHealthClientId = ConfigurationManager.AppSettings["AccuHealthClientId"];
-        private static readonly string AccuHealthBranchId = ConfigurationManager.AppSettings["AccuHealthBranchId"];
-
         private IResponseManager responseManager;
         private ApplicationDBContext dBContext;
         private ILogger logger;
         private IModuleIdentity identity;
-        public AccuHealthLisController(ILogger logger, IResponseManager responseManager, ApplicationDBContext dBContext, IModuleIdentity identity )
+        public AccuHealthLisController(ILogger logger, 
+            IResponseManager responseManager, 
+            ApplicationDBContext dBContext, 
+            IModuleIdentity identity )
         {
             this.dBContext = dBContext;
             this.logger = logger;
@@ -36,14 +41,32 @@ namespace Lis.Api.Controllers.Api
             this.identity = identity;
         }
 
+        /// <summary>
+        /// This methods is used to ping the API from LIS Console
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
-        // GET api/<controller>
-        // Sync Test Param - api/LIS/GetParams?ClientId=67DB18E8-2988-4F53-A252-B6CB0CB8873F&Branch_Id=EE09D44E-757D-4FD2-B171-1F59224390EA
-        public async Task<IEnumerable<string>> Get()
+        [HttpGet]
+        public bool Get()
         {
-            throw new NotImplementedException();
+            try
+            {
+                logger.LogInfo($"Ping API Request");
+                var testRequestDetails = true; // Todo 
+                logger.LogInfo($"Ping API Response");
+                return testRequestDetails;
+            }
+            catch (Exception e)
+            {
+                logger.LogException(e);
+                return false;
+            }
         }
-
+        /// <summary>
+        /// Get list of Sample for a specific sampleno coming through barcode
+        /// </summary>
+        /// <param name="Id">Barcode</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
         public IEnumerable<AccuHealthSample> Get(string Id)
@@ -52,9 +75,8 @@ namespace Lis.Api.Controllers.Api
             {
                 logger.LogInfo($"Get Sample Request: {Id}");
 
-
-                var testOrderList = dBContext.AccuHealthTestOrders
-                            .Where(p => p.TESTPROF_CODE.Equals(Id, StringComparison.OrdinalIgnoreCase) && 
+                var testOrders = dBContext.AccuHealthTestOrders
+                            .Where(p => p.TESTPROF_CODE.Equals(Id, StringComparison.OrdinalIgnoreCase) &&
                                             p.Status == ReportStatusType.New)
                             .Join(dBContext.AccuHealthParamMappings,
                                 t => t.PARAMCODE,
@@ -65,26 +87,37 @@ namespace Lis.Api.Controllers.Api
                                 e => e.Id,
                                 (tmp, e) => new { tmp.t, tmp.pm, e })
                             .Where(x => x.e.IsActive &&
-                                    x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase))
-                            .Select(x => new AccuHealthSample()
-                            {
-                                PATFNAME = x.t.PATFNAME,
-                                PATMNAME = x.t.PATMNAME,
-                                PATLNAME = x.t.PATLNAME,
-                                PAT_DOB = x.t.PAT_DOB,
-                                GENDER = x.t.GENDER,
-                                PATAGE = x.t.PATAGE,
-                                AGEUNIT = x.t.AGEUNIT,
-                                SampleNo = x.t.REF_VISITNO,
-                                LisParamCode = x.pm.LIS_PARAMCODE,
-                                HIS_PARAMCODE = x.pm.HIS_PARAMCODE,
-                                SPECIMEN = x.pm.SPECIMEN
-                            })
-                            .ToList();
+                                    x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase));
+                            
 
-                var responseStrign = JsonConvert.SerializeObject(testOrderList);
-                logger.LogInfo($"Get Sample Response: {responseStrign}");
-                return testOrderList;
+                foreach (var item in testOrders)
+                {
+                    item.t.Status = ReportStatusType.SentToEquipment;
+                }
+
+                var orders = testOrders
+                    .Select(x => new AccuHealthSample()
+                    {
+                        PATFNAME = x.t.PATFNAME,
+                        PATMNAME = x.t.PATMNAME,
+                        PATLNAME = x.t.PATLNAME,
+                        PAT_DOB = x.t.PAT_DOB,
+                        GENDER = x.t.GENDER,
+                        PATAGE = x.t.PATAGE,
+                        AGEUNIT = x.t.AGEUNIT,
+                        SampleNo = x.t.REF_VISITNO,
+                        LisParamCode = x.pm.LIS_PARAMCODE,
+                        HIS_PARAMCODE = x.pm.HIS_PARAMCODE,
+                        SPECIMEN = x.pm.SPECIMEN
+                    })
+                    .ToList();
+
+                var responseStrign = JsonConvert.SerializeObject(orders);
+                logger.LogInfo($"Get Sample Response: {orders}");
+
+                dBContext.SaveChanges();
+
+                return orders;
             }
             catch (Exception e)
             {
@@ -95,44 +128,72 @@ namespace Lis.Api.Controllers.Api
 
 
         /// <summary>
-        /// Saving new order from Accuhealth
+        /// Save the list of result received from LIS Console
         /// </summary>
-        /// <param name="newOrder"></param>
+        /// <param name="testValue"></param>
         /// <returns></returns>`
         [AllowAnonymous]
-        public HttpResponseMessage Post(LisTestValue testValue)
+        public async Task<HttpResponseMessage> Post(LisTestValue[] values)
         {
             try
             {
-                var order = dBContext.AccuHealthTestOrders
-                            .Join(dBContext.AccuHealthParamMappings,
-                                t => t.PARAMCODE,
-                                pm => pm.HIS_PARAMCODE,
-                                (t, pm) => new { t, pm })
-                            .Join(dBContext.EquipmentMaster,
-                                temp => temp.pm.EquipmentId,
-                                e => e.Id,
-                                (temp, e) => new { temp.t, temp.pm, e })
-                            .Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase)
-                                     && x.t.REF_VISITNO == testValue.REF_VISITNO
-                                     && x.pm.LIS_PARAMCODE == testValue.PARAMCODE)
-                            .Select(x=>x.t)
-                            .FirstOrDefault();
-               
-                if (order != null)
+                foreach(var item in values)
                 {
-                    order.Value = testValue.Value;
-                    dBContext.SaveChanges();
-
-                    APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "New Sample added successfully", null, order.ROW_ID);
-
-                    return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
-
+                    item.Equipment = identity.AccessKey;
                 }
-                else
+
+                dBContext.LisTestValues.AddRange(values);
+
+                var recordsToUpdate = dBContext.AccuHealthTestOrders
+                .Join(dBContext.AccuHealthParamMappings,
+                    o => o.PARAMCODE,
+                    pm => pm.HIS_PARAMCODE,
+                    (o, pm) => new { o, pm })
+                .Join(dBContext.EquipmentMaster,
+                    x => x.pm.EquipmentId,
+                    e => e.Id,
+                    (x, e) => new { x.o, x.pm, e })
+                .Join(values,
+                    x => new { x.o.REF_VISITNO, LIS_PARAMCODE = x.pm.LIS_PARAMCODE },
+                    vItem => new { REF_VISITNO = vItem.REF_VISITNO, LIS_PARAMCODE = vItem.PARAMCODE },
+                    (x, vItem) => new { x.o, x.pm, x.e, vItem.Value })
+                .Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase));
+
+                foreach (var item in recordsToUpdate)
                 {
-                    return null;
+                    item.o.Value = item.Value;
+                    item.o.Status = ReportStatusType.ReportGenerated;
                 }
+
+                dBContext.SaveChanges();
+
+                var accuHealthResults = recordsToUpdate
+                                            .Select(p=> new AccuHealthTestValue()
+                                            {
+                                                ROW_ID = p.o.ROW_ID,
+                                                isSynced = true,
+                                                SRNO = p.o.REF_VISITNO,
+                                                SDATE = p.o.DATESTAMP,
+                                                SAMPLEID = p.o.REF_VISITNO,
+                                                TESTID = p.o.PARAMCODE,
+                                                MACHINEID = p.e.Name,
+                                                SUFFIX = "",
+                                                TRANSFERFLAG = "",
+                                                TMPVALUE = p.o.Value,
+                                                DESCRIPTION = p.o.PARAMCODE,
+                                                RUNDATE = DateTime.Now,
+                                            })
+                                            .ToArray();
+
+                // TODO Send to AccuHealth
+                await PostTestResults(accuHealthResults);
+
+                dBContext.AccuHealthTestValues.AddRange(accuHealthResults);
+                dBContext.SaveChanges();
+
+                APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "Value saved successfully.", null,null);
+
+                return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
             }
             catch (Exception e)
             {
@@ -141,51 +202,43 @@ namespace Lis.Api.Controllers.Api
             }
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+        private static readonly string HospitalApiUrl = ConfigurationManager.AppSettings["HospitalApiUrl"];
+        private static readonly string AccuHealthClientId = ConfigurationManager.AppSettings["AccuHealthClientId"];
+        private static readonly string AccuHealthBranchId = ConfigurationManager.AppSettings["AccuHealthBranchId"];
+        private static async Task<bool> PostTestResults(AccuHealthTestValue[] results)
         {
-        }
-
-        private async Task<GetParamsResponse> GetTestParams()
-        {
-            HttpResponseMessage responseMessage = null;
-
-            GetPendingOrderCountResponse responseCount = new GetPendingOrderCountResponse();
-            try
+            string apiUrl = $"{HospitalApiUrl}lis/PostTestResults";
+            using (var client = new ApiClient().GetHttpClient())
             {
-                logger.LogInfo("GetTestParams Started.");
-
-                string apiUrl = $"{HospitalApiUrl}lis/GetParams?ClientId={AccuHealthClientId}";
-                if (!AccuHealthBranchId.Equals(string.Empty))
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                var payload = new
                 {
-                    apiUrl += $"&BranchId={AccuHealthBranchId}";
-                }
-
-                using (var client = new ApiClient().GetHttpClient())
+                    ClientId = AccuHealthClientId,
+                    TestValues = results
+                };
+                var jsonPayload = JsonConvert.SerializeObject(payload);
+                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(apiUrl, content);
+                if (response.IsSuccessStatusCode)
                 {
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                    responseMessage = await client.GetAsync(apiUrl);
-
-                    var jsonString = await responseMessage.Content.ReadAsStringAsync();
-                    var response = JsonConvert.DeserializeObject<GetParamsResponse>(jsonString);
-                    logger.LogInfo("GetTestParams Completed.");
-                    return response;
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    // Convert JSON string to dynamic object
+                    var result = JsonConvert.DeserializeObject<UpdateOrderStatusResponse>(responseContent);
+                    if (result.ResponseType == "Success")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-
-
-            }
-            catch (Exception ex)
-            {
-                logger.LogException(ex);
-                return null;
+                else
+                {
+                    return false;
+                }
             }
         }
     }
-
-    
 }

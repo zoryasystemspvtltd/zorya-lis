@@ -1,0 +1,3 @@
+Data Source=DTPL-DEV-SVR;User Id=dbadmin;Password=Dev@2025#;Initial Catalog=ZoryaLIS;
+
+https://lisportal.labiq.in/

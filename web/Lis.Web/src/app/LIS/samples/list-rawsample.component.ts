@@ -22,30 +22,30 @@ export class ListRawSampleComponent implements OnInit {
     hideCreate: true,
     allowPaging: true,
     //filterStatus:0,
-    allowedFilter: [0, 1],
+    allowedFilter: [0, 1, 2],
     auto_refresh:true,
     isNew:true,
     elements: [
       {
-        heading: 'Barcode No', fieldName: 'sampleNo', sortable: true, width: '12%', type: 'link'
+        heading: 'Sample No', fieldName: 'reF_VISITNO', sortable: true, width: '15%', type: 'link'
       },
       {
-        heading: 'Lab No', fieldName: 'hisRequestNo', sortable: false, width: '10%', type: 'label'
+        heading: 'Admission No', fieldName: 'admissionno', sortable: false, width: '15%', type: 'label'
       },
       {
-        heading: 'IP No', fieldName: 'ipNo', sortable: false, width: '10%', type: 'label'
+        heading: 'Patient Name', fieldName: 'patfname', sortable: false, width: '15%', type: 'label'
       },
       {
-        heading: 'Test Name', fieldName: 'hisTestName',chieldFieldName:'name', sortable: false, width: '16%', type: 'label'
+        heading: 'Test Name', fieldName: 'testproF_CODE', sortable: false, width: '10%', type: 'label'
       },
       {
-        heading: 'Department', fieldName: 'department',chieldFieldName:'name', sortable: false, width: '14%', type: 'label'
+        heading: 'Param Name', fieldName: 'paramcode', sortable: false, width: '10%', type: 'label'
       },
       {
-        heading: 'Collection Date', fieldName: 'sampleCollectionDate', sortable: true, width: '16%', type: 'date', format: 'dd/MM/yyyy'
+        heading: 'Collection Date', fieldName: 'reqdatetime', sortable: true, width: '16%', type: 'date', format: 'dd/MM/yyyy'
       },
       {
-        heading: 'Patient Name', fieldName: 'patient', sortable: false, width: '20%', type: 'chield'
+        heading: 'Value', fieldName: 'value', sortable: false, width: '15%', type: 'label'
       }
     ]
   }
