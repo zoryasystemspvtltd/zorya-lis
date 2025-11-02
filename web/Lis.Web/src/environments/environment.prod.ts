@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   IsOldApplicationServer:true,
-  ApplicationServer:'https://localhost:44392/',
-  ClientId: 'DXI800',
+  ApplicationServer:'https://lisportal.labiq.in',
+  ClientId: 'Zorya Server',
   VDName:'',
 };

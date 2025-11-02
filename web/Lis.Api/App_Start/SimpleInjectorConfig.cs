@@ -83,6 +83,9 @@ namespace Lis.Api
                 manager => InitializeUserManager(manager, app));
 
             // Setup for ISecureDataFormat
+            container.Register<IEquipmentManager, EquipmentManager>(Lifestyle.Scoped);
+            container.Register<IEquipmentTestMappingManager, EquipmentTestMappingManager>(Lifestyle.Scoped);
+            container.Register<IEquipmentHeartBeatManager, EquipmentHeartBeatManager>(Lifestyle.Scoped);
             container.Register<ISecureDataFormat<AuthenticationTicket>,
                 SecureDataFormat<AuthenticationTicket>>(Lifestyle.Scoped);
             container.Register<ITextEncoder, Base64UrlTextEncoder>(Lifestyle.Scoped);
@@ -94,6 +97,7 @@ namespace Lis.Api
                 Lifestyle.Scoped);
             container.Register<IModuleIdentity, ModuleIdentity>(Lifestyle.Transient);
             container.Register<ILogger, Logger>(Lifestyle.Singleton);
+            container.Register<AccuHealthDataSynchronizer>(Lifestyle.Singleton);
             container.Register<IFileHandler, FileHandler>(Lifestyle.Scoped);
             //.Register<IEquipmentManager, EquipmentManager>(Lifestyle.Scoped);
             

@@ -1,6 +1,6 @@
 # zorya-lis
 1. Change Connection string within 
-	1.1 App.config in Dxi800
+	1.1 App.config in ZoryaLIS
 	1.2 App.config in DataModel
 
 2. EF Code first Data migration
