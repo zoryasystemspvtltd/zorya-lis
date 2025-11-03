@@ -140,52 +140,52 @@ namespace Lis.Api.Controllers.Api
 
                 dBContext.LisTestValues.AddRange(values);
 
-                //var recordsToUpdate = dBContext.AccuHealthTestOrders
-                //.Join(dBContext.AccuHealthParamMappings,
-                //    o => o.PARAMCODE,
-                //    pm => pm.HIS_PARAMCODE,
-                //    (o, pm) => new { o, pm })
-                //.Join(dBContext.EquipmentMaster,
-                //    x => x.pm.EquipmentId,
-                //    e => e.Id,
-                //    (x, e) => new { x.o, x.pm, e })
-                //.Join(values,
-                //    x => new { x.o.REF_VISITNO, LIS_PARAMCODE = x.pm.LIS_PARAMCODE },
-                //    vItem => new { REF_VISITNO = vItem.REF_VISITNO, LIS_PARAMCODE = vItem.PARAMCODE },
-                //    (x, vItem) => new { x.o, x.pm, x.e, vItem.Value })
-                //.Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase));
+                var recordsToUpdate = dBContext.AccuHealthTestOrders
+                .Join(dBContext.AccuHealthParamMappings,
+                    o => o.PARAMCODE,
+                    pm => pm.HIS_PARAMCODE,
+                    (o, pm) => new { o, pm })
+                .Join(dBContext.EquipmentMaster,
+                    x => x.pm.EquipmentId,
+                    e => e.Id,
+                    (x, e) => new { x.o, x.pm, e })
+                .Join(values.AsQueryable(),
+                    x => new { x.o.REF_VISITNO, LIS_PARAMCODE = x.pm.LIS_PARAMCODE },
+                    vItem => new { REF_VISITNO = vItem.REF_VISITNO, LIS_PARAMCODE = vItem.PARAMCODE },
+                    (x, vItem) => new { x.o, x.pm, x.e, vItem.Value })
+                .Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase));
 
-                //foreach (var item in recordsToUpdate)
-                //{
-                //    item.o.Value = item.Value;
-                //    item.o.Status = ReportStatusType.ReportGenerated;
-                //}
+                foreach (var item in recordsToUpdate)
+                {
+                    item.o.Value = item.Value;
+                    item.o.Status = ReportStatusType.ReportGenerated;
+                }
 
                 dBContext.SaveChanges();
 
-                //var accuHealthResults = recordsToUpdate
-                //                            .Select(p=> new AccuHealthTestValue()
-                //                            {
-                //                                ROW_ID = p.o.ROW_ID,
-                //                                isSynced = true,
-                //                                SRNO = p.o.REF_VISITNO,
-                //                                SDATE = p.o.DATESTAMP,
-                //                                SAMPLEID = p.o.REF_VISITNO,
-                //                                TESTID = p.o.PARAMCODE,
-                //                                MACHINEID = p.e.Name,
-                //                                SUFFIX = "",
-                //                                TRANSFERFLAG = "",
-                //                                TMPVALUE = p.o.Value,
-                //                                DESCRIPTION = p.o.PARAMCODE,
-                //                                RUNDATE = DateTime.Now,
-                //                            })
-                //                            .ToArray();
+                var accuHealthResults = recordsToUpdate
+                                            .Select(p => new AccuHealthTestValue()
+                                            {
+                                                ROW_ID = p.o.ROW_ID,
+                                                isSynced = true,
+                                                SRNO = p.o.REF_VISITNO,
+                                                SDATE = p.o.DATESTAMP,
+                                                SAMPLEID = p.o.REF_VISITNO,
+                                                TESTID = p.o.PARAMCODE,
+                                                MACHINEID = p.e.Name,
+                                                SUFFIX = "",
+                                                TRANSFERFLAG = "",
+                                                TMPVALUE = p.o.Value,
+                                                DESCRIPTION = p.o.PARAMCODE,
+                                                RUNDATE = DateTime.Now,
+                                            })
+                                            .ToArray();
 
-                //// TODO Send to AccuHealth
-                //await PostTestResults(accuHealthResults);
+                // TODO Send to AccuHealth
+                await PostTestResults(accuHealthResults);
 
-                //dBContext.AccuHealthTestValues.AddRange(accuHealthResults);
-                //dBContext.SaveChanges();
+                dBContext.AccuHealthTestValues.AddRange(accuHealthResults);
+                dBContext.SaveChanges();
 
                 APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "Value saved successfully.", null,null);
 
