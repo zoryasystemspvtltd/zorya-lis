@@ -1,6 +1,5 @@
 ﻿using LIS.DtoModel;
 using System;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -113,13 +112,13 @@ namespace LIS.Com.Businesslogic
                                 //Remove <SB> character from raw message
                                 message = message.Replace("<SB>", "");
 
-                                var inputmsg = message.Split((char)28); 
+                                var inputmsg = message.Split((char)28);
                                 var blocks = inputmsg[0].Split((char)13);
 
                                 foreach (var block in blocks)
                                 {
                                     var input = block.Split('|');
-                                    switch (input[0])
+                                    switch (input[0].Trim())
                                     {
                                         case "MSH":
                                         case "MSH":
@@ -130,8 +129,7 @@ namespace LIS.Com.Businesslogic
                                                 sInputMsg.Append(block + (char)13);
                                             }
                                             break;
-                                        case "QRD":
-                                        case "\nQRD":
+                                        case "QRD":                                       
                                             string sampleNo = input[8];
                                             if (orderRequest)
                                             {
@@ -151,16 +149,16 @@ namespace LIS.Com.Businesslogic
                                                 }
                                             }
                                             break;
-                                        case "OBR":
+                                        case "OBR":                                        
                                             sInputMsg.Append(block + (char)13);
                                             break;
-                                        case "OBX":
+                                        case "OBX":                                      
                                             sInputMsg.Append(block + (char)13);
                                             break;
                                     }
 
                                 }
-                                if (sInputMsg.Length > 1000)
+                                if (sInputMsg.Length > 100)
                                 {
                                     await ResultProcess();
                                 }
@@ -195,13 +193,13 @@ namespace LIS.Com.Businesslogic
                     messageControlId = firstrow[9];
 
                 string[] field = resultMesgSegments[1].Split('|');
-                if (field[0] == "OBR")
+                if (field[0].Trim() == "OBR")
                 {
                     string sampleNo = field[3];
-                    bool flag = IsValidSampleNo(sampleNo);
+                    //bool flag = IsValidSampleNo(sampleNo);
                     string response = @"MSH|^~\&|||||||ACK|" + (char)13 + $"MSA|AR|{messageControlId}|{(char)13}";
 
-                    if (flag && resultMesgSegments.Length > 2)
+                    if (resultMesgSegments.Length > 2)
                     {
                         response = await ProccessMessage(sampleNo, message, messageControlId);
                         WriteMessage(response.ToString());
@@ -234,7 +232,7 @@ namespace LIS.Com.Businesslogic
             ASCIIEncoding encd = new ASCIIEncoding();
             var finalresponse = (char)11 + response + (char)28 + (char)13;
             var dsrBytes = encd.GetBytes(finalresponse);
-            stream.Write(dsrBytes, 0, dsrBytes.Length);           
+            stream.Write(dsrBytes, 0, dsrBytes.Length);
             Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", finalresponse);
         }
 

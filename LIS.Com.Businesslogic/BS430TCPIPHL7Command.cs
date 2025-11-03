@@ -26,13 +26,13 @@ namespace LIS.Com.Businesslogic
         }
 
         private async Task SaveResult(string sampleNo, string[] resultMesgSegments)
-        {            
-            List<LisTestValue> lsResult = new List<LisTestValue>();            
+        {
+            List<LisTestValue> lsResult = new List<LisTestValue>();
             for (int i = 0; i < resultMesgSegments.Length; i++)
             {
                 string[] field = resultMesgSegments[i].Split('|');
 
-                if (field[0] == "OBX" && field[2] == "NM")
+                if (field[0].Trim() == "OBX" && field[2] == "NM")
                 {
                     var resultDetails = new LisTestValue();
                     var paramCode = field[4].ToString();
@@ -43,7 +43,7 @@ namespace LIS.Com.Businesslogic
                     lsResult.Add(resultDetails);
                 }
             }
-            
+
             Logger.Logger.LogInstance.LogDebug("BS430 Result posted to API for SampleNo: " + lsResult[0].REF_VISITNO);
             await LisContext.LisDOM.SaveTestResult(lsResult);
         }
@@ -59,95 +59,64 @@ namespace LIS.Com.Businesslogic
             string message_qak = string.Empty;
             string message_DSP = string.Empty;
             string DSRMessage, QRYMessage;
-            var response = new OrderHL7Response();
-            bool flag = IsValidSampleNo(sampleNo);
-            if (flag)
+            var response = new OrderHL7Response();            
+            IEnumerable<AccuHealthSample> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
+            if (testlist != null && testlist.Count() > 0)
             {
-                IEnumerable<AccuHealthSample> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
-                if (testlist != null && testlist.Count() > 0)
+
+                var firstTest = testlist.First();
+                var specimen = firstTest.SPECIMEN.ToLower();               
+                var name = firstTest.PATFNAME;
+                if (name.Length > 32)
+                {
+                    name = name.Substring(0, 30);
+                }
+                for (int i = 1; i <= 28; i++)
                 {
 
-                    var firstTest = testlist.First();
-                    //var specimen = firstTest.SpecimenName.ToLower();
-                    //string gender = "";
-                    //switch (firstTest.Patient.Gender)
-                    //{
-                    //    case "MALE":
-                    //        gender = "M";
-                    //        break;
-                    //    case "FEMALE":
-                    //        gender = "F";
-                    //        break;
-                    //    default:
-                    //        gender = "O";
-                    //        break;
-                    //}
-
-                    //string DOB = firstTest.Patient.DateOfBirth.ToString("yyyyMMddhhmmss");
-                    var name = firstTest.PATFNAME;
-                    if (name.Length > 32)
+                    switch (i)
                     {
-                        name = name.Substring(0, 30);
+                        case 3:
+                            message_DSP += $"DSP|{i}||{name}|||{(char)13}";
+                            break;
+                        case 4:
+                        case 5:
+                            message_DSP += $"DSP|{i}|||||{(char)13}";                          
+                            break;
+                        case 21:
+                            message_DSP += $"DSP|{i}||{sampleNo}|||{(char)13}";
+                            break;
+                        case 24:
+                            message_DSP += $"DSP|{i}||N|||{(char)13}";
+                            break;
+                        case 26:
+                            message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
+                            //message_DSP += $"DSP|{i}|||||{(char)13}";
+                            break;
+                        default:
+                            message_DSP += $"DSC||{(char)13}";
+                            break;
                     }
-                    for (int i = 1; i <= 28; i++)
-                    {
-
-                        switch (i)
-                        {
-                            case 3:
-                                message_DSP += $"DSP|{i}||{name}|||{(char)13}";
-                                break;
-                            case 4:
-                                //message_DSP += $"DSP|{i}||{DOB}|||{(char)13}";
-                                message_DSP += $"DSP|{i}|||||{(char)13}";
-                                break;
-                            case 5:
-                                //message_DSP += $"DSP|{i}||{gender}|||{(char)13}";
-                                message_DSP += $"DSP|{i}|||||{(char)13}";
-                                break;
-                            case 21:
-                                message_DSP += $"DSP|{i}||{sampleNo}|||{(char)13}";
-                                break;
-                            case 24:
-                                message_DSP += $"DSP|{i}||N|||{(char)13}";
-                                break;
-                            case 26:
-                                //message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
-                                message_DSP += $"DSP|{i}|||||{(char)13}";
-                                break;
-                            default:
-                                message_DSP += $"DSC||{(char)13}";
-                                break;
-                        }
-                    }
-                    for (int i = 0; i < testlist.Count(); i++)
-                    {
-                        int j = 29 + i;
-                        var test = testlist.ElementAt(i);
-                        //await LisContext.LisDOM.AcknowledgeSample(test.Id);
-                        var testname = test.LisParamCode + "^^^";
-                        message_DSP += $"DSP|{j}||{testname}|||{(char)13}";
-                    }
-                    message_qak = $"QAK|SR|OK|{(char)13}";
-                    string message_QRD = $"QRD|{datetime}|R|D|54|||RD|{sampleNo}|OTH|||T|{(char)13}";
-                    string message_QRF = $"QRF||{datetime}|{datetime}|||RCT|COR|ALL||{(char)13}";
-                    string message_DSC = $"DSC||{(char)13}";
-
-                    DSRMessage = message_MSH + message_MSA + message_err + message_qak + message_QRD + message_QRF + message_DSP + message_DSC;
-                    DSRMessage = AddHeaderAndFooterToHL7Msg(DSRMessage);
-
-                    QRYMessage = SendResponse("OK", messageControlId);
-                    response.QRYResponse = QRYMessage;
-                    response.DSRResponse = DSRMessage;
-                    return response;
                 }
-                else
+                for (int i = 0; i < testlist.Count(); i++)
                 {
-                    QRYMessage = SendResponse("NF", messageControlId);
-                    response.QRYResponse = QRYMessage;
-                    response.DSRResponse = null;
-                    return response;
+                    int j = 29 + i;
+                    var test = testlist.ElementAt(i);                   
+                    var testname = test.LisParamCode + "^^^";
+                    message_DSP += $"DSP|{j}||{testname}|||{(char)13}";
                 }
+                message_qak = $"QAK|SR|OK|{(char)13}";
+                string message_QRD = $"QRD|{datetime}|R|D|54|||RD|{sampleNo}|OTH|||T|{(char)13}";
+                string message_QRF = $"QRF||{datetime}|{datetime}|||RCT|COR|ALL||{(char)13}";
+                string message_DSC = $"DSC||{(char)13}";
+
+                DSRMessage = message_MSH + message_MSA + message_err + message_qak + message_QRD + message_QRF + message_DSP + message_DSC;
+                DSRMessage = AddHeaderAndFooterToHL7Msg(DSRMessage);
+
+                QRYMessage = SendResponse("OK", messageControlId);
+                response.QRYResponse = QRYMessage;
+                response.DSRResponse = DSRMessage;
+                return response;
             }
             else
             {
@@ -155,7 +124,7 @@ namespace LIS.Com.Businesslogic
                 response.QRYResponse = QRYMessage;
                 response.DSRResponse = null;
                 return response;
-            }
+            }            
         }
 
         public override string SendResponse(string qak, string messageControlId)
