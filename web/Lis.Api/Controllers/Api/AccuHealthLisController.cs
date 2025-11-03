@@ -3,17 +3,14 @@ using LIS.DataAccess;
 using LIS.DtoModel;
 using LIS.DtoModel.Interfaces;
 using LIS.DtoModel.Models;
-using LIS.DtoModel.Models.ExternalApi;
 using LIS.Logger;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -30,10 +27,10 @@ namespace Lis.Api.Controllers.Api
         private ApplicationDBContext dBContext;
         private ILogger logger;
         private IModuleIdentity identity;
-        public AccuHealthLisController(ILogger logger, 
-            IResponseManager responseManager, 
-            ApplicationDBContext dBContext, 
-            IModuleIdentity identity )
+        public AccuHealthLisController(ILogger logger,
+            IResponseManager responseManager,
+            ApplicationDBContext dBContext,
+            IModuleIdentity identity)
         {
             this.dBContext = dBContext;
             this.logger = logger;
@@ -83,7 +80,7 @@ namespace Lis.Api.Controllers.Api
                                 (tmp, e) => new { tmp.t, tmp.pm, e })
                             .Where(x => x.e.IsActive &&
                                     x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase));
-                            
+
 
                 foreach (var item in testOrders)
                 {
@@ -133,61 +130,65 @@ namespace Lis.Api.Controllers.Api
         {
             try
             {
-                foreach(var item in values)
+                foreach (var item in values)
                 {
                     item.Equipment = identity.AccessKey;
                 }
 
                 dBContext.LisTestValues.AddRange(values);
 
-                var recordsToUpdate = dBContext.AccuHealthTestOrders
-                .Join(dBContext.AccuHealthParamMappings,
-                    o => o.PARAMCODE,
-                    pm => pm.HIS_PARAMCODE,
-                    (o, pm) => new { o, pm })
-                .Join(dBContext.EquipmentMaster,
-                    x => x.pm.EquipmentId,
-                    e => e.Id,
-                    (x, e) => new { x.o, x.pm, e })
-                .Join(values.AsQueryable(),
-                    x => new { x.o.REF_VISITNO, LIS_PARAMCODE = x.pm.LIS_PARAMCODE },
-                    vItem => new { REF_VISITNO = vItem.REF_VISITNO, LIS_PARAMCODE = vItem.PARAMCODE },
-                    (x, vItem) => new { x.o, x.pm, x.e, vItem.Value })
-                .Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase));
+                var accuHealthResults = new List<AccuHealthTestValue>();
 
-                foreach (var item in recordsToUpdate)
+                foreach (var item in values)
                 {
-                    item.o.Value = item.Value;
-                    item.o.Status = ReportStatusType.ReportGenerated;
+                    item.Equipment = identity.AccessKey;
+
+                    var recordsToUpdate = dBContext.AccuHealthTestOrders
+                    .Join(dBContext.AccuHealthParamMappings,
+                        o => o.PARAMCODE,
+                        pm => pm.HIS_PARAMCODE,
+                        (o, pm) => new { o, pm })
+                    .Join(dBContext.EquipmentMaster,
+                        x => x.pm.EquipmentId,
+                        e => e.Id,
+                        (x, e) => new { x.o, x.pm, e })
+                    .Where(x => x.e.AccessKey.Equals(identity.AccessKey, StringComparison.OrdinalIgnoreCase)
+                    && x.pm.LIS_PARAMCODE == item.PARAMCODE && x.o.REF_VISITNO == item.REF_VISITNO).FirstOrDefault();
+
+                    if (recordsToUpdate != null)
+                    {
+                        recordsToUpdate.o.Value = item.Value;
+                        recordsToUpdate.o.Status = ReportStatusType.ReportGenerated;
+
+                        var accuHealth = new AccuHealthTestValue()
+                        {
+                            ROW_ID = recordsToUpdate.o.ROW_ID,
+                            isSynced = true,
+                            SRNO = recordsToUpdate.o.REF_VISITNO,
+                            SDATE = recordsToUpdate.o.DATESTAMP,
+                            SAMPLEID = recordsToUpdate.o.REF_VISITNO,
+                            TESTID = recordsToUpdate.o.PARAMCODE,
+                            MACHINEID = recordsToUpdate.e.Name,
+                            SUFFIX = "",
+                            TRANSFERFLAG = "",
+                            TMPVALUE = recordsToUpdate.o.Value,
+                            DESCRIPTION = recordsToUpdate.o.PARAMCODE,
+                            RUNDATE = DateTime.Now,
+                        };
+                        accuHealthResults.Add(accuHealth);
+                    }
                 }
-
                 dBContext.SaveChanges();
-
-                var accuHealthResults = recordsToUpdate
-                                            .Select(p => new AccuHealthTestValue()
-                                            {
-                                                ROW_ID = p.o.ROW_ID,
-                                                isSynced = true,
-                                                SRNO = p.o.REF_VISITNO,
-                                                SDATE = p.o.DATESTAMP,
-                                                SAMPLEID = p.o.REF_VISITNO,
-                                                TESTID = p.o.PARAMCODE,
-                                                MACHINEID = p.e.Name,
-                                                SUFFIX = "",
-                                                TRANSFERFLAG = "",
-                                                TMPVALUE = p.o.Value,
-                                                DESCRIPTION = p.o.PARAMCODE,
-                                                RUNDATE = DateTime.Now,
-                                            })
-                                            .ToArray();
 
                 // TODO Send to AccuHealth
-                await PostTestResults(accuHealthResults);
+                if (accuHealthResults != null)
+                {
+                    await PostTestResults(accuHealthResults);
 
-                dBContext.AccuHealthTestValues.AddRange(accuHealthResults);
-                dBContext.SaveChanges();
-
-                APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "Value saved successfully.", null,null);
+                    dBContext.AccuHealthTestValues.AddRange(accuHealthResults);
+                    dBContext.SaveChanges();
+                }
+                APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "Value saved successfully.", null, null);
 
                 return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
             }
@@ -202,7 +203,7 @@ namespace Lis.Api.Controllers.Api
         private static readonly string HospitalApiUrl = ConfigurationManager.AppSettings["HospitalApiUrl"];
         private static readonly string AccuHealthClientId = ConfigurationManager.AppSettings["AccuHealthClientId"];
         private static readonly string AccuHealthBranchId = ConfigurationManager.AppSettings["AccuHealthBranchId"];
-        private static async Task<bool> PostTestResults(AccuHealthTestValue[] results)
+        private static async Task<bool> PostTestResults(List<AccuHealthTestValue> results)
         {
             string apiUrl = $"{HospitalApiUrl}lis/PostTestResults";
             using (var client = new ApiClient().GetHttpClient())
