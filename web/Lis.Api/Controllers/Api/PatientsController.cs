@@ -162,32 +162,24 @@ namespace Lis.Api.Controllers.Api
                 foreach (PatientStatus item in iDs)
                 {
                     var recordsToUpdate = dBContext.AccuHealthTestOrders
-                    .Join(dBContext.AccuHealthParamMappings,
-                        o => o.PARAMCODE,
-                        pm => pm.HIS_PARAMCODE,
-                        (o, pm) => new { o, pm })
-                    .Join(dBContext.EquipmentMaster,
-                        x => x.pm.EquipmentId,
-                        e => e.Id,
-                        (x, e) => new { x.o, x.pm, e })
-                    .FirstOrDefault(p => p.o.ROW_ID == item.Id);
+                    .FirstOrDefault(p => p.ROW_ID == item.Id);
 
                     if (recordsToUpdate != null)
                     {
 
                         var accuHealth = new AccuHealthTestValue()
                         {
-                            ROW_ID = recordsToUpdate.o.ROW_ID,
+                            ROW_ID = recordsToUpdate.ROW_ID,
                             isSynced = true,
-                            SRNO = recordsToUpdate.o.REF_VISITNO,
-                            SDATE = recordsToUpdate.o.REQDATETIME,
-                            SAMPLEID = recordsToUpdate.o.REF_VISITNO,
-                            TESTID = recordsToUpdate.o.PARAMCODE,
-                            MACHINEID = recordsToUpdate.e.Name,
+                            SRNO = recordsToUpdate.REF_VISITNO,
+                            SDATE = recordsToUpdate.REQDATETIME,
+                            SAMPLEID = recordsToUpdate.REF_VISITNO,
+                            TESTID = recordsToUpdate.PARAMCODE,
+                            MACHINEID = "LIS SERVER",
                             SUFFIX = "",
                             TRANSFERFLAG = "",
-                            TMPVALUE = recordsToUpdate.o.Value,
-                            DESCRIPTION = recordsToUpdate.o.PARAMCODE,
+                            TMPVALUE = recordsToUpdate.Value,
+                            DESCRIPTION = recordsToUpdate.PARAMCODE,
                             RUNDATE = DateTime.Now,
                         };
                         accuHealthResults.Add(accuHealth);
