@@ -27,16 +27,19 @@ namespace Lis.Api.Controllers.Api
         private ApplicationDBContext dBContext;
         private ILogger logger;
         private IModuleIdentity identity;
+        private AccuHealthDataSynchronizer accuHealthDataSynchronizer;
         public AccuHealthLisController(ILogger logger,
             IResponseManager responseManager,
             ApplicationDBContext dBContext,
-            IModuleIdentity identity)
+            IModuleIdentity identity,
+            AccuHealthDataSynchronizer accuHealthDataSynchronizer)
         {
             this.dBContext = dBContext;
             this.logger = logger;
             this.responseManager = responseManager;
             this.identity = identity;
-        }
+            this.accuHealthDataSynchronizer = accuHealthDataSynchronizer;
+        }   
 
         [AllowAnonymous]
         [HttpGet]
@@ -165,7 +168,7 @@ namespace Lis.Api.Controllers.Api
                             ROW_ID = recordsToUpdate.o.ROW_ID,
                             isSynced = true,
                             SRNO = recordsToUpdate.o.REF_VISITNO,
-                            SDATE = recordsToUpdate.o.DATESTAMP,
+                            SDATE = recordsToUpdate.o.REQDATETIME,
                             SAMPLEID = recordsToUpdate.o.REF_VISITNO,
                             TESTID = recordsToUpdate.o.PARAMCODE,
                             MACHINEID = recordsToUpdate.e.Name,
@@ -183,7 +186,7 @@ namespace Lis.Api.Controllers.Api
                 // TODO Send to AccuHealth
                 if (accuHealthResults != null)
                 {
-                    await PostTestResults(accuHealthResults);
+                    await accuHealthDataSynchronizer.PostTestResults(accuHealthResults);
 
                     dBContext.AccuHealthTestValues.AddRange(accuHealthResults);
                     dBContext.SaveChanges();
@@ -199,43 +202,5 @@ namespace Lis.Api.Controllers.Api
             }
         }
 
-
-        private static readonly string HospitalApiUrl = ConfigurationManager.AppSettings["HospitalApiUrl"];
-        private static readonly string AccuHealthClientId = ConfigurationManager.AppSettings["AccuHealthClientId"];
-        private static readonly string AccuHealthBranchId = ConfigurationManager.AppSettings["AccuHealthBranchId"];
-        private static async Task<bool> PostTestResults(List<AccuHealthTestValue> results)
-        {
-            string apiUrl = $"{HospitalApiUrl}lis/PostTestResults";
-            using (var client = new ApiClient().GetHttpClient())
-            {
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                var payload = new
-                {
-                    ClientId = AccuHealthClientId,
-                    TestValues = results
-                };
-                var jsonPayload = JsonConvert.SerializeObject(payload);
-                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(apiUrl, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    // Convert JSON string to dynamic object
-                    var result = JsonConvert.DeserializeObject<UpdateOrderStatusResponse>(responseContent);
-                    if (result.ResponseType == "Success")
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
     }
 }

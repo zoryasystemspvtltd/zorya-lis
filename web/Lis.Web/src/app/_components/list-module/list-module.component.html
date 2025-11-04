@@ -225,7 +225,9 @@
                 <button type="button" *ngIf="schemma.isRejected" class="btn btn-default" (click)="editAll(0);" data-dismiss="modal" >Re-Run Sample</button>
                 <button type="button" *ngIf="schemma.isNew" class="btn btn-default" (click)="editAll(0);" data-dismiss="modal" >Re-Run Sample</button>
                 <button type="button" *ngIf="schemma.isNew" class="btn btn-default" (click)="editAll(4);" data-dismiss="modal" >Reject</button>
+                <button type="button" *ngIf="schemma.isNew" class="btn btn-default" (click)="editAll(-1);" data-dismiss="modal" >Send Result</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                
             </div>
         </div>
 
