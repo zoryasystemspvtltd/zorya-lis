@@ -215,7 +215,7 @@ export class ListModuleComponent implements OnInit {
         let request = {
           note: this.note,
           status: status,
-          id: this.items[i].id,
+          id: this.items[i].roW_ID,
           runIndex: 0
         };
     

@@ -75,3 +75,5 @@ nunit-*.xml
 /web/Lis.Web/node_modules
 /.vs/Zorya_LIS/CopilotIndices/17.14.1231.31060
 /.vs
+/web/Lis.Api/Properties/PublishProfiles/FolderProfile1.pubxml.user
+/web/Lis.Api/Lis.Api.csproj.user
