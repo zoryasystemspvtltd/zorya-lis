@@ -1,5 +1,6 @@
 ﻿using Antlr.Runtime.Misc;
 using Lis.Api.Providers;
+using LIS.Businesslogic;
 using LIS.DataAccess;
 using LIS.DtoModel;
 using LIS.DtoModel.Interfaces;
@@ -12,20 +13,28 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Principal;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Lis.Api.Controllers.Api
 {
     public class PatientsController : ApiController
     {
-         private ILogger logger;
+        private ILogger logger;
         private ApplicationDBContext dBContext;
+        private AccuHealthDataSynchronizer accuHealthDataSynchronizer;
+        private IResponseManager responseManager;
         public PatientsController(
              ILogger Logger
-            , ApplicationDBContext dBContext)
+            , ApplicationDBContext dBContext
+            , AccuHealthDataSynchronizer accuHealthDataSynchronizer
+            , IResponseManager responseManager)
         {
             logger = Logger;
             this.dBContext = dBContext;
+            this.accuHealthDataSynchronizer = accuHealthDataSynchronizer;
+            this.responseManager = responseManager;
         }
 
         private ListOptions ApiOption
@@ -142,39 +151,65 @@ namespace Lis.Api.Controllers.Api
             }
         }
 
-        //[AllowAnonymous]
-        //[HttpPut]
-        //public HttpResponseMessage Put(List<AuthorizeRequest> request)
-        //{
-        //    try
-        //    {
-        //        if (!ModelState.IsValid)
-        //        {
-        //            return Request.CreateResponse(HttpStatusCode.PreconditionFailed, ModelState.Keys);
-        //        }
-        //        foreach(var sample in request)
-        //        {
-        //            if (sample.Status == ReportStatusType.DoctorApproved 
-        //                || sample.Status == ReportStatusType.DoctorRejected)
-        //            {
-        //                testmanager.DoctorReview(sample.Id, sample.Status, sample.Note, sample.RunIndex);
-        //            }
-        //            if (sample.Status == ReportStatusType.TechnicianApproved
-        //                || sample.Status == ReportStatusType.TechnicianRejected
-        //                || sample.Status == ReportStatusType.New)
-        //            {
-        //                testmanager.TechnicianReview(sample.Id, sample.Status, sample.Note, sample.RunIndex);
-        //            }
-                    
-        //        }
+        [AllowAnonymous]
+        [HttpPut]
+        public async Task<HttpResponseMessage> Put(List<PatientStatus> iDs)
+        {
+            try
+            {
+                var accuHealthResults = new List<AccuHealthTestValue>();
 
-        //        return Request.CreateResponse(HttpStatusCode.OK);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        logger.LogException(e);
-        //        return null;
-        //    }
-        //}
+                foreach (PatientStatus item in iDs)
+                {
+                    var recordsToUpdate = dBContext.AccuHealthTestOrders
+                    .FirstOrDefault(p => p.ROW_ID == item.Id);
+
+                    if (recordsToUpdate != null)
+                    {
+
+                        var accuHealth = new AccuHealthTestValue()
+                        {
+                            ROW_ID = recordsToUpdate.ROW_ID,
+                            isSynced = true,
+                            SRNO = recordsToUpdate.REF_VISITNO,
+                            SDATE = recordsToUpdate.REQDATETIME,
+                            SAMPLEID = recordsToUpdate.REF_VISITNO,
+                            TESTID = recordsToUpdate.PARAMCODE,
+                            MACHINEID = "LIS SERVER",
+                            SUFFIX = "",
+                            TRANSFERFLAG = "",
+                            TMPVALUE = recordsToUpdate.Value,
+                            DESCRIPTION = recordsToUpdate.PARAMCODE,
+                            RUNDATE = DateTime.Now,
+                        };
+                        accuHealthResults.Add(accuHealth);
+                    }
+                }
+                
+                if (accuHealthResults != null)
+                {
+                    await accuHealthDataSynchronizer.PostTestResults(accuHealthResults);
+
+                    dBContext.AccuHealthTestValues.AddRange(accuHealthResults);
+                    dBContext.SaveChanges();
+                }
+                APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.OK, "Result sent to AccuHealth.", null, null);
+
+                return Request.CreateResponse<APIResponse>(HttpStatusCode.OK, aPIResponse);
+            }
+            catch (Exception e)
+            {
+                logger.LogException(e);
+                return null;
+            }
+        }
+
+
+        public class PatientStatus
+        {
+            public Guid Id { get; set; }
+            public string note { get; set; }
+            public int Status { get; set; }
+        }
     }
 }

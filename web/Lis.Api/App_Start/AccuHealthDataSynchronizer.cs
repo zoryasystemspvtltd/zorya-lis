@@ -3,6 +3,7 @@ using LIS.DataAccess;
 using LIS.DtoModel;
 using LIS.DtoModel.Models;
 using LIS.Logger;
+using log4net.Repository.Hierarchy;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -226,7 +227,7 @@ namespace Lis.Api
             }
         }
 
-        private async Task<bool> PostTestResults(AccuHealthTestValue[] results)
+        public async Task<bool> PostTestResults(List<AccuHealthTestValue> results)
         {
             string apiUrl = $"{HospitalApiUrl}lis/PostTestResults";
             using (var client = new ApiClient().GetHttpClient())
@@ -238,6 +239,9 @@ namespace Lis.Api
                     TestValues = results
                 };
                 var jsonPayload = JsonConvert.SerializeObject(payload);
+
+                _logger.LogDebug(jsonPayload);
+
                 var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(apiUrl, content);
                 if (response.IsSuccessStatusCode)
@@ -260,7 +264,5 @@ namespace Lis.Api
                 }
             }
         }
-
-
     }
 }
