@@ -66,11 +66,21 @@ namespace LIS.Com.Businesslogic
             {
 
                 var firstTest = testlist.First();
-                var specimen = firstTest.SPECIMEN.ToLower();                
+                var specimen = firstTest.SPECIMEN.ToLower();
                 var name = firstTest.PATFNAME;
-                if (name.Length > 32)
+                var gender = firstTest.GENDER;
+                var dob = firstTest.PAT_DOB;
+                if (dob != null)
                 {
-                    name = name.Substring(0, 30);
+                    dob = Convert.ToDateTime(dob).ToString("yyyyMMddhhmmss");
+                }
+                else
+                {
+                    dob = "";
+                }
+                if (name.Length > 40)
+                {
+                    name = name.Substring(0, 39);
                 }
                 for (int i = 1; i <= 28; i++)
                 {
@@ -81,8 +91,10 @@ namespace LIS.Com.Businesslogic
                             message_DSP += $"DSP|{i}||{name}|||{(char)13}";
                             break;
                         case 4:
+                            message_DSP += $"DSP|{i}||{dob}|||{(char)13}";
+                            break;
                         case 5:
-                            message_DSP += $"DSP|{i}|||||{(char)13}";
+                            message_DSP += $"DSP|{i}||{gender}|||{(char)13}";
                             break;
                         case 21:
                             message_DSP += $"DSP|{i}||{sampleNo}|||{(char)13}";
@@ -92,7 +104,6 @@ namespace LIS.Com.Businesslogic
                             break;
                         case 26:
                             message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
-                            //message_DSP += $"DSP|{i}|||||{(char)13}";
                             break;
                         default:
                             message_DSP += $"DSC||{(char)13}";
@@ -102,7 +113,7 @@ namespace LIS.Com.Businesslogic
                 for (int i = 0; i < testlist.Count(); i++)
                 {
                     int j = 29 + i;
-                    var test = testlist.ElementAt(i);                  
+                    var test = testlist.ElementAt(i);
                     var testname = test.LisParamCode + "^^^";
                     message_DSP += $"DSP|{j}||{testname}|||{(char)13}";
                 }

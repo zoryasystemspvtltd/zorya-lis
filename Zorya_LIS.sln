@@ -30,8 +30,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		Documents\Accuhealth_Data.sql = Documents\Accuhealth_Data.sql
 		Documents\BS-360E&BS-240Pro&240E_LIS Interface Manual_V1.0_EN.pdf = Documents\BS-360E&BS-240Pro&240E_LIS Interface Manual_V1.0_EN.pdf
 		Documents\BS-430_Host Interface Manual_V4.0.pdf = Documents\BS-430_Host Interface Manual_V4.0.pdf
+		Documents\CL1200i Analyzer_LIS Manual_V1.0_EN.pdf = Documents\CL1200i Analyzer_LIS Manual_V1.0_EN.pdf
 		..\..\Users\Revolution PC\Downloads\R315005_XN-L series_ASTM Host Interface Specifications_EN_Rev6.pdf = ..\..\Users\Revolution PC\Downloads\R315005_XN-L series_ASTM Host Interface Specifications_EN_Rev6.pdf
 		README.md = README.md
+		Documents\XN-350 series_ASTM Host Interface Specifications_EN_Rev6.pdf = Documents\XN-350 series_ASTM Host Interface Specifications_EN_Rev6.pdf
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{D26E5E74-837F-42F5-A2A9-62C84049B72C}"

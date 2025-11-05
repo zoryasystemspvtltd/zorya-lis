@@ -107,6 +107,9 @@ namespace LIS.Com.Businesslogic
                     case EquipmentType.BS240E:
                         this.TcpIpHL7Command = new BS240ETCPIPHL7Command(settings);
                         break;
+                    case EquipmentType.CL1200i:
+                        this.TcpIpHL7Command = new CL1200iTCPIPHL7Command(settings);
+                        break;
                     default:
                         throw new NotImplementedException();
                 }

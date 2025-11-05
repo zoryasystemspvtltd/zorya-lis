@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace LIS.Com.Businesslogic
 {
-    public class BS430TCPIPHL7Command : TCPIPHL7Command
+    public class CL1200iTCPIPHL7Command : TCPIPHL7Command
     {
-        public BS430TCPIPHL7Command(TCPIPSettings _settings) : base(_settings)
+        public CL1200iTCPIPHL7Command(TCPIPSettings _settings) : base(_settings)
         { }
 
         public override async Task<string> ProccessMessage(string sampleNo, string rawMessage, string messageControlId)
         {
-            Logger.Logger.LogInstance.LogDebug("BS430 ProccessMessage method started");
+            Logger.Logger.LogInstance.LogDebug("CL1200i ProccessMessage method started");
             string[] resultMesgSegments = rawMessage.TrimEnd((char)13).Split((char)13); // <CR>
 
             await SaveResult(sampleNo, resultMesgSegments);
@@ -44,13 +44,13 @@ namespace LIS.Com.Businesslogic
                 }
             }
 
-            Logger.Logger.LogInstance.LogDebug("BS430 Result posted to API for SampleNo: " + lsResult[0].REF_VISITNO);
+            Logger.Logger.LogInstance.LogDebug("CL1200i Result posted to API for SampleNo: " + lsResult[0].REF_VISITNO);
             await LisContext.LisDOM.SaveTestResult(lsResult);
         }
 
         public override async Task<OrderHL7Response> SendOrderData(string sampleNo, string messageControlId)
         {
-            Logger.Logger.LogInstance.LogDebug("BS430 generateORMField method started for SampleNo: " + sampleNo);
+            Logger.Logger.LogInstance.LogDebug("CL1200i generateORMField method started for SampleNo: " + sampleNo);
             string datetime = DateTime.Now.ToString("yyyyMMddhhmmss");
             string specialchar = @"^~\&";
             string message_MSH = $"MSH|{specialchar}|||||{datetime}||DSR^Q03|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
@@ -59,13 +59,14 @@ namespace LIS.Com.Businesslogic
             string message_qak = string.Empty;
             string message_DSP = string.Empty;
             string DSRMessage, QRYMessage;
-            var response = new OrderHL7Response();            
+            var response = new OrderHL7Response();
+
             IEnumerable<AccuHealthSample> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
             if (testlist != null && testlist.Count() > 0)
             {
 
                 var firstTest = testlist.First();
-                var specimen = firstTest.SPECIMEN.ToLower();               
+                var specimen = firstTest.SPECIMEN.ToLower();                
                 var name = firstTest.PATFNAME;
                 var gender = firstTest.GENDER;
                 var dob = firstTest.PAT_DOB;
@@ -103,7 +104,6 @@ namespace LIS.Com.Businesslogic
                             break;
                         case 26:
                             message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
-                            //message_DSP += $"DSP|{i}|||||{(char)13}";
                             break;
                         default:
                             message_DSP += $"DSC||{(char)13}";
@@ -113,7 +113,7 @@ namespace LIS.Com.Businesslogic
                 for (int i = 0; i < testlist.Count(); i++)
                 {
                     int j = 29 + i;
-                    var test = testlist.ElementAt(i);                   
+                    var test = testlist.ElementAt(i);                  
                     var testname = test.LisParamCode + "^^^";
                     message_DSP += $"DSP|{j}||{testname}|||{(char)13}";
                 }
@@ -136,7 +136,7 @@ namespace LIS.Com.Businesslogic
                 response.QRYResponse = QRYMessage;
                 response.DSRResponse = null;
                 return response;
-            }            
+            }
         }
 
         public override string SendResponse(string qak, string messageControlId)

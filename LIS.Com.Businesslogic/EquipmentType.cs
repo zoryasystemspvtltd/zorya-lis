@@ -8,5 +8,6 @@ namespace LIS.Com.Businesslogic
         XN350 = 1,
         BS430 = 2,
         BS240E = 3,
+        CL1200i=4
     }
 }
