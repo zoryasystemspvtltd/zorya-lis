@@ -49,19 +49,7 @@ namespace LisTCPIPConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:44392")]
-        public string SERVER_URL {
-            get {
-                return ((string)(this["SERVER_URL"]));
-            }
-            set {
-                this["SERVER_URL"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DUMMY")]
+        [global::System.Configuration.DefaultSettingValueAttribute("ACCU-HEALTH-CL1200-1")]
         public string API_KEY {
             get {
                 return ((string)(this["API_KEY"]));
@@ -85,7 +73,7 @@ namespace LisTCPIPConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("XN350")]
+        [global::System.Configuration.DefaultSettingValueAttribute("CL1200i")]
         public string EQUIPMENT_TYPE {
             get {
                 return ((string)(this["EQUIPMENT_TYPE"]));
@@ -97,7 +85,7 @@ namespace LisTCPIPConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(" 192.168.31.102")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.2.11")]
         public string IP_ADDRESS {
             get {
                 return ((string)(this["IP_ADDRESS"]));
@@ -109,13 +97,25 @@ namespace LisTCPIPConsole.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ASTM")]
+        [global::System.Configuration.DefaultSettingValueAttribute("HL7")]
         public string PROTOCOL_NAME {
             get {
                 return ((string)(this["PROTOCOL_NAME"]));
             }
             set {
                 this["PROTOCOL_NAME"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:44392/api")]
+        public string SERVER_URL {
+            get {
+                return ((string)(this["SERVER_URL"]));
+            }
+            set {
+                this["SERVER_URL"] = value;
             }
         }
     }
