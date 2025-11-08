@@ -20,7 +20,7 @@ namespace LIS.Com.Businesslogic
             await SaveResult(sampleNo, resultMesgSegments);
             Logger.Logger.LogInstance.LogDebug("All the mandatory tags are present in the ORU message");
             string response = @"MSH|^~\&|||||" + DateTime.Now.ToString("yyyyMMddhhmmss") +
-                "||ACK^R01|1|P|2.3.1||||0||ASCII||" + (char)13 +
+                "||ACK^R01|" + messageControlId + "|P|2.3.1||||0||ASCII|||" + (char)13 +
                 $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
             return response;
         }
@@ -66,7 +66,7 @@ namespace LIS.Com.Businesslogic
             {
 
                 var firstTest = testlist.First();
-                var specimen = firstTest.SPECIMEN.ToLower();                
+                var specimen = firstTest.SPECIMEN.ToLower();
                 var name = firstTest.PATFNAME;
                 var gender = firstTest.GENDER;
                 var dob = firstTest.PAT_DOB;
@@ -113,7 +113,7 @@ namespace LIS.Com.Businesslogic
                 for (int i = 0; i < testlist.Count(); i++)
                 {
                     int j = 29 + i;
-                    var test = testlist.ElementAt(i);                  
+                    var test = testlist.ElementAt(i);
                     var testname = test.LisParamCode + "^^^";
                     message_DSP += $"DSP|{j}||{testname}|||{(char)13}";
                 }
@@ -145,8 +145,9 @@ namespace LIS.Com.Businesslogic
             string specialchar = @"^~\&";
             string message_MSH = $"MSH|{specialchar}|||||{datetime}||QCK^Q02|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
             string message_MSA = $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
-            string message_qak = $"QAK|SR|{qak}|{(char)13}";
             string message_err = $"ERR|0|{(char)13}";
+            string message_qak = $"QAK|SR|{qak}|{(char)13}";
+            
             var response = message_MSH + message_MSA + message_err + message_qak;
             return AddHeaderAndFooterToHL7Msg(response);
         }

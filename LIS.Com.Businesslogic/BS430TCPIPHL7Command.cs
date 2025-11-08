@@ -20,7 +20,7 @@ namespace LIS.Com.Businesslogic
             await SaveResult(sampleNo, resultMesgSegments);
             Logger.Logger.LogInstance.LogDebug("All the mandatory tags are present in the ORU message");
             string response = @"MSH|^~\&|||||" + DateTime.Now.ToString("yyyyMMddhhmmss") +
-                "||ACK^R01|1|P|2.3.1||||0||ASCII||" + (char)13 +
+                "||ACK^R01|" + messageControlId + "|P|2.3.1||||0||ASCII||" + (char)13 +
                 $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
             return response;
         }
@@ -59,13 +59,13 @@ namespace LIS.Com.Businesslogic
             string message_qak = string.Empty;
             string message_DSP = string.Empty;
             string DSRMessage, QRYMessage;
-            var response = new OrderHL7Response();            
+            var response = new OrderHL7Response();
             IEnumerable<AccuHealthSample> testlist = await LisContext.LisDOM.GetTestRequestDetails(sampleNo);
             if (testlist != null && testlist.Count() > 0)
             {
 
                 var firstTest = testlist.First();
-                var specimen = firstTest.SPECIMEN.ToLower();               
+                var specimen = firstTest.SPECIMEN.ToLower();
                 var name = firstTest.PATFNAME;
                 var gender = firstTest.GENDER;
                 var dob = firstTest.PAT_DOB;
@@ -113,7 +113,7 @@ namespace LIS.Com.Businesslogic
                 for (int i = 0; i < testlist.Count(); i++)
                 {
                     int j = 29 + i;
-                    var test = testlist.ElementAt(i);                   
+                    var test = testlist.ElementAt(i);
                     var testname = test.LisParamCode + "^^^";
                     message_DSP += $"DSP|{j}||{testname}|||{(char)13}";
                 }
@@ -136,7 +136,7 @@ namespace LIS.Com.Businesslogic
                 response.QRYResponse = QRYMessage;
                 response.DSRResponse = null;
                 return response;
-            }            
+            }
         }
 
         public override string SendResponse(string qak, string messageControlId)

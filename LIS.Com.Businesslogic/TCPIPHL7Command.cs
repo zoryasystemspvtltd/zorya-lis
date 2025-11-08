@@ -129,7 +129,7 @@ namespace LIS.Com.Businesslogic
                                                 sInputMsg.Append(block + (char)13);
                                             }
                                             break;
-                                        case "QRD":                                       
+                                        case "QRD":
                                             string sampleNo = input[8];
                                             if (orderRequest)
                                             {
@@ -149,10 +149,10 @@ namespace LIS.Com.Businesslogic
                                                 }
                                             }
                                             break;
-                                        case "OBR":                                        
+                                        case "OBR":
                                             sInputMsg.Append(block + (char)13);
                                             break;
-                                        case "OBX":                                      
+                                        case "OBX":
                                             sInputMsg.Append(block + (char)13);
                                             break;
                                     }
@@ -198,7 +198,7 @@ namespace LIS.Com.Businesslogic
                     string sampleNo = field[3];
                     //bool flag = IsValidSampleNo(sampleNo);
                     string response = @"MSH|^~\&|||||" + DateTime.Now.ToString("yyyyMMddhhmmss") +
-                                       "||ACK^R01|1|P|2.3.1||||2||ASCII||" + (char)13 +
+                                       "||ACK^R01|" + messageControlId + "|P|2.3.1||||2||ASCII||" + (char)13 +
                                        $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
                     if (resultMesgSegments.Length > 2)
                     {
@@ -227,7 +227,12 @@ namespace LIS.Com.Businesslogic
             }
         }
 
-
+        /// <summary>
+        /// CR	or (char)13 carriage return
+        /// VT	or (char)11 start block
+        /// FS	or (char)28 start block
+        /// </summary>
+        /// <param name="response"></param>
         private void WriteMessage(string response)
         {
             ASCIIEncoding encd = new ASCIIEncoding();
