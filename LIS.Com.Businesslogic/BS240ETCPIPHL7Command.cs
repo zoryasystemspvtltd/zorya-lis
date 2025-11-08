@@ -84,7 +84,6 @@ namespace LIS.Com.Businesslogic
                 }
                 for (int i = 1; i <= 28; i++)
                 {
-
                     switch (i)
                     {
                         case 3:
@@ -106,7 +105,7 @@ namespace LIS.Com.Businesslogic
                             message_DSP += $"DSP|{i}||{specimen}|||{(char)13}";
                             break;
                         default:
-                            message_DSP += $"DSC||{(char)13}";
+                            message_DSP += $"DSP|{i}|||||{(char)13}";
                             break;
                     }
                 }
@@ -143,7 +142,7 @@ namespace LIS.Com.Businesslogic
         {
             string datetime = DateTime.Now.ToString("yyyyMMddhhmmss");
             string specialchar = @"^~\&";
-            string message_MSH = $"MSH|{specialchar}|||||{datetime}||QCK^Q02|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
+            string message_MSH = $"MSH|{specialchar}|||Mindray|BS240E|{datetime}||QCK^Q02|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
             string message_MSA = $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
             string message_err = $"ERR|0|{(char)13}";
             string message_qak = $"QAK|SR|{qak}|{(char)13}";
