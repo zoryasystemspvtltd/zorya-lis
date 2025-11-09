@@ -1,6 +1,5 @@
 ﻿using LIS.DtoModel;
 using System;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -42,6 +41,7 @@ namespace LIS.Com.Businesslogic
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, settings.PortNo);
                 TCPserverHL7 = new TcpListener(localEndPoint);
                 TCPserverHL7.Start();
+
                 TCPServerHL7Thread = new Thread(new ThreadStart(TCPListenHL7Data));
                 TCPServerHL7Thread.Name = "SERVER";
                 TCPServerHL7Thread.Start();
@@ -51,7 +51,7 @@ namespace LIS.Com.Businesslogic
             }
             catch (Exception ex)
             {
-                TCPServerHL7Thread?.Abort();//properly abort the client 
+                //TCPServerHL7Thread?.Abort();//properly abort the client 
                 TCPserverHL7?.Stop();//properly stop the listner
                 Logger.Logger.LogInstance.LogDebug("Server Stopped.");
                 this.FullMessage = ex.Message;
@@ -66,7 +66,7 @@ namespace LIS.Com.Businesslogic
             {
                 if (TCPServerHL7Thread != null)
                 {
-                    TCPServerHL7Thread.Abort();
+                    //TCPServerHL7Thread.s
                     TCPserverHL7.Stop();
                 }
                 IsReady = false;
@@ -79,105 +79,113 @@ namespace LIS.Com.Businesslogic
             Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command DisconnectToTCPIP method completed.");
         }
 
-        private async void TCPListenHL7Data()
+        private void TCPListenHL7Data()
         {
-            while (true)
+
+            try
             {
-                try
+
+                TCPserverHL7.Start();
+                TcpClient client = TCPserverHL7.AcceptTcpClient();
+
+                while (true)
                 {
-
-                    TCPserverHL7.Start();
-                    TcpClient client = TCPserverHL7.AcceptTcpClient();
-
-                    while (true)
+                    try
                     {
-                        try
+                        string messageControlId = "";
+                        bool orderRequest = false;
+                        string message = "";
+                        int read = 0;
+
+                        // Get a stream object for reading and writing
+                        stream = client.GetStream();
+
+                        // Loop to receive all the data sent by the client.
+                        while (stream.DataAvailable)
                         {
-                            string messageControlId = "";
-                            bool orderRequest = false;
-                            string message = "";
-                            int read = 0;
-
-                            // Get a stream object for reading and writing
-                            stream = client.GetStream();
-
-                            // Loop to receive all the data sent by the client.
-                            while (stream.DataAvailable)
-                            {
-                                read = stream.ReadByte();
-                                message += Convert.ToChar(read);
-                            }
-                            if (message != string.Empty)
-                            {
-                                Logger.Logger.LogInstance.LogInfo("TCP/IP Read: '{0}'", message);
-                                //Remove <SB> character from raw message
-                                message = message.Replace("<SB>", "");
-
-                                var inputmsg = message.Split((char)28); 
-                                var blocks = inputmsg[0].Split((char)13);
-
-                                foreach (var block in blocks)
-                                {
-                                    var input = block.Split('|');
-                                    switch (input[0])
-                                    {
-                                        case "MSH":
-                                        case "MSH":
-                                            orderRequest = input[8] == "QRY^Q02";
-                                            messageControlId = input[9];
-                                            if (!orderRequest)
-                                            {
-                                                sInputMsg.Append(block + (char)13);
-                                            }
-                                            break;
-                                        case "QRD":
-                                        case "\nQRD":
-                                            string sampleNo = input[8];
-                                            if (orderRequest)
-                                            {
-                                                ASCIIEncoding encd = new ASCIIEncoding();
-                                                var response = await SendOrderData(sampleNo, messageControlId);
-
-                                                //Send First order Response
-                                                var dataBytes = encd.GetBytes(response.QRYResponse);
-                                                stream.Write(dataBytes, 0, dataBytes.Length);
-                                                Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.QRYResponse);
-                                                if (response.DSRResponse != null)
-                                                {
-                                                    //Send Order Info
-                                                    var dsrBytes = encd.GetBytes(response.DSRResponse);
-                                                    stream.Write(dsrBytes, 0, dsrBytes.Length);
-                                                    Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.DSRResponse);
-                                                }
-                                            }
-                                            break;
-                                        case "OBR":
-                                            sInputMsg.Append(block + (char)13);
-                                            break;
-                                        case "OBX":
-                                            sInputMsg.Append(block + (char)13);
-                                            break;
-                                    }
-
-                                }
-                                if (sInputMsg.Length > 1000)
-                                {
-                                    await ResultProcess();
-                                }
-                            }
+                            read = stream.ReadByte();
+                            message += Convert.ToChar(read);
                         }
-                        catch (Exception ex)
+                        if (message != string.Empty)
                         {
-                            Logger.Logger.LogInstance.LogException(ex);
+                            Logger.Logger.LogInstance.LogInfo("TCP/IP Read: '{0}'", message);
+                            //Remove <SB> character from raw message
+                            message = message.Replace("<SB>", "");
+
+                            var inputmsg = message.Split((char)28);
+                            var blocks = inputmsg[0].Split((char)13);
+
+                            foreach (var block in blocks)
+                            {
+                                var input = block.Split('|');
+                                switch (input[0].Trim())
+                                {
+                                    case "MSH":
+                                    case "MSH":
+                                        orderRequest = input[8] == "QRY^Q02";
+                                        messageControlId = input[9];
+                                        if (!orderRequest)
+                                        {
+                                            sInputMsg.Append(block + (char)13);
+                                        }
+                                        break;
+                                    case "QRD":
+                                        string sampleNo = input[8];
+                                        if (orderRequest)
+                                        {
+                                            ASCIIEncoding encd = new ASCIIEncoding();
+                                            var response = Task.Run(async () => await SendOrderData(sampleNo, messageControlId)).Result;
+                                            //var response = await SendOrderData(sampleNo, messageControlId);
+
+                                            //Send First order Response
+                                            var dataBytes = encd.GetBytes(response.QRYResponse);
+                                            stream.Write(dataBytes, 0, dataBytes.Length);
+                                            Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.QRYResponse);
+                                            if (response.DSRResponse != null)
+                                            {
+                                                //Send Order Info
+                                                var dsrBytes = encd.GetBytes(response.DSRResponse);
+                                                stream.Write(dsrBytes, 0, dsrBytes.Length);
+                                                Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.DSRResponse);
+                                            }
+                                        }
+                                        break;
+                                    case "OBR":
+                                        sInputMsg.Append(block + (char)13);
+                                        break;
+                                    case "OBX":
+                                        sInputMsg.Append(block + (char)13);
+                                        break;
+                                }
+
+                            }
+                            if (sInputMsg.Length > 100)
+                            {
+                                Task.Run(async () => await ResultProcess());
+                                //await ResultProcess();
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        Logger.Logger.LogInstance.LogException(ex);
+                    }
+                }
 
-                }
-                catch (Exception ex)
-                {
-                    Logger.Logger.LogInstance.LogException(ex);
-                }
             }
+            catch (SocketException ex)
+            {
+                Logger.Logger.LogInstance.LogException(ex);
+            }
+            catch (Exception ex)
+            {
+                Logger.Logger.LogInstance.LogException(ex);
+            }
+            finally
+            {
+                TCPserverHL7.Stop();
+            }
+
         }
 
         private async Task ResultProcess()
@@ -195,13 +203,16 @@ namespace LIS.Com.Businesslogic
                     messageControlId = firstrow[9];
 
                 string[] field = resultMesgSegments[1].Split('|');
-                if (field[0] == "OBR")
+                if (field[0].Trim() == "OBR")
                 {
                     string sampleNo = field[3];
-                    bool flag = IsValidSampleNo(sampleNo);
-                    string response = @"MSH|^~\&|||||||ACK|" + (char)13 + $"MSA|AR|{messageControlId}|{(char)13}";
+                    //bool flag = IsValidSampleNo(sampleNo);
+                    //For control result
+                    string response = @"MSH|^~\&|||||" + DateTime.Now.ToString("yyyyMMddhhmmss") +
+                                       "||ACK^R01|" + messageControlId + "|P|2.3.1||||2||ASCII||" + (char)13 +
+                                       $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
 
-                    if (flag && resultMesgSegments.Length > 2)
+                    if (resultMesgSegments.Length > 2)
                     {
                         response = await ProccessMessage(sampleNo, message, messageControlId);
                         WriteMessage(response.ToString());
@@ -228,13 +239,18 @@ namespace LIS.Com.Businesslogic
             }
         }
 
-
+        /// <summary>
+        /// CR	or (char)13 carriage return
+        /// VT	or (char)11 start block
+        /// FS	or (char)28 start block
+        /// </summary>
+        /// <param name="response"></param>
         private void WriteMessage(string response)
         {
             ASCIIEncoding encd = new ASCIIEncoding();
             var finalresponse = (char)11 + response + (char)28 + (char)13;
             var dsrBytes = encd.GetBytes(finalresponse);
-            stream.Write(dsrBytes, 0, dsrBytes.Length);           
+            stream.Write(dsrBytes, 0, dsrBytes.Length);
             Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", finalresponse);
         }
 

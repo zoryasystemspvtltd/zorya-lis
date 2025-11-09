@@ -146,7 +146,7 @@ namespace Lis.Api
                 var orderId = await SaveLisOrderAsync(orderItem);
 
                 // Acknowledge
-                if (orderId != orderItem.ROW_ID)
+                if (orderId != null && orderId == orderItem.ROW_ID)
                 {
                     // TODO Uncomment
                     var isSyncd = await UpdateOrderStatus(orderItem);

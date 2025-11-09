@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C430D4D6-265D-45C4-B740-1C98D7E4F8CF}</ProjectGuid>
+    <ProjectGuid>{3FBDE905-35BF-4100-93EA-2CB7827FFDDC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>LisTCPIPConsole</RootNamespace>
-    <AssemblyName>LisTCPIPConsole</AssemblyName>
+    <AssemblyName>BS240E</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\BS240E\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

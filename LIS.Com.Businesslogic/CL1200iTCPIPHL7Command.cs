@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace LIS.Com.Businesslogic
 {
-    public class BS240ETCPIPHL7Command : TCPIPHL7Command
+    public class CL1200iTCPIPHL7Command : TCPIPHL7Command
     {
-        public BS240ETCPIPHL7Command(TCPIPSettings _settings) : base(_settings)
+        public CL1200iTCPIPHL7Command(TCPIPSettings _settings) : base(_settings)
         { }
 
         public override async Task<string> ProccessMessage(string sampleNo, string rawMessage, string messageControlId)
         {
-            Logger.Logger.LogInstance.LogDebug("BS430 ProccessMessage method started");
+            Logger.Logger.LogInstance.LogDebug("CL1200i ProccessMessage method started");
             string[] resultMesgSegments = rawMessage.TrimEnd((char)13).Split((char)13); // <CR>
 
             await SaveResult(sampleNo, resultMesgSegments);
-            Logger.Logger.LogInstance.LogDebug("All the mandatory tags are present in the ORU message");
+           
             string response = @"MSH|^~\&|||||" + DateTime.Now.ToString("yyyyMMddhhmmss") +
-                "||ACK^R01|" + messageControlId + "|P|2.3.1||||0||ASCII||" + (char)13 +
+                "||ACK^R01|" + messageControlId + "|P|2.3.1||||0||ASCII|||" + (char)13 +
                 $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
             return response;
         }
@@ -35,7 +35,7 @@ namespace LIS.Com.Businesslogic
                 if (field[0].Trim() == "OBX" && field[2] == "NM")
                 {
                     var resultDetails = new LisTestValue();
-                    var paramCode = field[3].ToString();
+                    var paramCode = field[4].ToString();
                     var paramValue = field[5].ToString();
                     resultDetails.PARAMCODE = paramCode;
                     resultDetails.Value = paramValue;
@@ -44,13 +44,13 @@ namespace LIS.Com.Businesslogic
                 }
             }
 
-            Logger.Logger.LogInstance.LogDebug("BS430 Result posted to API for SampleNo: " + lsResult[0].REF_VISITNO);
+            Logger.Logger.LogInstance.LogDebug("CL1200i Result posted to API for SampleNo: " + lsResult[0].REF_VISITNO);
             await LisContext.LisDOM.SaveTestResult(lsResult);
         }
 
         public override async Task<OrderHL7Response> SendOrderData(string sampleNo, string messageControlId)
         {
-            Logger.Logger.LogInstance.LogDebug("BS430 generateORMField method started for SampleNo: " + sampleNo);
+            Logger.Logger.LogInstance.LogDebug("CL1200i generateORMField method started for SampleNo: " + sampleNo);
             string datetime = DateTime.Now.ToString("yyyyMMddhhmmss");
             string specialchar = @"^~\&";
             string message_MSH = $"MSH|{specialchar}|||||{datetime}||DSR^Q03|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
@@ -121,7 +121,8 @@ namespace LIS.Com.Businesslogic
                 string message_QRF = $"QRF||{datetime}|{datetime}|||RCT|COR|ALL||{(char)13}";
                 string message_DSC = $"DSC||{(char)13}";
 
-                DSRMessage = message_MSH + message_MSA + message_err + message_qak + message_QRD + message_QRF + message_DSP + message_DSC;
+                DSRMessage = message_MSH + message_MSA + message_err + message_qak + message_QRD + message_QRF +
+                    message_DSP + message_DSC;
                 DSRMessage = AddHeaderAndFooterToHL7Msg(DSRMessage);
 
                 QRYMessage = SendResponse("OK", messageControlId);
@@ -142,10 +143,11 @@ namespace LIS.Com.Businesslogic
         {
             string datetime = DateTime.Now.ToString("yyyyMMddhhmmss");
             string specialchar = @"^~\&";
-            string message_MSH = $"MSH|{specialchar}|||Mindray|BS240E|{datetime}||QCK^Q02|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
+            string message_MSH = $"MSH|{specialchar}|||Mindray|CL1200|{datetime}||QCK^Q02|{messageControlId}|P|2.3.1||||||ASCII|||{(char)13}";
             string message_MSA = $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
             string message_err = $"ERR|0|{(char)13}";
             string message_qak = $"QAK|SR|{qak}|{(char)13}";
+
             var response = message_MSH + message_MSA + message_err + message_qak;
             return AddHeaderAndFooterToHL7Msg(response);
         }

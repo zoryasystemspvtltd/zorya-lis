@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C430D4D6-265D-45C4-B740-1C98D7E4F8CF}</ProjectGuid>
+    <ProjectGuid>{FD4B89A5-7296-4297-B644-DE750D4EAB59}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>LisTCPIPConsole</RootNamespace>
-    <AssemblyName>LisTCPIPConsole</AssemblyName>
+    <AssemblyName>CL1200i</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\CL1200i\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

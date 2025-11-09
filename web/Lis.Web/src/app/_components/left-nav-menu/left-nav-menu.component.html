@@ -1,6 +1,5 @@
 <div *ngIf="authenticationService.isAuthenticated" id="sidenav" class="sidenav" [ngClass]="{'hidden': authenticationService.hideSideNav }">
     <div class="col-md-12">
-        <app-equipment-alert></app-equipment-alert>
         <div class="closebtn-area">
             <button (click)="authenticationService.toggleSideNav()" class="closebtn" type="button" title="Close">&times;</button>
         </div>
@@ -106,6 +105,6 @@
                 </div>
             </div>
         </div>
-
+        <app-equipment-alert></app-equipment-alert>
     </div>
 </div>

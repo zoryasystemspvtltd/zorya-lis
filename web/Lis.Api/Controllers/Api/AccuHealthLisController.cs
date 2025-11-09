@@ -70,6 +70,7 @@ namespace Lis.Api.Controllers.Api
             try
             {
                 logger.LogInfo($"Get Sample Request: {Id}");
+                logger.LogInfo($"Get Sample Request: {identity.AccessKey}");
 
                 var testOrders = dBContext.AccuHealthTestOrders
                             .Where(p => p.REF_VISITNO.Equals(Id, StringComparison.OrdinalIgnoreCase))
@@ -109,6 +110,7 @@ namespace Lis.Api.Controllers.Api
 
                 var responseStrign = JsonConvert.SerializeObject(orders);
                 logger.LogInfo($"Get Sample Response: {orders}");
+                logger.LogInfo($"Get Sample Response: {responseStrign}");
 
                 dBContext.SaveChanges();
 
