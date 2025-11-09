@@ -124,7 +124,7 @@ namespace Lis.Api
 
                     var jsonString = await responseMessage.Content.ReadAsStringAsync();
                     var response = JsonConvert.DeserializeObject<GetTestOrdersResponse>(jsonString);
-                    _logger.LogInfo("GetTestOrders Completed.");
+                    _logger.LogInfo($"GetTestOrders Completed. {jsonString}");
                     return response;
                 }
 
@@ -176,7 +176,12 @@ namespace Lis.Api
                         var result = JsonConvert.DeserializeObject<APIResponse>(responseContent);
                         return Guid.Parse(result.Result?.ToString());
                     }
-
+                    else
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        var result = JsonConvert.DeserializeObject<APIResponse>(responseContent);
+                        _logger.LogInfo(result.Message);
+                    }
 
                 }
 
@@ -240,7 +245,7 @@ namespace Lis.Api
                 };
                 var jsonPayload = JsonConvert.SerializeObject(payload);
 
-                _logger.LogDebug(jsonPayload);
+                _logger.LogInfo(jsonPayload);
 
                 var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(apiUrl, content);
