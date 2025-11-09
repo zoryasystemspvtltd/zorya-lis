@@ -113,6 +113,9 @@ namespace LIS.Com.Businesslogic
                     case EquipmentType.ZYBIOZ3:
                         this.TcpIpHL7Command = new ZYBIOZ3TCPIPHL7Command(settings);
                         break;
+                    case EquipmentType.ZYBIOZ5:
+                        this.TcpIpHL7Command = new ZYBIOZ5TCPIPHL7Command(settings);
+                        break;
                     default:
                         throw new NotImplementedException();
                 }
