@@ -8,6 +8,8 @@ namespace LIS.Com.Businesslogic
         XN350 = 1,
         BS430 = 2,
         BS240E = 3,
-        CL1200i = 4
+        CL1200i = 4,
+        ZYBIOZ3 = 5,
+        ZYBIOZ5 = 6
     }
 }

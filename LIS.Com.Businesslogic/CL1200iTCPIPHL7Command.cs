@@ -18,7 +18,7 @@ namespace LIS.Com.Businesslogic
             string[] resultMesgSegments = rawMessage.TrimEnd((char)13).Split((char)13); // <CR>
 
             await SaveResult(sampleNo, resultMesgSegments);
-            Logger.Logger.LogInstance.LogDebug("All the mandatory tags are present in the ORU message");
+           
             string response = @"MSH|^~\&|||||" + DateTime.Now.ToString("yyyyMMddhhmmss") +
                 "||ACK^R01|" + messageControlId + "|P|2.3.1||||0||ASCII|||" + (char)13 +
                 $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";

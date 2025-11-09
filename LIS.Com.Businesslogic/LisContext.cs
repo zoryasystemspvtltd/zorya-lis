@@ -110,6 +110,9 @@ namespace LIS.Com.Businesslogic
                     case EquipmentType.CL1200i:
                         this.TcpIpHL7Command = new CL1200iTCPIPHL7Command(settings);
                         break;
+                    case EquipmentType.ZYBIOZ3:
+                        this.TcpIpHL7Command = new ZYBIOZ3TCPIPHL7Command(settings);
+                        break;
                     default:
                         throw new NotImplementedException();
                 }

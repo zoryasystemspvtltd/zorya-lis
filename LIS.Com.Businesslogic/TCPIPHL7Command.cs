@@ -197,9 +197,11 @@ namespace LIS.Com.Businesslogic
                 {
                     string sampleNo = field[3];
                     //bool flag = IsValidSampleNo(sampleNo);
+                    //For control result
                     string response = @"MSH|^~\&|||||" + DateTime.Now.ToString("yyyyMMddhhmmss") +
                                        "||ACK^R01|" + messageControlId + "|P|2.3.1||||2||ASCII||" + (char)13 +
                                        $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
+
                     if (resultMesgSegments.Length > 2)
                     {
                         response = await ProccessMessage(sampleNo, message, messageControlId);
