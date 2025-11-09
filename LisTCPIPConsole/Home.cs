@@ -60,6 +60,10 @@ namespace LisTCPIPConsole
             var statusText = isReady ? "Disconnect" : "Connect";
             var statusMessage = isReady ? " :: Status - Equipment connected." : " :: Status - Equipment not connected.";
 
+            //Todo known bug, diconnect not working,henace disable the button
+            if (isReady)
+                ConnectToolStripMenuItem.Enabled = false;
+            
             ConnectToolStripMenuItem.Text = statusText;
             connectItem.Text = statusText;
             comPortName = statusMessage;
@@ -67,7 +71,7 @@ namespace LisTCPIPConsole
             heartBeatProxy.WatchHeartBeat();
             this.Text = $"{selectedEquipment} {comPortName}";
             Logger.LogInstance.LogDebug("Lis Console InitLIS method completed");
-        }       
+        }
 
         private void ConnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
