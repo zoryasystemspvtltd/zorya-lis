@@ -110,6 +110,8 @@ namespace LIS.Com.Businesslogic
                         {
                             Logger.Logger.LogInstance.LogInfo("TCP/IP Read: '{0}'", message);
                             //Remove <SB> character from raw message
+                            //Remove <VT> character from raw message
+                            message = message.Replace("<VT>", "");
                             message = message.Replace("<SB>", "");
 
                             var inputmsg = message.Split((char)28);
@@ -161,8 +163,10 @@ namespace LIS.Com.Businesslogic
                             }
                             if (sInputMsg.Length > 100)
                             {
-                                Task.Run(async () => await ResultProcess());
+                                var response = Task.Run(async () => await ResultProcess(sInputMsg.ToString())).Result;
                                 //await ResultProcess();
+                                sInputMsg.Clear(); //Clear the insput message
+                                WriteMessage(response.ToString());
                             }
                         }
                     }
@@ -184,44 +188,6 @@ namespace LIS.Com.Businesslogic
             finally
             {
                 TCPserverHL7.Stop();
-            }
-
-        }
-
-        private async Task ResultProcess()
-        {
-            string messageControlId = "";
-            Logger.Logger.LogInstance.LogDebug("Result process method excuted.");
-            string message = sInputMsg.ToString();
-            sInputMsg.Clear(); //Clear the insput message
-
-            string[] resultMesgSegments = message.TrimEnd((char)13).Split((char)13); // vbCr<CR>
-            if (resultMesgSegments.Length > 1)
-            {
-                string[] firstrow = resultMesgSegments[0].Split('|');
-                if (firstrow[0] == "MSH" || firstrow[0] == "MSH")
-                    messageControlId = firstrow[9];
-
-                string[] field = resultMesgSegments[1].Split('|');
-                if (field[0].Trim() == "OBR")
-                {
-                    string sampleNo = field[3];
-                    //bool flag = IsValidSampleNo(sampleNo);
-                    //For control result
-                    string response = @"MSH|^~\&|||||" + DateTime.Now.ToString("yyyyMMddhhmmss") +
-                                       "||ACK^R01|" + messageControlId + "|P|2.3.1||||2||ASCII||" + (char)13 +
-                                       $"MSA|AA|{messageControlId}|Message accepted|||0|{(char)13}";
-
-                    if (resultMesgSegments.Length > 2)
-                    {
-                        response = await ProccessMessage(sampleNo, message, messageControlId);
-                        WriteMessage(response.ToString());
-                    }
-                    else
-                    {
-                        WriteMessage(response.ToString());
-                    }
-                }
             }
         }
 
@@ -262,7 +228,8 @@ namespace LIS.Com.Businesslogic
         {
             throw new NotImplementedException();
         }
-        virtual public Task<string> ProccessMessage(string sampleNo, string message, string messageControlId)
+        
+        virtual public Task<string> ResultProcess(string message)
         {
             throw new NotImplementedException();
         }
