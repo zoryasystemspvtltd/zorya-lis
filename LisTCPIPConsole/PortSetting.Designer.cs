@@ -33,6 +33,8 @@
             this.bCancle = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cmbProtocol = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.ddlEquipmentType = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cbRunOnStartup = new System.Windows.Forms.CheckBox();
@@ -52,8 +54,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtServer = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbProtocol = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -113,6 +113,27 @@
             this.tabPage1.Size = new System.Drawing.Size(350, 143);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General Settings";
+            // 
+            // cmbProtocol
+            // 
+            this.cmbProtocol.FormattingEnabled = true;
+            this.cmbProtocol.Items.AddRange(new object[] {
+            "ASTM",
+            "HL7"});
+            this.cmbProtocol.Location = new System.Drawing.Point(163, 84);
+            this.cmbProtocol.Name = "cmbProtocol";
+            this.cmbProtocol.Size = new System.Drawing.Size(121, 21);
+            this.cmbProtocol.TabIndex = 29;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 90);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 13);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "PROTOCOL NAME:";
             // 
             // ddlEquipmentType
             // 
@@ -301,27 +322,6 @@
             this.label9.Size = new System.Drawing.Size(66, 13);
             this.label9.TabIndex = 38;
             this.label9.Text = "Server URL:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 90);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 13);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "PROTOCOL NAME:";
-            // 
-            // cmbProtocol
-            // 
-            this.cmbProtocol.FormattingEnabled = true;
-            this.cmbProtocol.Items.AddRange(new object[] {
-            "ASTM",
-            "HL7"});
-            this.cmbProtocol.Location = new System.Drawing.Point(163, 84);
-            this.cmbProtocol.Name = "cmbProtocol";
-            this.cmbProtocol.Size = new System.Drawing.Size(121, 21);
-            this.cmbProtocol.TabIndex = 29;
             // 
             // PortSetting
             // 
