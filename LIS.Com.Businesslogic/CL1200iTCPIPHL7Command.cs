@@ -64,7 +64,7 @@ namespace LIS.Com.Businesslogic
                 if (field[0].Trim() == "OBX" && field[2] == "NM")
                 {
                     var resultDetails = new LisTestValue();
-                    var paramCode = field[4].ToString();
+                    var paramCode = field[3].ToString();
                     var paramValue = field[5].ToString();
                     resultDetails.PARAMCODE = paramCode;
                     resultDetails.Value = paramValue;
