@@ -15,7 +15,7 @@ namespace LisTCPIPConsole
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            Logger.LogInstance.LogInfo("DxI 800 Stopped.");
+            Logger.LogInstance.LogInfo("Zorya LIS Stopped.");
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -133,10 +133,10 @@ namespace LisTCPIPConsole
             // 
             // lisNotifyIcon
             // 
-            this.lisNotifyIcon.BalloonTipText = "UniCel DxI 800 still working...";
-            this.lisNotifyIcon.BalloonTipTitle = "UniCel DxI 800";
+            this.lisNotifyIcon.BalloonTipText = "Zorya LIS";
+            this.lisNotifyIcon.BalloonTipTitle = "Zorya LIS";
             this.lisNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("lisNotifyIcon.Icon")));
-            this.lisNotifyIcon.Text = "UniCel DxI 800";
+            this.lisNotifyIcon.Text = "Zorya LIS";
             this.lisNotifyIcon.Visible = true;
             // 
             // Home
