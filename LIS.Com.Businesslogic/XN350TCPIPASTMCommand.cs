@@ -17,10 +17,17 @@ namespace LIS.Com.Businesslogic
         private readonly JArray validCodes;
         public XN350TCPIPASTMCommand(TCPIPSettings _settings) : base(_settings)
         {
-            var path = $"{Environment.CurrentDirectory}\\Data\\XN350.json";
-            var jsonData = File.ReadAllText(path);
-            validCodes = JArray.Parse(jsonData);
-            Logger.Logger.LogInstance.LogError("Please add XN350.JSON file under bin/Data/");
+            try
+            {
+                var path = $"{Environment.CurrentDirectory}\\Data\\XN350.json";
+                var jsonData = File.ReadAllText(path);
+                validCodes = JArray.Parse(jsonData);
+            }
+            catch (Exception ex)
+            {
+                Logger.Logger.LogInstance.LogException("Create method exception:", ex);
+                Logger.Logger.LogInstance.LogError("Please add XN350.JSON file under bin/Data/");
+            }
         }
 
         public override async Task CreateMessage(string message)
@@ -138,12 +145,12 @@ namespace LIS.Com.Businesslogic
                         Logger.Logger.LogInstance.LogDebug("XN350 Header Segment {0}", headerSegment);
                         output[3] = patientSegment;
                         Logger.Logger.LogInstance.LogDebug("XN350 Patient Segment {0}", patientSegment);
-                        output[4] = orderSegment2;                       
+                        output[4] = orderSegment2;
                         Logger.Logger.LogInstance.LogDebug("XN350 Order2 Segment {0}", orderSegment2);
                         output[5] = trailerSegment;
                         Logger.Logger.LogInstance.LogDebug("XN350 Trailer Segment {0}", trailerSegment);
                         index = 1;
-                    }                    
+                    }
                 }
                 else//no test order
                 {
