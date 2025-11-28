@@ -319,8 +319,8 @@
     <Content Include="ui\icon_facebook.a4a821dd7a42e1c10eda.png" />
     <Content Include="ui\icon_google.e74abd862dfd83547f92.png" />
     <Content Include="ui\index.html" />
-    <Content Include="ui\main-es2015.069a2074e9bac162d656.js" />
-    <Content Include="ui\main-es5.069a2074e9bac162d656.js" />
+    <Content Include="ui\main-es2015.c9990f2851bdb306cda7.js" />
+    <Content Include="ui\main-es5.c9990f2851bdb306cda7.js" />
     <Content Include="ui\polyfills-es2015.1fa79c8fa3f9ad800f15.js" />
     <Content Include="ui\polyfills-es5.3541e0fe0342e58a8062.js" />
     <Content Include="ui\runtime-es2015.5b2aa354bcdddab16363.js" />
