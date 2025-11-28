@@ -5,6 +5,7 @@ using LIS.DtoModel.Interfaces;
 using LIS.DtoModel.Models;
 using LIS.Logger;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -167,7 +168,7 @@ namespace Lis.Api.Controllers.Api
                         decimal value;
                         if (decimal.TryParse(item.Value, out value))
                         {
-                            decimal truncated = Math.Truncate(value * 100) / 100;
+                            decimal truncated = Math.Round(value, 2);
                             recordsToUpdate.o.Value = truncated.ToString();
                         }
                         else
