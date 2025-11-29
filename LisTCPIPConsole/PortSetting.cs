@@ -44,7 +44,7 @@ namespace LisTCPIPConsole
             this.Close();
         }
 
-        private async void bSave_Click(object sender, EventArgs e)
+        private void bSave_Click(object sender, EventArgs e)
         {
             //For local testing comment this code
             
@@ -100,7 +100,7 @@ namespace LisTCPIPConsole
             this.Close();
         }
 
-        private async void btnValidate_Click(object sender, EventArgs e)
+        private void btnValidate_Click(object sender, EventArgs e)
         {
             LisContext.LisDOM.InitAPI(txtServer.Text, txtKey.Text);
             //isValidAPI = await LisContext.LisDOM.PingAPI();
