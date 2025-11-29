@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -20,12 +21,12 @@ namespace LIS.Com.Businesslogic
         private readonly object _shutdownLock = new object();
         private bool _isShutdown = false;
         protected StringBuilder sInputMsg = new StringBuilder();
-        public string FullMessage { get; private set; }       
+        public string FullMessage { get; private set; }
         // Call from ConnectToTCPIP instead of creating Thread 
         public TCPIPHL7Command(TCPIPSettings settings)
         {
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method started.");
-            this._settings = settings;           
+            this._settings = settings;
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method completed.");
         }
         public async Task StartListenerAsync(CancellationToken externalToken)
@@ -35,7 +36,7 @@ namespace LIS.Com.Businesslogic
 
             var ipAddress = IPAddress.Parse(_settings.IPAddress);
             _listener = new TcpListener(new IPEndPoint(ipAddress, _settings.PortNo));
-            _listener.Start();           
+            _listener.Start();
             // Accept loop
             while (!token.IsCancellationRequested)
             {
@@ -84,12 +85,21 @@ namespace LIS.Com.Businesslogic
                         continue;
                     }
 
-                    int bytesRead = readTask.Result;
-                    if (bytesRead == 0)
+                    int bytesRead = 0;
+                    try
                     {
-                        // client closed gracefully 
-                        Logger.Logger.LogInstance.LogInfo($"Remote closed connection: {endpoint}");
-                        break;
+                        bytesRead = readTask.Result;
+                        if (bytesRead == 0)
+                        {
+                            // client closed gracefully 
+                            Logger.Logger.LogInstance.LogInfo($"Remote closed connection: {endpoint}");
+                            break;
+                        }
+                    }
+                    catch (IOException ioEx)
+                    {
+                        this.FullMessage = ioEx.Message;
+                        Logger.Logger.LogInstance.LogException(ioEx);
                     }
 
                     lastReceived = DateTime.UtcNow;
@@ -131,16 +141,16 @@ namespace LIS.Com.Businesslogic
                 catch { }
             }
         }
-      
+
         private async Task ProcessFrameAsync(string frame, NetworkStream stream)
         {
             try
             {
+                bool orderRequest = false;
+                string messageControlId = "";
                 var segments = frame.Split('\r');
                 foreach (var seg in segments)
                 {
-                    bool orderRequest = false;
-                    string messageControlId = "";
                     var parts = seg.Split('|');
                     if (parts.Length == 0) continue;
                     var segId = parts[0].Trim();
@@ -181,11 +191,11 @@ namespace LIS.Com.Businesslogic
                         case "OBX":
                             sInputMsg.Append(seg + (char)13);
                             break;
-                    }                   
-                }               
+                    }
+                }
                 if (sInputMsg.Length > 100)
                 {
-                    var response = Task.Run(async () => await ResultProcess(sInputMsg.ToString())).Result;                   
+                    var response = Task.Run(async () => await ResultProcess(sInputMsg.ToString())).Result;
                     sInputMsg.Clear(); //Clear the insput message
                     Logger.Logger.LogInstance.LogInfo($"Write: {response.ToString()}");
                     var dsrBytes = Encoding.ASCII.GetBytes(response.ToString());
@@ -202,7 +212,7 @@ namespace LIS.Com.Businesslogic
 
         // Call this to disconnect and stop the listener
         public async Task DisconnectToTCPIPAsync(TimeSpan? gracefulWait = null)
-        {           
+        {
             // default wait for handlers to exit
             var waitTimeout = gracefulWait ?? TimeSpan.FromSeconds(10);
 
