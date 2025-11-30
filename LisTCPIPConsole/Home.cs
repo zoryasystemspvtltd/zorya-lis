@@ -52,9 +52,8 @@ namespace LisTCPIPConsole
         private void InitLIS()
         {
             Logger.LogInstance.LogDebug("Lis Console InitLIS method started");
-            var context = LisContext.LisDOM;
-            var isASTM = Settings.Default.PROTOCOL_NAME == "ASTM";
-            var isReady = isASTM ? context.TcpIpASTMCommand.IsReady : IsReady;
+            var context = LisContext.LisDOM;           
+            var isReady = IsReady;
 
             var statusText = isReady ? "Disconnect" : "Connect";
             var statusMessage = isReady ? " :: Status - Equipment connected." : " :: Status - Equipment not connected.";                       
@@ -79,9 +78,7 @@ namespace LisTCPIPConsole
                 IsReady = false;
                 InitLIS();
                 await DisconnectIP(); 
-
             }
-
         }
 
         private async Task ConnectTCPIP()
@@ -100,30 +97,13 @@ namespace LisTCPIPConsole
                 }
                 else if (Settings.Default.PROTOCOL_NAME == "ASTM")
                 {
-                    if (!context.TcpIpASTMCommand.IsReady)
-                    {
-                        context.TcpIpASTMCommand.ConnectToTCPIP();
-                        if (!context.TcpIpASTMCommand.IsReady)
-                        {
-                            InitLIS();
-                            Logger.LogInstance.LogInfo(context.TcpIpASTMCommand.FullMessage);
-                            MessageBox.Show(this, context.TcpIpASTMCommand.FullMessage, "Error !", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address connected.");
-                        }
-                    }
-                    else
-                    {
-                        context.TcpIpASTMCommand.DisconnectToTCPIP();
-                        Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address disconnected.");
-                    }
+                    IsReady = true;
+                    InitLIS();
+                    Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address connected.");
+                    await context.TcpIpASTMCommand.StartListenerAsync(externalToken);
                 }
 
                 Logger.LogInstance.LogDebug("LisConsole ConnectTCPIP completed.");
-
-
             }
             catch (Exception ex)
             {
@@ -142,7 +122,8 @@ namespace LisTCPIPConsole
         {
             if (Settings.Default.PROTOCOL_NAME == "ASTM")
             {
-                LisContext.LisDOM.TcpIpASTMCommand.DisconnectToTCPIP();
+                IsReady = false;
+                await LisContext.LisDOM.TcpIpASTMCommand.DisconnectToTCPIPAsync();
             }
             else
             {
@@ -166,7 +147,6 @@ namespace LisTCPIPConsole
                 //this.ConnectCOM();
             }
         }
-
         private void Home_SizeChanged(object sender, EventArgs e)
         {
 
