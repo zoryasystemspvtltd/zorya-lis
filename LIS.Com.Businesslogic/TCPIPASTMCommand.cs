@@ -2,9 +2,6 @@
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -15,122 +12,76 @@ namespace LIS.Com.Businesslogic
 {
     public class TCPIPASTMCommand
     {
-        private TCPIPSettings _settings;
-        private CancellationTokenSource _cts;
-        private TcpListener _listener;
-        private readonly ConcurrentDictionary<string, (TcpClient Client, Task HandlerTask, CancellationTokenSource Cts)> _clients
-            = new ConcurrentDictionary<string, (TcpClient, Task, CancellationTokenSource)>();
-        private readonly object _shutdownLock = new object();
-        private bool _isShutdown = false;
-        protected string sInputMsg = "";
-        public string FullMessage { get; private set; }
-        protected int index;
+        private TCPIPSettings settings;
+        protected Thread TCPServerASTMThread;
+        NetworkStream stream;
+        protected TcpListener TCPServerASTM;
         protected string[] output;
-        //NetworkStream stream;
+        protected int index;
+        public bool IsReady { get; private set; }
+
+        public string Message { get; private set; }
+
+        public bool IsRunning { get; private set; }
+        public string FullMessage { get; private set; }
+        protected System.Timers.Timer timer;
+        protected string sInputMsg = "";
+        public bool IsConnected { get; set; }
         public TCPIPASTMCommand(TCPIPSettings settings)
         {
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPASTMCommand Constructor method started.");
-            this._settings = settings;
+            IsReady = false;
+            this.settings = settings;
+
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPASTMCommand Constructor method completed.");
         }
 
-        public async Task StartListenerAsync(CancellationToken externalToken)
+        public void StartListener()
         {
-            _cts = CancellationTokenSource.CreateLinkedTokenSource(externalToken);
-            var token = _cts.Token;
-
-            var ipAddress = IPAddress.Parse(_settings.IPAddress);
-            _listener = new TcpListener(new IPEndPoint(ipAddress, _settings.PortNo));
-            _listener.Start();
-            // Accept loop
-            while (!token.IsCancellationRequested)
+            Logger.Logger.LogInstance.LogDebug("TCPIPASTMCommand ConnectToTCPIP method started.");
+            try
             {
-                try
-                {
-                    var client = await _listener.AcceptTcpClientAsync().ConfigureAwait(false);
-                    // Optional: configure socket keepalive 
+                IsConnected = true;
+                var ipAddress = IPAddress.Parse(settings.IPAddress);
+                IPEndPoint localEndPoint = new IPEndPoint(ipAddress, settings.PortNo);
+                TCPServerASTM = new TcpListener(localEndPoint);
+                TCPServerASTM.Start();
+                TCPServerASTMThread = new Thread(new ThreadStart(TCPIPListenASTMData));
+                TCPServerASTMThread.Name = "SERVER" + settings.PortNo;
+                TCPServerASTMThread.Start();
+                IsReady = true;
 
-                    client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
-                    _ = Task.Run(() => HandleClientAsync(client, token), token); // fire-and-forget 
-
-                }
-
-                catch (ObjectDisposedException) { break; } // listener stopped 
-                catch (Exception ex)
-                {
-                    this.FullMessage = ex.Message;
-                    Logger.Logger.LogInstance.LogException(ex);
-                    await Task.Delay(TimeSpan.FromSeconds(1), token).ConfigureAwait(false);
-                }
+                Logger.Logger.LogInstance.LogDebug("TCPIPASTMCommand ConnectToTCPIP method completed.");
+            }
+            catch (Exception ex)
+            {
+                // TCPServerASTMThread?.Abort();//properly abort the thread
+                TCPServerASTM?.Stop();//properly stop the listner
+                Logger.Logger.LogInstance.LogDebug("Server Stopped.");
+                this.FullMessage = ex.Message;
+                Logger.Logger.LogInstance.LogException(ex);
             }
         }
 
-        private async Task HandleClientAsync(TcpClient client, CancellationToken token)
+        public void DisconnectToTCPIP()
         {
-            var endpoint = client.Client.RemoteEndPoint?.ToString();
-            var stream = client.GetStream();
-            var buffer = new byte[10240];
-            var parserBuffer = new StringBuilder();
-            var lastReceived = DateTime.UtcNow;
+            Logger.Logger.LogInstance.LogDebug("TCPIPASTMCommand DisconnectToTCPIP method started.");
             try
             {
-                while (!token.IsCancellationRequested)
+                IsConnected = false;
+                if (TCPServerASTMThread != null)
                 {
-                    // Read with timeout awareness 
-                    var readTask = stream.ReadAsync(buffer, 0, buffer.Length, token);
-                    var completed = await Task.WhenAny(readTask, Task.Delay(TimeSpan.FromSeconds(30), token)).ConfigureAwait(false);
-                    if (completed != readTask)
-                    {
-                        // no data in 30s - check idle policy 
-                        if (DateTime.UtcNow - lastReceived > TimeSpan.FromMinutes(5))
-                        {
-                            Logger.Logger.LogInstance.LogInfo($"Connection idle - closing: {endpoint}");
-                            break; // exit loop -> cleanup -> allow reconnect 
-                        }
-                        continue;
-                    }
-
-                    int bytesRead = 0;
-                    try
-                    {
-                        bytesRead = readTask.Result;
-                        if (bytesRead == 0)
-                        {
-                            // client closed gracefully 
-                            Logger.Logger.LogInstance.LogInfo($"Remote closed connection: {endpoint}");
-                            break;
-                        }
-                    }
-                    catch (IOException ioEx)
-                    {
-                        this.FullMessage = ioEx.Message;
-                        Logger.Logger.LogInstance.LogException(ioEx);
-                    }
-
-                    lastReceived = DateTime.UtcNow;
-                    var chunk = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    parserBuffer.Append(chunk);
-
-                    string data = parserBuffer.ToString();
-                    Logger.Logger.LogInstance.LogInfo($"Read: {data}");                
-                    await ProcessFrameAsync(data, stream).ConfigureAwait(false);
-
-                    // Keep leftover 
-                    parserBuffer.Clear();
-                   // parserBuffer.Append(data);
+                    //TCPServerASTMThread.Abort();
+                    TCPServerASTM.Stop();
                 }
+                IsReady = false;
             }
-
             catch (Exception ex)
             {
                 this.FullMessage = ex.Message;
                 Logger.Logger.LogInstance.LogException(ex);
             }
-            finally
-            {
-                try { stream.Close(); client.Close(); }
-                catch { }
-            }
+            Logger.Logger.LogInstance.LogDebug("TCPIPASTMCommand DisconnectToTCPIP method completed.");
         }
 
         /// ENQ or (char)5 -enquiry
@@ -142,212 +93,128 @@ namespace LIS.Com.Businesslogic
         /// NAK or (char)21 - negative acknowledge
         /// DLE or (char)10 - data link escape 
         /// CR	or (char)13 carriage return
-        private async Task ProcessFrameAsync(string message, NetworkStream stream)
+        private async void TCPIPListenASTMData()
         {
-            try
+            Logger.Logger.LogInstance.LogDebug("TCPIPASTMCommand TCPIPListenASTMData method started.");
+            TcpClient client = null;
+            while (true)
             {
-                if (message != string.Empty)
-                {
-                    var InpBuffer = message.ToCharArray();
-                    switch (InpBuffer[0])
-                    {
-                        case (char)5:        // Check for <ENQ>
-                            {
-                                await WriteToPort("" + (char)6, stream);
-                                break;
-                            }
-
-                        case (char)6:      // Check for <ACK>
-                            {
-                                if (index < 4)
-                                {
-                                    await WriteToPort((char)2 + Add_CheckSum(output[index + 1]) + (char)13, stream);
-                                    index += 1;
-
-                                }
-                                else
-                                {  //(char)4 means end of transmission
-                                    await WriteToPort("" + (char)4, stream);
-                                    index = 0;
-                                    for (int i = 0; i <= 4; i++)
-                                        output[i] = string.Empty;
-                                }
-
-                                break;
-                            }
-
-                        case (char)4:   // Check For the <EOT>
-                            {
-                                //Logger.Logger.LogInstance.LogInfo("SerialCommand Read: '{0}'", sInputMsg);
-                                await CreateMessage(sInputMsg);
-                                break;
-                            }
-
-                        default:
-                            {
-                                for (int i = 0; i <= InpBuffer.Length - 1; i++)
-                                {
-                                    sInputMsg += InpBuffer[i];
-
-                                    if (InpBuffer[i] == Strings.Chr(10))
-                                    {
-                                        await WriteToPort("" + (char)6, stream);
-                                    }
-                                }
-
-                                break;
-                            }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                this.FullMessage = ex.Message;
-                sInputMsg = "";
-                throw;
-            }
-        }
-        public async Task DisconnectToTCPIPAsync(TimeSpan? gracefulWait = null)
-        {
-            // default wait for handlers to exit
-            var waitTimeout = gracefulWait ?? TimeSpan.FromSeconds(10);
-
-            lock (_shutdownLock)
-            {
-                if (_isShutdown) return; // idempotent
-                _isShutdown = true;
-            }
-
-            Logger.Logger.LogInstance.LogInfo("DisconnectToTCPIP: initiating shutdown.");
-
-            // 1) Stop accepting new clients
-            try
-            {
-                if (_listener != null)
-                {
-                    Logger.Logger.LogInstance.LogInfo("Stopping TcpListener...");
-                    try
-                    {
-                        // Cancel accept loop first if you use a token for accept loop
-                        _cts?.Cancel();
-                    }
-                    catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
-
-                    try
-                    {
-                        _listener.Stop();
-                    }
-                    catch (Exception ex)
-                    {
-                        // Sometimes Stop may throw if listener already stopped; log and continue
-                        Logger.Logger.LogInstance.LogException(ex);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Logger.LogInstance.LogException(ex);
-            }
-
-            // 2) Cancel all client read loops and request graceful close
-            List<Task> handlerTasks = new List<Task>();
-            foreach (var kvp in _clients.ToArray())
-            {
-                var key = kvp.Key;
-                var tuple = kvp.Value;
                 try
                 {
-                    Logger.Logger.LogInstance.LogInfo($"DisconnectToTCPIP: closing client {key}");
-
-                    // Cancel per-client token so their read loops can exit gracefully
-                    try { tuple.Cts?.Cancel(); } catch (Exception) { }
-
-                    // Attempt graceful shutdown on socket
-                    try
+                    if (IsConnected)
                     {
-                        var client = tuple.Client;
-                        if (client != null && client.Connected)
+                        TCPServerASTM.Start();
+                        try
+                        {
+                            client = TCPServerASTM.AcceptTcpClient();
+                        }
+                        catch
+                        {
+                        }
+                        while (IsConnected)
                         {
                             try
                             {
-                                // Graceful shutdown
-                                client.Client.Shutdown(SocketShutdown.Both);
+                                if (!IsConnected)
+                                {
+                                    Logger.Logger.LogInstance.LogInfo("LIS disconnected!.");
+                                    break;
+                                }
+
+                                string message = "";
+                                int read = 0;
+
+                                // Get a stream object for reading and writing
+                                stream = client.GetStream();
+
+                                // Loop to receive all the data sent by the client.
+                                while (stream.DataAvailable)
+                                {
+                                    read = stream.ReadByte();
+                                    message += Convert.ToChar(read);
+                                }
+                                if (message != string.Empty)
+                                {
+                                    var InpBuffer = message.ToCharArray();
+                                    switch (InpBuffer[0])
+                                    {
+                                        case (char)5:        // Check for <ENQ>
+                                            {
+                                                WriteToPort("" + (char)6);
+                                                break;
+                                            }
+
+                                        case (char)6:      // Check for <ACK>
+                                            {
+                                                if (index < 4)
+                                                {
+                                                    WriteToPort((char)2 + Add_CheckSum(output[index + 1]) + (char)13);
+                                                    index += 1;
+
+                                                }
+                                                else
+                                                {  //(char)4 means end of transmission
+                                                    WriteToPort("" + (char)4);
+                                                    index = 0;
+                                                    for (int i = 0; i <= 4; i++)
+                                                        output[i] = string.Empty;
+                                                }
+
+                                                break;
+                                            }
+
+                                        case (char)4:   // Check For the <EOT>
+                                            {
+                                                Logger.Logger.LogInstance.LogInfo("SerialCommand Read: '{0}'", sInputMsg);
+                                                await CreateMessage(sInputMsg);
+                                                break;
+                                            }
+
+                                        default:
+                                            {
+                                                for (int i = 0; i <= InpBuffer.Length - 1; i++)
+                                                {
+                                                    sInputMsg += InpBuffer[i];
+
+                                                    if (InpBuffer[i] == Strings.Chr(10))
+                                                    {
+                                                        WriteToPort("" + (char)6);
+                                                    }
+                                                }
+
+                                                break;
+                                            }
+                                    }
+                                }
                             }
-                            catch (SocketException se)
+                            catch (Exception)
                             {
-                                // ignore if remote already closed, but log
-                                Logger.Logger.LogInstance.LogException(se);
+
+                                throw;
                             }
                         }
+                        if (client != null)
+                            client.Close();
                     }
-                    catch (Exception ex)
-                    {
-                        Logger.Logger.LogInstance.LogException(ex);
-                    }
-
-                    // collect handler task to await later
-                    if (tuple.HandlerTask != null)
-                    {
-                        handlerTasks.Add(tuple.HandlerTask);
-                    }
+                }
+                catch (SocketException ex)
+                {
+                    Logger.Logger.LogInstance.LogException(ex);
                 }
                 catch (Exception ex)
                 {
                     Logger.Logger.LogInstance.LogException(ex);
                 }
-            }
-
-            // 3) Give handlers some time to finish gracefully
-            try
-            {
-                if (handlerTasks.Count > 0)
+                if (!IsConnected)
                 {
-                    var whenAll = Task.WhenAll(handlerTasks);
-                    var finished = await Task.WhenAny(whenAll, Task.Delay(waitTimeout)).ConfigureAwait(false);
-                    if (finished != whenAll)
-                    {
-                        Logger.Logger.LogInstance.LogInfo("DisconnectToTCPIP: timeout waiting for handler tasks to finish; forcing closure.");
-                    }
+                    if (client != null)
+                        client.Close();
+
+                    Logger.Logger.LogInstance.LogInfo("LIS disconnected!.");
+                    break;
                 }
             }
-            catch (Exception ex)
-            {
-                Logger.Logger.LogInstance.LogException(ex);
-            }
-
-            // 4) Close and dispose remaining clients and streams forcefully
-            foreach (var kvp in _clients.ToArray())
-            {
-                var key = kvp.Key;
-                var tuple = kvp.Value;
-                try
-                {
-                    try { tuple.Client?.GetStream()?.Close(); } catch { }
-                    try { tuple.Client?.Close(); } catch { }
-                    try { tuple.Client?.Dispose(); } catch { }
-                    try { tuple.Cts?.Dispose(); } catch { }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Logger.LogInstance.LogException(ex);
-                }
-
-                // remove from collection
-                _clients.TryRemove(key, out _);
-            }
-
-            // 5) Dispose listener CTS
-            try { _cts?.Dispose(); } catch { }
-            _cts = null;
-
-            // 6) Finally nullify or dispose listener reference
-            try { _listener = null; } catch { }
-
-            Logger.Logger.LogInstance.LogInfo("DisconnectToTCPIP: shutdown completed.");
         }
-
-
-
         /// <summary>
         ///Many serial protocols use checksum (additional bytes added at the end of the data string) to check
         ///the data integrity, as errors might occur during data transmission.        
@@ -378,10 +245,11 @@ namespace LIS.Com.Businesslogic
             return output;
         }
 
-        protected async Task WriteToPort(string text, NetworkStream stream)
+        protected void WriteToPort(string text)
         {
-            var dsrBytes = Encoding.ASCII.GetBytes(text);
-            await stream.WriteAsync(dsrBytes, 0, dsrBytes.Length).ConfigureAwait(false);
+            ASCIIEncoding encd = new ASCIIEncoding();
+            var dataBytes = encd.GetBytes(text);
+            stream.Write(dataBytes, 0, dataBytes.Length);
             Logger.Logger.LogInstance.LogInfo("TCPIPASTMCommand Write: '{0}'", text);
         }
 

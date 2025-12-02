@@ -25,15 +25,11 @@ namespace LIS.Com.Businesslogic
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method started.");
             IsReady = false;
             this.settings = settings;
-            if (this.settings.AutoConnect)
-            {
-                StartListenerAsync();
-            }
 
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method completed.");
         }
 
-        public void StartListenerAsync()
+        public void StartListener()
         {
             Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command ConnectToTCPIP method started.");
             try
@@ -45,7 +41,7 @@ namespace LIS.Com.Businesslogic
                 TCPserverHL7.Start();
 
                 TCPServerHL7Thread = new Thread(new ThreadStart(TCPListenHL7Data));
-                TCPServerHL7Thread.Name = "SERVER";
+                TCPServerHL7Thread.Name = "SERVER" + settings.PortNo;
                 TCPServerHL7Thread.Start();
                
                 IsReady = true;
@@ -61,7 +57,7 @@ namespace LIS.Com.Businesslogic
             }
         }
 
-        public void DisconnectToTCPIPAsync()
+        public void DisconnectToTCPIP()
         {
             Logger.Logger.LogInstance.LogDebug("TCPIPHL7Command DisconnectToTCPIP method started.");
             try
