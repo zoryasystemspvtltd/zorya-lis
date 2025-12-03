@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace LIS.Com.Businesslogic
 {
@@ -88,18 +89,24 @@ namespace LIS.Com.Businesslogic
                 {
                     if (IsConnected)
                     {
-                        TCPserverHL7.Start();
+                        // Do NOT call Start repeatedly here. Listener was started in StartListener.
 
                         try
                         {
+                            // AcceptTcpClient blocks until a client connects or the listener is stopped.
                             client = TCPserverHL7.AcceptTcpClient();
                         }
-                        catch
+                        catch (SocketException sockEx)
                         {
+                            // Listener was likely stopped - break if disconnected
+                            Logger.Logger.LogInstance.LogException(sockEx);
+                            if (!IsConnected)
+                                break;
+                            continue;
                         }
 
 
-                        while (IsConnected)
+                        while (IsConnected && client != null && client.Connected)
                         {
                             try
                             {
@@ -112,18 +119,41 @@ namespace LIS.Com.Businesslogic
                                 string messageControlId = "";
                                 bool orderRequest = false;
                                 string message = "";
-                                int read = 0;
 
                                 // Get a stream object for reading and writing
                                 stream = client.GetStream();
 
-                                // Loop to receive all the data sent by the client.
-                                while (stream.DataAvailable)
+                                // Use blocking Read with a short timeout instead of busy-waiting on DataAvailable
+                                stream.ReadTimeout = 1000; // 1 second timeout so we can check IsConnected periodically
+                                var buffer = new byte[4096];
+
+                                int bytesRead = 0;
+                                try
                                 {
-                                    read = stream.ReadByte();
-                                    message += Convert.ToChar(read);
+                                    bytesRead = stream.Read(buffer, 0, buffer.Length);
                                 }
-                                if (message != string.Empty)
+                                catch (IOException ioEx)
+                                {
+                                    // If the read timed out, loop back to check IsConnected
+                                    var se = ioEx.InnerException as SocketException;
+                                    if (se != null && se.SocketErrorCode == SocketError.TimedOut)
+                                    {
+                                        continue;
+                                    }
+                                    // Other IO issues - log and break client loop
+                                    Logger.Logger.LogInstance.LogException(ioEx);
+                                    break;
+                                }
+
+                                if (bytesRead == 0)
+                                {
+                                    // Remote closed connection
+                                    break;
+                                }
+
+                                message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+
+                                if (!string.IsNullOrEmpty(message))
                                 {
                                     Logger.Logger.LogInstance.LogInfo("TCP/IP Read: '{0}'", message);
                                     //Remove <SB> character from raw message
@@ -140,30 +170,28 @@ namespace LIS.Com.Businesslogic
                                         switch (input[0].Trim())
                                         {
                                             case "MSH":
-                                            case "MSH":
-                                                orderRequest = input[8] == "QRY^Q02";
-                                                messageControlId = input[9];
+                                            case "\u000BMSH":
+                                                orderRequest = input.Length > 8 && input[8] == "QRY^Q02";
+                                                messageControlId = input.Length > 9 ? input[9] : string.Empty;
                                                 if (!orderRequest)
                                                 {
                                                     sInputMsg.Append(block + (char)13);
                                                 }
                                                 break;
                                             case "QRD":
-                                                string sampleNo = input[8];
+                                                string sampleNo = input.Length > 8 ? input[8] : string.Empty;
                                                 if (orderRequest)
                                                 {
-                                                    ASCIIEncoding encd = new ASCIIEncoding();
                                                     var response = Task.Run(async () => await SendOrderData(sampleNo, messageControlId)).Result;
-                                                    //var response = await SendOrderData(sampleNo, messageControlId);
 
                                                     //Send First order Response
-                                                    var dataBytes = encd.GetBytes(response.QRYResponse);
+                                                    var dataBytes = Encoding.ASCII.GetBytes(response.QRYResponse);
                                                     stream.Write(dataBytes, 0, dataBytes.Length);
                                                     Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.QRYResponse);
                                                     if (response.DSRResponse != null)
                                                     {
                                                         //Send Order Info
-                                                        var dsrBytes = encd.GetBytes(response.DSRResponse);
+                                                        var dsrBytes = Encoding.ASCII.GetBytes(response.DSRResponse);
                                                         stream.Write(dsrBytes, 0, dsrBytes.Length);
                                                         Logger.Logger.LogInstance.LogInfo("TCP/IP Write: '{0}'", response.DSRResponse);
                                                     }

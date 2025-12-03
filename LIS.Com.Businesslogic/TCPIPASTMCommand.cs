@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace LIS.Com.Businesslogic
 {
@@ -103,36 +104,61 @@ namespace LIS.Com.Businesslogic
                 {
                     if (IsConnected)
                     {
-                        TCPServerASTM.Start();
+                        // Do not call Start repeatedly; listener started in StartListener
                         try
                         {
                             client = TCPServerASTM.AcceptTcpClient();
                         }
-                        catch
+                        catch (SocketException sockEx)
                         {
+                            Logger.Logger.LogInstance.LogException(sockEx);
+                            if (!IsConnected)
+                                break;
+                            continue;
                         }
-                        while (IsConnected)
+                        while (IsConnected && client != null && client.Connected)
                         {
                             try
                             {
                                 if (!IsConnected)
                                 {
-                                    Logger.Logger.LogInstance.LogInfo("LIS disconnected!.");
+                                    Logger.Logger.LogInstance.LogInfo("LIS disconnected!." );
                                     break;
                                 }
 
                                 string message = "";
-                                int read = 0;
 
                                 // Get a stream object for reading and writing
                                 stream = client.GetStream();
 
-                                // Loop to receive all the data sent by the client.
-                                while (stream.DataAvailable)
+                                // Use blocking Read with a timeout instead of busy-waiting on DataAvailable
+                                stream.ReadTimeout = 1000; // 1 second timeout
+                                var buffer = new byte[4096];
+                                int bytesRead = 0;
+                                try
                                 {
-                                    read = stream.ReadByte();
-                                    message += Convert.ToChar(read);
+                                    bytesRead = stream.Read(buffer, 0, buffer.Length);
                                 }
+                                catch (IOException ioEx)
+                                {
+                                    var se = ioEx.InnerException as SocketException;
+                                    if (se != null && se.SocketErrorCode == SocketError.TimedOut)
+                                    {
+                                        // read timed out, loop to check IsConnected
+                                        continue;
+                                    }
+                                    Logger.Logger.LogInstance.LogException(ioEx);
+                                    break;
+                                }
+
+                                if (bytesRead == 0)
+                                {
+                                    // remote closed connection
+                                    break;
+                                }
+
+                                message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+
                                 if (message != string.Empty)
                                 {
                                     var InpBuffer = message.ToCharArray();
@@ -166,7 +192,14 @@ namespace LIS.Com.Businesslogic
                                         case (char)4:   // Check For the <EOT>
                                             {
                                                 Logger.Logger.LogInstance.LogInfo("SerialCommand Read: '{0}'", sInputMsg);
-                                                await CreateMessage(sInputMsg);
+                                                try
+                                                {
+                                                    await CreateMessage(sInputMsg);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Logger.Logger.LogInstance.LogException(ex);
+                                                }
                                                 break;
                                             }
 
@@ -176,7 +209,7 @@ namespace LIS.Com.Businesslogic
                                                 {
                                                     sInputMsg += InpBuffer[i];
 
-                                                    if (InpBuffer[i] == Strings.Chr(10))
+                                                    if (InpBuffer[i] == '\n')
                                                     {
                                                         WriteToPort("" + (char)6);
                                                     }
@@ -187,10 +220,10 @@ namespace LIS.Com.Businesslogic
                                     }
                                 }
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
-
-                                throw;
+                                Logger.Logger.LogInstance.LogException(ex);
+                                break;
                             }
                         }
                         if (client != null)
@@ -210,7 +243,7 @@ namespace LIS.Com.Businesslogic
                     if (client != null)
                         client.Close();
 
-                    Logger.Logger.LogInstance.LogInfo("LIS disconnected!.");
+                    Logger.Logger.LogInstance.LogInfo("LIS disconnected!." );
                     break;
                 }
             }
