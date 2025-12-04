@@ -16,7 +16,7 @@ namespace LIS.Com.Businesslogic
             string messageControlId = "";
             Logger.Logger.LogInstance.LogDebug("Result process method excuted.");
             //string message = sInputMsg.ToString();
-            sInputMsg.Clear(); //Clear the insput message
+            //sInputMsg.Clear(); //Clear the insput message
             string response = "";
             string[] resultMesgSegments = message.TrimEnd((char)13).Split((char)13); // vbCr<CR>
             if (resultMesgSegments.Length > 1)
