@@ -92,7 +92,7 @@ namespace LisTCPIPConsole
                     IsReady = true;
                     this.InitLIS();
                     Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address connected.");
-                    await context.TcpIpHL7Command.StartListenerAsync(cancellationToken);
+                    context.TcpIpHL7Command.StartListenerAsync(cancellationToken);
 
                 }
                 else if (Settings.Default.PROTOCOL_NAME == "ASTM")
@@ -128,7 +128,7 @@ namespace LisTCPIPConsole
             else
             {
                 IsReady = false;
-                await LisContext.LisDOM.TcpIpHL7Command.DisconnectToTCPIPAsync();
+                LisContext.LisDOM.TcpIpHL7Command.DisconnectToTCPIPAsync();
             }
         }
 
