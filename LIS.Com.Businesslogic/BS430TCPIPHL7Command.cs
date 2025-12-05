@@ -127,7 +127,6 @@ namespace LIS.Com.Businesslogic
                 string message_DSC = $"DSC||{(char)13}";
 
                 DSRMessage = message_MSH + message_MSA + message_err + message_qak + message_QRD + message_QRF + message_DSP + message_DSC;
-                DSRMessage = AddHeaderAndFooterToHL7Msg(DSRMessage);
 
                 QRYMessage = SendResponse("OK", messageControlId);
                 response.QRYResponse = QRYMessage;
@@ -152,20 +151,7 @@ namespace LIS.Com.Businesslogic
             string message_qak = $"QAK|SR|{qak}|{(char)13}";
             string message_err = $"ERR|0|{(char)13}";
             var response = message_MSH + message_MSA + message_err + message_qak;
-            return AddHeaderAndFooterToHL7Msg(response);
-        }
-
-        public string AddHeaderAndFooterToHL7Msg(string RawMessage)
-        {
-            char BeginFormat = (char)11; //Strings.ChrW(0xB); //VT
-            char EndFormat1 = (char)28;//Strings.ChrW(0x1C); //FS
-            char EndFormat2 = (char)13; //CR
-
-            string NwkMessage = RawMessage.PadLeft(RawMessage.Length + 1, BeginFormat);
-            string NwkMessage1 = NwkMessage.PadRight(NwkMessage.Length + 1, EndFormat1);
-            string NwkMessage2 = NwkMessage1.PadRight(NwkMessage1.Length + 1, EndFormat2);
-
-            return NwkMessage2;
+            return response;
         }
     }
 }
