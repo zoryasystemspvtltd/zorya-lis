@@ -84,7 +84,6 @@ namespace LisTCPIPConsole
         {
             try
             {
-                cancellationToken = new CancellationToken();
                 var context = LisContext.LisDOM;
                 Logger.LogInstance.LogDebug("LisConsole ConnectTCPIP started.");
                 if (Settings.Default.PROTOCOL_NAME == "HL7")
@@ -92,7 +91,7 @@ namespace LisTCPIPConsole
                     IsReady = true;
                     this.InitLIS();
                     Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address connected.");
-                    context.TcpIpHL7Command.StartListenerAsync(cancellationToken);
+                    context.TcpIpHL7Command.StartListenerAsync();
 
                 }
                 else if (Settings.Default.PROTOCOL_NAME == "ASTM")
