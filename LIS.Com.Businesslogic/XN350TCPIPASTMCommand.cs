@@ -32,7 +32,7 @@ namespace LIS.Com.Businesslogic
         public override async Task CreateMessage(string message)
         {
             Logger.Logger.LogInstance.LogDebug("XN350 CreateMessage method started '{0}'", message);
-            //sInputMsg = "";
+            sInputMsg = "";
             string formattedmessage = "";
             string[] segments;
             try

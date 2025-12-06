@@ -4,8 +4,6 @@ using LIS.Logger;
 using LisTCPIPConsole.Properties;
 using System;
 using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LisTCPIPConsole
@@ -17,7 +15,6 @@ namespace LisTCPIPConsole
         ToolStripMenuItem connectItem;
         HeartBeatProxy heartBeatProxy;
         bool IsReady = false;
-        CancellationToken cancellationToken;
         public Home()
         {
             Logger.LogInstance.LogDebug("Lis Console Home method started");
@@ -66,25 +63,24 @@ namespace LisTCPIPConsole
             Logger.LogInstance.LogDebug("Lis Console InitLIS method completed");
         }
 
-        private async void ConnectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ConnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ConnectToolStripMenuItem.Text == "Connect")
             {
-                await ConnectTCPIP();
+                ConnectTCPIP();
             }
             else
             {
                 IsReady = false;
                 InitLIS();
-                await DisconnectIP();
+                DisconnectIP();
             }
         }
 
-        private async Task ConnectTCPIP()
+        private void ConnectTCPIP()
         {
             try
             {
-                cancellationToken = new CancellationToken();
                 var context = LisContext.LisDOM;
                 Logger.LogInstance.LogDebug("LisConsole ConnectTCPIP started.");
                 if (Settings.Default.PROTOCOL_NAME == "HL7")
@@ -92,7 +88,7 @@ namespace LisTCPIPConsole
                     IsReady = true;
                     this.InitLIS();
                     Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address connected.");
-                    await context.TcpIpHL7Command.StartListenerAsync(cancellationToken);
+                    context.TcpIpHL7Command.StartListener();
 
                 }
                 else if (Settings.Default.PROTOCOL_NAME == "ASTM")
@@ -100,7 +96,7 @@ namespace LisTCPIPConsole
                     IsReady = true;
                     this.InitLIS();
                     Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address connected.");
-                    await context.TcpIpASTMCommand.StartListenerAsync(cancellationToken);
+                    context.TcpIpASTMCommand.StartListener();
                 }
 
                 Logger.LogInstance.LogDebug("LisConsole ConnectTCPIP completed.");
@@ -112,23 +108,23 @@ namespace LisTCPIPConsole
             }
         }
 
-        private async void QuitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await DisconnectIP();
+            DisconnectIP();
             Application.Exit();
         }
 
-        private async Task DisconnectIP()
+        private void DisconnectIP()
         {
             if (Settings.Default.PROTOCOL_NAME == "ASTM")
             {
                 IsReady = false;
-                await LisContext.LisDOM.TcpIpASTMCommand.DisconnectToTCPIPAsync();
+                LisContext.LisDOM.TcpIpASTMCommand.DisconnectToTCPIP();
             }
             else
             {
                 IsReady = false;
-                await LisContext.LisDOM.TcpIpHL7Command.DisconnectToTCPIPAsync();
+                LisContext.LisDOM.TcpIpHL7Command.DisconnectToTCPIP();
             }
         }
 
@@ -180,12 +176,12 @@ namespace LisTCPIPConsole
 
         async void MenuConnect_Click(object sender, EventArgs e)
         {
-            await ConnectTCPIP();
+            ConnectTCPIP();
         }
 
         async void MenuQuit_Click(object sender, EventArgs e)
         {
-            await DisconnectIP();
+            DisconnectIP();
             Application.Exit();
         }
 
@@ -194,9 +190,9 @@ namespace LisTCPIPConsole
             Logger.LogInstance.LogInfo(selectedEquipment + " Started.");
         }
 
-        private async void Home_FormClosed(object sender, FormClosedEventArgs e)
+        private void Home_FormClosed(object sender, FormClosedEventArgs e)
         {
-            await DisconnectIP();
+            DisconnectIP();
             Application.Exit();
         }
     }
