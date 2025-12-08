@@ -32,8 +32,8 @@ namespace LIS.Com.Businesslogic
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method started.");
             this._settings = settings;
 
-            // Initialize heartbeat timer (1 minute = 60000ms)
-            timer = new System.Timers.Timer(60000);
+            // Initialize heartbeat timer (30 seconds)
+            timer = new System.Timers.Timer(30000);
             timer.Elapsed += OnHeartbeatTimerElapsed;
             timer.AutoReset = true;
 
@@ -53,14 +53,12 @@ namespace LIS.Com.Businesslogic
                 server = new TcpListener(localEndPoint);
                 server.Start();
                 disconnectTokenSource = new CancellationTokenSource();
-                reportingThread = new Thread(() => TCP_ListenData(disconnectTokenSource.Token));
+
+                reportingThread = new Thread(() => TCP_ListenLoop(disconnectTokenSource.Token));
                 reportingThread.IsBackground = true;
                 reportingThread.Start();
                 IsReady = true;
                 Logger.Logger.LogInstance.LogDebug("TCPIPCommand ConnectToTCPIP method completed.");
-                
-                Thread.SpinWait(5000);
-                SendHeartbit();
             }
             catch (Exception ex)
             {
@@ -69,66 +67,67 @@ namespace LIS.Com.Businesslogic
             }
         }
 
-        private void TCP_ListenData(CancellationToken token)
+        /// <summary>
+        /// Main accept loop: accepts clients repeatedly until cancellation requested.
+        /// For each accepted client it processes incoming messages until client disconnects,
+        /// then cleans up and waits for the next client.
+        /// </summary>
+        private void TCP_ListenLoop(CancellationToken token)
         {
-            Logger.Logger.LogInstance.LogDebug("TCPIPCommand TCP_ListenData method started.");
-            try
+            Logger.Logger.LogInstance.LogDebug("TCPIPCommand TCP_ListenLoop started.");
+
+            while (!token.IsCancellationRequested)
             {
-                // Wait for client connection with timeout
-                var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-                if (!server.Pending()) // 5 second timeout
+                try
                 {
-                    if (stopwatch.ElapsedMilliseconds > 5000) // 5 second timeout
+                    // AcceptTcpClient blocks until a client connects or the listener is stopped
+                    var tcpClient = server.AcceptTcpClient();
+                    if (tcpClient == null) continue;
+
+                    // Create socket/streams for this client
+                    lock (_lockObject)
                     {
-                        Logger.Logger.LogInstance.LogWarning("No client connected within 5 seconds");
-                        return;
+                        // Cleanup any previous connection (defensive)
+                        CleanupConnection();
+
+                        soc = tcpClient.Client;
+                        sm = tcpClient.GetStream();
+                        sr = new StreamReader(sm, Encoding.ASCII);
+                        sw = new StreamWriter(sm, Encoding.ASCII) { AutoFlush = true };
+
+                        _connectionEstablished = true;
+                        Logger.Logger.LogInstance.LogInfo("TCP connection established successfully from {0}", tcpClient.Client.RemoteEndPoint);
+
+                        // Start heartbeat timer
+                        timer.Start();
+                    }
+
+                    // Process this client's incoming data until it disconnects
+                    ProcessIncomingMessages(token);
+
+                    // When processing returns, ensure cleanup for this client and continue to accept next
+                    CleanupConnection();
+                }
+                catch (SocketException sex)
+                {
+                    if (!token.IsCancellationRequested)
+                    {
+                        Logger.Logger.LogInstance.LogException(sex);
                     }
                     Thread.Sleep(100);
                 }
-
-                soc = server.AcceptSocket();
-                if (soc == null)
+                catch (Exception ex)
                 {
-                    Logger.Logger.LogInstance.LogError("Failed to accept socket");
-                    return;
-                }
-
-                sm = new NetworkStream(soc, true);
-                if (sm == null)
-                {
-                    Logger.Logger.LogInstance.LogError("Failed to create NetworkStream");
-                    return;
-                }
-
-                sr = new StreamReader(sm, Encoding.ASCII);
-                sw = new StreamWriter(sm, Encoding.ASCII) { AutoFlush = true };
-
-                if (sr == null || sw == null)
-                {
-                    Logger.Logger.LogInstance.LogError("Failed to create StreamReader/Writer");
-                    return;
-                }
-
-                _connectionEstablished = true;
-                Logger.Logger.LogInstance.LogInfo("TCP connection established successfully");
-
-                // Start heartbeat timer
-                lock (_lockObject)
-                {
-                    timer.Start();
-                }
-
-                ProcessIncomingMessages(token);
-            }
-            catch (Exception ex)
-            {
-                if (!token.IsCancellationRequested)
-                {
-                    Logger.Logger.LogInstance.LogException(ex);
+                    if (!token.IsCancellationRequested)
+                    {
+                        Logger.Logger.LogInstance.LogException(ex);
+                    }
+                    Thread.Sleep(100);
                 }
             }
+
+            Logger.Logger.LogInstance.LogDebug("TCPIPCommand TCP_ListenLoop exiting.");
         }
-
 
         private void ProcessIncomingMessages(CancellationToken token)
         {
@@ -141,13 +140,21 @@ namespace LIS.Com.Businesslogic
             {
                 try
                 {
-                    if (sr == null || !soc.Connected) break;
+                    // Defensive checks
+                    if (sr == null || sm == null || soc == null || !soc.Connected)
+                    {
+                        Logger.Logger.LogInstance.LogInfo("Socket disconnected or streams null - breaking read loop.");
+                        break;
+                    }
 
+                    // Read is blocking; we can use a small timeout on the underlying networkstream if desired.
                     int readByteCount = sr.Read(charArray, 0, charArray.Length);
+
+                    // If 0 bytes read -> remote closed the connection gracefully
                     if (readByteCount == 0)
                     {
-                        Thread.Sleep(50);
-                        continue;
+                        Logger.Logger.LogInstance.LogInfo("Client closed the connection (read returned 0).\n");
+                        break;
                     }
 
                     string rawmsg = new string(charArray, 0, readByteCount);
@@ -156,15 +163,33 @@ namespace LIS.Com.Businesslogic
                     messageBuffer.Append(rawmsg);
                     ProcessBufferedMessages(messageBuffer, ref sInputMsg, ref messageControlId);
                 }
+                catch (IOException ioex)
+                {
+                    // IOException often wraps SocketException when the remote disconnects or network hiccups occur
+                    Logger.Logger.LogInstance.LogWarning("IO exception while reading: {0}", ioex.Message);
+                    break; // break the loop so we cleanup and accept a new client
+                }
+                catch (ObjectDisposedException odex)
+                {
+                    Logger.Logger.LogInstance.LogWarning("Stream was disposed while reading: {0}", odex.Message);
+                    break;
+                }
                 catch (Exception ex)
                 {
                     if (!token.IsCancellationRequested)
                     {
                         Logger.Logger.LogInstance.LogException(ex);
                     }
+
+                    // Small pause to avoid tight error loop
                     Thread.Sleep(100);
                 }
             }
+
+            // Ensure connection is marked as not established - cleanup will be done by caller
+            _connectionEstablished = false;
+            timer.Stop();
+            Logger.Logger.LogInstance.LogInfo("Exiting ProcessIncomingMessages for current client.");
         }
 
         private void ProcessBufferedMessages(StringBuilder messageBuffer, ref StringBuilder sInputMsg, ref string messageControlId)
@@ -230,7 +255,7 @@ namespace LIS.Com.Businesslogic
                     {
                         ResultProcess(sInputMsg.ToString(), messageControlId).Wait();
                         sInputMsg.Clear();
-                        string ackResponse = $@"MSH|^~\&|||||{DateTime.Now:yyyyMMddHHmmss}||ACK^R01|{messageControlId}|P|2.3.1||||2||ASCII{(char)13}MSA|AA|{messageControlId}|Message accepted|||0{(char)13}";
+                        string ackResponse = $@"MSH|^~\\&|||||{DateTime.Now:yyyyMMddHHmmss}||ACK^R01|{messageControlId}|P|2.3.1||||2||ASCII{(char)13}MSA|AA|{messageControlId}|Message accepted|||0{(char)13}";
                         WriteResponseSafe(ackResponse);
                     }
                 }
@@ -248,7 +273,7 @@ namespace LIS.Com.Businesslogic
         {
             lock (_lockObject)
             {
-                if (_connectionEstablished && sw != null)
+                if (_connectionEstablished && sw != null && soc != null && soc.Connected)
                 {
                     try
                     {
@@ -257,6 +282,14 @@ namespace LIS.Com.Businesslogic
                     catch (ObjectDisposedException)
                     {
                         Logger.Logger.LogInstance.LogWarning("Attempted to write to a closed writer.");
+                        // mark connection as dead so it will be cleaned up
+                        _connectionEstablished = false;
+                    }
+                    catch (IOException ioex)
+                    {
+                        // Common when client disconnects unexpectedly
+                        Logger.Logger.LogInstance.LogWarning("IOException while writing response: {0}", ioex.Message);
+                        _connectionEstablished = false;
                     }
                     catch (Exception ex)
                     {
@@ -265,21 +298,29 @@ namespace LIS.Com.Businesslogic
                 }
                 else
                 {
-                    Logger.Logger.LogInstance.LogWarning("Write ignored: connection not established or writer is null.");
+                    Logger.Logger.LogInstance.LogWarning("Write ignored: connection not established or writer is null/closed.");
                 }
             }
         }
 
-
-        // Heartbeat method - sends HL7 ACK every minute to check analyzer
+        // Heartbeat method - sends HL7 ACK every 30 seconds to check analyzer
         private void OnHeartbeatTimerElapsed(object sender, ElapsedEventArgs e)
         {
             lock (_lockObject)
             {
                 if (!_connectionEstablished || sw == null || soc == null || !soc.Connected)
                 {
-                    Logger.Logger.LogInstance.LogInfo("Analyzer disconnected!");
-                    AnalyzerActive = false;
+                    Logger.Logger.LogInstance.LogInfo("Analyzer disconnected (heartbeat check). Will cleanup and wait for new client.");
+                    _connectionEstablished = false;
+                    try
+                    {
+                        // Let the listening loop handle the next accept; cleanup current resources
+                        CleanupConnection();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Logger.LogInstance.LogException(ex);
+                    }
                     timer.Stop();
                     return;
                 }
@@ -300,7 +341,7 @@ namespace LIS.Com.Businesslogic
         private void SendHeartbit()
         {
             string heartbeatControlId = "HB" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
-            string heartbeatMsg = $@"MSH|^~\&|LIS|LAB|ANALYZER|RECEIVER|{DateTime.Now:yyyyMMddHHmmss}||ACK|P|2.3.1||||2||ASCII{(char)13}
+            string heartbeatMsg = $@"MSH|^~\\&|LIS|LAB|ANALYZER|RECEIVER|{DateTime.Now:yyyyMMddHHmmss}||ACK|P|2.3.1||||2||ASCII{(char)13}
 MSA|AA|{heartbeatControlId}|Analyzer heartbeat check{(char)13}";
 
             Logger.Logger.LogInstance.LogInfo("Sending heartbeat ACK (ID: {0})", heartbeatControlId);
@@ -311,8 +352,17 @@ MSA|AA|{heartbeatControlId}|Analyzer heartbeat check{(char)13}";
         {
             var res = AddHeaderAndFooterToHL7Msg(response);
             Logger.Logger.LogInstance.LogInfo("COM Write: '{0}'", res);
-            char[] datachar = res.ToCharArray();
-            sw.Write(datachar, 0, datachar.Length);
+            try
+            {
+                char[] datachar = res.ToCharArray();
+                sw.Write(datachar, 0, datachar.Length);
+                sw.Flush();
+            }
+            catch (IOException)
+            {
+                // Let caller handle marking connection dead
+                throw;
+            }
         }
 
         public string AddHeaderAndFooterToHL7Msg(string RawMessage)
@@ -329,18 +379,31 @@ MSA|AA|{heartbeatControlId}|Analyzer heartbeat check{(char)13}";
         {
             lock (_lockObject)
             {
-                timer?.Stop();
-                _connectionEstablished = false;
+                try
+                {
+                    timer?.Stop();
 
-                sw?.Dispose();
-                sr?.Dispose();
-                sm?.Dispose();
-                soc?.Dispose();
+                    _connectionEstablished = false;
 
-                sw = null;
-                sr = null;
-                sm = null;
-                soc = null;
+                    try { sw?.Close(); } catch { }
+                    try { sr?.Close(); } catch { }
+                    try { sm?.Close(); } catch { }
+
+                    if (soc != null)
+                    {
+                        try { soc.Shutdown(SocketShutdown.Both); } catch { }
+                        try { soc.Close(); } catch { }
+                    }
+
+                    sw = null;
+                    sr = null;
+                    sm = null;
+                    soc = null;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Logger.LogInstance.LogException(ex);
+                }
             }
         }
 
@@ -350,9 +413,12 @@ MSA|AA|{heartbeatControlId}|Analyzer heartbeat check{(char)13}";
             try
             {
                 disconnectTokenSource?.Cancel();
+
+                // Stop listener first so AcceptTcpClient returns
+                try { server?.Stop(); } catch { }
+
                 CleanupConnection();
 
-                server?.Stop();
                 server = null;
 
                 reportingThread?.Join(2000);
