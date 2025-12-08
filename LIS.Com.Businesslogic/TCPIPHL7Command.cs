@@ -26,14 +26,15 @@ namespace LIS.Com.Businesslogic
         private CancellationTokenSource disconnectTokenSource;
         private readonly object _lockObject = new object();
         private volatile bool _connectionEstablished = false;
+        private volatile bool isDisconnecting = false;
 
         public TCPIPHL7Command(TCPIPSettings settings)
         {
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method started.");
             this._settings = settings;
 
-            // Initialize heartbeat timer (30 seconds)
-            timer = new System.Timers.Timer(30000);
+            // Initialize heartbeat timer (60 seconds)
+            timer = new System.Timers.Timer(60000);
             timer.Elapsed += OnHeartbeatTimerElapsed;
             timer.AutoReset = true;
 
@@ -81,7 +82,20 @@ namespace LIS.Com.Businesslogic
                 try
                 {
                     // AcceptTcpClient blocks until a client connects or the listener is stopped
-                    var tcpClient = server.AcceptTcpClient();
+                    TcpClient tcpClient = null;
+                    try
+                    {
+                        tcpClient = server.AcceptTcpClient();
+                    }
+                    catch (SocketException sockEx)
+                    {
+                        // If the listener was stopped, break the loop
+                        if (token.IsCancellationRequested) break;
+                        Logger.Logger.LogInstance.LogException(sockEx);
+                        Thread.Sleep(100);
+                        continue;
+                    }
+
                     if (tcpClient == null) continue;
 
                     // Create socket/streams for this client
@@ -96,6 +110,7 @@ namespace LIS.Com.Businesslogic
                         sw = new StreamWriter(sm, Encoding.ASCII) { AutoFlush = true };
 
                         _connectionEstablished = true;
+                        AnalyzerActive = true;
                         Logger.Logger.LogInstance.LogInfo("TCP connection established successfully from {0}", tcpClient.Client.RemoteEndPoint);
 
                         // Start heartbeat timer
@@ -107,14 +122,6 @@ namespace LIS.Com.Businesslogic
 
                     // When processing returns, ensure cleanup for this client and continue to accept next
                     CleanupConnection();
-                }
-                catch (SocketException sex)
-                {
-                    if (!token.IsCancellationRequested)
-                    {
-                        Logger.Logger.LogInstance.LogException(sex);
-                    }
-                    Thread.Sleep(100);
                 }
                 catch (Exception ex)
                 {
@@ -147,13 +154,12 @@ namespace LIS.Com.Businesslogic
                         break;
                     }
 
-                    // Read is blocking; we can use a small timeout on the underlying networkstream if desired.
                     int readByteCount = sr.Read(charArray, 0, charArray.Length);
 
                     // If 0 bytes read -> remote closed the connection gracefully
                     if (readByteCount == 0)
                     {
-                        Logger.Logger.LogInstance.LogInfo("Client closed the connection (read returned 0).\n");
+                        Logger.Logger.LogInstance.LogInfo("Client closed the connection (read returned 0).");
                         break;
                     }
 
@@ -165,7 +171,6 @@ namespace LIS.Com.Businesslogic
                 }
                 catch (IOException ioex)
                 {
-                    // IOException often wraps SocketException when the remote disconnects or network hiccups occur
                     Logger.Logger.LogInstance.LogWarning("IO exception while reading: {0}", ioex.Message);
                     break; // break the loop so we cleanup and accept a new client
                 }
@@ -186,7 +191,6 @@ namespace LIS.Com.Businesslogic
                 }
             }
 
-            // Ensure connection is marked as not established - cleanup will be done by caller
             _connectionEstablished = false;
             timer.Stop();
             Logger.Logger.LogInstance.LogInfo("Exiting ProcessIncomingMessages for current client.");
@@ -217,7 +221,7 @@ namespace LIS.Com.Businesslogic
                         var input = block.Split('|');
                         if (input.Length == 0) continue;
 
-                        string segmentType = input[0].TrimStart('\u000B', '|');
+                        string segmentType = input[0].TrimStart('', '|');
 
                         switch (segmentType.Trim())
                         {
@@ -255,7 +259,7 @@ namespace LIS.Com.Businesslogic
                     {
                         ResultProcess(sInputMsg.ToString(), messageControlId).Wait();
                         sInputMsg.Clear();
-                        string ackResponse = $@"MSH|^~\\&|||||{DateTime.Now:yyyyMMddHHmmss}||ACK^R01|{messageControlId}|P|2.3.1||||2||ASCII{(char)13}MSA|AA|{messageControlId}|Message accepted|||0{(char)13}";
+                        string ackResponse = $@"MSH|^~\&|||||{DateTime.Now:yyyyMMddHHmmss}||ACK^R01|{messageControlId}|P|2.3.1||||2||ASCII{(char)13}MSA|AA|{messageControlId}|Message accepted|||0{(char)13}";
                         WriteResponseSafe(ackResponse);
                     }
                 }
@@ -287,7 +291,6 @@ namespace LIS.Com.Businesslogic
                     }
                     catch (IOException ioex)
                     {
-                        // Common when client disconnects unexpectedly
                         Logger.Logger.LogInstance.LogWarning("IOException while writing response: {0}", ioex.Message);
                         _connectionEstablished = false;
                     }
@@ -303,7 +306,7 @@ namespace LIS.Com.Businesslogic
             }
         }
 
-        // Heartbeat method - sends HL7 ACK every 30 seconds to check analyzer
+        // Heartbeat method - sends HL7 ACK every 60 seconds to check analyzer
         private void OnHeartbeatTimerElapsed(object sender, ElapsedEventArgs e)
         {
             lock (_lockObject)
@@ -314,7 +317,6 @@ namespace LIS.Com.Businesslogic
                     _connectionEstablished = false;
                     try
                     {
-                        // Let the listening loop handle the next accept; cleanup current resources
                         CleanupConnection();
                     }
                     catch (Exception ex)
@@ -341,7 +343,7 @@ namespace LIS.Com.Businesslogic
         private void SendHeartbit()
         {
             string heartbeatControlId = "HB" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
-            string heartbeatMsg = $@"MSH|^~\\&|LIS|LAB|ANALYZER|RECEIVER|{DateTime.Now:yyyyMMddHHmmss}||ACK|P|2.3.1||||2||ASCII{(char)13}
+            string heartbeatMsg = $@"MSH|^~\&|LIS|LAB|ANALYZER|RECEIVER|{DateTime.Now:yyyyMMddHHmmss}||ACK|P|2.3.1||||2||ASCII{(char)13}
 MSA|AA|{heartbeatControlId}|Analyzer heartbeat check{(char)13}";
 
             Logger.Logger.LogInstance.LogInfo("Sending heartbeat ACK (ID: {0})", heartbeatControlId);
@@ -360,7 +362,6 @@ MSA|AA|{heartbeatControlId}|Analyzer heartbeat check{(char)13}";
             }
             catch (IOException)
             {
-                // Let caller handle marking connection dead
                 throw;
             }
         }
@@ -412,25 +413,36 @@ MSA|AA|{heartbeatControlId}|Analyzer heartbeat check{(char)13}";
         {
             try
             {
+                isDisconnecting = true;
                 disconnectTokenSource?.Cancel();
 
-                // Stop listener first so AcceptTcpClient returns
                 try { server?.Stop(); } catch { }
 
                 CleanupConnection();
 
                 server = null;
 
-                reportingThread?.Join(2000);
-                reportingThread = null;
+                if (reportingThread != null)
+                {
+                    if (!reportingThread.Join(500))
+                    {
+                        try { reportingThread.Interrupt(); } catch { }
+                    }
+                }
 
+                reportingThread = null;
                 IsReady = false;
                 AnalyzerActive = false;
-                Logger.Logger.LogInstance.LogInfo("LIS disconnected. Analyzer: {0}", AnalyzerActive);
+
+                try { Task.Run(() => Logger.Logger.LogInstance.LogInfo("LIS disconnected. Analyzer: {0}", AnalyzerActive)); } catch { }
             }
             catch (Exception ex)
             {
                 Logger.Logger.LogInstance.LogException(ex);
+            }
+            finally
+            {
+                isDisconnecting = false;
             }
         }
 
