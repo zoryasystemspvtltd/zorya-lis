@@ -53,12 +53,17 @@ namespace LIS.Com.Businesslogic
                 try
                 {
                     var client = await _listener.AcceptTcpClientAsync().ConfigureAwait(false);
+                    if (!client.Connected)
+                    {
+                        await client.ConnectAsync(IPAddress.Parse(_settings.IPAddress), _settings.PortNo);
+                    }
+
 
                     // configure socket keepalive and NoDelay (Nagle off)
                     try
                     {
-                        client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                         client.Client.NoDelay = true;
+                        client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                     }
                     catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
 
@@ -104,11 +109,16 @@ namespace LIS.Com.Businesslogic
 
                 while (!token.IsCancellationRequested && client.Connected)
                 {
+                    if (!IsSocketConnected(client.Client))
+                    {
+                        Logger.Logger.LogInstance.LogInfo("Client disconnected before read, closing handler.");
+                        break;
+                    }
                     Task<int> readTask = null;
                     try
                     {
                         readTask = stream.ReadAsync(buffer, 0, buffer.Length, token);
-                        var completed = await Task.WhenAny(readTask, Task.Delay(TimeSpan.FromSeconds(30), token)).ConfigureAwait(false);
+                        var completed = await Task.WhenAny(readTask, Task.Delay(TimeSpan.FromSeconds(50), token)).ConfigureAwait(false);
 
                         if (completed != readTask)
                         {
@@ -620,6 +630,19 @@ namespace LIS.Com.Businesslogic
 
             Logger.Logger.LogInstance.LogInfo("DisconnectToTCPIP: shutdown completed.");
         }
+
+        private bool IsSocketConnected(Socket s)
+        {
+            try
+            {
+                return !(s.Poll(1, SelectMode.SelectRead) && s.Available == 0);
+            }
+            catch (SocketException)
+            {
+                return false;
+            }
+        }
+
 
         // virtuals to be implemented by derived classes
         virtual public Task<OrderHL7Response> SendOrderData(string sampleNo, string messageControlId)
