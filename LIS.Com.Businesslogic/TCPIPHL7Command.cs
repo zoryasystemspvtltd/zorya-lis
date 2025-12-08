@@ -467,13 +467,4 @@ MSA|AA|{heartbeatControlId}|Analyzer heartbeat check{(char)13}";
         public string QRYResponse { get; set; }
         public string DSRResponse { get; set; }
     }
-
-    public class ResultItem
-    {
-        public string TestCode { get; set; }
-        public string Value { get; set; }
-        public string Units { get; set; }
-        public string ReferenceRange { get; set; }
-        public string AbnormalFlags { get; set; }
-    }
 }

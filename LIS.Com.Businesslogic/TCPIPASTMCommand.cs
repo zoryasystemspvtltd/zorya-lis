@@ -1,290 +1,461 @@
 ﻿using LIS.DtoModel;
+using Microsoft.VisualBasic;
 using System;
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace LIS.Com.Businesslogic
 {
     public class TCPIPASTMCommand
     {
         private TCPIPSettings _settings;
-        private CancellationTokenSource _cts;
-        private TcpListener _listener;
-        private readonly ConcurrentDictionary<string, (TcpClient Client, Task HandlerTask, CancellationTokenSource Cts)> _clients
-            = new ConcurrentDictionary<string, (TcpClient, Task, CancellationTokenSource)>();
-        private readonly object _shutdownLock = new object();
-        private bool _isShutdown = false;
-
-        // Backwards-compatible fields kept for existing derived code, but handlers use per-client builders
+        protected Thread reportingThread;
+        protected Socket soc;
+        protected Stream sm;
+        protected StreamWriter sw;
+        protected StreamReader sr;
+        protected TcpListener server;
+        public bool IsReady { get; private set; }
+        public bool AnalyzerActive { get; private set; } = false;
+        public string FullMessage { get; private set; }
+        protected System.Timers.Timer timer;
+        private CancellationTokenSource disconnectTokenSource;
+        private readonly object _lockObject = new object();
+        private volatile bool _connectionEstablished = false;
         protected string[] output = new string[5];
         protected int index;
-        public bool IsReady { get; private set; }
-        public bool IsRunning { get; private set; }
-        public string Message { get; private set; }
-        public string FullMessage { get; private set; }
-        public bool IsConnected { get; private set; }
-
-        // Note: this field retained for compatibility with code that expects a single stream,
-        // handlers will also use a per-client stream variable.
+        private volatile bool isDisconnecting = false;
         protected NetworkStream stream;
 
         public TCPIPASTMCommand(TCPIPSettings settings)
         {
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPASTMCommand Constructor method started.");
             _settings = settings;
-            IsReady = false;
+
+            // Initialize heartbeat timer (60 seconds)
+            timer = new System.Timers.Timer(60000);
+            timer.Elapsed += OnHeartbeatTimerElapsed;
+            timer.AutoReset = true;
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPASTMCommand Constructor method completed.");
         }
 
         // New async listener modeled after TCPIPHL7Command
-        public async Task StartListenerAsync(CancellationToken externalToken)
+        public void StartListenerAsync(CancellationToken externalToken)
         {
-            _cts = CancellationTokenSource.CreateLinkedTokenSource(externalToken);
-            var token = _cts.Token;
-
-            IPAddress ipAddress;
-            if (!IPAddress.TryParse(_settings.IPAddress, out ipAddress))
+            Logger.Logger.LogInstance.LogDebug("TCPIPCommand ConnectToTCPIP method started.");
+            try
             {
-                Logger.Logger.LogInstance.LogWarning($"Invalid IP '{_settings.IPAddress}' in settings. Falling back to IPAddress.Any.");
-                ipAddress = IPAddress.Any;
+                if (string.IsNullOrWhiteSpace(_settings?.IPAddress) || _settings.PortNo <= 0)
+                    throw new ArgumentException("Invalid TCP settings");
+
+                var ipAddress = IPAddress.Parse(_settings.IPAddress);
+                IPEndPoint localEndPoint = new IPEndPoint(ipAddress, _settings.PortNo);
+                server = new TcpListener(localEndPoint);
+                server.Start();
+                disconnectTokenSource = new CancellationTokenSource();
+
+                reportingThread = new Thread(() => TCP_ListenLoop(disconnectTokenSource.Token));
+                reportingThread.IsBackground = true;
+                reportingThread.Start();
+                IsReady = true;
+                Logger.Logger.LogInstance.LogDebug("TCPIPCommand ConnectToTCPIP method completed.");
             }
+            catch (Exception ex)
+            {
+                this.FullMessage = ex.Message;
+                Logger.Logger.LogInstance.LogException(ex);
+            }
+        }
 
-            _listener = new TcpListener(new IPEndPoint(ipAddress, _settings.PortNo));
-            _listener.Start();
-            IsConnected = true;
-            IsReady = true;
-
-            Logger.Logger.LogInstance.LogInfo($"TCP ASTM listener started at {_settings.IPAddress}:{_settings.PortNo}");
+        /// <summary>
+        /// Main accept loop: accepts clients repeatedly until cancellation requested.
+        /// For each accepted client it processes incoming messages until client disconnects,
+        /// then cleans up and waits for the next client.
+        /// </summary>
+        private void TCP_ListenLoop(CancellationToken token)
+        {
+            Logger.Logger.LogInstance.LogDebug("TCPIPCommand TCP_ListenLoop started.");
 
             while (!token.IsCancellationRequested)
             {
                 try
                 {
-                    var client = await _listener.AcceptTcpClientAsync().ConfigureAwait(false);
-
-                    // configure socket keepalive and NoDelay (Nagle off)
+                    // AcceptTcpClient blocks until a client connects or the listener is stopped
+                    TcpClient tcpClient = null;
                     try
                     {
-                        client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
-                        client.Client.NoDelay = true;
+                        tcpClient = server.AcceptTcpClient();
                     }
-                    catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
+                    catch (SocketException sockEx)
+                    {
+                        // If the listener was stopped, break the loop
+                        if (token.IsCancellationRequested) break;
+                        Logger.Logger.LogInstance.LogException(sockEx);
+                        Thread.Sleep(100);
+                        continue;
+                    }
 
-                    var clientCts = CancellationTokenSource.CreateLinkedTokenSource(token);
-                    var clientKey = client.Client.RemoteEndPoint?.ToString() ?? Guid.NewGuid().ToString();
+                    if (tcpClient == null) continue;
 
-                    var handlerTask = Task.Run(() => HandleClientAsync(client, clientCts.Token, clientKey), clientCts.Token);
+                    // Create socket/streams for this client
+                    lock (_lockObject)
+                    {
+                        // Cleanup any previous connection (defensive)
+                        CleanupConnection();
 
-                    _clients.TryAdd(clientKey, (client, handlerTask, clientCts));
+                        soc = tcpClient.Client;
+                        sm = tcpClient.GetStream();
+                        sr = new StreamReader(sm, Encoding.ASCII);
+                        sw = new StreamWriter(sm, Encoding.ASCII) { AutoFlush = true };
 
-                    Logger.Logger.LogInstance.LogInfo($"Accepted ASTM connection from {clientKey}. Handler started.");
+                        _connectionEstablished = true;
+                        AnalyzerActive = true;
+                        Logger.Logger.LogInstance.LogInfo("TCP connection established successfully from {0}", tcpClient.Client.RemoteEndPoint);
+
+                        // Start heartbeat timer
+                        timer.Start();
+                    }
+
+                    // Process this client's incoming data until it disconnects
+                    ProcessIncomingMessages(token);
+
+                    // When processing returns, ensure cleanup for this client and continue to accept next
+                    CleanupConnection();
                 }
-                catch (ObjectDisposedException) { break; } // listener stopped
                 catch (Exception ex)
                 {
-                    this.FullMessage = ex.Message;
-                    Logger.Logger.LogInstance.LogException(ex);
-                    try { await Task.Delay(TimeSpan.FromSeconds(1), token).ConfigureAwait(false); } catch { }
+                    if (!token.IsCancellationRequested)
+                    {
+                        Logger.Logger.LogInstance.LogException(ex);
+                    }
+                    Thread.Sleep(100);
                 }
             }
+
+            Logger.Logger.LogInstance.LogDebug("TCPIPCommand TCP_ListenLoop exiting.");
         }
 
-        private async Task HandleClientAsync(TcpClient client, CancellationToken token, string clientKey)
+        private void ProcessIncomingMessages(CancellationToken token)
         {
-            var endpoint = client.Client.RemoteEndPoint?.ToString();
-            NetworkStream clientStream = null;
-            var buffer = new byte[8 * 1024];
-            DateTime lastReceived = DateTime.UtcNow;
-            TimeSpan idleThreshold = TimeSpan.FromMinutes(10);
-            TimeSpan probeTimeout = TimeSpan.FromSeconds(5);
+            char[] charArray = new char[10240];
+            var messageBuffer = new StringBuilder();
 
-            // per-client builders to avoid cross-talk
-            var clientInputBuilder = new StringBuilder();
-            var clientMessageBuilder = new StringBuilder();
+            while (!token.IsCancellationRequested && _connectionEstablished)
+            {
+                try
+                {
+                    // Defensive checks
+                    if (sr == null || sm == null || soc == null || !soc.Connected)
+                    {
+                        Logger.Logger.LogInstance.LogInfo("Socket disconnected or streams null - breaking read loop.");
+                        break;
+                    }
 
+                    int readByteCount = sr.Read(charArray, 0, charArray.Length);
+
+                    // If 0 bytes read -> remote closed the connection gracefully
+                    if (readByteCount == 0)
+                    {
+                        Logger.Logger.LogInstance.LogInfo("Client closed the connection (read returned 0).");
+                        break;
+                    }
+
+                    string rawmsg = new string(charArray, 0, readByteCount);
+                    Logger.Logger.LogInstance.LogInfo("COM Read: '{0}'", rawmsg);
+
+                    messageBuffer.Append(rawmsg);
+                    ProcessBufferedMessages(messageBuffer);
+                }
+                catch (IOException ioex)
+                {
+                    Logger.Logger.LogInstance.LogWarning("IO exception while reading: {0}", ioex.Message);
+                    break; // break the loop so we cleanup and accept a new client
+                }
+                catch (ObjectDisposedException odex)
+                {
+                    Logger.Logger.LogInstance.LogWarning("Stream was disposed while reading: {0}", odex.Message);
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    if (!token.IsCancellationRequested)
+                    {
+                        Logger.Logger.LogInstance.LogException(ex);
+                    }
+
+                    // Small pause to avoid tight error loop
+                    Thread.Sleep(100);
+                }
+            }
+
+            _connectionEstablished = false;
+            timer.Stop();
+            Logger.Logger.LogInstance.LogInfo("Exiting ProcessIncomingMessages for current client.");
+        }
+
+        private void ProcessBufferedMessages(StringBuilder messageBuffer)
+        {
+            string bufferContent = messageBuffer.ToString();
+            var sInputMsg = new StringBuilder();
             try
             {
-                clientStream = client.GetStream();
-
-                // for backward compatibility some code may use protected 'stream' field;
-                // set it to this client's stream while the handler runs.
-                try { stream = clientStream; } catch { }
-
-                // Ensure keepalive
-                try { client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true); } catch { }
-
-                while (!token.IsCancellationRequested && client.Connected)
+                var InpBuffer = bufferContent.ToCharArray();
+                int failCount = 0;
+                for (int i = 0; i < InpBuffer.Length; i++)
                 {
-                    Task<int> readTask = null;
+                    char ch = InpBuffer[i];
+
+                    switch (ch)
+                    {
+                        case (char)5:        // Check for <ENQ>
+                            {
+                                WriteResponseSafe(((char)6).ToString());
+                                break;
+                            }
+
+                        case (char)6:      // Check for <ACK>
+                            {
+                                failCount = 0;
+                                switch (index)
+                                {
+                                    case 0:
+                                        //(char)2 means start of text
+
+                                        var payload1 = ((char)2) + Add_CheckSum(output[index + 1]) + (char)13;
+                                        WriteResponseSafe(payload1);
+                                        index = 1;
+                                        break;
+                                    case 1:
+                                        //(char)2 means start of text
+                                        var payload2 = ((char)2) + Add_CheckSum(output[index + 1]) + (char)13;
+                                        WriteResponseSafe(payload2);
+                                        index = 2;
+                                        break;
+                                    case 2:
+                                        //(char)2 means start of text
+                                        var payload3 = ((char)2) + Add_CheckSum(output[index + 1]) + (char)13;
+                                        WriteResponseSafe(payload3);
+                                        index = 3;
+                                        break;
+                                    case 3:
+                                        //(char)2 means start of text
+                                        var payload4 = ((char)2) + Add_CheckSum(output[index + 1]) + (char)13;
+                                        WriteResponseSafe(payload4);
+                                        index = 4;
+                                        break;
+
+                                    default:
+                                        WriteResponseSafe("" + (char)4);
+                                        index = 0;
+
+                                        break;
+                                }
+                                break;
+                            }
+
+                        //When the EVOLIS receives a <NAK> for a frame rejected by a host it resends the frame.
+                        //Frames are invalidated when:
+                        //1. Any character errors are detected(ie.parity error, framing error)
+                        //2. The frame checksum does not match the checksum computed on the received frame.
+                        //2. The frame number is not the same as the last accepted frame or one number higher.
+                        case (char)21:       // Check for <NAK>
+                            {
+                                if (failCount < 3)
+                                {
+                                    if (index > 0)
+                                    {
+                                        var payload = ((char)2) + Add_CheckSum(output[index]) + (char)13;
+                                        WriteResponseSafe(payload);
+                                    }
+                                    else
+                                    {
+                                        WriteResponseSafe(output[index]);
+                                    }
+                                }
+
+                                failCount++;
+                                break;
+                            }
+
+                        case (char)4:   // Check For the <EOT>
+                            {
+                                Logger.Logger.LogInstance.LogInfo("SerialCommand Read: '{0}'", sInputMsg);
+                                CreateMessageAsync(sInputMsg.ToString());
+                                sInputMsg.Clear();
+                                break;
+                            }
+
+                        default:
+                            {
+                                sInputMsg.Append(InpBuffer[i]);
+
+                                if (InpBuffer[i] == Strings.Chr(10))
+                                {
+                                    WriteResponseSafe("" + (char)6);
+                                }
+
+                                break;
+                            }
+                    }
+                    Logger.Logger.LogInstance.LogDebug("SerialCommand DataReceived method completed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Logger.LogInstance.LogException(ex);
+            }
+
+
+        }
+
+        private void WriteResponseSafe(string response)
+        {
+            lock (_lockObject)
+            {
+                if (_connectionEstablished && sw != null && soc != null && soc.Connected)
+                {
                     try
                     {
-                        readTask = clientStream.ReadAsync(buffer, 0, buffer.Length, token);
-                        var completed = await Task.WhenAny(readTask, Task.Delay(TimeSpan.FromSeconds(30), token)).ConfigureAwait(false);
-
-                        if (completed != readTask)
-                        {
-                            // no data in 30s - check idle policy
-                            if (DateTime.UtcNow - lastReceived > idleThreshold)
-                            {
-                                Logger.Logger.LogInstance.LogInfo($"ASTM connection idle threshold reached for {endpoint}. Sending ENQ probe before close.");
-
-                                // send ENQ (0x05) probe - non-blocking attempt
-                                try
-                                {
-                                    var enq = new byte[] { 0x05 };
-                                    await clientStream.WriteAsync(enq, 0, 1, token).ConfigureAwait(false);
-                                    await clientStream.FlushAsync(token).ConfigureAwait(false);
-                                }
-                                catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
-
-                                var probeDeadline = DateTime.UtcNow + probeTimeout;
-                                bool activitySeen = false;
-                                while (DateTime.UtcNow < probeDeadline && !token.IsCancellationRequested)
-                                {
-                                    if (DateTime.UtcNow - lastReceived < TimeSpan.FromSeconds(1))
-                                    {
-                                        activitySeen = true;
-                                        break;
-                                    }
-                                    try { await Task.Delay(200, token).ConfigureAwait(false); } catch { break; }
-                                }
-
-                                if (!activitySeen)
-                                {
-                                    Logger.Logger.LogInstance.LogInfo($"No activity after probe - closing ASTM connection: {endpoint}");
-                                    break;
-                                }
-                                else
-                                {
-                                    lastReceived = DateTime.UtcNow;
-                                    continue;
-                                }
-                            }
-                            continue;
-                        }
-
-                        int bytesRead = await readTask.ConfigureAwait(false);
-                        if (bytesRead == 0)
-                        {
-                            // remote closed
-                            Logger.Logger.LogInstance.LogInfo($"ASTM remote closed connection: {endpoint}");
-                            break;
-                        }
-
-                        lastReceived = DateTime.UtcNow;
-
-                        var chunk = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                        // process chunk char-by-char to handle control characters and block protocol
-                        for (int i = 0; i < chunk.Length; i++)
-                        {
-                            char ch = chunk[i];
-
-                            switch (ch)
-                            {
-                                case (char)5: // ENQ -> respond with ACK
-                                    {
-                                        await SafeWriteAsync(clientStream, ((char)6).ToString(), token).ConfigureAwait(false);
-                                        break;
-                                    }
-
-                                case (char)6: // ACK -> send next frame or EOT
-                                    {
-                                        if (index < 4 && !string.IsNullOrEmpty(output[index + 1]))
-                                        {
-                                            // STX (0x02) + data-with-checksum + CR
-                                            var payload = ((char)2) + Add_CheckSum(output[index + 1]) + (char)13;
-                                            await SafeWriteAsync(clientStream, payload, token).ConfigureAwait(false);
-                                            index += 1;
-                                        }
-                                        else
-                                        {
-                                            await SafeWriteAsync(clientStream, ((char)4).ToString(), token).ConfigureAwait(false); // EOT
-                                            index = 0;
-                                            for (int k = 0; k <= 4; k++)
-                                                output[k] = string.Empty;
-                                        }
-                                        break;
-                                    }
-
-                                case (char)4: // EOT -> process accumulated message
-                                    {
-                                        var message = clientMessageBuilder.ToString();
-                                        Logger.Logger.LogInstance.LogInfo($"ASTM Received complete message: {message}");
-                                        try
-                                        {
-                                            await CreateMessage(message).ConfigureAwait(false);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Logger.Logger.LogInstance.LogException(ex);
-                                        }
-                                        clientMessageBuilder.Clear();
-                                        break;
-                                    }
-
-                                case (char)2: // STX - start of text; reset current block builder
-                                    {
-                                        clientInputBuilder.Clear();
-                                        // Some protocols include block number as first char after STX - keep as-is
-                                        clientInputBuilder.Append(ch);
-                                        break;
-                                    }
-
-                                case (char)3: // ETX - end of text; typically followed by checksum
-                                case (char)17: // ETB
-                                    {
-                                        clientInputBuilder.Append(ch);
-                                        // After ETX/ETB there will be two hex checksum chars then CR. We will attempt to capture them from the stream if present.
-                                        // If not present (split across reads), the remaining logic will catch and process when present.
-                                        // At a minimum, append current block to message builder.
-                                        clientMessageBuilder.Append(clientInputBuilder.ToString());
-                                        clientInputBuilder.Clear();
-                                        break;
-                                    }
-
-                                default:
-                                    {
-                                        clientInputBuilder.Append(ch);
-                                        clientMessageBuilder.Append(ch);
-
-                                        // If newline seen, reply with ACK per original implementation
-                                        if (ch == '\n')
-                                        {
-                                            await SafeWriteAsync(clientStream, ((char)6).ToString(), token).ConfigureAwait(false);
-                                        }
-                                        break;
-                                    }
-                            }
-                        }
+                        WriteResponse(response, sw);
                     }
-                    catch (IOException ioEx)
+                    catch (ObjectDisposedException)
                     {
-                        var se = ioEx.InnerException as SocketException;
-                        if (se != null && se.SocketErrorCode == SocketError.TimedOut)
-                        {
-                            // read timed out - continue to loop
-                            continue;
-                        }
-                        Logger.Logger.LogInstance.LogException(ioEx);
-                        break;
+                        Logger.Logger.LogInstance.LogWarning("Attempted to write to a closed writer.");
+                        // mark connection as dead so it will be cleaned up
+                        _connectionEstablished = false;
                     }
-                    catch (OperationCanceledException) when (token.IsCancellationRequested)
+                    catch (IOException ioex)
                     {
-                        break;
+                        Logger.Logger.LogInstance.LogWarning("IOException while writing response: {0}", ioex.Message);
+                        _connectionEstablished = false;
                     }
                     catch (Exception ex)
                     {
                         Logger.Logger.LogInstance.LogException(ex);
-                        break;
                     }
-                } // while
+                }
+                else
+                {
+                    Logger.Logger.LogInstance.LogWarning("Write ignored: connection not established or writer is null/closed.");
+                }
+            }
+        }
+
+        // Heartbeat method - sends HL7 ACK every 60 seconds to check analyzer
+        private void OnHeartbeatTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            lock (_lockObject)
+            {
+                if (!_connectionEstablished || sw == null || soc == null || !soc.Connected)
+                {
+                    Logger.Logger.LogInstance.LogInfo("Analyzer disconnected (heartbeat check). Will cleanup and wait for new client.");
+                    _connectionEstablished = false;
+                    try
+                    {
+                        CleanupConnection();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Logger.LogInstance.LogException(ex);
+                    }
+                    timer.Stop();
+                    return;
+                }
+            }
+
+            try
+            {
+                SendHeartbit();
+            }
+            catch (Exception ex)
+            {
+                AnalyzerActive = false;
+                Logger.Logger.LogInstance.LogError("Heartbeat failed: {0}", ex.Message);
+            }
+        }
+        private void SendHeartbit()
+        {
+            string heartbeatMsg = "<ENQ>";
+            WriteResponseSafe(heartbeatMsg);
+        }
+        private void WriteResponse(string res, StreamWriter sw)
+        {
+            Logger.Logger.LogInstance.LogInfo("COM Write: '{0}'", res);
+            try
+            {
+                char[] datachar = res.ToCharArray();
+                sw.Write(datachar, 0, datachar.Length);
+                sw.Flush();
+            }
+            catch (IOException)
+            {
+                throw;
+            }
+        }
+        private void CleanupConnection()
+        {
+            lock (_lockObject)
+            {
+                try
+                {
+                    timer?.Stop();
+
+                    _connectionEstablished = false;
+
+                    try { sw?.Close(); } catch { }
+                    try { sr?.Close(); } catch { }
+                    try { sm?.Close(); } catch { }
+
+                    if (soc != null)
+                    {
+                        try { soc.Shutdown(SocketShutdown.Both); } catch { }
+                        try { soc.Close(); } catch { }
+                    }
+
+                    sw = null;
+                    sr = null;
+                    sm = null;
+                    soc = null;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Logger.LogInstance.LogException(ex);
+                }
+            }
+        }
+
+
+        public void DisconnectToTCPIPAsync()
+        {
+            try
+            {
+                isDisconnecting = true;
+                disconnectTokenSource?.Cancel();
+
+                try { server?.Stop(); } catch { }
+
+                CleanupConnection();
+
+                server = null;
+
+                if (reportingThread != null)
+                {
+                    if (!reportingThread.Join(500))
+                    {
+                        try { reportingThread.Interrupt(); } catch { }
+                    }
+                }
+
+                reportingThread = null;
+                IsReady = false;
+                AnalyzerActive = false;
+
+                try { Task.Run(() => Logger.Logger.LogInstance.LogInfo("LIS disconnected. Analyzer: {0}", AnalyzerActive)); } catch { }
             }
             catch (Exception ex)
             {
@@ -292,28 +463,9 @@ namespace LIS.Com.Businesslogic
             }
             finally
             {
-                try
-                {
-                    Logger.Logger.LogInstance.LogInfo($"ASTM handler exiting and closing client: {endpoint}");
-                    try { clientStream?.Close(); } catch { }
-                    try { client.Close(); } catch { }
-                    try { client.Dispose(); } catch { }
-                }
-                catch { }
-
-                _clients.TryRemove(clientKey, out var entry);
-                try { entry.Cts?.Dispose(); } catch { }
-
-                // Clear compatibility stream if it points to this client's stream
-                try
-                {
-                    if (stream == clientStream)
-                        stream = null;
-                }
-                catch { }
+                isDisconnecting = false;
             }
         }
-
         // Compute checksum same semantics as original VB implementation:
         // sum of bytes from block-number (first char after STX) through ETX/ETB,
         // keep low-order 8 bits and present hex as uppercase with leading zero if needed.
@@ -336,153 +488,11 @@ namespace LIS.Com.Businesslogic
             Logger.Logger.LogInstance.LogDebug($"Add_CheckSum Return: '{result}'");
             return result;
         }
-
-        // Safe write for ASTM (sends raw text)
-        protected void WriteToPort(string text)
-        {
-            // kept for compatibility; uses the last assigned 'stream' (set while handling a client).
-            if (stream == null || string.IsNullOrEmpty(text)) return;
-
-            try
-            {
-                var dataBytes = Encoding.ASCII.GetBytes(text);
-                stream.Write(dataBytes, 0, dataBytes.Length);
-                Logger.Logger.LogInstance.LogInfo($"TCPIPASTMCommand Write: '{text}'");
-            }
-            catch (Exception ex)
-            {
-                Logger.Logger.LogInstance.LogException(ex);
-            }
-        }
-
-        private async Task SafeWriteAsync(NetworkStream streamToUse, string text, CancellationToken token)
-        {
-            if (streamToUse == null || string.IsNullOrEmpty(text)) return;
-
-            try
-            {
-                var bytes = Encoding.ASCII.GetBytes(text);
-                await streamToUse.WriteAsync(bytes, 0, bytes.Length, token).ConfigureAwait(false);
-                await streamToUse.FlushAsync(token).ConfigureAwait(false);
-
-                var logged = bytes.Length > 200 ? Encoding.ASCII.GetString(bytes, 0, 200) + "..." : Encoding.ASCII.GetString(bytes);
-                Logger.Logger.LogInstance.LogInfo($"ASTM Write: {logged}");
-            }
-            catch (Exception ex)
-            {
-                Logger.Logger.LogInstance.LogException(ex);
-            }
-        }
-
-        // Graceful shutdown mirroring TCPIPHL7Command
-        public async Task DisconnectToTCPIPAsync(TimeSpan? gracefulWait = null)
-        {
-            var waitTimeout = gracefulWait ?? TimeSpan.FromSeconds(10);
-
-            lock (_shutdownLock)
-            {
-                if (_isShutdown) return;
-                _isShutdown = true;
-            }
-
-            Logger.Logger.LogInstance.LogInfo("DisconnectToTCPIP (ASTM): initiating shutdown.");
-
-            try
-            {
-                if (_listener != null)
-                {
-                    Logger.Logger.LogInstance.LogInfo("Stopping TcpListener (ASTM)...");
-                    try { _cts?.Cancel(); } catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
-
-                    try { _listener.Stop(); } catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
-                }
-            }
-            catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
-
-            var handlerTasks = new System.Collections.Generic.List<Task>();
-            foreach (var kvp in _clients.ToArray())
-            {
-                var key = kvp.Key;
-                var tuple = kvp.Value;
-                try
-                {
-                    Logger.Logger.LogInstance.LogInfo($"DisconnectToTCPIP (ASTM): closing client {key}");
-                    try { tuple.Cts?.Cancel(); } catch { }
-
-                    try
-                    {
-                        var client = tuple.Client;
-                        if (client != null && client.Connected)
-                        {
-                            try { client.Client.Shutdown(SocketShutdown.Both); } catch (SocketException se) { Logger.Logger.LogInstance.LogException(se); }
-                        }
-                    }
-                    catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
-
-                    if (tuple.HandlerTask != null) handlerTasks.Add(tuple.HandlerTask);
-                }
-                catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
-            }
-
-            try
-            {
-                if (handlerTasks.Count > 0)
-                {
-                    var whenAll = Task.WhenAll(handlerTasks);
-                    var finished = await Task.WhenAny(whenAll, Task.Delay(waitTimeout)).ConfigureAwait(false);
-                    if (finished != whenAll)
-                    {
-                        Logger.Logger.LogInstance.LogInfo("DisconnectToTCPIP (ASTM): timeout waiting for handler tasks to finish; forcing closure.");
-                    }
-                }
-            }
-            catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
-
-            foreach (var kvp in _clients.ToArray())
-            {
-                var key = kvp.Key;
-                var tuple = kvp.Value;
-                try
-                {
-                    try { tuple.Client?.GetStream()?.Close(); } catch { }
-                    try { tuple.Client?.Close(); } catch { }
-                    try { tuple.Client?.Dispose(); } catch { }
-                    try { tuple.Cts?.Dispose(); } catch { }
-                }
-                catch (Exception ex) { Logger.Logger.LogInstance.LogException(ex); }
-
-                _clients.TryRemove(key, out _);
-            }
-
-            try { _cts?.Dispose(); } catch { }
-            _cts = null;
-            try { _listener = null; } catch { }
-
-            IsConnected = false;
-            IsReady = false;
-
-            Logger.Logger.LogInstance.LogInfo("DisconnectToTCPIP (ASTM): shutdown completed.");
-        }
-
-        // virtuals to be implemented by derived classes (preserve original signatures)
-        virtual public Task SendOrderData(string sampleNo)
+        virtual public Task CreateMessageAsync(string message)
         {
             throw new NotImplementedException();
         }
-        virtual public Task ParseMessage(string message, ArrayList sampleIdLst)
-        {
-            throw new NotImplementedException();
-        }
-
-        virtual public Task CreateMessage(string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        virtual public Task Identify(string message)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 
 }

@@ -5,7 +5,6 @@ using LisTCPIPConsole.Properties;
 using System;
 using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LisTCPIPConsole
@@ -66,21 +65,21 @@ namespace LisTCPIPConsole
             Logger.LogInstance.LogDebug("Lis Console InitLIS method completed");
         }
 
-        private async void ConnectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ConnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ConnectToolStripMenuItem.Text == "Connect")
             {
-                await ConnectTCPIP();
+                ConnectTCPIP();
             }
             else
             {
                 IsReady = false;
                 InitLIS();
-                await DisconnectIP();
+                DisconnectIP();
             }
         }
 
-        private async Task ConnectTCPIP()
+        private void ConnectTCPIP()
         {
             try
             {
@@ -99,7 +98,7 @@ namespace LisTCPIPConsole
                     IsReady = true;
                     this.InitLIS();
                     Logger.LogInstance.LogInfo($"{Settings.Default.IP_ADDRESS} IP Address connected.");
-                    await context.TcpIpASTMCommand.StartListenerAsync(cancellationToken);
+                    context.TcpIpASTMCommand.StartListenerAsync(cancellationToken);
                 }
 
                 Logger.LogInstance.LogDebug("LisConsole ConnectTCPIP completed.");
@@ -111,18 +110,18 @@ namespace LisTCPIPConsole
             }
         }
 
-        private async void QuitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await DisconnectIP();
+            DisconnectIP();
             Application.Exit();
         }
 
-        private async Task DisconnectIP()
+        private void DisconnectIP()
         {
             if (Settings.Default.PROTOCOL_NAME == "ASTM")
             {
                 IsReady = false;
-                await LisContext.LisDOM.TcpIpASTMCommand.DisconnectToTCPIPAsync();
+                LisContext.LisDOM.TcpIpASTMCommand.DisconnectToTCPIPAsync();
             }
             else
             {
@@ -177,14 +176,14 @@ namespace LisTCPIPConsole
             this.WindowState = FormWindowState.Normal;
         }
 
-        async void MenuConnect_Click(object sender, EventArgs e)
+        void MenuConnect_Click(object sender, EventArgs e)
         {
-            await ConnectTCPIP();
+            ConnectTCPIP();
         }
 
-        async void MenuQuit_Click(object sender, EventArgs e)
+        void MenuQuit_Click(object sender, EventArgs e)
         {
-            await DisconnectIP();
+            DisconnectIP();
             Application.Exit();
         }
 
@@ -193,9 +192,9 @@ namespace LisTCPIPConsole
             Logger.LogInstance.LogInfo(selectedEquipment + " Started.");
         }
 
-        private async void Home_FormClosed(object sender, FormClosedEventArgs e)
+        private void Home_FormClosed(object sender, FormClosedEventArgs e)
         {
-            await DisconnectIP();
+            DisconnectIP();
             Application.Exit();
         }
     }
