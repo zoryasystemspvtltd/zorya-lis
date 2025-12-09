@@ -139,27 +139,27 @@ namespace LIS.Com.Businesslogic
                             {
                                 case 0:
                                     //(char)2 means start of text
-                                    WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + Constants.vbCrLf);
+                                    WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + (char)13);
                                     index = 1;
                                     break;
                                 case 1:
                                     //(char)2 means start of text
-                                    WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + Constants.vbCrLf);
+                                    WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + (char)13);
                                     index = 2;
                                     break;
                                 case 2:
                                     //(char)2 means start of text
-                                    WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + Constants.vbCrLf);
+                                    WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + (char)13);
                                     index = 3;
                                     break;
                                 case 3:
                                     //(char)2 means start of text
-                                    WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + Constants.vbCrLf);
+                                    WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + (char)13);
                                     index = 4;
                                     break;
                                 //case 4:
                                 //    //(char)2 means start of text
-                                //    WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + Constants.vbCrLf);
+                                //    WriteToPort((char)2 + Add_CheckSum(data[index + 1]) + (char)13);
                                 //    index = 5;
                                 //    break;
                                 default:
@@ -183,7 +183,7 @@ namespace LIS.Com.Businesslogic
                             {
                                 if (index > 0)
                                 {
-                                    WriteToPort((char)2 + Add_CheckSum(data[index]) + Constants.vbCrLf);
+                                    WriteToPort((char)2 + Add_CheckSum(data[index]) + (char)13);
                                 }
                                 else
                                 {
