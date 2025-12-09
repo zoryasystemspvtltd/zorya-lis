@@ -28,15 +28,24 @@ namespace LIS.Com.Businesslogic
         private volatile bool _connectionEstablished = false;
         private volatile bool isDisconnecting = false;
 
+        // Track last real communication time
+        private DateTime _lastRealComm = DateTime.UtcNow;
+
+        private bool _enableHeartbeat = false;
+
         public TCPIPHL7Command(TCPIPSettings settings)
         {
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method started.");
             this._settings = settings;
 
-            // Initialize heartbeat timer (60 seconds)
-            timer = new System.Timers.Timer(60000);
-            timer.Elapsed += OnHeartbeatTimerElapsed;
-            timer.AutoReset = true;
+
+            if (_enableHeartbeat)
+            {
+                timer = new System.Timers.Timer(60000);
+                timer.Elapsed += OnHeartbeatTimerElapsed;
+                timer.AutoReset = true;
+            }
+
 
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPHL7Command Constructor method completed.");
         }
@@ -49,11 +58,13 @@ namespace LIS.Com.Businesslogic
                 if (string.IsNullOrWhiteSpace(_settings?.IPAddress) || _settings.PortNo <= 0)
                     throw new ArgumentException("Invalid TCP settings");
 
+
                 var ipAddress = IPAddress.Parse(_settings.IPAddress);
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, _settings.PortNo);
                 server = new TcpListener(localEndPoint);
                 server.Start();
                 disconnectTokenSource = new CancellationTokenSource();
+
 
                 reportingThread = new Thread(() => TCP_ListenLoop(disconnectTokenSource.Token));
                 reportingThread.IsBackground = true;
@@ -66,6 +77,11 @@ namespace LIS.Com.Businesslogic
                 this.FullMessage = ex.Message;
                 Logger.Logger.LogInstance.LogException(ex);
             }
+        }
+
+        private void MarkRealCommunication()
+        {
+            _lastRealComm = DateTime.UtcNow;
         }
 
         /// <summary>
@@ -114,7 +130,7 @@ namespace LIS.Com.Businesslogic
                         Logger.Logger.LogInstance.LogInfo("TCP connection established successfully from {0}", tcpClient.Client.RemoteEndPoint);
 
                         // Start heartbeat timer
-                        timer.Start();
+                        if (_enableHeartbeat) timer.Start();
                     }
 
                     // Process this client's incoming data until it disconnects
@@ -136,6 +152,7 @@ namespace LIS.Com.Businesslogic
             Logger.Logger.LogInstance.LogDebug("TCPIPCommand TCP_ListenLoop exiting.");
         }
 
+        // Call MarkRealCommunication() at the start of any real communication
         private void ProcessIncomingMessages(CancellationToken token)
         {
             string messageControlId = "";
@@ -143,57 +160,41 @@ namespace LIS.Com.Businesslogic
             var sInputMsg = new StringBuilder();
             var messageBuffer = new StringBuilder();
 
+
             while (!token.IsCancellationRequested && _connectionEstablished)
             {
                 try
                 {
-                    // Defensive checks
+                    MarkRealCommunication(); // Real communication happening now
+
+
                     if (sr == null || sm == null || soc == null || !soc.Connected)
                     {
                         Logger.Logger.LogInstance.LogInfo("Socket disconnected or streams null - breaking read loop.");
                         break;
                     }
 
-                    int readByteCount = sr.Read(charArray, 0, charArray.Length);
 
-                    // If 0 bytes read -> remote closed the connection gracefully
+                    int readByteCount = sr.Read(charArray, 0, charArray.Length);
                     if (readByteCount == 0)
                     {
                         Logger.Logger.LogInstance.LogInfo("Client closed the connection (read returned 0).");
                         break;
                     }
 
+
                     string rawmsg = new string(charArray, 0, readByteCount);
                     Logger.Logger.LogInstance.LogInfo("COM Read: '{0}'", rawmsg);
+
 
                     messageBuffer.Append(rawmsg);
                     ProcessBufferedMessages(messageBuffer, ref sInputMsg, ref messageControlId);
                 }
-                catch (IOException ioex)
+                catch
                 {
-                    Logger.Logger.LogInstance.LogWarning("IO exception while reading: {0}", ioex.Message);
-                    break; // break the loop so we cleanup and accept a new client
-                }
-                catch (ObjectDisposedException odex)
-                {
-                    Logger.Logger.LogInstance.LogWarning("Stream was disposed while reading: {0}", odex.Message);
                     break;
                 }
-                catch (Exception ex)
-                {
-                    if (!token.IsCancellationRequested)
-                    {
-                        Logger.Logger.LogInstance.LogException(ex);
-                    }
-
-                    // Small pause to avoid tight error loop
-                    Thread.Sleep(100);
-                }
             }
-
-            _connectionEstablished = false;
-            timer.Stop();
-            Logger.Logger.LogInstance.LogInfo("Exiting ProcessIncomingMessages for current client.");
         }
 
         private void ProcessBufferedMessages(StringBuilder messageBuffer, ref StringBuilder sInputMsg, ref string messageControlId)
@@ -311,22 +312,24 @@ namespace LIS.Com.Businesslogic
         {
             lock (_lockObject)
             {
+                // Skip heartbeat if real communication happened in last 1 second
+                if ((DateTime.UtcNow - _lastRealComm).TotalMilliseconds < 1000)
+                {
+                    Logger.Logger.LogInstance.LogInfo("Skipping heartbeat because real communication is ongoing.");
+                    return;
+                }
+
+
                 if (!_connectionEstablished || sw == null || soc == null || !soc.Connected)
                 {
                     Logger.Logger.LogInstance.LogInfo("Analyzer disconnected (heartbeat check). Will cleanup and wait for new client.");
                     _connectionEstablished = false;
-                    try
-                    {
-                        CleanupConnection();
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Logger.LogInstance.LogException(ex);
-                    }
+                    try { CleanupConnection(); } catch { }
                     timer.Stop();
                     return;
                 }
             }
+
 
             try
             {
@@ -345,6 +348,7 @@ namespace LIS.Com.Businesslogic
             string heartbeatControlId = "HB" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
             string heartbeatMsg = $@"MSH|^~\&|LIS|LAB|ANALYZER|RECEIVER|{DateTime.Now:yyyyMMddHHmmss}||ACK|P|2.3.1||||2||ASCII{(char)13}
 MSA|AA|{heartbeatControlId}|Analyzer heartbeat check{(char)13}";
+
 
             Logger.Logger.LogInstance.LogInfo("Sending heartbeat ACK (ID: {0})", heartbeatControlId);
             WriteResponseSafe(heartbeatMsg);
