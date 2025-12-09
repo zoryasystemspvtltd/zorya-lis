@@ -38,9 +38,9 @@ namespace LisTCPIPConsole
 
             Action operation = () =>
             {
-               if (FormWindowState.Minimized != _Form.WindowState)
+                if (FormWindowState.Minimized != _Form.WindowState)
                 {
-                    System.Drawing.Color text_color = System.Drawing.Color.White; 
+                    System.Drawing.Color text_color = System.Drawing.Color.White;
 
                     switch (loggingEvent.Level.DisplayName.ToUpper())
                     {
@@ -68,9 +68,11 @@ namespace LisTCPIPConsole
                             text_color = System.Drawing.Color.White;
                             break;
                     }
-
-                    _textBox.SelectionColor = text_color;
-                    _textBox.AppendText(RenderLoggingEvent(loggingEvent));
+                    if (_textBox != null)
+                    {
+                        _textBox.SelectionColor = text_color;
+                        _textBox.AppendText(RenderLoggingEvent(loggingEvent));
+                    }
                 }
             };
             this._textBox.Invoke(operation);
