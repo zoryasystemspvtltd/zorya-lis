@@ -214,7 +214,7 @@ namespace LIS.Com.Businesslogic
                     {
                         case (char)5:        // Check for <ENQ>
                             {
-                                WriteResponseSafe(((char)6).ToString());
+                                WriteResponseSafe(((char)6).ToString(), false);
                                 break;
                             }
 
@@ -227,30 +227,30 @@ namespace LIS.Com.Businesslogic
                                         //(char)2 means start of text
 
                                         var payload1 = ((char)2) + Add_CheckSum(output[index + 1]) + (char)13;
-                                        WriteResponseSafe(payload1);
+                                        WriteResponseSafe(payload1, false);
                                         index = 1;
                                         break;
                                     case 1:
                                         //(char)2 means start of text
                                         var payload2 = ((char)2) + Add_CheckSum(output[index + 1]) + (char)13;
-                                        WriteResponseSafe(payload2);
+                                        WriteResponseSafe(payload2, false);
                                         index = 2;
                                         break;
                                     case 2:
                                         //(char)2 means start of text
                                         var payload3 = ((char)2) + Add_CheckSum(output[index + 1]) + (char)13;
-                                        WriteResponseSafe(payload3);
+                                        WriteResponseSafe(payload3, false);
                                         index = 3;
                                         break;
                                     case 3:
                                         //(char)2 means start of text
                                         var payload4 = ((char)2) + Add_CheckSum(output[index + 1]) + (char)13;
-                                        WriteResponseSafe(payload4);
+                                        WriteResponseSafe(payload4, false);
                                         index = 4;
                                         break;
 
                                     default:
-                                        WriteResponseSafe("" + (char)4);
+                                        WriteResponseSafe("" + (char)4, false);
                                         index = 0;
 
                                         break;
@@ -270,11 +270,11 @@ namespace LIS.Com.Businesslogic
                                     if (index > 0)
                                     {
                                         var payload = ((char)2) + Add_CheckSum(output[index]) + (char)13;
-                                        WriteResponseSafe(payload);
+                                        WriteResponseSafe(payload, false);
                                     }
                                     else
                                     {
-                                        WriteResponseSafe(output[index]);
+                                        WriteResponseSafe(output[index], false);
                                     }
                                 }
 
@@ -296,7 +296,7 @@ namespace LIS.Com.Businesslogic
 
                                 if (InpBuffer[i] == Strings.Chr(10))
                                 {
-                                    WriteResponseSafe("" + (char)6);
+                                    WriteResponseSafe("" + (char)6,false);
                                 }
 
                                 break;
@@ -309,11 +309,9 @@ namespace LIS.Com.Businesslogic
             {
                 Logger.Logger.LogInstance.LogException(ex);
             }
-
-
         }
 
-        private void WriteResponseSafe(string response)
+        private void WriteResponseSafe(string response,bool isHeartBeat)
         {
             lock (_lockObject)
             {
@@ -321,7 +319,7 @@ namespace LIS.Com.Businesslogic
                 {
                     try
                     {
-                        WriteResponse(response, sw);
+                        WriteResponse(response, sw, isHeartBeat);
                     }
                     catch (ObjectDisposedException)
                     {
@@ -380,12 +378,16 @@ namespace LIS.Com.Businesslogic
         }
         private void SendHeartbit()
         {
-            string heartbeatMsg = "<ENQ>";
-            WriteResponseSafe(heartbeatMsg);
+            string heartbeatMsg = "<ACK>";
+            WriteResponseSafe(heartbeatMsg,true);
         }
-        private void WriteResponse(string res, StreamWriter sw)
+        private void WriteResponse(string res, StreamWriter sw, bool isHeartBeat)
         {
-            Logger.Logger.LogInstance.LogInfo("COM Write: '{0}'", res);
+            if (isHeartBeat)
+                Logger.Logger.LogInstance.LogInfo("HeartBeat: '{0}'", res);
+            else
+                Logger.Logger.LogInstance.LogInfo("COM Write: '{0}'", res);
+
             try
             {
                 char[] datachar = res.ToCharArray();
@@ -492,7 +494,7 @@ namespace LIS.Com.Businesslogic
         {
             throw new NotImplementedException();
         }
-        
+
     }
 
 }
