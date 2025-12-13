@@ -34,7 +34,7 @@ namespace LIS.Com.Businesslogic
             this._settings = settings;
 
             // Initialize heartbeat timer (60 seconds)
-            timer = new System.Timers.Timer(60000);
+            timer = new System.Timers.Timer(_settings.HeartbitTimeout*1000);
             timer.Elapsed += OnHeartbeatTimerElapsed;
             timer.AutoReset = true;
 
@@ -346,7 +346,7 @@ namespace LIS.Com.Businesslogic
             string heartbeatMsg = $@"MSH|^~\&|LIS|LAB|ANALYZER|RECEIVER|{DateTime.Now:yyyyMMddHHmmss}||ACK|P|2.3.1||||2||ASCII{(char)13}
 MSA|AA|{heartbeatControlId}|Analyzer heartbeat check{(char)13}";
 
-            Logger.Logger.LogInstance.LogInfo("Sending heartbeat ACK (ID: {0})", heartbeatControlId);
+            //Logger.Logger.LogInstance.LogInfo("Sending heartbeat ACK (ID: {0})", heartbeatControlId);
             WriteResponseSafe(heartbeatMsg, true);
         }
 

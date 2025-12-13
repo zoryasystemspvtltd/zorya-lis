@@ -25,6 +25,7 @@ namespace LisTCPIPConsole
             txtKey.Text = Settings.Default.API_KEY;
             txtServerIP.Text = Settings.Default.IP_ADDRESS;
             txtServerPort.Text = Settings.Default.PORT_NO.ToString();
+            txtHeartbit.Text = Settings.Default.HEARTBIT_INTERVAL.ToString();
             cmbProtocol.SelectedItem = Settings.Default.PROTOCOL_NAME;
             ddlEquipmentType.DataSource = Enum.GetNames(typeof(EquipmentType));
             var selectedEquipment = (EquipmentType)Enum.Parse(typeof(EquipmentType), Settings.Default.EQUIPMENT_TYPE);
@@ -73,6 +74,7 @@ namespace LisTCPIPConsole
 
             Settings.Default.IP_ADDRESS = txtServerIP.Text;
             Settings.Default.PORT_NO = Convert.ToInt32(txtServerPort.Text);
+            Settings.Default.HEARTBIT_INTERVAL = Convert.ToInt32(txtHeartbit.Text);
             Settings.Default.PROTOCOL_NAME = (string)cmbProtocol.SelectedItem;
             Settings.Default.AUTO_CONNECT = cbAutoConnect.Checked;
             Settings.Default.SERVER_URL = txtServer.Text;
@@ -95,6 +97,7 @@ namespace LisTCPIPConsole
             settings.AutoConnect = Settings.Default.AUTO_CONNECT;
             settings.IPAddress = Settings.Default.IP_ADDRESS;
             settings.PortNo = Settings.Default.PORT_NO;
+            settings.HeartbitTimeout = Settings.Default.HEARTBIT_INTERVAL;
             settings.ProtocolName = Settings.Default.PROTOCOL_NAME;
             Settings.Default.Save();
             this.Close();

@@ -38,7 +38,7 @@ namespace LIS.Com.Businesslogic
             _settings = settings;
 
             // Initialize heartbeat timer (60 seconds)
-            timer = new System.Timers.Timer(60000);
+            timer = new System.Timers.Timer(_settings.HeartbitTimeout * 1000);
             timer.Elapsed += OnHeartbeatTimerElapsed;
             timer.AutoReset = true;
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPASTMCommand Constructor method completed.");

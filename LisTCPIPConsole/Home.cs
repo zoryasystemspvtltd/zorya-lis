@@ -27,7 +27,8 @@ namespace LisTCPIPConsole
                 AutoConnect = Settings.Default.AUTO_CONNECT,
                 IPAddress = Settings.Default.IP_ADDRESS,
                 PortNo = Settings.Default.PORT_NO,
-                ProtocolName = Settings.Default.PROTOCOL_NAME
+                ProtocolName = Settings.Default.PROTOCOL_NAME,
+                HeartbitTimeout = Settings.Default.HEARTBIT_INTERVAL
             };
             selectedEquipment = (EquipmentType)Enum.Parse(typeof(EquipmentType), Settings.Default.EQUIPMENT_TYPE);
             LisContext.LisDOM.InitTCPIPCommand(settings, selectedEquipment);

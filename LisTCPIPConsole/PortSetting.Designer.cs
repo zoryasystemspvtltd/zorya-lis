@@ -54,6 +54,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtServer = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.txtHeartbit = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -189,7 +191,7 @@
             // Label6
             // 
             this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(36, 108);
+            this.Label6.Location = new System.Drawing.Point(47, 108);
             this.Label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label6.Name = "Label6";
             this.Label6.Size = new System.Drawing.Size(95, 13);
@@ -199,7 +201,7 @@
             // cbAutoConnect
             // 
             this.cbAutoConnect.AutoSize = true;
-            this.cbAutoConnect.Location = new System.Drawing.Point(147, 108);
+            this.cbAutoConnect.Location = new System.Drawing.Point(150, 108);
             this.cbAutoConnect.Margin = new System.Windows.Forms.Padding(4);
             this.cbAutoConnect.Name = "cbAutoConnect";
             this.cbAutoConnect.Size = new System.Drawing.Size(15, 14);
@@ -208,18 +210,20 @@
             // 
             // pnlTCPIP
             // 
+            this.pnlTCPIP.Controls.Add(this.txtHeartbit);
+            this.pnlTCPIP.Controls.Add(this.label2);
             this.pnlTCPIP.Controls.Add(this.txtServerPort);
             this.pnlTCPIP.Controls.Add(this.label13);
             this.pnlTCPIP.Controls.Add(this.txtServerIP);
             this.pnlTCPIP.Controls.Add(this.label12);
-            this.pnlTCPIP.Location = new System.Drawing.Point(6, 16);
+            this.pnlTCPIP.Location = new System.Drawing.Point(8, 6);
             this.pnlTCPIP.Name = "pnlTCPIP";
-            this.pnlTCPIP.Size = new System.Drawing.Size(316, 85);
+            this.pnlTCPIP.Size = new System.Drawing.Size(316, 95);
             this.pnlTCPIP.TabIndex = 50;
             // 
             // txtServerPort
             // 
-            this.txtServerPort.Location = new System.Drawing.Point(141, 40);
+            this.txtServerPort.Location = new System.Drawing.Point(141, 36);
             this.txtServerPort.Margin = new System.Windows.Forms.Padding(4);
             this.txtServerPort.Name = "txtServerPort";
             this.txtServerPort.Size = new System.Drawing.Size(165, 20);
@@ -228,7 +232,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(30, 41);
+            this.label13.Location = new System.Drawing.Point(30, 37);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(106, 13);
@@ -323,6 +327,24 @@
             this.label9.TabIndex = 38;
             this.label9.Text = "Server URL:";
             // 
+            // txtHeartbit
+            // 
+            this.txtHeartbit.Location = new System.Drawing.Point(141, 67);
+            this.txtHeartbit.Margin = new System.Windows.Forms.Padding(4);
+            this.txtHeartbit.Name = "txtHeartbit";
+            this.txtHeartbit.Size = new System.Drawing.Size(165, 20);
+            this.txtHeartbit.TabIndex = 51;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(34, 68);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(101, 13);
+            this.label2.TabIndex = 50;
+            this.label2.Text = "Heartbit (Seconds) :";
+            // 
             // PortSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,5 +400,7 @@
         internal System.Windows.Forms.Label lblStatus;
         internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbProtocol;
+        internal System.Windows.Forms.TextBox txtHeartbit;
+        internal System.Windows.Forms.Label label2;
     }
 }
