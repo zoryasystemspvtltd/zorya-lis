@@ -31,7 +31,7 @@ namespace LIS.Com.Businesslogic
         protected int index;
         private volatile bool isDisconnecting = false;
         protected NetworkStream stream;
-
+        //StringBuilder sInputMsg = new StringBuilder();
         public TCPIPASTMCommand(TCPIPSettings settings)
         {
             Logger.Logger.LogInstance.LogDebug("LIS.Com.Businesslogic TCPIPASTMCommand Constructor method started.");
@@ -143,8 +143,7 @@ namespace LIS.Com.Businesslogic
         private void ProcessIncomingMessages(CancellationToken token)
         {
             char[] charArray = new char[10240];
-            var messageBuffer = new StringBuilder();
-
+            var sInputMsg = new StringBuilder();
             while (!token.IsCancellationRequested && _connectionEstablished)
             {
                 try
@@ -168,8 +167,8 @@ namespace LIS.Com.Businesslogic
                     string rawmsg = new string(charArray, 0, readByteCount);
                     Logger.Logger.LogInstance.LogInfo("COM Read: '{0}'", rawmsg);
 
-                    messageBuffer.Append(rawmsg);
-                    ProcessBufferedMessages(messageBuffer);
+                    //messageBuffer.Append(rawmsg);
+                    ProcessBufferedMessages(rawmsg, ref sInputMsg);                    
                 }
                 catch (IOException ioex)
                 {
@@ -198,10 +197,9 @@ namespace LIS.Com.Businesslogic
             Logger.Logger.LogInstance.LogInfo("Exiting ProcessIncomingMessages for current client.");
         }
 
-        private void ProcessBufferedMessages(StringBuilder messageBuffer)
+        private void ProcessBufferedMessages(string bufferContent, ref StringBuilder sInputMsg)
         {
-            string bufferContent = messageBuffer.ToString();
-            var sInputMsg = new StringBuilder();
+            //sInputMsg.Append(bufferContent);
             try
             {
                 var InpBuffer = bufferContent.ToCharArray();

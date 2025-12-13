@@ -12,14 +12,13 @@ namespace LIS.Com.Businesslogic
 {
     public class XN350TCPIPASTMCommand : TCPIPASTMCommand
     {
-        private readonly JArray validCodes;
+        public JArray validCodes;
         public XN350TCPIPASTMCommand(TCPIPSettings _settings) : base(_settings)
         {
             try
             {
-                var path = $"{Environment.CurrentDirectory}\\Data\\XN350.json";
-                var jsonData = File.ReadAllText(path);
-                validCodes = JArray.Parse(jsonData);
+                CheckCode();
+
             }
             catch (Exception ex)
             {
@@ -27,6 +26,14 @@ namespace LIS.Com.Businesslogic
                 Logger.Logger.LogInstance.LogError("Please add XN350.JSON file under bin/Data/");
             }
         }
+
+        private void CheckCode()
+        {
+            var path = $"{Environment.CurrentDirectory}\\Data\\XN350.json";
+            var jsonData = File.ReadAllText(path);
+            validCodes = JArray.Parse(jsonData);
+        }
+
         public override async Task CreateMessageAsync(string message)
         {
             //Remove <CHK1>,<CHK2> character from raw message
@@ -82,6 +89,9 @@ namespace LIS.Com.Businesslogic
                             {
                                 string[] parameter = field[2].Split('^');
                                 string paramCode = parameter[4];
+                                if (validCodes == null)
+                                    CheckCode();
+
                                 bool isValid = validCodes.Any(item => (string)item["Code"] == paramCode);
                                 if (paramCode != "" && isValid)
                                 {
