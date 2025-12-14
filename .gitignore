@@ -77,3 +77,4 @@ nunit-*.xml
 /.vs
 /web/Lis.Api/Properties/PublishProfiles/FolderProfile1.pubxml.user
 /web/Lis.Api/Lis.Api.csproj.user
+/web/Lis.Web/package-lock.json

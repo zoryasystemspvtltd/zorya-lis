@@ -15,7 +15,7 @@ namespace LisTCPIPConsole
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            Logger.LogInstance.LogInfo("DxI 800 Stopped.");
+            Logger.LogInstance.LogInfo("Zorya LIS Stopped.");
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -31,7 +31,6 @@ namespace LisTCPIPConsole
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.MenuStrip1 = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +42,6 @@ namespace LisTCPIPConsole
             this.AboutUsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pMain = new System.Windows.Forms.Panel();
             this.executeCOM1 = new LisTCPIPConsole.controlls.ExecuteCOM();
-            this.lisNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.MenuStrip1.SuspendLayout();
             this.pMain.SuspendLayout();
             this.SuspendLayout();
@@ -131,14 +129,6 @@ namespace LisTCPIPConsole
             this.executeCOM1.Size = new System.Drawing.Size(888, 424);
             this.executeCOM1.TabIndex = 0;
             // 
-            // lisNotifyIcon
-            // 
-            this.lisNotifyIcon.BalloonTipText = "UniCel DxI 800 still working...";
-            this.lisNotifyIcon.BalloonTipTitle = "UniCel DxI 800";
-            this.lisNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("lisNotifyIcon.Icon")));
-            this.lisNotifyIcon.Text = "UniCel DxI 800";
-            this.lisNotifyIcon.Visible = true;
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,7 +161,6 @@ namespace LisTCPIPConsole
         internal System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem AboutUsToolStripMenuItem;
         private System.Windows.Forms.Panel pMain;
-        private System.Windows.Forms.NotifyIcon lisNotifyIcon;
         private LisTCPIPConsole.controlls.ExecuteCOM executeCOM1;
     }
 }

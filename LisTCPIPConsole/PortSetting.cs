@@ -44,19 +44,10 @@ namespace LisTCPIPConsole
             this.Close();
         }
 
-        private async void bSave_Click(object sender, EventArgs e)
+        private void bSave_Click(object sender, EventArgs e)
         {
             //For local testing comment this code
-            if (!isValidAPI)
-            {
-                LisContext.LisDOM.InitAPI(txtServer.Text, txtKey.Text);
-                isValidAPI = await LisContext.LisDOM.PingAPI();
-            }
-            if (!isValidAPI)
-            {
-                MessageBox.Show(this, "Invalid API Details", "Error !", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            
             if (string.IsNullOrWhiteSpace(txtServer.Text))
             {
                 MessageBox.Show(this, "Invalid value in Server URL", "Error !", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -109,7 +100,7 @@ namespace LisTCPIPConsole
             this.Close();
         }
 
-        private async void btnValidate_Click(object sender, EventArgs e)
+        private void btnValidate_Click(object sender, EventArgs e)
         {
             LisContext.LisDOM.InitAPI(txtServer.Text, txtKey.Text);
             //isValidAPI = await LisContext.LisDOM.PingAPI();

@@ -5,11 +5,11 @@ import { ModuleService } from '../../../_services';
 
 @Component({
   selector: 'app-equipment-alert',
-  template: `<div style="float:left;" *ngFor="let item of items;">
+  template: `<div style="float:left; color:#FFF" *ngFor="let item of items;">
     <span class="glyphicon glyphicon glyphicon-ok-sign icon-large" 
     [title]="item.name" 
     [ngClass]="{'icon-green': item.isAlive === true,'icon-red': item.isAlive !== true}"></span>
-  <div>`
+  {{item.name}}<div>`
 })
 
 export class AlertEquipmentComponent implements OnInit {

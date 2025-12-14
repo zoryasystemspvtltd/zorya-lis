@@ -27,7 +27,7 @@ export class ListRawSampleComponent implements OnInit {
     isNew:true,
     elements: [
       {
-        heading: 'Sample No', fieldName: 'reF_VISITNO', sortable: true, width: '15%', type: 'link'
+        heading: 'Sample No', fieldName: 'reF_VISITNO', sortable: true, width: '15%', type: 'label'
       },
       {
         heading: 'Admission No', fieldName: 'admissionno', sortable: false, width: '15%', type: 'label'
