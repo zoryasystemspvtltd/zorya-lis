@@ -8,5 +8,6 @@
         public bool AutoConnect { get; set; }
         public string ProtocolName { get; set; }
         public bool RunOnStartup { get; set; }
+        public int HeartbitTimeout { get; set; }
     }
 }

@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ZYBIOZ5TCPIPHL7Command.cs" />
+    <Compile Include="ZYBIOZ3TCPIPHL7Command.cs" />
+    <Compile Include="CL1200iTCPIPHL7Command.cs" />
     <Compile Include="BS240ETCPIPHL7Command.cs" />
     <Compile Include="D10SerialCommand.cs" />
     <Compile Include="TCPIPASTMCommand.cs" />

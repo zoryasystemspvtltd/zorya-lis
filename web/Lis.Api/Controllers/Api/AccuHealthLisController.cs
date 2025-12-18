@@ -5,6 +5,7 @@ using LIS.DtoModel.Interfaces;
 using LIS.DtoModel.Models;
 using LIS.Logger;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,6 +15,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace Lis.Api.Controllers.Api
 {
@@ -39,7 +41,7 @@ namespace Lis.Api.Controllers.Api
             this.responseManager = responseManager;
             this.identity = identity;
             this.accuHealthDataSynchronizer = accuHealthDataSynchronizer;
-        }   
+        }
 
         [AllowAnonymous]
         [HttpGet]
@@ -70,6 +72,7 @@ namespace Lis.Api.Controllers.Api
             try
             {
                 logger.LogInfo($"Get Sample Request: {Id}");
+                logger.LogInfo($"Get Sample Request: {identity.AccessKey}");
 
                 var testOrders = dBContext.AccuHealthTestOrders
                             .Where(p => p.REF_VISITNO.Equals(Id, StringComparison.OrdinalIgnoreCase))
@@ -109,6 +112,7 @@ namespace Lis.Api.Controllers.Api
 
                 var responseStrign = JsonConvert.SerializeObject(orders);
                 logger.LogInfo($"Get Sample Response: {orders}");
+                logger.LogInfo($"Get Sample Response: {responseStrign}");
 
                 dBContext.SaveChanges();
 
@@ -160,7 +164,18 @@ namespace Lis.Api.Controllers.Api
 
                     if (recordsToUpdate != null)
                     {
-                        recordsToUpdate.o.Value = item.Value;
+                        // Round Off to 2 decimal place
+                        decimal value;
+                        if (decimal.TryParse(item.Value, out value))
+                        {
+                            decimal truncated = Math.Round(value, 2);
+                            recordsToUpdate.o.Value = truncated.ToString();
+                        }
+                        else
+                        {
+                            recordsToUpdate.o.Value = item.Value;
+                        }
+
                         recordsToUpdate.o.Status = ReportStatusType.ReportGenerated;
 
                         var accuHealth = new AccuHealthTestValue()

@@ -62,13 +62,18 @@ namespace Lis.Api.Controllers.Api
                 else
                 {
                     logger.LogError($"Duplicate Test Order {newOrder.ROW_ID}");
-                    return null;
+
+                    APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.BadRequest, $"Duplicate Test Order {newOrder.ROW_ID}", null, newOrder.ROW_ID);
+
+                    return Request.CreateResponse<APIResponse>(HttpStatusCode.BadRequest, aPIResponse);
                 }
             }
             catch (Exception e)
             {
                 logger.LogException(e);
-                return null;
+                APIResponse aPIResponse = responseManager.CreateResponse(HttpStatusCode.BadRequest, e.Message, null, newOrder.ROW_ID);
+
+                return Request.CreateResponse<APIResponse>(HttpStatusCode.BadRequest, aPIResponse);
             }
         }
 
